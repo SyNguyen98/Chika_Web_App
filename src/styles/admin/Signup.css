@@ -1,0 +1,28 @@
+.signup-container {
+  text-align: center;
+  background-image: url('https://homesecurity.com.vn/wp-content/uploads/2018/08/smart-home-1.jpg');
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-container h1 {
+  color: #fff494;
+  font-size: 40px;
+  margin-left: 50vw;
+}
+
+.signup-form {
+  color: #fff494;
+  float: left;
+  margin-top: 30px;
+  min-width: 25vw;
+  margin-left: 50vw;
+}
+
+.signup-form-button {
+    width: 100%;
+}

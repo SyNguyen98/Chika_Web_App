@@ -1,0 +1,100 @@
+.product-page {
+  min-height: 100vh;
+}
+
+.product-image {
+  background-image: url("http://ismarthome.com.vn/images/background/1920x599/SmartHome.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+}
+
+.product-title {
+  margin-top: 48vh;
+  margin-left: 20vw;
+  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+.product-title h1 {
+  color: #dbd000;
+  font-size: 2.5vw;
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+
+.product-title p {
+  color: black;
+  font-size: 1.5vw;
+}
+
+.product-content {
+  margin-top: 5vh;
+  margin-left: 15vw;
+  margin-right: 15vw;
+}
+
+.product-content h1 {
+  color: #787878;
+  font-size: 2.5vw;
+  font-weight: bold;
+  border-bottom: 0.5px solid #cccccc;
+}
+
+.product-content p {
+  color: black;
+  font-size: 1vw;
+}
+
+.product-content Button {
+  display: inline;
+  margin-top: 2vh;
+  margin-left: 5vw;
+  color: #ff8c00;
+  border-color: #ff8c00;
+  height: auto;
+  font-size: 1.5vw;
+}
+
+.product-content img {
+  width: 30vw;
+  height: 50vh;
+}
+
+.product-switch-image {
+  float: left;
+}
+
+.product-switch {
+  float: right;
+  margin-top: 15vh;
+}
+
+.product-socket-image {
+  float: right;
+  margin-top: 10vh;
+}
+
+.product-socket {
+  float: left;
+  margin-top: 20vh;
+}
+
+.product-moduleir-image {
+  float: left;
+  margin-top: 5vh;
+}
+
+.product-moduleir {
+  float: right;
+  margin-top: 15vh;
+}
+
+.product-center-image {
+  float: right;
+  margin-top: 5vh;
+}
+
+.product-center {
+  float: left;
+  margin-top: 15vh;
+}

@@ -1,0 +1,179 @@
+.gg-assistant {
+  min-height: 100vh;
+}
+
+.gg-assistant img {
+  transition: transform .2s;
+}
+
+.gg-assistant img:hover {
+  transform: scale(1.1);
+}
+
+.gg-assistant_header {
+  background-image: url("/image/gg-assistant/banner-google-assistant.jpg");
+  background-size: 100vw 38vw;
+  width: 100vw;
+  height: 38vw;
+  display: flex;
+}
+
+.gg-assistant_header_title {
+  margin: 22vw auto auto 15vw;
+  width: 33vw;
+}
+
+.gg-assistant_header_title h1 {
+  color: #f3d5a8;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #fff, 0 2px 0 #000, 0 -2px 0 #fff;
+  font-size: 2.5vw;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.gg-assistant_header_title p {
+  color: #000;
+  font-size: 1.3vw;
+  font-weight: 500;
+  text-align: justify;
+}
+
+.gg-assistant_introduce {
+  margin: 3vw 10vw auto 10vw;
+  width: 80%;
+  font-size: 1.2vw;
+  text-align: justify;
+  font-weight: 500;
+}
+
+.gg-assistant_introduce img, .gg-assistant-body img {
+  transition: transform .2s;
+}
+
+.gg-assistant_introduce img:hover, .gg-assistant-body img:hover {
+  transform: scale(1.1);
+}
+
+.gg-assistant_introduce_image {
+  padding-top: 4vw;
+  text-align: center;
+  font-size: 1.5vw;
+  font-weight: 900;
+}
+
+.gg-assistant_introduce_image p {
+  margin-top: 15px;
+}
+
+.gg-assistant_introduce_gg-home {
+  border-right: 0.1px solid gray;
+}
+
+.gg-assistant_introduce_gg-home img {
+  width: 17vw;
+  height: 25vw;
+}
+
+.gg-assistant_introduce_smartphone img {
+  width: 13vw;
+  height: 25vw;
+}
+
+.gg-assistant-body {
+  margin: 2vw 7vw auto 7vw;
+}
+
+.gg-assistant-body h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid #cccccc;
+}
+
+.gg-assistant-body p {
+  color: black;
+  font-size: 1vw;
+  text-align: justify;
+}
+
+.gg-assistant-body_open-light-image {
+  float: left;
+  margin: 2vw auto auto 4vw;
+  width: 37vw;
+  height: 27vw;
+}
+
+.gg-assistant-body_open-light {
+  float: right;
+  margin: 7vw 5vw auto auto;
+  width: 33vw;
+}
+
+.gg-assistant-body_open-conditioner-image {
+  float: right;
+  margin: 15vw 4vw auto auto;
+  width: 37vw;
+  height: 33vw;
+}
+
+.gg-assistant-body_open-conditioner {
+  float: left;
+  margin: 12vw auto auto 10vw;
+  width: 27vw;
+}
+
+.gg-assistant-body_open-sound-image {
+  float: left;
+  margin: 17vw auto auto 4vw;
+  width: 38vw;
+  height: 27vw;
+}
+
+.gg-assistant-body_open-sound {
+  float: right;
+  margin: 13vw 5vw auto auto;
+  width: 33vw;
+}
+
+.gg-assistant-body_design-image {
+  float: right;
+  margin: 10vw 4vw auto auto;
+  width: 37vw;
+  height: 23vw;
+}
+
+.gg-assistant-body_design {
+  float: left;
+  margin: 12vw auto auto 10vw;
+  width: 27vw;
+}
+
+.gg-assistant-footer {
+  margin-top: 130vw;
+  background-color: #dbdbdb;
+  text-align: center;
+}
+
+.gg-assistant-footer h1 {
+  padding-top: 2vw;
+  color: #f3d5a8;
+  font-size: 3vw;
+  font-weight: 900;
+  text-shadow: 2px 0 0 #000, -1px 0 0 #fff, 0 2px 0 #000, 0 -1px 0 #fff;
+}
+
+.gg-assistant-footer_row {
+  margin: auto 5vw auto 5vw;
+}
+
+.gg-assistant-footer_col img {
+  width: 25vw;
+  height: 15vw;
+  cursor: pointer;
+}
+
+.gg-assistant-footer_col p {
+  margin: 1vw auto 2vw auto;
+  font-size: 1.25vw;
+  font-weight: 800;
+}
