@@ -1,100 +1,151 @@
-.product-page {
+.product {
   min-height: 100vh;
 }
 
-.product-image {
-  background-image: url("http://ismarthome.com.vn/images/background/1920x599/SmartHome.jpg");
-  background-size: contain;
-  background-repeat: no-repeat;
+.product_header {
+  background-image: url("/image/product/banner-thiet-bi.jpg");
+  background-size: 100vw 35vw;
+  height: 35vw;
   display: flex;
 }
 
-.product-title {
-  margin-top: 48vh;
-  margin-left: 20vw;
-  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+.product_header_title {
+  margin: 25vw auto auto 10vw;
 }
 
-.product-title h1 {
-  color: #dbd000;
+.product_header_title h1 {
+  color: #f3d5a8;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #fff, 0 2px 0 #000, 0 -2px 0 #fff;
   font-size: 2.5vw;
   font-weight: bold;
   margin-bottom: 1px;
 }
 
-.product-title p {
+.product_header_title p {
   color: black;
   font-size: 1.5vw;
 }
 
-.product-content {
-  margin-top: 5vh;
-  margin-left: 15vw;
-  margin-right: 15vw;
+.product_introduce {
+  margin: 3vw 10vw auto 10vw;
+  width: 80%;
+  font-size: 1.4vw;
+  text-align: justify;
+  font-weight: 500;
 }
 
-.product-content h1 {
-  color: #787878;
-  font-size: 2.5vw;
-  font-weight: bold;
+.product_body {
+  margin: 2vw 7vw auto 7vw;
+}
+
+.product_body h1 {
+  color: #58595b;
+  font-size: 2.6vw;
+  font-weight: 800;
   border-bottom: 0.5px solid #cccccc;
 }
 
-.product-content p {
+.product_body p {
   color: black;
-  font-size: 1vw;
+  font-size: 1.2vw;
+  text-align: justify;
 }
 
-.product-content Button {
-  display: inline;
-  margin-top: 2vh;
-  margin-left: 5vw;
+.product_body Button {
+  margin: 1vw auto auto 7vw;
   color: #ff8c00;
   border-color: #ff8c00;
-  height: auto;
-  font-size: 1.5vw;
+  background-color: transparent;
+  font-size: 1.3vw;
+  font-weight: bold;
+  padding: 0.3vw 2vw 2.3vw;
 }
 
-.product-content img {
+.product_body h1:hover {
+  color: green;
+  cursor: pointer;
+}
+
+.product_body Button:hover {
+  color: white;
+  background-color: #f7931e;
+  border-color: #f7931e;
+}
+
+.product_body_switch-sensor-image {
+  float: left;
+  margin: 2vw auto auto 4vw;
+  width: 38vw;
+  height: 35vw;
+}
+
+.product_body_switch-sensor {
+  float: right;
+  margin: 8vw 4vw auto auto;
+  width: 31vw;
+}
+
+.product_body_switch-image {
+  float: right;
+  margin: 2vw 1vw auto auto;
+  width: 43vw;
+  height: 35vw;
+}
+
+.product_body_switch {
+  float: left;
+  margin: 11vw auto auto 6vw;
+  width: 33vw;
+}
+
+.product_body_module-ir-image {
+  float: left;
+  margin: 3vw auto auto 3vw;
+  width: 38vw;
+  height: 35vw;
+}
+
+.product_body_module-ir {
+  float: right;
+  margin: 12vw 3vw auto auto;
+  width: 35vw;
+}
+
+.product_body_home-controller-image {
+  float: right;
+  margin: 15vw 1vw auto auto;
+  width: 40vw;
+  height: 32vw;
+}
+
+.product_body_home-controller {
+  float: left;
+  margin: 11vw auto auto 13vw;
+  width: 25vw;
+}
+
+.product_body_door-sensor-image {
+  float: left;
+  margin: 5vw auto auto 2vw;
+  width: 40vw;
+  height: 35vw;
+}
+
+.product_body_door-sensor {
+  float: right;
+  margin: 10vw 10vw auto auto;
+  width: 23vw;
+}
+
+.product_body_motion-detector-image {
+  float: right;
+  margin: 10vw 1vw 3vw auto;
+  width: 40vw;
+  height: 32vw;
+}
+
+.product_body_motion-detector {
+  float: left;
+  margin: 8vw auto auto 7vw;
   width: 30vw;
-  height: 50vh;
-}
-
-.product-switch-image {
-  float: left;
-}
-
-.product-switch {
-  float: right;
-  margin-top: 15vh;
-}
-
-.product-socket-image {
-  float: right;
-  margin-top: 10vh;
-}
-
-.product-socket {
-  float: left;
-  margin-top: 20vh;
-}
-
-.product-moduleir-image {
-  float: left;
-  margin-top: 5vh;
-}
-
-.product-moduleir {
-  float: right;
-  margin-top: 15vh;
-}
-
-.product-center-image {
-  float: right;
-  margin-top: 5vh;
-}
-
-.product-center {
-  float: left;
-  margin-top: 15vh;
 }

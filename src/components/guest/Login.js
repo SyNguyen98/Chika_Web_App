@@ -54,11 +54,12 @@ class LoginForm extends Component {
       <div className="login-page">
         <div className="login-container">
           <h1>ĐĂNG NHẬP</h1>
+          <p>Dành cho người dùng có sản phẩm của Chika</p>
           <div className="login-form">
             <Form onSubmit={this.handleSubmit}>
               <Form.Item className="item">
                 {getFieldDecorator('usernameOrEmail', {
-                  rules: [{ required: true, message: 'Please input your Username!' }]
+                  rules: [{ required: true, message: 'Vui lòng nhập tên đăng nhập hoặc email!' }]
                 })(
                   <Input
                     size="large"
@@ -69,7 +70,7 @@ class LoginForm extends Component {
               </Form.Item>
               <Form.Item className="item">
                 {getFieldDecorator('password', {
-                  rules: [{ required: true, message: 'Please input your Password!' }]
+                  rules: [{ required: true, message: 'Vui lòng nhập mật khẩu!' }]
                 })(
                   <Input.Password
                     size="large"

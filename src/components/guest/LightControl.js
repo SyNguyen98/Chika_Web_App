@@ -37,14 +37,14 @@ class LightControl extends Component {
         </div>
 
         <div className="light-control_body">
-          <img className="light-control_body_auto-light-image" alt="ok-google-bat-den" src="/image/light-control/chieu-sang-thong-minh-qua-dien-thoai.jpg"></img>
+          <img className="light-control_body_auto-light-image" alt="chieu-sang-thong-minh-qua-dien-thoai" src="/image/light-control/chieu-sang-thong-minh-qua-dien-thoai.jpg"></img>
           <div className="light-control_body_auto-light">
             <h1>TIỆN NGHI HỆ THỐNG<br/>ÁNH SÁNG TỰ ĐỘNG</h1>
             <p>Chika đã tích hợp thành công với Google Assistant, giúp bật/tắt hệ thống chiếu sáng bằng giọng nói tiếng Việt dễ dàng, giải pháp mang đến cuộc sống vạn tiện nghi cho gia đình bạn.
               Khi ở xa, với chiếc smartphone được kết nối internet, bạn có thể điều khiển, kiểm soát hệ thống chiếu sáng 1 phòng hay toàn bộ ngôi nhà.</p>
           </div>
 
-          <img className="light-control_body_switch-image" alt="ok-google-bat-dieu-hoa" src="/image/light-control/cong-tac-cam-ung.png"></img>
+          <img className="light-control_body_switch-image" alt="cong-tac-cam-ung" src="/image/light-control/cong-tac-cam-ung.png"></img>
           <div className="light-control_body_switch">
             <h1>CÔNG TẮC CẢM ỨNG</h1>
             <p>Sử dụng công nghệ cảm ứng điện dung, rất an toàn kể cả khi tay ướt chạm vào. Vòng tròn tỏa sáng led giúp bạn nhận biết dễ dàng trạng thái đang bật/tắt của công tắc.</p>
@@ -60,7 +60,7 @@ class LightControl extends Component {
         </div>
 
         <div className="light-control_body">
-          <img className="light-control_body_timer-image" alt="ok-google-bat-dieu-hoa" src="/image/light-control/hen-gio-chieu-sang.jpg"></img>
+          <img className="light-control_body_timer-image" alt="hen-gio-chieu-sang" src="/image/light-control/hen-gio-chieu-sang.jpg"></img>
           <div className="light-control_body_timer">
             <h1>HẸN GIỜ CHIẾU SÁNG</h1>
             <p>Hệ thống đèn chiếu sáng trong ngôi nhà sẽ tự động bật tắt theo giờ bạn cài đặt. Ví dụ: đèn ngủ tự động bật khi 10h tối và tắt khi 5h sáng.</p>
@@ -73,7 +73,7 @@ class LightControl extends Component {
         </div>
 
         <div className="light-control_body">
-          <img className="light-control_body_door-sensor-image" alt="ok-google-bat-den" src="/image/light-control/cam-bien-cua.png"></img>
+          <img className="light-control_body_door-sensor-image" alt="cam-bien-cua" src="/image/light-control/cam-bien-cua.png"></img>
           <div className="light-control_body_door-sensor">
             <h1>CẢM BIẾN CỬA</h1>
             <p>Đèn sẽ tự động sáng khi cửa được mở ra và tắt khi cửa đóng.</p>
@@ -122,7 +122,7 @@ class LightControl extends Component {
             <Col className="light-control_footer_col" span={8}>
               <img alt="led-rgb" src="/image/solution/led-rgb.jpg"
                   onClick={(event) => this.handleClickChangePage(event, LINK_RGB_LED)}></img>
-              <p>LED 16 TRIỆU MÀU</p>
+              <p>ĐÈN LED 16 TRIỆU MÀU</p>
             </Col>
           </Row>
         </div>

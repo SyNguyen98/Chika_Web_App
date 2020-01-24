@@ -1,0 +1,104 @@
+.switch-sensor {
+  min-height: 100vh;
+}
+
+.switch-sensor_introduce {
+  margin-top: 5vw;
+  display: flex;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.switch-sensor_introduce_image {
+  float: left;
+  margin: auto auto 3vw 7vw;
+  background-color: #ebebeb;
+  width: 40vw;
+  height: 30vw;
+}
+
+.switch-sensor_introduce_carousel {
+  margin: 5vw auto auto 8vw;
+  width: 20vw;
+  height: 20vw;
+}
+
+.switch-sensor_introduce_content {
+  float: right;
+  margin: auto 7vw auto 3vw;
+  width: 45vw;
+}
+
+.switch-sensor_introduce_content h1 {
+  color: green;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid #cccccc;
+}
+
+.switch-sensor_introduce_content p {
+  line-height: 1.7vw;
+  color: black;
+  font-size: 1.2vw;
+  text-align: justify;
+}
+
+.switch-sensor_body {
+  margin: 5vw 10vw auto 10vw;
+  line-height: 1.8vw;
+  color: black;
+  font-size: 1.2vw;
+  text-align: justify;
+}
+
+.switch-sensor_body img {
+  margin: 1vw auto 1vw 7vw;
+}
+
+.switch-sensor_body_title {
+  color: #4f4f4f;
+  font-weight: 800;
+  font-size: 1.5vw;
+  line-height: 3vw;
+}
+
+.switch-sensor_footer {
+  margin-top: 4vw;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.switch-sensor_footer h1 {
+  padding-top: 2vw;
+  color: #f3d5a8;
+  font-size: 3vw;
+  font-weight: 900;
+  text-shadow: 2px 0 0 #000, -1px 0 0 #fff, 0 2px 0 #000, 0 -1px 0 #fff;
+}
+
+.switch-sensor_footer_row {
+  margin: auto 5vw auto 5vw;
+}
+
+.switch-sensor_footer_col img {
+  width: 20vw;
+  height: 15vw;
+  cursor: pointer;
+}
+
+.switch-sensor_footer_col img {
+  transition: transform .2s;
+}
+
+.switch-sensor_footer_col img:hover {
+  transform: scale(1.1);
+}
+
+.switch-sensor_footer_col img:hover + p {
+  color: green;
+}
+
+.switch-sensor_footer_col p {
+  margin: 1vw auto 2vw auto;
+  font-size: 1.25vw;
+  font-weight: 800;
+}

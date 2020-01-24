@@ -1,0 +1,166 @@
+.rgb-led {
+  min-height: 100vh;
+}
+
+.rgb-led img {
+  transition: transform .2s;
+}
+
+.rgb-led img:hover {
+  transform: scale(1.1);
+}
+
+.rgb-led_header {
+  background-image: url("/image/rgb-led/banner-led-16-trieu-mau.jpg");
+  background-size: 100% 35vw;
+  height: 35vw;
+  display: flex;
+}
+
+.rgb-led_header_title {
+  margin: 20vw 1vw auto 15vw;
+  width: 33vw;
+}
+
+.rgb-led_header_title h1 {
+  color: #f3d5a8;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #fff, 0 2px 0 #000, 0 -2px 0 #fff;
+  font-size: 2.4vw;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.rgb-led_header_title p {
+  color: #000;
+  font-size: 1.3vw;
+  text-align: justify;
+}
+
+.rgb-led_introduce {
+  margin: 3vw 10vw auto 10vw;
+  width: 80%;
+  font-size: 1.2vw;
+  text-align: justify;
+  font-weight: 500;
+}
+
+.rgb-led_body {
+  margin: 2vw 7vw auto 7vw;
+}
+
+.rgb-led_body h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid #cccccc;
+}
+
+.rgb-led_body p {
+  color: black;
+  font-size: 1.1vw;
+  text-align: justify;
+}
+
+.rgb-led_body_color-space-image {
+  float: left;
+  margin: 4vw auto auto 3vw;
+  width: 40vw;
+  height: 27vw;
+}
+
+.rgb-led_body_color-space {
+  float: right;
+  margin: 10vw 5vw auto auto;
+  width: 27vw;
+}
+
+.rgb-led_change-color {
+  margin: 40vw auto 3vw auto;
+  background-image: url("/image/rgb-led/doi-mau-sac.jpg");
+  background-size: 100% 35vw;
+  min-height: 35vw;
+  display: flex;
+}
+
+.rgb-led_change-color:hover h1 {
+  color: green;
+}
+
+.rgb-led_change-color_content {
+  margin: 10vw auto auto 10vw;
+  width: 25vw;
+}
+
+.rgb-led_change-color h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid white;
+}
+
+.rgb-led_change-color p {
+  color: black;
+  font-size: 1.2vw;
+  text-align: justify;
+}
+
+.rgb-led_body_combine-device-image {
+  float: right;
+  margin: 4vw 3vw auto auto;
+  width: 40vw;
+  height: 27vw;
+}
+
+.rgb-led_body_combine-device {
+  float: left;
+  margin: 13vw auto auto 5vw;
+  width: 32vw;
+}
+
+.rgb-led_timer {
+  margin-top: 40vw;
+  text-align: center;
+}
+
+.rgb-led_timer h1 {
+  color: #58595b;
+  font-size: 2.8vw;
+  font-weight: 800;
+  margin-bottom: 2vw;
+}
+
+.rgb-led_timer_image {
+  background-image: url("/image/rgb-led/hen-gio-doi-mau-sac-led.jpg");
+  background-size: 100% 33vw;
+  height: 33vw;
+}
+
+.rgb-led_footer {
+  margin-top: 5vw;
+  background-color: #dbdbdb;
+  text-align: center;
+}
+
+.rgb-led_footer h1 {
+  padding-top: 2vw;
+  color: #f3d5a8;
+  font-size: 3vw;
+  font-weight: 900;
+  text-shadow: 2px 0 0 #000, -1px 0 0 #fff, 0 2px 0 #000, 0 -1px 0 #fff;
+}
+
+.rgb-led_footer_row {
+  margin: auto 5vw auto 5vw;
+}
+
+.rgb-led_footer_col img {
+  width: 25vw;
+  height: 15vw;
+  cursor: pointer;
+}
+
+.rgb-led_footer_col p {
+  margin: 1vw auto 2vw auto;
+  font-size: 1.25vw;
+  font-weight: 800;
+}

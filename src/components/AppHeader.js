@@ -3,8 +3,8 @@ import { withRouter, Link } from 'react-router-dom';
 import { Layout, Menu, Dropdown, Row, Col } from 'antd';
 
 import '../styles/AppHeader.css';
-import { CHIKA_COLOR, LINK_GG_ASSISTANT, LINK_LIGHT_CONTROL, LINK_CONDITIONER_TIVI,
-  LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED } from '../constant'
+import { CHIKA_COLOR, LINK_INTRODUCTION, LINK_PRODUCT, LINK_LOGIN,
+  LINK_GG_ASSISTANT, LINK_LIGHT_CONTROL, LINK_CONDITIONER_TIVI, LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED } from '../constant'
 
 const { Header } = Layout;
 
@@ -25,28 +25,22 @@ class AppHeader extends Component {
     let menuItems;
     if(this.props.currentUser) {
       menuItems = [
-        <Menu.Item key="/" >
-          <Link style={{color: CHIKA_COLOR}} to="/">Trang chủ</Link>
-        </Menu.Item>,
-        <Menu.Item key="/product" >
-          <Link style={{color: CHIKA_COLOR}} to="/product">Sản phẩm</Link>
-        </Menu.Item>
       ];
     } else {
       menuItems = [
-        <Menu.Item key="/introduction" >
-          <Link style={{color: CHIKA_COLOR}} to="/introduction">Giới thiệu</Link>
+        <Menu.Item key={LINK_INTRODUCTION}>
+          <Link style={{color: CHIKA_COLOR}} to={LINK_INTRODUCTION}>Giới thiệu</Link>
         </Menu.Item>,
         <Menu.Item key="/smarthome" className="smarthome-menu">
           <SmarthomeDropdownMenu
             currentUser={this.props.currentUser}
             handleMenuClick={this.handleMenuClick} />
         </Menu.Item>,
-        <Menu.Item key="/product" >
-          <Link style={{color: CHIKA_COLOR}} to="/product">Thiết bị</Link>
+        <Menu.Item key={LINK_PRODUCT} >
+          <Link style={{color: CHIKA_COLOR}} to={LINK_PRODUCT}>Thiết bị</Link>
         </Menu.Item>,
-        <Menu.Item key="/login">
-          <Link style={{color: CHIKA_COLOR}} to="/login">Đăng nhập</Link>
+        <Menu.Item key={LINK_LOGIN}>
+          <Link style={{color: CHIKA_COLOR}} to={LINK_LOGIN}>Đăng nhập</Link>
         </Menu.Item>
       ];
     }

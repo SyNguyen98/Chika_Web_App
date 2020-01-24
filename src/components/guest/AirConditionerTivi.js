@@ -119,7 +119,7 @@ class AirConditionerTivi extends Component {
             <Col className="conditioner-tivi-footer_col" span={8}>
               <img alt="led-rgb" src="/image/solution/led-rgb.jpg"
                   onClick={(event) => this.handleClickChangePage(event, LINK_RGB_LED)}></img>
-              <p>LED 16 TRIỆU MÀU</p>
+              <p>ĐÈN LED 16 TRIỆU MÀU</p>
             </Col>
           </Row>
         </div>
