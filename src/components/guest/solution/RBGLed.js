@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'antd';
 
-import '../../styles/guest/RBGLed.css';
+import '../../../styles/guest/solution/RBGLed.css';
 import { LINK_GG_ASSISTANT, LINK_CONDITIONER_TIVI,
-  LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_LIGHT_CONTROL } from '../../constant'
+  LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_LIGHT_CONTROL } from '../../../constant'
 
 class RBGLed extends Component {
 
-  handleClickChangePage = (event, link) => {
-    event.preventDefault();
+  handleChangePage = (event, link) => {
     this.props.history.push(link);
   }
 
@@ -71,29 +70,29 @@ class RBGLed extends Component {
           <Row className="rgb-led_footer_row">
             <Col className="rgb-led_footer_col" span={8}>
               <img alt="google-assistant" src="/image/solution/google-assistant.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_GG_ASSISTANT)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_GG_ASSISTANT)}></img>
               <p>KẾT NỐI GOOGLE ASSISTANT</p>
             </Col>
             <Col className="rgb-led_footer_col" span={8}>
               <img alt="conditioner-tivi" src="/image/solution/conditioner-tivi.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_CONDITIONER_TIVI)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_CONDITIONER_TIVI)}></img>
               <p>ĐIỀU HÒA, TV THÔNG MINH</p>
             </Col>
             <Col className="rgb-led_footer_col" span={8}>
               <img alt="light-control" src="/image/solution/light-control.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_LIGHT_CONTROL)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_LIGHT_CONTROL)}></img>
               <p>CHIẾU SÁNG THÔNG MINH</p>
             </Col>
           </Row>
           <Row className="rgb-led_footer_row">
             <Col className="rgb-led_footer_col" span={8}>
               <img alt="environmental-control" src="/image/solution/environmental-control.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_ENVIRONMANTAL_CONTROL)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_ENVIRONMANTAL_CONTROL)}></img>
               <p>KIỂM SOÁT MÔI TRƯỜNG</p>
             </Col>
             <Col className="rgb-led_footer_col" span={8}>
               <img alt="security-system" src="/image/solution/security-system.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SECURITY_SYSTEM)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_SECURITY_SYSTEM)}></img>
               <p>AN NINH CHỐNG TRỘM</p>
             </Col>
             <Col className="rgb-led_footer_col" span={8}>

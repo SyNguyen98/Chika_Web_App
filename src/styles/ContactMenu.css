@@ -1,0 +1,30 @@
+.contact-menu {
+  position: fixed;
+  margin: 35vh 10vw auto auto;
+}
+
+.contact-menu_item {
+  display: flex;
+  margin-bottom: 1px;
+  cursor: pointer;
+}
+
+.contact-menu_item img {
+  width: 35px;
+  height: 35px;
+  background-color: #00a624;
+  padding: 0.3vw 0.3vw 0.3vw;
+}
+
+.contact-menu_item h1 {
+  color: white;
+  margin-bottom: 0px;
+  padding: 0.4vw 0.7vw 0 3vw;
+  font-size: 15px;
+  background-color: #00a624;
+  display: none;
+}
+
+.contact-menu_item:hover h1 {
+  display: block;
+}

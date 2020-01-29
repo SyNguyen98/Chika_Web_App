@@ -1,5 +1,11 @@
+.app-footer {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+}
+
+
 .footer-content {
-  float: left;
   margin-left: 10vw;
   color: white;
 }

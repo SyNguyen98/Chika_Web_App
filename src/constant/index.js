@@ -6,6 +6,9 @@ export const CHIKA_COLOR = '#f3d5a8';
 export const LINK_INTRODUCTION = '/Gioi-thieu';
 export const LINK_PRODUCT = '/Thiet-bi-dien-thong-minh';
 export const LINK_LOGIN = '/Dang-nhap';
+export const LINK_SUPPORTING = '/Ho-tro';
+export const LINK_QUESTION = '/Cau-hoi-thuong-gap';
+export const LINK_DOCUMENT = '/Tai-lieu-huong-dan';
 
 export const LINK_GG_ASSISTANT = '/google-assitant';
 export const LINK_CONDITIONER_TIVI = '/He-thong-dieu-hoa-ti-ti';

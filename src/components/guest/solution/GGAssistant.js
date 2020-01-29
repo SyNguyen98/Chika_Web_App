@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'antd';
 
-import '../../styles/guest/GGAssistant.css';
+import '../../../styles/guest/solution/GGAssistant.css';
 import { LINK_LIGHT_CONTROL, LINK_CONDITIONER_TIVI,
-  LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED } from '../../constant'
+  LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED } from '../../../constant'
 
 class GGAssistant extends Component {
 
-  handleClickChangePage = (event, link) => {
-    event.preventDefault();
+  handleChangePage = (event, link) => {
     this.props.history.push(link);
   }
 
@@ -84,29 +83,29 @@ class GGAssistant extends Component {
             </Col>
             <Col className="gg-assistant_footer_col" span={8}>
               <img alt="conditioner-tivi" src="/image/solution/conditioner-tivi.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_CONDITIONER_TIVI)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_CONDITIONER_TIVI)}></img>
               <p>ĐIỀU HÒA, TV THÔNG MINH</p>
             </Col>
             <Col className="gg-assistant_footer_col" span={8}>
               <img alt="light-control" src="/image/solution/light-control.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_LIGHT_CONTROL)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_LIGHT_CONTROL)}></img>
               <p>CHIẾU SÁNG THÔNG MINH</p>
             </Col>
           </Row>
           <Row className="gg-assistant_footer_row">
             <Col className="gg-assistant_footer_col" span={8}>
               <img alt="environmental-control" src="/image/solution/environmental-control.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_ENVIRONMANTAL_CONTROL)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_ENVIRONMANTAL_CONTROL)}></img>
               <p>KIỂM SOÁT MÔI TRƯỜNG</p>
             </Col>
             <Col className="gg-assistant_footer_col" span={8}>
               <img alt="security-system" src="/image/solution/security-system.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SECURITY_SYSTEM)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_SECURITY_SYSTEM)}></img>
               <p>AN NINH CHỐNG TRỘM</p>
             </Col>
             <Col className="gg-assistant_footer_col" span={8}>
               <img alt="led-rgb" src="/image/solution/led-rgb.jpg"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_RGB_LED)}></img>
+                  onClick={(event) => this.handleChangePage(event, LINK_RGB_LED)}></img>
                 <p>ĐÈN LED 16 TRIỆU MÀU</p>
             </Col>
           </Row>

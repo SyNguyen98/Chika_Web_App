@@ -23,6 +23,14 @@ const request = (options) => {
     );
 };
 
+export function postReview(review) {
+    return request({
+        url: API_BASE_URL + "/review",
+        method: 'POST',
+        body: JSON.stringify(review)
+    });
+}
+
 export function login(loginRequest) {
     return request({
         url: API_BASE_URL + "/auth/signin",
