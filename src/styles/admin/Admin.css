@@ -1,0 +1,57 @@
+.admin {
+  display: flex;
+}
+
+.admin_menu {
+  margin-top: 6vw;
+  height: 90vh;
+  width: 15vw;
+  background-image: linear-gradient(#00ddff, #1d00bf);
+  text-align: center;
+  position: fixed;
+}
+
+.admin_menu_personal img {
+  margin-top: 3vw;
+  border-radius: 50%;
+  height: 5vw;
+  width: 5vw;
+  cursor: pointer;
+}
+
+.admin_menu_personal p {
+  margin-top: 5px;
+  color: white;
+  font-size: 1.3vw;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin_menu_item {
+  margin-top: 1vw;
+  border-top: 1px solid white;
+  color: white;
+  font-size: 1.2vw;
+  font-weight: 600;
+}
+
+.admin_menu_icon {
+  margin: 1vw auto 5px auto;
+  height: 2vw;
+  width: 2vw;
+  cursor: pointer;
+}
+
+.admin_menu_item p {
+  cursor: pointer;
+}
+
+.admin_body {
+  margin: 6vw 0 0 15vw;
+}
+
+@media only screen and (max-width: 1400px) {
+  .admin_menu {
+    margin-top: 5vw;
+  }
+}

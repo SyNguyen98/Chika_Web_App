@@ -4,7 +4,7 @@ import { Layout, Menu, Dropdown, Row, Col } from 'antd';
 
 import '../styles/AppHeader.css';
 import { CHIKA_COLOR, LINK_INTRODUCTION, LINK_PRODUCT, LINK_LOGIN,
-  LINK_GG_ASSISTANT, LINK_LIGHT_CONTROL, LINK_CONDITIONER_TIVI, LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED } from '../constant'
+        LINK_GG_ASSISTANT, LINK_LIGHT_CONTROL, LINK_CONDITIONER_TIVI, LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED } from '../constant'
 
 const { Header } = Layout;
 
@@ -15,51 +15,52 @@ class AppHeader extends Component {
     this.props.history.push(link);
   }
 
-  handleMenuClick = ({key}) => {
-    if(key === "logout") {
-      this.props.onLogout();
-    }
+  componentDidMount() {
+    console.log(this.props.userRole);
   }
 
   render() {
-    let menuItems;
-    if(this.props.currentUser) {
-      menuItems = [
-      ];
-    } else {
-      menuItems = [
-        <Menu.Item key={LINK_INTRODUCTION}>
-          <Link style={{color: CHIKA_COLOR}} to={LINK_INTRODUCTION}>Giới thiệu</Link>
-        </Menu.Item>,
-        <Menu.Item key="/smarthome" className="smarthome-menu">
-          <SmarthomeDropdownMenu
-            currentUser={this.props.currentUser}
-            handleMenuClick={this.handleMenuClick} />
-        </Menu.Item>,
-        <Menu.Item key={LINK_PRODUCT} >
-          <Link style={{color: CHIKA_COLOR}} to={LINK_PRODUCT}>Thiết bị</Link>
-        </Menu.Item>,
-        <Menu.Item key={LINK_LOGIN}>
-          <Link style={{color: CHIKA_COLOR}} to={LINK_LOGIN}>Đăng nhập</Link>
-        </Menu.Item>
-      ];
+    let header;
+    if (this.props.userRole === null) {
+        header = (
+          <Header className="app-header">
+            <div className="logo" onClick={(event) => this.handleClickChangePage(event, '/')}>
+              <img src="/image/logo.svg" alt="logo"/>
+              <div className="name">
+                <p className="chika">CHIKA</p>
+                <p className="home">Nhà thông minh</p>
+              </div>
+            </div>
+            <Menu className="header-menu"
+                  mode="horizontal">
+              <Menu.Item key={LINK_INTRODUCTION}>
+                <Link style={{color: CHIKA_COLOR}} to={LINK_INTRODUCTION}>Giới thiệu</Link>
+              </Menu.Item>
+              <Menu.Item className="smarthome-menu">
+                <SmarthomeDropdownMenu/>
+              </Menu.Item>
+              <Menu.Item key={LINK_PRODUCT} >
+                <Link style={{color: CHIKA_COLOR}} to={LINK_PRODUCT}>Thiết bị</Link>
+              </Menu.Item>
+              <Menu.Item key={LINK_LOGIN}>
+                <Link style={{color: CHIKA_COLOR}} to={LINK_LOGIN}>Đăng nhập</Link>
+              </Menu.Item>
+            </Menu>
+          </Header>
+        )
+    } else if (this.props.userRole === 'ROLE_ADMIN') {
+      header = (
+        <Header className="app-header" style={{position: 'fixed'}}>
+          <img className="header_admin_img" alt="logo-chika" src="/image/logo.svg"/>
+          <p className="header_admin_chika">CHIKA</p>
+          <p className="header_admin_title">TRANG QUẢN LÝ</p>
+        </Header>
+      )
     }
-
     return(
-      <Header className="app-header">
-        <div className="logo" onClick={(event) => this.handleClickChangePage(event, '/')}>
-          <img src="/image/logo.svg" alt="logo" height="40px"/>
-          <div className="name">
-            <p className="chika">CHIKA</p>
-            <p className="home">Nhà thông minh</p>
-          </div>
-        </div>
-        <Menu className="header-menu"
-              mode="horizontal"
-              selectedKeys={[this.props.location.pathname]}>
-          {menuItems}
-        </Menu>
-      </Header>
+      <div>
+        {header}
+      </div>
     );
   }
 }

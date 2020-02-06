@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Form, Input, Button, Icon, Row, Col, notification } from 'antd';
 
 import '../../styles/guest/Supporting.css';
-import { postReview } from '../../util/APIUtil';
+import { postReview } from '../../api';
 import { LINK_QUESTION, LINK_DOCUMENT, LINK_PRODUCT } from '../../constant'
 
 const { TextArea } = Input;

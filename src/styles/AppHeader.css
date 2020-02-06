@@ -1,8 +1,9 @@
 .app-header {
-  background-color: #0f0f0f;
-  width: 100%;
-  height: 8%;
+  background-image: linear-gradient(black, #2c008a);
+  width: 100vw;
+  height: 6vw;
   box-shadow: 0 2px 8px #f0f1f2;
+  display: flex;
 }
 
 .logo {
@@ -43,7 +44,7 @@
 }
 
 .header-menu {
-  background-color: #0f0f0f;
+  background-color: rgba(0,0,0,0);
   float: right;
   margin: 1.5vw 20vw auto auto;
   line-height: 4.5vw;
@@ -67,8 +68,34 @@
   background-color: #f3d5a8;
 }
 
+.header_admin_img {
+  margin: 1vw 0 auto 3vw;
+  width: 4vw;
+  height: 4vw;
+}
+
+.header_admin_chika {
+  margin: 1.2vw 0 0 0.5vw;
+  color: #f3d5a8;
+  font-size: 2vw;
+  font-weight: 800;
+  text-align: center;
+}
+
+.header_admin_title {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin: 1.4vw 0 auto 30vw;
+  color: white;
+  font-size: 2vw;
+  font-weight: 700;
+}
+
 
 @media only screen and (max-width: 1400px) {
+  .app-header {
+    height: 5vw;
+  }
+
   .header-menu {
     margin-top: 0.5vw;
     margin-right: 15vw;
@@ -77,5 +104,17 @@
   .dropdown-row {
     width: 35vw;
     font-size: 1vw;
+  }
+
+  .header_admin_img {
+    margin-top: 0.6vw;
+  }
+
+  .header_admin_chika {
+    margin-top: 0;
+  }
+
+  .header_admin_title {
+    margin-top: 0;
   }
 }

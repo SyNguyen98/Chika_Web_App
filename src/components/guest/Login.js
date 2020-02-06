@@ -3,7 +3,7 @@ import { Form, Input, Button, Icon, notification } from 'antd';
 
 import '../../styles/guest/Login.css';
 import { ACCESS_TOKEN } from '../../constant';
-import { login } from '../../util/APIUtil';
+import { login } from '../../api';
 
 class Login extends Component {
   componentDidMount() {

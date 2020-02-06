@@ -23,3 +23,5 @@ export const LINK_MODULE_IR = '/Dieu-khien-hong-ngoai';
 export const LINK_HOME_CONTROLLER = '/Bo-dieu-khien-trung-tam';
 export const LINK_DOOR_SENSOR = '/Cam-bien-cua';
 export const LINK_MOTION_DETECTOR = '/Cam-bien-phat-hien-chuyen-dong';
+
+export const LINK_ADMIN = '/admin';

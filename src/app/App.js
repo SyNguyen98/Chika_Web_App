@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, withRouter, Switch } from 'react-router-dom';
-import { Layout, notification, BackTop } from 'antd';
+import { Layout, BackTop, notification } from 'antd';
 import './App.css';
 
 import AppHeader from '../components/AppHeader';
@@ -31,13 +31,16 @@ import Document from '../components/guest/supporting/Document';
 
 import Login from '../components/guest/Login';
 
-import Profile from '../components/user/Profile';
+import Admin from '../components/admin/Admin';
 
-import { getUser } from '../util/APIUtil';
-import { ACCESS_TOKEN, LINK_INTRODUCTION, LINK_LOGIN, LINK_PRODUCT, LINK_SUPPORTING,
+import { ACCESS_TOKEN,
+  LINK_INTRODUCTION, LINK_LOGIN, LINK_PRODUCT, LINK_SUPPORTING,
   LINK_GG_ASSISTANT, LINK_LIGHT_CONTROL, LINK_CONDITIONER_TIVI, LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED,
   LINK_SWITCH_SENSOR, LINK_SWITCH, LINK_MODULE_IR, LINK_HOME_CONTROLLER, LINK_DOOR_SENSOR, LINK_MOTION_DETECTOR,
-  LINK_QUESTION, LINK_DOCUMENT} from '../constant';
+  LINK_QUESTION, LINK_DOCUMENT,
+  LINK_ADMIN} from '../constant';
+
+import { getCurrentUser } from '../api';
 
 const { Content } = Layout;
 
@@ -45,8 +48,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: null,
-      isAuthenticated: false,
+      userRole: null,
       isLoading: false
     }
   }
@@ -55,13 +57,14 @@ class App extends Component {
     this.setState({
       isLoading: true
     });
-    getUser()
-    .then(response => {
+    getCurrentUser().then(response => {
       this.setState({
-        currentUser: response,
-        isAuthenticated: true,
+        userRole: response.role,
         isLoading: false
       });
+      if (this.state.userRole === 'ROLE_ADMIN') {
+        this.props.history.push(LINK_ADMIN);
+      }
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -72,24 +75,22 @@ class App extends Component {
   handleLogin = () => {
     notification.success({
       message: 'Chika Smarthome',
-      description: "You're successfully logged in.",
+      description: "Đăng nhập thành công.",
     });
     this.loadCurrentUser();
-    this.props.history.push("/");
   }
 
   handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
 
     this.setState({
-      currentUser: null,
-      isAuthenticated: false
+      userRole: null,
     });
 
     this.props.history.push("/");
     notification.success({
       message: 'Chika Smarthome',
-      description: "You're successfully logged out.",
+      description: "Đăng xuất thành công.",
     });
   }
 
@@ -100,11 +101,7 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <AppHeader
-          isAuthenticated={this.state.isAuthenticated}
-          currentUser={this.state.currentUser}
-          onLogout={this.handleLogout} >
-        </AppHeader>
+        <AppHeader userRole={this.state.userRole}/>
 
         <Content>
             <Switch>
@@ -130,16 +127,16 @@ class App extends Component {
                 <Route exact path={LINK_QUESTION} component={Question} />
                 <Route exact path={LINK_DOCUMENT} component={Document} />
 
+              <Route exact path={LINK_ADMIN} render={(props) => <Admin onLogout={this.handleLogout} {...props} />} />
+
               <Route path={LINK_LOGIN} render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
-              <Route path="/users/:username"
-                render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}/>}>
-              </Route>
+
             </Switch>
         </Content>
 
-        <AppFooter/>
+        {this.state.userRole === null ? (<AppFooter/>) : null}
 
-        <ContactMenu/>
+        {this.state.userRole === null ? (<ContactMenu/>) : null}
 
         <BackTop/>
       </Layout>
