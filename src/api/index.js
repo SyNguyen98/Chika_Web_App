@@ -71,3 +71,14 @@ export function getCurrentUser() {
         method: 'GET'
     });
 }
+
+export function getAdminInfo() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/user/admin",
+        method: 'GET'
+    });
+}

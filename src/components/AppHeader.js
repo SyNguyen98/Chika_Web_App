@@ -16,7 +16,6 @@ class AppHeader extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userRole);
   }
 
   render() {

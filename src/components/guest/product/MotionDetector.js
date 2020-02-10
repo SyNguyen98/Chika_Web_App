@@ -46,7 +46,7 @@ class MotionDetector extends Component {
           <b><i>Thiết kế tinh tế, hiện đại</i></b>
           <br/><strong>Cảm biến chuyển động</strong> Chika được làm bằng nhựa chống cháy PP, thiết kế tinh tế với đường bo tròn sang trọng, màu trắng mang đến nét hiện đại của sản phẩm.
           <br/>
-          <br/><b><i>Ứng dụng của cảm biến chuyển động Lumi</i></b>
+          <br/><b><i>Ứng dụng của cảm biến chuyển động Chika</i></b>
           <br/><strong>Cảm biến chuyển động</strong> được ứng dụng tại khu vực hành lang, khu vệ sinh của các bệnh viện, khách sạn, nhà ở, trường học …
             tránh tình trạng người dùng quên tắt đèn khi ra vào. Cảm biến phát hiện người di chuyển và thông báo cho HC để bật đèn khi có người,
             không có người thì tự động tắt đèn. Giải pháp này giúp tiết kiệm, tránh lãng phí điện năng cho người sử dụng một các tối ưu nhất.
