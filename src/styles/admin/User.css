@@ -1,0 +1,80 @@
+.admin-user {
+ width: 84vw;
+ height: 90vh;
+}
+
+.admin-user_menu {
+  display: flex;
+  height: 90vh;
+}
+.admin-user_menu_item {
+  margin: 5vw 0 0 8vw;
+  background-size: contain;
+  width: 30vw;
+  height: 16vw;
+  position: relative;
+  cursor: pointer;
+}
+
+.admin-user_menu_item_title {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 30vw;
+  text-align: center;
+  color: white;
+}
+
+.admin-user_menu_item_title h1 {
+  padding-top: 10px;
+  color: white;
+}
+
+.admin-user_user-list {
+  text-align: center;
+}
+
+.admin-user_user-list h1 {
+  margin-top: 1vw;
+  font-size: 2.5vw;
+  font-weight: 700;
+  color: green;
+}
+
+/* Table */
+.admin-user_user-list_table {
+  margin: 1vw 3vw 0 3vw;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #e6e6e6;
+  text-align: center;
+}
+
+span.ant-table-column-title {
+  font-size: 1.3vw;
+  color: #2c0073;
+}
+
+tr.ant-table-row.ant-table-row-level-0 {
+  font-size: 1vw;
+  text-align: center;
+}
+
+/* Modal */
+.ant-modal-confirm-body .ant-modal-confirm-title {
+  margin-bottom: 1vw;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: 700;
+  color: #240091;
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-content {
+  text-align: center;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns {
+  float: none;
+  text-align: center;
+}

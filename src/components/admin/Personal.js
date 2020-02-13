@@ -1,47 +1,18 @@
 import React, { Component } from 'react';
 
 import '../../styles/admin/Personal.css';
-import { getAdminInfo } from '../../api';
 
 export default class Personal extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          adminInfo: null,
-          isLoading: false,
-      }
-  }
-
-  loadInfo = () => {
-    this.setState({
-      isLoading: true
-    });
-    getAdminInfo().then(response => {
-      this.setState({
-        adminInfo: response,
-        isLoading: false
-      });
-      console.log(this.state.adminInfo);
-    }).catch(error => {
-      this.setState({
-        isLoading: false
-      });
-    });
-  }
-
-  componentDidMount() {
-    this.loadInfo();
-  }
 
   render() {
     return(
       <div className="admin-personal">
-        {this.state.adminInfo ? (
+        {this.props.adminInfo ? (
           <div>
             <div style={{textAlign: 'center'}}>
-              <img className="admin-personal_avatar" alt='avatar' src={this.state.adminInfo.avatar}></img>
-              <p className="admin-personal_name">{this.state.adminInfo.name}</p>
-              <p className="admin-personal_username">@{this.state.adminInfo.username}</p>
+              <img className="admin-personal_avatar" alt='avatar' src={this.props.adminInfo.avatar}></img>
+              <p className="admin-personal_name">{this.props.adminInfo.name}</p>
+              <p className="admin-personal_username">@{this.props.adminInfo.username}</p>
             </div>
             <div className="admin-personal_info">
               <div className="admin-personal_info_title">
@@ -56,10 +27,10 @@ export default class Personal extends Component {
                   <p>Số điện thoại</p>
                 </div>
                 <div className="admin-personal_info_content_content">
-                  <p>{this.state.adminInfo.birthday}</p>
-                  <p>{this.state.adminInfo.address}</p>
-                  <p>{this.state.adminInfo.email}</p>
-                  <p>{this.state.adminInfo.phone}</p>
+                  <p>{this.props.adminInfo.birthday}</p>
+                  <p>{this.props.adminInfo.address}</p>
+                  <p>{this.props.adminInfo.email}</p>
+                  <p>{this.props.adminInfo.phone}</p>
                 </div>
               </div>
 
@@ -74,9 +45,9 @@ export default class Personal extends Component {
                   <p>Nhóm</p>
                 </div>
                 <div className="admin-personal_info_content_content">
-                  <p>{this.state.adminInfo.employeeId}</p>
-                  <p>{this.state.adminInfo.function}</p>
-                  <p>{this.state.adminInfo.department}</p>
+                  <p>{this.props.adminInfo.employeeId}</p>
+                  <p>{this.props.adminInfo.function}</p>
+                  <p>{this.props.adminInfo.department}</p>
                 </div>
               </div>
             </div>

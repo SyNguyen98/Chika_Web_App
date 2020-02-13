@@ -49,7 +49,7 @@ class AppHeader extends Component {
         )
     } else if (this.props.userRole === 'ROLE_ADMIN') {
       header = (
-        <Header className="app-header" style={{position: 'fixed'}}>
+        <Header className="app-header">
           <img className="header_admin_img" alt="logo-chika" src="/image/logo.svg"/>
           <p className="header_admin_chika">CHIKA</p>
           <p className="header_admin_title">TRANG QUẢN LÝ</p>

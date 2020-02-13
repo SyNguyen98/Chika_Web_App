@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import '../../styles/admin/Admin.css';
-import { getCurrentUser } from '../../api';
+import { getAdminInfo } from '../../api';
 
 import Personal from './Personal'
 import User from './User'
@@ -15,7 +15,7 @@ class Admin extends Component {
       this.state = {
           user: null,
           isLoading: false,
-          component: 'info'
+          component: 'user'
       }
   }
 
@@ -23,7 +23,7 @@ class Admin extends Component {
     this.setState({
       isLoading: true
     });
-    getCurrentUser().then(response => {
+    getAdminInfo().then(response => {
       this.setState({
         user: response,
         isLoading: false
@@ -59,7 +59,7 @@ class Admin extends Component {
   render() {
     let component;
     if (this.state.component === 'info') {
-      component = (<Personal/>);
+      component = (<Personal adminInfo={this.state.user}/>);
     } else if (this.state.component === 'user') {
       component = (<User/>);
     } else if (this.state.component === 'device') {
