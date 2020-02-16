@@ -1,5 +1,5 @@
 .home-page {
-  min-height: 100vh;
+  margin-top: 10vh;
 }
 
 .home-page Button:hover {
@@ -65,7 +65,7 @@
   background-color: transparent;
   font-size: 1.1vw;
   font-weight: bold;
-  padding: 3px 30px 3px;
+  padding: 0.3vw 2vw 2vw;
 }
 
 .home_body_gg-assitant-img {
@@ -119,7 +119,7 @@
   background-color: transparent;
   font-size: 1.1vw;
   font-weight: bold;
-  padding: 3px 30px 3px;
+  padding: 0.3vw 2vw 2vw;
 }
 
 .home_body_led-rgb-img {
@@ -186,7 +186,7 @@
   border-color: #ff8c00;
   font-size: 1vw;
   font-weight: bold;
-  padding: 3px 30px 3px;
+  padding: 0.3vw 2vw 2vw;
 }
 
 .home_body_environmental-control-img img {

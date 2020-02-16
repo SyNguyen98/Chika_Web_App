@@ -23,14 +23,6 @@ const request = (options) => {
     );
 };
 
-export function postReview(review) {
-    return request({
-        url: API_BASE_URL + "/review",
-        method: 'POST',
-        body: JSON.stringify(review)
-    });
-}
-
 export function login(loginRequest) {
     return request({
         url: API_BASE_URL + "/auth/signin",
@@ -73,9 +65,36 @@ export function getAllUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
-
     return request({
         url: API_BASE_URL + "/user/all",
         method: 'GET'
+    });
+}
+
+export function sendFeedback(feedback) {
+    return request({
+        url: API_BASE_URL + "/feedback",
+        method: 'POST',
+        body: JSON.stringify(feedback)
+    });
+}
+
+export function getAllFeedback() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: API_BASE_URL + "/feedback",
+        method: 'GET'
+    });
+}
+
+export function updateFeedBackResponse(id, response) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: API_BASE_URL + "/feedback/id/" + id + "/response/" + response,
+        method: 'PUT'
     });
 }

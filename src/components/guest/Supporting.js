@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Form, Input, Button, Icon, Row, Col, notification } from 'antd';
 
 import '../../styles/guest/Supporting.css';
-import { postReview } from '../../api';
+import { sendFeedback } from '../../api';
 import { LINK_QUESTION, LINK_DOCUMENT, LINK_PRODUCT } from '../../constant'
 
 const { TextArea } = Input;
@@ -85,8 +85,8 @@ class SubmitForm extends Component {
     event.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        const review = Object.assign({}, values);
-        postReview(review)
+        const feedback = Object.assign({}, values);
+        sendFeedback(feedback)
         .then(response => {
           notification.success({
             message: 'Chika Smarthome',
@@ -137,14 +137,14 @@ class SubmitForm extends Component {
         </Form.Item>
         <div>
           <Form.Item>
-            {getFieldDecorator('phone', {
-              rules: [{ required: true, message: 'Vui lòng không để trống số điện thoại!' }]
-            })(<Input style={{width: "17vw"}}
+            {getFieldDecorator('email', {
+              rules: [{ required: true, message: 'Vui lòng không để trống email!' }]
+            })(<Input style={{width: "20vw"}}
                 size="large"
-                name="phone"
-                placeholder="Số điện thoại"/>
+                name="email"
+                placeholder="Email"/>
             )}
-            <Button type="primary" htmlType="submit" size="large" style={{width: "10vw", marginLeft: '3vw'}}>Hoàn Tất</Button>
+            <Button type="primary" htmlType="submit" size="large" style={{width: "8vw", marginLeft: '2vw'}}>Hoàn Tất</Button>
           </Form.Item>
         </div>
       </Form>

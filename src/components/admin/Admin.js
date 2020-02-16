@@ -15,7 +15,7 @@ class Admin extends Component {
       this.state = {
           user: null,
           isLoading: false,
-          component: 'user'
+          component: 'info'
       }
   }
 

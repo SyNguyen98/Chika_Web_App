@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Table, Icon, Input, Button, Modal } from 'antd';
+import { Table, Icon, Input, Button, Modal, Divider, Popconfirm } from 'antd';
 
 import '../../styles/admin/User.css';
-import { getAllUser } from '../../api';
+import { getAllUser, getAllFeedback, updateFeedBackResponse } from '../../api';
 
 export default class User extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export default class User extends Component {
       this.state = {
           list: null,
           userList: null,
+          feedbackList: null,
           isLoading: false
       }
   }
@@ -31,15 +32,35 @@ export default class User extends Component {
     });
   }
 
-  handleChangeList = (listName) => {
+  loadAllFeedback = () => {
     this.setState({
-      list: listName
+      isLoading: true
     });
+    getAllFeedback().then(response => {
+      this.setState({
+        feedbackList: response,
+        isLoading: false
+      });
+      console.log(this.state.feedbackList);
+    }).catch(error => {
+      this.setState({
+        isLoading: false
+      });
+    });
+  }
+
+  handleChangeList = (listName) => {
+    this.setState({ list: listName });
+  }
+
+  handleBack = () => {
+    this.setState({ list: null });
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
     this.loadAllUser();
+    this.loadAllFeedback();
   }
 
   render() {
@@ -47,11 +68,18 @@ export default class User extends Component {
     if (this.state.list === 'user') {
       list = (<UserList userList={this.state.userList}/>);
     } else if (this.state.list === 'feedback') {
-      list = (<FeedbackList />);
+      list = (<FeedbackList feedbackList={this.state.feedbackList}/>);
     }
     return(
       <div className="admin-user">
-        {this.state.list ? list : (
+        {this.state.list ? (
+          <div >
+            <Button type="primary" style={{margin: '1vw 0 0 3vw'}} onClick={this.handleBack}>
+                <Icon type="left" />Trở về
+            </Button>
+            {list}
+          </div>
+        ) : (
           <div className="admin-user_menu">
             <div className="admin-user_menu_item" style={{backgroundImage: "url('/image/admin/user.jpg')"}}
                 onClick={(event) => this.handleChangeList('user')}>
@@ -65,7 +93,7 @@ export default class User extends Component {
                 onClick={(event) => this.handleChangeList('feedback')}>
               <div className="admin-user_menu_item_title">
                 <h1>Danh sách phản hồi</h1>
-                <p><b>200</b> phản hồi</p>
+                <p><b>{this.state.feedbackList ? this.state.feedbackList.length : null}</b> phản hồi</p>
               </div>
             </div>
           </div>
@@ -132,7 +160,6 @@ class UserList extends Component {
 
   hanleShowModal = (email) => {
     let userInfo = this.props.userList.find(user => user.email === email);
-    console.log(userInfo.address.length);
     Modal.info({
       icon: null,
       title: 'Thông tin cá nhân',
@@ -170,6 +197,7 @@ class UserList extends Component {
           </div>
         </div>
       ),
+      okText: 'Trở về',
       width: '50vw'
     });
   };
@@ -203,10 +231,10 @@ class UserList extends Component {
       },
     ];
     return(
-      <div className="admin-user_user-list">
+      <div className="admin-user_list">
         <h1>DANH SÁCH NGƯỜI DÙNG</h1>
         {this.props.userList ? (
-          <Table className="admin-user_user-list_table"
+          <Table className="admin-user_list_table"
                 columns={columns}
                 dataSource={this.props.userList}
                 pagination={{ pageSize: 20 }}
@@ -218,11 +246,118 @@ class UserList extends Component {
 }
 
 class FeedbackList extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+        visible: false,
+        feedbackInfo: null
+      }
+  }
+
+  hanleShowModal = (time) => {
+    let feedback = this.props.feedbackList.find(feedback => feedback.time === time);
+    this.setState({
+      isLoading: false,
+      visible: true,
+      feedbackInfo: feedback
+    });
+  };
+
+  handleCancelModal = () => {
+    this.setState({ visible: false });
+  }
+
+  handleSendResponse = (email) => {
+    window.open("https://mail.google.com/mail/u/0/?view=cm&fs=1&to=" + email);
+  }
+
+  handleChangeIsResponse = (time) => {
+    let feedback = this.props.feedbackList.find(feedback => feedback.time === time);
+    this.setState({
+      isLoading: true
+    });
+    updateFeedBackResponse(feedback.id, true).then(response => {
+      this.setState({
+        isLoading: false
+      });
+      let index = this.props.feedbackList.indexOf(this.props.feedbackList.find(feedback => feedback.id === response.id));
+      this.props.feedbackList[index] = response;
+      this.componentDidMount();
+    }).catch(error => {
+      this.setState({
+        isLoading: false
+      });
+    });
+  }
+
+  onChangeTable = {
+
+  }
 
   render() {
+    const { isLoading, visible, feedbackInfo } = this.state;
+    const columns = [
+      {
+        title: 'Thời Gian',
+        dataIndex: 'time',
+        key: 'time',
+      },
+      {
+        title: 'Họ Tên',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, row) => <a onClick={(event) => this.hanleShowModal(row.time)}>{text}</a>,
+      },
+      {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
+      },
+      {
+        title: 'Phản Hồi',
+        dataIndex: 'response',
+        key: 'response',
+        render: (text, row) => <span>{text ? <i>Đã phản hồi</i> : (
+          <Popconfirm title="Đã phản hồi hay chưa?"
+                      onConfirm={(event) => this.handleChangeIsResponse(row.time)}
+                      okText="Rồi"
+                      cancelText="Chưa">
+            <b style={{cursor: 'pointer'}}>Chưa phản hồi</b>
+          </Popconfirm>
+        )}</span>
+      },
+    ];
     return(
-      <div className="admin-user_feedback-list">
-        Danh sách feedback
+      <div className="admin-user_list">
+        <h1>DANH SÁCH PHẢN HỒI</h1>
+        {this.props.feedbackList ? (
+          <Table className="admin-user_list_table"
+                columns={columns}
+                dataSource={this.props.feedbackList}
+                pagination={{ pageSize: 20 }}
+                bordered/>
+        ) : null}
+        {feedbackInfo ? (
+          <Modal visible={visible}
+                title="Phản Hồi"
+                centered
+                footer={[
+                  <Button key="back" onClick={this.handleCancelModal}>
+                    Quay về
+                  </Button>,
+                  <Button key="submit" type="primary" onClick={(event) => this.handleSendResponse(feedbackInfo.email)}>
+                    Trả lời
+                  </Button>,
+                ]}>
+            <div style={{margin: '0 3vw 0 3vw'}}>
+              <h2 style={{marginBottom: '0'}}>{feedbackInfo.subject}</h2>
+              <p style={{marginTop: '0', fontSize: '0.8vw', color: '#cfcfcf'}}>{feedbackInfo.time}</p>
+              <p style={{marginTop: '1vw', fontSize: '1.2vw'}}>{feedbackInfo.content}</p>
+              <Divider dashed />
+              <h4 style={{marginTop: '0', fontSize: '1vw'}}><i>{feedbackInfo.name}</i></h4>
+            </div>
+          </Modal>
+        ) : null}
       </div>
     )
   }

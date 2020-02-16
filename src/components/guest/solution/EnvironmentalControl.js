@@ -71,7 +71,7 @@ class EnvironmentalControl extends Component {
           <img className="environmental-control_body_combine-device-image" alt="rem-tu-dong-khi-troi-qua-toi" src="/image/environmental-control/rem-tu-dong-khi-troi-qua-toi.jpg"></img>
           <div className="environmental-control_body_combine-device">
             <h1>KẾT HỢP THIẾT BỊ KHÁC<br/>TẠO NÊN<br/>ĐIỀU KỲ DIỆU</h1>
-            <p>Rèm cửa tự động mở ra khi trời tối. hay đóng vào khi có ánh nắng chói chang.</p>
+            <p>Rèm cửa tự động mở ra khi trời tối, hay đóng vào khi có ánh nắng chói chang.</p>
           </div>
         </div>
 
@@ -84,7 +84,7 @@ class EnvironmentalControl extends Component {
           <img className="environmental-control_body_door-sensor-image" alt="cam-bien-cua" src="/image/light-control/cam-bien-cua.png"></img>
           <div className="environmental-control_body_door-sensor">
             <h1>SANG TRỌNG<br/>TINH TẾ<br/>& ĐẲNG CẤP</h1>
-            <p>Sản phẩm đầu tiên tại Việt Nam đạt chứng chỉ tiêu chuẩn xuất khẩu sang các nướ Châu Âu - CE và UL – được phép xuất khẩu tới 104 Quốc gia trên thế giới.</p>
+            <p>Sản phẩm đầu tiên tại Việt Nam đạt chứng chỉ tiêu chuẩn xuất khẩu sang các nước Châu Âu - CE và UL – được phép xuất khẩu tới 104 Quốc gia trên thế giới.</p>
           </div>
         </div>
 

@@ -48,7 +48,7 @@ class DoorSensor extends Component {
 
         <div className="door-sensor_body">
           <b><i>Cảm biến cửa Chika - thiết kế tinh tế, hiện đại với màu trắng bắt mắt</i></b>
-          <br/>Cảm biến cửa Lumi được thiết kế thành 2 phần riêng biệt, được gắn tại cửa ra vào của ngôi nhà hay của từng phòng, được lắp với tối đa cách nhau là 2cm.
+          <br/>Cảm biến cửa Chika được thiết kế thành 2 phần riêng biệt, được gắn tại cửa ra vào của ngôi nhà hay của từng phòng, được lắp với tối đa cách nhau là 2cm.
             Được làm từ chất liệu nhựa chống cháy PP, thiết kế tinh tế, tỉ mỉ với các đầu vát tròn.
             <strong> Cảm biến phát hiện đột nhập</strong> chỉ duy nhất có màu trắng, thể hiện sự hiện đại, sang trọng.
           <br/><img alt="cam-bien-dot-nhap" src="/image/product/door-sensor/cam-bien-dot-nhap.jpg"/>
