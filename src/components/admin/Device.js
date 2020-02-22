@@ -151,7 +151,7 @@ export default class Device extends Component {
           <div>
             <div className="admin-device_menu">
               <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('switch')}>
-                <img alt='switch' src='/image/admin/switch-wifi.png' style={{width: '12vw', height: '12vw'}}/>
+                <img alt='switch-wifi' src='/image/admin/switch-wifi.png' style={{width: '12vw', height: '12vw'}}/>
                 <div className="admin-device_menu_item_title">
                   <h1>CÔNG TẮC WIFI</h1>
                   <p><b>{switchList ? switchList.length : null}</b> sản phẩm</p>
@@ -159,7 +159,7 @@ export default class Device extends Component {
               </div>
 
               <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('switch')}>
-                <img alt='switch' src='/image/admin/switch-rf.png' style={{width: '12vw', height: '12vw'}}/>
+                <img alt='switch-rf' src='/image/admin/switch-rf.png' style={{width: '12vw', height: '12vw'}}/>
                 <div className="admin-device_menu_item_title">
                   <h1>CÔNG TẮC RF</h1>
                   <p><b>{switchList ? switchList.length : null}</b> sản phẩm</p>
@@ -167,7 +167,7 @@ export default class Device extends Component {
               </div>
 
               <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('module-ir')}>
-                <img alt='switch' src='/image/admin/module-ir.png' style={{width: '10vw', height: '10vw', marginTop: '1vw'}}/>
+                <img alt='module-ir' src='/image/admin/module-ir.png' style={{width: '10vw', height: '10vw', marginTop: '1vw'}}/>
                 <div className="admin-device_menu_item_title">
                   <h1>ĐIỀU KHIỂN HỒNG NGOẠI</h1>
                   <p><b>{moduleIrList ? moduleIrList.length : null}</b> sản phẩm</p>
@@ -178,7 +178,7 @@ export default class Device extends Component {
 
             <div className="admin-device_menu">
               <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('home-center')}>
-                <img alt='switch' src='/image/admin/home-center.png' style={{width: '10vw', height: '9vw', marginTop: '1vw'}}/>
+                <img alt='home-center' src='/image/admin/home-center.png' style={{width: '10vw', height: '9vw', marginTop: '1vw'}}/>
                 <div className="admin-device_menu_item_title">
                   <h1>BỘ XỬ LÝ TRUNG TÂM</h1>
                   <p><b>{homeCenterList ? homeCenterList.length : null}</b> sản phẩm</p>
@@ -186,7 +186,7 @@ export default class Device extends Component {
               </div>
 
               <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('sensor')}>
-                <img alt='switch' src='/image/admin/sensor.png' style={{width: '9vw', height: '9vw', marginTop: '1vw'}}/>
+                <img alt='sensor' src='/image/admin/sensor.png' style={{width: '9vw', height: '9vw', marginTop: '1vw'}}/>
                 <div className="admin-device_menu_item_title">
                   <h1>CẢM BIẾN</h1>
                   <p><b>{sensorList ? sensorList.length : null}</b> sản phẩm</p>

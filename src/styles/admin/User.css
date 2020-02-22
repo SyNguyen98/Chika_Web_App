@@ -5,29 +5,27 @@
 
 .admin-user_menu {
   display: flex;
-  height: 90vh;
 }
+
 .admin-user_menu_item {
-  margin: 5vw 0 0 8vw;
-  background-size: contain;
-  width: 30vw;
-  height: 16vw;
-  position: relative;
+  margin: 4vw 0 0 15vw;
+  background-image: radial-gradient(white, #e0e0e0);
+  text-align: center;
+  width: 18vw;
+  height: 15vw;
   cursor: pointer;
 }
 
-.admin-user_menu_item_title {
-  position: absolute;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  width: 30vw;
-  text-align: center;
-  color: white;
+.admin-user_menu_item h1 {
+  font-size: 1.2vw;
+  font-weight: bold;
+  color: #19008a;
+  text-shadow: 2px 2px #e0e0e0;
 }
 
-.admin-user_menu_item_title h1 {
-  padding-top: 10px;
-  color: white;
+.admin-user_back-btn {
+  margin: 1vw 0 0 3vw;
+  float: left;
 }
 
 .admin-user_list {

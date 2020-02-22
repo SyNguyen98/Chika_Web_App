@@ -15,7 +15,7 @@ class Admin extends Component {
       this.state = {
           user: null,
           isLoading: false,
-          component: 'device'
+          component: 'info'
       }
   }
 
@@ -57,23 +57,31 @@ class Admin extends Component {
   }
 
   render() {
+    const { user } = this.state;
     let component;
-    if (this.state.component === 'info') {
-      component = (<Personal adminInfo={this.state.user}/>);
-    } else if (this.state.component === 'user') {
-      component = (<User/>);
-    } else if (this.state.component === 'device') {
-      component = (<Device/>);
-    } else if (this.state.component === 'setting') {
-      component = (<Setting/>);
+    switch (this.state.component) {
+      case 'info':
+        component = (<Personal adminInfo={user}/>);
+        break;
+      case 'user':
+        component = (<User/>);
+        break;
+      case 'device':
+        component = (<Device/>);
+        break;
+      case 'setting':
+        component = (<Setting/>);
+        break;
+      default:
+        component = null;
     }
     return(
       <div className="admin">
         <div className="admin_menu">
-          {this.state.user ? (
+          {user ? (
             <div className="admin_menu_personal" onClick={(event) => this.handleChangeComponent('info')}>
-              <img alt="avatar" src={this.state.user.avatar}></img>
-              <p>{this.cutName(this.state.user.name)}</p>
+              <img alt="avatar" src={user.avatar}/>
+              <p>{this.cutName(user.name)}</p>
             </div>
           ) : null}
           <div className="admin_menu_item" onClick={(event) => this.handleChangeComponent('user')}>

@@ -84,7 +84,7 @@ export default class ModuleIrList extends Component {
         disableAddModule: true
       });
       this.props.moduleIrList.unshift(response);
-      this.componentDidMount();
+      this.forceUpdate();
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -106,7 +106,7 @@ export default class ModuleIrList extends Component {
       });
       let index = this.props.moduleIrList.indexOf(this.props.moduleIrList.find(moduleIr => moduleIr.id === id));
       this.props.moduleIrList.splice(index, 1);
-      this.componentDidMount();
+      this.forceUpdate();
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -146,8 +146,8 @@ export default class ModuleIrList extends Component {
                                   onConfirm={(event) => this.handleDeleteModule(row.id)}
                                   okText="Xóa"
                                   cancelText="Hủy">
-                        <b style={{cursor: 'pointer', color: 'blue'}}>Xóa</b>
-                      </Popconfirm>,
+                                <b style={{cursor: 'pointer', color: 'blue'}}>Xóa</b>
+                              </Popconfirm>,
       },
     ];
     return (

@@ -84,7 +84,7 @@ export default class HomeCenterList extends Component {
         disableAddHomeCenter: true
       });
       this.props.homeCenterList.unshift(response);
-      this.componentDidMount();
+      this.forceUpdate();
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -106,7 +106,7 @@ export default class HomeCenterList extends Component {
       });
       let index = this.props.homeCenterList.indexOf(this.props.homeCenterList.find(s => s.id === id));
       this.props.homeCenterList.splice(index, 1);
-      this.componentDidMount();
+      this.forceUpdate();
     }).catch(error => {
       this.setState({
         isLoading: false

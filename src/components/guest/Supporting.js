@@ -106,7 +106,7 @@ class SubmitForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return(
-      <Form onSubmit={this.handleSubmit} className="supporting_header_form">
+      <Form className="supporting_header_form" onSubmit={this.handleSubmit} autocomplete="off">
         <Form.Item>
           {getFieldDecorator('subject', {
             rules: [{ required: true, message: 'Vui lòng không để trống tiêu đề!' }]

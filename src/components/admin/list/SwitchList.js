@@ -85,7 +85,7 @@ export default class SwitchList extends Component {
         disableAddSwitch: true
       });
       this.props.switchList.unshift(response);
-      this.componentDidMount();
+      this.forceUpdate();
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -107,7 +107,7 @@ export default class SwitchList extends Component {
       });
       let index = this.props.switchList.indexOf(this.props.switchList.find(s => s.id === id));
       this.props.switchList.splice(index, 1);
-      this.componentDidMount();
+      this.forceUpdate();
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -160,8 +160,8 @@ export default class SwitchList extends Component {
                                   onConfirm={(event) => this.handleDeleteSwitch(row.id)}
                                   okText="Xóa"
                                   cancelText="Hủy">
-                        <b style={{cursor: 'pointer', color: 'blue'}}>Xóa</b>
-                      </Popconfirm>,
+                                <b style={{cursor: 'pointer', color: 'blue'}}>Xóa</b>
+                              </Popconfirm>,
       },
     ];
     return (

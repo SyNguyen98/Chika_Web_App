@@ -85,7 +85,7 @@ export default class SensorList extends Component {
         disableAddSensor: true
       });
       this.props.sensorList.unshift(response);
-      this.componentDidMount();
+      this.forceUpdate();
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -107,7 +107,7 @@ export default class SensorList extends Component {
       });
       let index = this.props.sensorList.indexOf(this.props.sensorList.find(s => s.id === id));
       this.props.sensorList.splice(index, 1);
-      this.componentDidMount();
+      this.forceUpdate();
     }).catch(error => {
       this.setState({
         isLoading: false
