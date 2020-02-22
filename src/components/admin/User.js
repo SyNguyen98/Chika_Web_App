@@ -250,6 +250,7 @@ class FeedbackList extends Component {
       super(props);
       this.state = {
         visible: false,
+        isLoading: false,
         feedbackInfo: null
       }
   }
@@ -290,12 +291,8 @@ class FeedbackList extends Component {
     });
   }
 
-  onChangeTable = {
-
-  }
-
   render() {
-    const { isLoading, visible, feedbackInfo } = this.state;
+    const { visible, feedbackInfo } = this.state;
     const columns = [
       {
         title: 'Thời Gian',

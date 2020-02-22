@@ -22,22 +22,21 @@
 .admin_menu_personal p {
   margin-top: 5px;
   color: white;
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   font-weight: 600;
   cursor: pointer;
 }
 
 .admin_menu_item {
-  margin-top: 1vw;
   color: white;
-  font-size: 1.2vw;
+  font-size: 1vw;
   font-weight: 600;
 }
 
 .admin_menu_icon {
-  margin: 1vw auto 5px auto;
-  height: 2vw;
-  width: 2vw;
+  margin: 1.8vw auto 5px auto;
+  height: 1.8vw;
+  width: 1.8vw;
   cursor: pointer;
 }
 

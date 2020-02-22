@@ -56,7 +56,7 @@ class LoginForm extends Component {
           <h1>ĐĂNG NHẬP</h1>
           <p>Dành cho người dùng có sản phẩm của Chika</p>
           <div className="login-form">
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit} autocomplete="off">
               <Form.Item className="item">
                 {getFieldDecorator('usernameOrEmail', {
                   rules: [{ required: true, message: 'Vui lòng nhập tên đăng nhập hoặc email!' }]

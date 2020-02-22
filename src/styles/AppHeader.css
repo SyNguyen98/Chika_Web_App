@@ -11,8 +11,7 @@
 .logo {
   float: left;
   display: flex;
-  margin-left: 10vw;
-  margin-top: 1vw;
+  margin: 1vw auto auto 10vw;
   color: #f3d5a8;
   padding-right: 2vw;
   border-right: 1px solid #f3d5a8;
