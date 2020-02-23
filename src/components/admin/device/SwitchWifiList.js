@@ -3,7 +3,7 @@ import { Table, Icon, Input, Button, Modal, Radio, Popconfirm, notification } fr
 
 import { saveSwitch, deleteSwitch } from '../../../api';
 
-export default class SwitchList extends Component {
+export default class SwitchWifiList extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -84,7 +84,7 @@ export default class SwitchList extends Component {
         saveSwitchResponse: response,
         disableAddSwitch: true
       });
-      this.props.switchList.unshift(response);
+      this.props.switchWifiList.unshift(response);
       this.forceUpdate();
     }).catch(error => {
       this.setState({
@@ -105,8 +105,8 @@ export default class SwitchList extends Component {
         message: 'Chika Smarthome',
         description: "Sản phẩm đã được xóa.",
       });
-      let index = this.props.switchList.indexOf(this.props.switchList.find(s => s.id === id));
-      this.props.switchList.splice(index, 1);
+      let index = this.props.switchWifiList.indexOf(this.props.switchWifiList.find(s => s.id === id));
+      this.props.switchWifiList.splice(index, 1);
       this.forceUpdate();
     }).catch(error => {
       this.setState({
@@ -170,16 +170,17 @@ export default class SwitchList extends Component {
           <Icon type="plus" />Thêm
         </Button>
         <h1>DANH SÁCH CÔNG TẮC</h1>
-        {this.props.switchList ? (
+        {this.props.switchWifiList ? (
           <Table className="admin-device_list_table"
                 columns={columns}
-                dataSource={this.props.switchList}
+                dataSource={this.props.switchWifiList}
                 pagination={{ pageSize: 20 }}
                 bordered/>
         ) : null}
         <Modal visible={modalVisible}
               title="Thêm sản phẩm"
               centered
+              width='40vw'
               footer={[
                 <Button key="back" onClick={this.handleCancelModal}>
                   Quay về

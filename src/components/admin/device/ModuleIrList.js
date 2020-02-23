@@ -166,6 +166,7 @@ export default class ModuleIrList extends Component {
         <Modal visible={modalVisible}
               title="Thêm sản phẩm"
               centered
+              width='40vw'
               footer={[
                 <Button key="back" onClick={this.handleCancelModal}>
                   Quay về

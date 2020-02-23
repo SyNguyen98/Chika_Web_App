@@ -5,6 +5,8 @@ import '../../styles/admin/User.css';
 import { getAllUser, getAllFeedback } from '../../api';
 
 import UserList from './user/UserList';
+import AddUser from './user/AddUser';
+import Shop from './user/Shop';
 import FeedbackList from './user/FeedbackList';
 
 export default class User extends Component {
@@ -83,6 +85,12 @@ export default class User extends Component {
     switch (this.state.component) {
       case 'user-list':
         component = (<UserList userList={userList}/>);
+        break;
+      case 'add-user':
+        component = (<AddUser/>);
+        break;
+      case 'shop':
+        component = (<Shop/>);
         break;
       case 'feedback':
         component = (<FeedbackList feedbackList={feedbackList}/>);

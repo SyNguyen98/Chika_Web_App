@@ -4,17 +4,19 @@ import { Icon, Button, notification } from 'antd';
 import '../../styles/admin/Device.css';
 import { getAllSwitch, getAllModuleIr, getAllHomeCenter, getAllSensor } from '../../api';
 
-import SwitchList from './list/SwitchList';
-import ModuleIrList from './list/ModuleIrList';
-import HomeCenterList from './list/HomeCenterList';
-import SensorList from './list/SensorList';
+import SwitchWifiList from './device/SwitchWifiList';
+import SwitchRfList from './device/SwitchRfList';
+import ModuleIrList from './device/ModuleIrList';
+import HomeCenterList from './device/HomeCenterList';
+import SensorList from './device/SensorList';
 
 export default class Device extends Component {
   constructor(props) {
       super(props);
       this.state = {
           listComponent: null,
-          switchList: null,
+          switchWifiList: null,
+          switchRfList: null,
           moduleIrList: null,
           homeCenterList: null,
           sensorList: null,
@@ -22,13 +24,13 @@ export default class Device extends Component {
       }
   }
 
-  loadAllSwitch = () => {
+  loadAllSwitchWifi = () => {
     this.setState({
         isLoading: true
     });
     getAllSwitch().then(response => {
       this.setState({
-        switchList: response,
+        switchWifiList: response,
         isLoading: false
       });
     }).catch(error => {
@@ -113,18 +115,21 @@ export default class Device extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    this.loadAllSwitch();
+    this.loadAllSwitchWifi();
     this.loadAllModuleIr();
     this.loadAllHomeCenter();
     this.loadAllSensor();
   }
 
   render() {
-    const { listComponent, switchList, moduleIrList, homeCenterList, sensorList } = this.state;
+    const { listComponent, switchWifiList, switchRfList, moduleIrList, homeCenterList, sensorList } = this.state;
     let list;
     switch (listComponent) {
-      case 'switch':
-        list = (<SwitchList switchList={switchList}/>);
+      case 'switch-wifi':
+        list = (<SwitchWifiList switchWifiList={switchWifiList}/>);
+        break;
+      case 'switch-rf':
+        list = (<SwitchRfList switchRfList={switchRfList}/>);
         break;
       case 'module-ir':
         list = (<ModuleIrList moduleIrList={moduleIrList}/>);
@@ -150,19 +155,19 @@ export default class Device extends Component {
         ) : (
           <div>
             <div className="admin-device_menu">
-              <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('switch')}>
+              <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('switch-wifi')}>
                 <img alt='switch-wifi' src='/image/admin/switch-wifi.png' style={{width: '12vw', height: '12vw'}}/>
                 <div className="admin-device_menu_item_title">
                   <h1>CÔNG TẮC WIFI</h1>
-                  <p><b>{switchList ? switchList.length : null}</b> sản phẩm</p>
+                  <p><b>{switchWifiList ? switchWifiList.length : null}</b> sản phẩm</p>
                 </div>
               </div>
 
-              <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('switch')}>
+              <div className="admin-device_menu_item" onClick={(event) => this.handleChangeList('switch-rf')}>
                 <img alt='switch-rf' src='/image/admin/switch-rf.png' style={{width: '12vw', height: '12vw'}}/>
                 <div className="admin-device_menu_item_title">
                   <h1>CÔNG TẮC RF</h1>
-                  <p><b>{switchList ? switchList.length : null}</b> sản phẩm</p>
+                  <p><b>{switchRfList ? switchRfList.length : null}</b> sản phẩm</p>
                 </div>
               </div>
 

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { Table, Icon, Input, Button, Modal, Radio, Popconfirm, notification } from 'antd';
+import { Table, Icon, Input, Button, Modal, Popconfirm, notification } from 'antd';
 
-import { saveSensor, deleteSensor } from '../../../api';
+import { saveHomeCenter, deleteHomeCenter } from '../../../api';
 
-export default class SensorList extends Component {
+export default class HomeCenterList extends Component {
   constructor(props) {
       super(props);
       this.state = {
         searchText: '',
         searchedColumn: '',
         modalVisible: false,
-        sensorName: 'Cảm biến cửa',
-        saveSensorResponse: null,
-        disableAddSensor: false
+        saveHomeCenterResponse: null,
+        disableAddHomeCenter: false
       }
   }
 
@@ -69,22 +68,22 @@ export default class SensorList extends Component {
   handleCancelModal = () => {
     this.setState({
       modalVisible: false,
-      saveSensorResponse: null,
-      disableAddSensor: false
+      saveHomeCenterResponse: null,
+      disableAddHomeCenter: false
     });
   }
 
-  handleAddSensor = () => {
+  handleAddHomeCenter = () => {
     this.setState({
       isLoading: true
     });
-    saveSensor(this.state.sensorName).then(response => {
+    saveHomeCenter().then(response => {
       this.setState({
         isLoading: false,
-        saveSensorResponse: response,
-        disableAddSensor: true
+        saveHomeCenterResponse: response,
+        disableAddHomeCenter: true
       });
-      this.props.sensorList.unshift(response);
+      this.props.homeCenterList.unshift(response);
       this.forceUpdate();
     }).catch(error => {
       this.setState({
@@ -93,11 +92,11 @@ export default class SensorList extends Component {
     });
   }
 
-  handleDeleteSensor = (id) => {
+  handleDeleteHomeCenter = (id) => {
     this.setState({
       isLoading: true
     });
-    deleteSensor(id).then(response => {
+    deleteHomeCenter(id).then(response => {
       this.setState({
         isLoading: false,
       });
@@ -105,8 +104,8 @@ export default class SensorList extends Component {
         message: 'Chika Smarthome',
         description: "Sản phẩm đã được xóa.",
       });
-      let index = this.props.sensorList.indexOf(this.props.sensorList.find(s => s.id === id));
-      this.props.sensorList.splice(index, 1);
+      let index = this.props.homeCenterList.indexOf(this.props.homeCenterList.find(s => s.id === id));
+      this.props.homeCenterList.splice(index, 1);
       this.forceUpdate();
     }).catch(error => {
       this.setState({
@@ -120,7 +119,7 @@ export default class SensorList extends Component {
   }
 
   render() {
-    const { modalVisible, sensorName, saveSensorResponse, disableAddSensor } = this.state;
+    const { modalVisible, saveHomeCenterResponse, disableAddHomeCenter } = this.state;
     const columns = [
       {
         title: 'Ngày sản xuất',
@@ -135,12 +134,6 @@ export default class SensorList extends Component {
         ...this.getColumnSearchProps('id'),
       },
       {
-        title: 'Tên',
-        dataIndex: 'name',
-        key: 'name',
-        ...this.getColumnSearchProps('name'),
-      },
-      {
         title: 'Mã người dùng',
         dataIndex: 'userId',
         key: 'userId',
@@ -151,11 +144,11 @@ export default class SensorList extends Component {
         dataIndex: 'delete',
         key: 'delete',
         render: (text, row) => <Popconfirm title="Bạn có chắc muốn xóa?"
-                                  onConfirm={(event) => this.handleDeleteSensor(row.id)}
-                                  okText="Xóa"
-                                  cancelText="Hủy">
-                                <b style={{cursor: 'pointer', color: 'blue'}}>Xóa</b>
-                              </Popconfirm>,
+                                          onConfirm={(event) => this.handleDeleteHomeCenter(row.id)}
+                                          okText="Xóa"
+                                          cancelText="Hủy">
+                                  <b style={{cursor: 'pointer', color: 'blue'}}>Xóa</b>
+                                </Popconfirm>,
       },
     ];
     return (
@@ -163,53 +156,41 @@ export default class SensorList extends Component {
         <Button className="admin-device_add-btn" type="primary" onClick={this.handleShowModal}>
           <Icon type="plus" />Thêm
         </Button>
-        <h1>DANH SÁCH CẢM BIẾN</h1>
-        {this.props.sensorList ? (
+        <h1>DANH SÁCH BỘ ĐIỀU KHIỂN TRUNG TÂM</h1>
+        {this.props.homeCenterList ? (
           <Table className="admin-device_list_table"
                 columns={columns}
-                dataSource={this.props.sensorList}
+                dataSource={this.props.homeCenterList}
                 pagination={{ pageSize: 20 }}
                 bordered/>
         ) : null}
         <Modal visible={modalVisible}
               title="Thêm sản phẩm"
               centered
+              width='40vw'
               footer={[
                 <Button key="back" onClick={this.handleCancelModal}>
                   Quay về
                 </Button>,
-                <Button disabled={disableAddSensor} key="submit" type="primary" onClick={this.handleAddSensor}>
+                <Button disabled={disableAddHomeCenter} key="submit" type="primary" onClick={this.handleAddHomeCenter}>
                   Thêm
                 </Button>,
               ]}>
           <div style={{margin: '0 3vw 0 3vw'}}>
-            {saveSensorResponse ? (
+            {saveHomeCenterResponse ? (
               <div>
                 <div style={{marginBottom: '1vw', fontSize: '1.5vw'}}>
                   <Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a"/><b>&ensp;Đã thêm sản phẩm</b>
                 </div>
                 <div style={{fontSize: '1.2vw'}}>
-                  <p><b>Ngày sản xuất: </b>{saveSensorResponse.day}</p>
+                  <p><b>Ngày sản xuất: </b>{saveHomeCenterResponse.day}</p>
                   <p><b>Mã sản phẩm: </b></p>
-                  <p>{saveSensorResponse.id}</p>
-                  <p><b>Tên: </b>{saveSensorResponse.name}</p>
+                  <p>{saveHomeCenterResponse.id}</p>
                 </div>
               </div>
             ) : (
-              <div style={{fontSize: '1.2vw'}}>
-                <p>Chọn loại cảm biến muốn thêm:</p>
-                <Radio.Group style={{display: 'flex'}}
-                            onChange={e => { this.setState({ sensorName: e.target.value })}}
-                            value={sensorName}>
-                  <div style={{float: 'left'}}>
-                    <Radio value={'Cảm biến cửa'} style={{marginBottom: '1vw'}}>Cảm biến cửa</Radio>
-                    <Radio value={'Cảm biến chuyển động'}>Cảm biến chuyển động</Radio>
-                  </div>
-                  <div style={{float: 'right'}}>
-                    <Radio value={'Cảm biến nhiệt độ'} style={{marginBottom: '1vw'}}>Cảm biến nhiệt độ</Radio>
-                    <Radio value={'Cảm biến ánh sáng'}>Cảm biến ánh sáng</Radio>
-                  </div>
-                </Radio.Group>
+              <div style={{fontSize: '1.2vw', textAlign: 'center'}}>
+                Bạn có chắc muốn thêm sản phẩm?
               </div>
             )}
           </div>
