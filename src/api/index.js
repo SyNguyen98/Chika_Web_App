@@ -101,33 +101,64 @@ export function updateFeedBackResponse(id, response) {
     });
 }
 
-/* SWITCH */
-export function getAllSwitch() {
+/* SWITCH WIFI */
+export function getAllSwitchWifi() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
     return request({
-        url: API_BASE_URL + "/switch",
+        url: API_BASE_URL + "/switch_wifi",
         method: 'GET'
     });
 }
 
-export function saveSwitch(numOfDevice) {
+export function saveSwitchWifi(numOfButton) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
     return request({
-        url: API_BASE_URL + "/switch/num_of_device/" + numOfDevice,
+        url: API_BASE_URL + "/switch_wifi/num_of_button/" + numOfButton,
         method: 'POST'
     });
 }
 
-export function deleteSwitch(id) {
+export function deleteSwitchWifi(id) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
     return request({
-        url: API_BASE_URL + "/switch/" + id,
+        url: API_BASE_URL + "/switch_wifi/" + id,
+        method: 'DELETE'
+    });
+}
+
+/* SWITCH RF */
+export function getAllSwitchRf() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: API_BASE_URL + "/switch_rf",
+        method: 'GET'
+    });
+}
+
+export function saveSwitchRf(numOfButton, channel) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: API_BASE_URL + "/switch_rf/num_of_button/" + numOfButton + "/channel/" + channel,
+        method: 'POST'
+    });
+}
+
+export function deleteSwitchRf(id) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: API_BASE_URL + "/switch_rf/" + id,
         method: 'DELETE'
     });
 }

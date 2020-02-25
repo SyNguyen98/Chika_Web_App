@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Icon, Button, notification } from 'antd';
 
 import '../../styles/admin/Device.css';
-import { getAllSwitch, getAllModuleIr, getAllHomeCenter, getAllSensor } from '../../api';
+import { getAllSwitchWifi, getAllSwitchRf, getAllModuleIr, getAllHomeCenter, getAllSensor } from '../../api';
 
 import SwitchWifiList from './device/SwitchWifiList';
 import SwitchRfList from './device/SwitchRfList';
@@ -14,7 +14,7 @@ export default class Device extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          listComponent: null,
+          listComponent: 'switch-rf',
           switchWifiList: null,
           switchRfList: null,
           moduleIrList: null,
@@ -28,9 +28,29 @@ export default class Device extends Component {
     this.setState({
         isLoading: true
     });
-    getAllSwitch().then(response => {
+    getAllSwitchWifi().then(response => {
       this.setState({
         switchWifiList: response,
+        isLoading: false
+      });
+    }).catch(error => {
+      this.setState({
+        isLoading: false
+      });
+      notification.error({
+        message: 'Chika Smarthome',
+        description: "Đã có lỗi xảy ra khi tải danh sách công tắc. Vui lòng thử lại sau!",
+      });
+    });
+  }
+
+  loadAllSwitchRf= () => {
+    this.setState({
+        isLoading: true
+    });
+    getAllSwitchRf().then(response => {
+      this.setState({
+        switchRfList: response,
         isLoading: false
       });
     }).catch(error => {
@@ -116,6 +136,7 @@ export default class Device extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.loadAllSwitchWifi();
+    this.loadAllSwitchRf();
     this.loadAllModuleIr();
     this.loadAllHomeCenter();
     this.loadAllSensor();

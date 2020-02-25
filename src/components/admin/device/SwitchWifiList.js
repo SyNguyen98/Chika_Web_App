@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Icon, Input, Button, Modal, Radio, Popconfirm, notification } from 'antd';
 
-import { saveSwitch, deleteSwitch } from '../../../api';
+import { saveSwitchWifi, deleteSwitchWifi } from '../../../api';
 
 export default class SwitchWifiList extends Component {
   constructor(props) {
@@ -78,7 +78,7 @@ export default class SwitchWifiList extends Component {
     this.setState({
       isLoading: true
     });
-    saveSwitch(this.state.buttonNum).then(response => {
+    saveSwitchWifi(this.state.buttonNum).then(response => {
       this.setState({
         isLoading: false,
         saveSwitchResponse: response,
@@ -97,7 +97,7 @@ export default class SwitchWifiList extends Component {
     this.setState({
       isLoading: true
     });
-    deleteSwitch(id).then(response => {
+    deleteSwitchWifi(id).then(response => {
       this.setState({
         isLoading: false,
       });
@@ -169,7 +169,7 @@ export default class SwitchWifiList extends Component {
         <Button className="admin-device_add-btn" type="primary" onClick={this.handleShowModal}>
           <Icon type="plus" />Thêm
         </Button>
-        <h1>DANH SÁCH CÔNG TẮC</h1>
+        <h1>DANH SÁCH CÔNG TẮC WIFI</h1>
         {this.props.switchWifiList ? (
           <Table className="admin-device_list_table"
                 columns={columns}
