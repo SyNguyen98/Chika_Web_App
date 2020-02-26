@@ -10,7 +10,7 @@ export default class SwitchWifiList extends Component {
         searchText: '',
         searchedColumn: '',
         modalVisible: false,
-        buttonNum: 2,
+        buttonNum: 1,
         switchChannel: '',
         saveSwitchResponse: null,
         disableAddSwitch: false
@@ -218,8 +218,9 @@ export default class SwitchWifiList extends Component {
               <div style={{margin: '1vw 5vw 1vw 5vw', fontSize: '1.2vw', textAlign: 'center'}}>
                 <p>Chọn loại công tắc muốn thêm:</p>
                 <Radio.Group onChange={e => { this.setState({ buttonNum: e.target.value })}} value={buttonNum}>
-                  <Radio value={2}>2 nút</Radio>
-                  <Radio value={3} style={{marginLeft: '3vw'}}>3 nút</Radio>
+                  <Radio value={1}>1 nút</Radio>
+                  <Radio value={2} style={{marginLeft: '2vw'}}>2 nút</Radio>
+                  <Radio value={3} style={{marginLeft: '2vw'}}>3 nút</Radio>
                 </Radio.Group>
                 <Input placeholder='Kênh vô tuyến. Vd: 83878217022001'
                       size="large"

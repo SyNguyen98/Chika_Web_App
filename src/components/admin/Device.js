@@ -14,7 +14,7 @@ export default class Device extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          listComponent: 'switch-rf',
+          listComponent: null,
           switchWifiList: null,
           switchRfList: null,
           moduleIrList: null,
