@@ -1,0 +1,10 @@
+.admin-user_add h1 {
+  text-align: center;
+  font-size: 2.5vw;
+  font-weight: 700;
+  color: green;
+}
+
+.admin-user_add_form {
+  margin: 1vw 20vw 1vw 20vw;
+}

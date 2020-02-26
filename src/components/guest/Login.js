@@ -58,14 +58,14 @@ class LoginForm extends Component {
           <div className="login-form">
             <Form onSubmit={this.handleSubmit} autocomplete="off">
               <Form.Item className="item">
-                {getFieldDecorator('usernameOrEmail', {
-                  rules: [{ required: true, message: 'Vui lòng nhập tên đăng nhập hoặc email!' }]
+                {getFieldDecorator('phoneOrEmail', {
+                  rules: [{ required: true, message: 'Vui lòng nhập số điện thoại hoặc email!' }]
                 })(
                   <Input
                     size="large"
                     prefix={<Icon type="user" />}
-                    name="usernameOrEmail"
-                    placeholder="Tên đăng nhập hoặc Email"/>
+                    name="phoneOrEmail"
+                    placeholder="Số điện thoại hoặc Email"/>
                 )}
               </Form.Item>
               <Form.Item className="item">

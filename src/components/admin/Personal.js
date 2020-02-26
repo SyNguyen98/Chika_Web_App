@@ -16,7 +16,6 @@ export default class Personal extends Component {
             <div style={{textAlign: 'center'}}>
               <img className="admin-personal_avatar" alt='avatar' src={this.props.adminInfo.avatar}></img>
               <p className="admin-personal_name">{this.props.adminInfo.name}</p>
-              <p className="admin-personal_username">@{this.props.adminInfo.username}</p>
             </div>
             <div className="admin-personal_info">
               <div className="admin-personal_info_title">
