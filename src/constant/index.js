@@ -3,6 +3,12 @@ export const ACCESS_TOKEN = 'accessToken';
 
 export const CHIKA_COLOR = '#f3d5a8';
 
+export const SWITCH_WIFI = 'Switch Wifi';
+export const SWITCH_RF = 'Switch Rf';
+export const MODULE_IR = 'Module Ir';
+export const HOME_CENTER = 'Home Center';
+export const SENSOR = 'Sensor';
+
 export const LINK_INTRODUCTION = '/Gioi-thieu';
 export const LINK_PRODUCT = '/Thiet-bi-dien-thong-minh';
 export const LINK_LOGIN = '/Dang-nhap';

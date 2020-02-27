@@ -13,7 +13,7 @@ export default class User extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          component: null,
+          component: 'add-user',
           userList: null,
           feedbackList: null,
           isLoading: false,

@@ -1,6 +1,6 @@
 .admin-user {
  width: 84vw;
- height: 90vh;
+ min-height: 90vh;
 }
 
 .admin-user_menu {
