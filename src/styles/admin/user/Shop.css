@@ -4,3 +4,60 @@
   font-weight: 700;
   color: green;
 }
+
+.admin-user_shop_content {
+  margin: 2vw 5vw 0 8vw;
+  display: flex;
+}
+
+.admin-user_shop_user-info {
+  margin-top: 1vw;
+  padding: 1vw 1vw 1vw;
+  border: 1px solid black;
+}
+
+.admin-user_shop_user-info h2 {
+  margin-bottom: 2vw;
+  text-align: center;
+  font-size: 1.5vw;
+  font-weight: 700;
+}
+
+.admin-user_shop_user-info p {
+  font-size: 1.1vw;
+}
+
+.admin-user_shop_product {
+  margin-left: 10vw;
+}
+
+.admin-user_shop_product h2 {
+  font-size: 1.5vw;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.ant-checkbox-group {
+  font-size: 2vw;
+  line-height: 2vw;
+}
+
+.ant-checkbox + span {
+  font-size: 1.1vw;
+  padding-right: 2vw;
+}
+
+.admin-user_shop_product_type {
+  margin-top: 1vw;
+  margin-right: 10vw;
+}
+
+.admin-user_shop_product_type .ant-row.ant-form-item {
+  margin-bottom: 0;
+}
+
+.admin-user_shop_product_type p {
+  font-size: 1.1vw;
+  font-weight: 600;
+  margin-bottom: 5px;
+}

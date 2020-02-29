@@ -89,7 +89,7 @@ export default class User extends Component {
         component = (<AddUser/>);
         break;
       case 'shop':
-        component = (<Shop/>);
+        component = (<Shop handleBack={this.handleBack}/>);
         break;
       case 'feedback':
         component = (<FeedbackList feedbackList={feedbackList}/>);

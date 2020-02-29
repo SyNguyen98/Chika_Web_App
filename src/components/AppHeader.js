@@ -47,7 +47,7 @@ class AppHeader extends Component {
             </Menu>
           </Header>
         )
-    } else if (this.props.userRole === 'ROLE_ADMIN') {
+    } else if (this.props.userRole === 'ADMIN') {
       header = (
         <Header className="app-header">
           <img className="header_admin_img" alt="logo-chika" src="/image/logo.svg"/>

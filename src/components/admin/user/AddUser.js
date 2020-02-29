@@ -11,11 +11,11 @@ export default class AddUser extends Component {
   }
 
   render() {
-    const AntWrappedLoginForm = Form.create()(SignUp)
+    const AntSignUpForm = Form.create()(SignUp)
     return (
       <div className="admin-user_add">
         <h1>THÊM TÀI KHOẢN NGƯỜI DÙNG</h1>
-        <AntWrappedLoginForm />
+        <AntSignUpForm />
       </div>
     )
   }
@@ -77,9 +77,31 @@ class SignUp extends Component {
             description: 'Tạo tài khoản thành công!'
           });
         }).catch(error => {
+          let message;
+          if (error.message.includes('have owner')) {
+            if (error.message.includes(SWITCH_WIFI)) {
+              message = 'Công tắc Wifi đã có người sở hữu';
+            } else if (error.message.includes(SWITCH_RF)) {
+              message = 'Công tắc Rf đã có người sở hữu';
+            } else if (error.message.includes(MODULE_IR)) {
+              message = 'Điều khiển hồng ngoại đã có người sở hữu';
+            } else if (error.message.includes(HOME_CENTER)) {
+              message = 'Bộ điều khiển trung tâm đã có người sở hữu';
+            } else if (error.message.includes(SENSOR)) {
+              message = 'Cảm biến đã có người sở hữu';
+            }
+          } else if (error.message.includes('already taken')) {
+            if (error.message.includes('Phone')) {
+              message = 'Số điện thoại đã được sử dụng';
+            } else if (error.message.includes('Email')) {
+              message = 'Email đã được sử dụng';
+            }
+          } else if (error.message.includes('1 Chika product')) {
+              message = 'Bạn cần sở hữu ít nhất 1 sản phẩm của Chika để tạo được tài khoản';
+          }
           notification.error({
             message: 'Chika Smarthome',
-            description: error.message || 'Đã có lỗi xảy ra. Xin vui lòng thử lại sau!'
+            description: message || 'Đã có lỗi xảy ra. Xin vui lòng thử lại sau!'
           });
         });
       }
@@ -248,7 +270,6 @@ class SignUp extends Component {
                 <Input
                   size="large"
                   prefix={<Icon type="user" />}
-                  name="name"
                   placeholder="Họ và Tên"/>
               )}
             </Form.Item>
@@ -259,7 +280,6 @@ class SignUp extends Component {
                 <Input
                   size="large"
                   prefix={<Icon type="phone" />}
-                  name="phone"
                   placeholder="Số điện thoại"
                   maxLength={10}/>
               )}
@@ -283,7 +303,6 @@ class SignUp extends Component {
                 <Input
                   size="large"
                   prefix={<Icon type="lock" />}
-                  name="password"
                   placeholder="Mật khẩu"/>
               )}
             </Form.Item>

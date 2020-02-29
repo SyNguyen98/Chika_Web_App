@@ -62,7 +62,7 @@ class App extends Component {
         userRole: response.role,
         isLoading: false
       });
-      if (this.state.userRole === 'ROLE_ADMIN') {
+      if (this.state.userRole === 'ADMIN') {
         this.props.history.push(LINK_ADMIN);
       }
     }).catch(error => {
@@ -139,7 +139,7 @@ class App extends Component {
 
               <Route exact path={LINK_ADMIN} render={(props) => <Admin onLogout={this.handleLogout} handleLogoutForChangePassword={this.handleLogoutForChangePassword} {...props} />} />
 
-              <Route path={LINK_LOGIN} render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
+              <Route path={LINK_LOGIN} render={(props) => <Login onLogin={this.handleLogin} loading={this.state.isLoading} {...props} />}/>
 
             </Switch>
         </Content>

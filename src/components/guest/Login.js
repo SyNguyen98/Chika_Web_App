@@ -11,10 +11,10 @@ class Login extends Component {
   }
 
   render() {
-    const AntWrappedLoginForm = Form.create()(LoginForm)
+    const AntLoginForm = Form.create()(LoginForm)
     return (
       <div>
-        <AntWrappedLoginForm onLogin={this.props.onLogin} />
+        <AntLoginForm onLogin={this.props.onLogin} loading={this.props.loading}/>
       </div>
     );
   }
@@ -79,7 +79,7 @@ class LoginForm extends Component {
                     placeholder="Mật khẩu"/>
                 )}
               </Form.Item>
-              <Button type="primary" htmlType="submit" size="large" className="login-button">Đăng Nhập</Button>
+              <Button className="login-button" type="primary" htmlType="submit" size="large" loading={this.props.loading}>Đăng Nhập</Button>
             </Form>
           </div>
         </div>

@@ -51,6 +51,17 @@ export function getCurrentUser() {
     });
 }
 
+export function getUserByPhone(phone) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/user/phone/" + phone,
+        method: 'GET'
+    });
+}
+
 export function getAdminInfo() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -122,6 +133,19 @@ export function updateFeedBackResponse(id, response) {
     return request({
         url: API_BASE_URL + "/feedback/id/" + id + "/response/" + response,
         method: 'PUT'
+    });
+}
+
+/* PRODUCT */
+export function updateProductWithUser(updateRequest) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/product",
+        method: 'PUT',
+        body: JSON.stringify(updateRequest)
     });
 }
 

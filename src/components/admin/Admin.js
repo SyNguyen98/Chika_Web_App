@@ -51,7 +51,7 @@ class Admin extends Component {
       });
     }).catch(error => {
       this.setState({ isLoading: false });
-      
+
       notification.error({
         message: 'Chika Smarthome',
         description: error.message || 'Đã có lỗi xảy ra. Xin vui lòng thử lại sau!'
