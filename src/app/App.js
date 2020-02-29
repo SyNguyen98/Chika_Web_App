@@ -83,14 +83,24 @@ class App extends Component {
   handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
 
-    this.setState({
-      userRole: null,
-    });
+    this.setState({ userRole: null, });
 
     this.props.history.push("/");
     notification.success({
       message: 'Chika Smarthome',
       description: "Đăng xuất thành công.",
+    });
+  }
+
+  handleLogoutForChangePassword = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+
+    this.setState({ userRole: null, });
+
+    this.props.history.push(LINK_LOGIN);
+    notification.success({
+      message: 'Chika Smarthome',
+      description: "Đổi mật khẩu thành công",
     });
   }
 
@@ -127,7 +137,7 @@ class App extends Component {
                 <Route exact path={LINK_QUESTION} component={Question} />
                 <Route exact path={LINK_DOCUMENT} component={Document} />
 
-              <Route exact path={LINK_ADMIN} render={(props) => <Admin onLogout={this.handleLogout} {...props} />} />
+              <Route exact path={LINK_ADMIN} render={(props) => <Admin onLogout={this.handleLogout} handleLogoutForChangePassword={this.handleLogoutForChangePassword} {...props} />} />
 
               <Route path={LINK_LOGIN} render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
 

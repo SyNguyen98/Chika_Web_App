@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { notification } from 'antd';
 
 import '../../styles/admin/Admin.css';
-import { getAdminInfo } from '../../api';
+import { getAdminInfo, updateAdminInfo } from '../../api';
 
 import Personal from './Personal'
 import User from './User'
@@ -15,7 +16,7 @@ class Admin extends Component {
       this.state = {
           user: null,
           isLoading: false,
-          component: 'user'
+          component: 'info'
       }
   }
 
@@ -31,6 +32,29 @@ class Admin extends Component {
     }).catch(error => {
       this.setState({
         isLoading: false
+      });
+    });
+  }
+
+  updateAdminInfo = (updateRequest) => {
+    this.setState({ isLoading: true });
+
+    updateAdminInfo(updateRequest).then(response => {
+      this.setState({
+        user: response,
+        component: 'info',
+        isLoading: false
+      });
+      notification.success({
+        message: 'Chika Smarthome',
+        description: "Thông tin đã được cập nhật."
+      });
+    }).catch(error => {
+      this.setState({ isLoading: false });
+      
+      notification.error({
+        message: 'Chika Smarthome',
+        description: error.message || 'Đã có lỗi xảy ra. Xin vui lòng thử lại sau!'
       });
     });
   }
@@ -70,7 +94,7 @@ class Admin extends Component {
         component = (<Device/>);
         break;
       case 'setting':
-        component = (<Setting/>);
+        component = (<Setting adminInfo={user} updateAdminInfo={this.updateAdminInfo} onLogout={this.props.handleLogoutForChangePassword}/>);
         break;
       default:
         component = null;
@@ -94,7 +118,7 @@ class Admin extends Component {
           </div>
           <div className="admin_menu_item" onClick={(event) => this.handleChangeComponent('setting')}>
             <img className="admin_menu_icon" alt="icon-setting" src="/image/admin/icon-setting.png"></img>
-            <p>Cài Đặt</p>
+            <p>Quản lý<br/>tài khoản</p>
           </div>
           <div className="admin_menu_item" onClick={this.handleLogout}>
             <img className="admin_menu_icon" alt="icon-logout" src="/image/admin/icon-logout.png"></img>

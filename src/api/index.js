@@ -72,6 +72,30 @@ export function getAllUser() {
     });
 }
 
+export function updateAdminInfo(updateRequest) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/user/admin_info",
+        method: 'PUT',
+        body: JSON.stringify(updateRequest)
+    });
+}
+
+export function updatePassword(updateRequest) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/user/password",
+        method: 'PUT',
+        body: JSON.stringify(updateRequest)
+    });
+}
+
 /* FEEDBACK */
 export function sendFeedback(feedback) {
     return request({

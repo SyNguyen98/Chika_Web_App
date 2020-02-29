@@ -113,6 +113,10 @@ export default class SwitchWifiList extends Component {
       this.setState({
         isLoading: false
       });
+      notification.error({
+        message: 'Chika Smarthome',
+        description: "Đã có lỗi xảy ra. Xin vui lòng thử lại sau!"
+      });
     });
   }
 

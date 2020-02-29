@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Icon, Checkbox } from 'antd';
+import { Form, Input, Button, Icon, Checkbox, notification } from 'antd';
 
 import '../../../styles/admin/user/AddUser.css';
 import { SWITCH_WIFI, SWITCH_RF, MODULE_IR, HOME_CENTER, SENSOR } from '../../../constant';
+import { signup } from '../../../api';
 
 export default class AddUser extends Component {
   componentDidMount() {
@@ -70,6 +71,17 @@ class SignUp extends Component {
           })
         });
         console.log(request);
+        signup(request).then(response => {
+          notification.success({
+            message: 'Chika Smarthome',
+            description: 'Tạo tài khoản thành công!'
+          });
+        }).catch(error => {
+          notification.error({
+            message: 'Chika Smarthome',
+            description: error.message || 'Đã có lỗi xảy ra. Xin vui lòng thử lại sau!'
+          });
+        });
       }
     });
   }
@@ -244,7 +256,7 @@ class SignUp extends Component {
               {getFieldDecorator('phone', {
                 rules: [{ required: true, message: 'Vui lòng nhập số điện thoại!' }]
               })(
-                <NumericInput
+                <Input
                   size="large"
                   prefix={<Icon type="phone" />}
                   name="phone"
@@ -325,37 +337,6 @@ class SignUp extends Component {
           </div>
         </div>
       </Form>
-    );
-  }
-}
-
-class NumericInput extends Component {
-  onChange = e => {
-    const { value } = e.target;
-    const reg = /^-?[0-9]*(\.[0-9]*)?$/;
-    if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
-      this.props.onChange(value);
-    }
-  };
-
-  onBlur = () => {
-    const { value, onBlur, onChange } = this.props;
-    let valueTemp = value;
-    if (value.charAt(value.length - 1) === '.' || value === '-') {
-      valueTemp = value.slice(0, -1);
-    }
-    onChange(valueTemp.replace(/0*(\d+)/, '$1'));
-    if (onBlur) {
-      onBlur();
-    }
-  };
-
-  render() {
-    return (
-        <Input
-          {...this.props}
-          onChange={this.onChange}
-          onBlur={this.onBlur}/>
     );
   }
 }

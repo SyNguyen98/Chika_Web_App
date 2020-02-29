@@ -16,13 +16,6 @@
   font-weight: 600;
 }
 
-.admin-personal_username {
-  color: #a1a1a1;
-  margin-top: 5px;
-  font-size: 1.1vw;
-  font-weight: 800;
-}
-
 .admin-personal_info {
   margin: 3vw 15vw 3vw 15vw;
 }
@@ -55,7 +48,7 @@
 }
 
 .admin-personal_info_content_content {
-  margin-left: 20vw;
+  margin-left: 10vw;
   font-size: 1.2vw;
 }
 
