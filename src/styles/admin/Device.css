@@ -1,6 +1,6 @@
 .admin-device {
  width: 84vw;
- height: 90vh;
+ min-height: 90vh;
 }
 
 .admin-device_menu {

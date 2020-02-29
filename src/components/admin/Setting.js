@@ -48,19 +48,21 @@ export default class Setting extends Component {
             </Button>
             {component}
           </div>
-        ) : [
-          <div className="admin-setting_menu">
-            <div className="admin-setting_menu_item" onClick={(event) => this.handleChangeComponet('change-info')}>
-              <img alt='icon-change-info' src='/image/admin/setting/change-info.png' style={{marginTop: '2vw', width: '8vw', height: '8vw'}}/>
-              <h1 style={{marginTop: '1vw'}}>THAY ĐỔI THÔNG TIN</h1>
-            </div>,
+        ) : (
+          <div>
+            <div className="admin-setting_menu">
+              <div className="admin-setting_menu_item" onClick={(event) => this.handleChangeComponet('change-info')}>
+                <img alt='icon-change-info' src='/image/admin/setting/change-info.png' style={{marginTop: '2vw', width: '8vw', height: '8vw'}}/>
+                <h1 style={{marginTop: '1vw'}}>THAY ĐỔI THÔNG TIN</h1>
+              </div>
 
-            <div className="admin-setting_menu_item" onClick={(event) => this.handleChangeComponet('change-password')}>
-              <img alt='icon-change-password' src='/image/admin/setting/change-password.png' style={{marginTop: '2vw', width: '9vw', height: '9vw'}}/>
-              <h1 >THAY ĐỔI MẬT KHẨU</h1>
+              <div className="admin-setting_menu_item" onClick={(event) => this.handleChangeComponet('change-password')}>
+                <img alt='icon-change-password' src='/image/admin/setting/change-password.png' style={{marginTop: '2vw', width: '9vw', height: '9vw'}}/>
+                <h1 >THAY ĐỔI MẬT KHẨU</h1>
+              </div>
             </div>
           </div>
-        ]}
+        )}
       </div>
     )
   }

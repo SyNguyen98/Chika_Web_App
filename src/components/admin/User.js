@@ -106,39 +106,41 @@ export default class User extends Component {
             </Button>
             {component}
           </div>
-        ) : [
-          <div className="admin-user_menu">
-            <div className="admin-user_menu_item" onClick={(event) => this.handleChangeComponet('user-list')}>
-              <img alt='icon-user-list' src='/image/admin/user/icon-user-list.png' style={{marginTop: '2vw', width: '8vw', height: '8vw'}}/>
-              <h1>THÔNG TIN NGƯỜI DÙNG</h1>
+        ) : (
+          <div>
+            <div className="admin-user_menu">
+              <div className="admin-user_menu_item" onClick={(event) => this.handleChangeComponet('user-list')}>
+                <img alt='icon-user-list' src='/image/admin/user/icon-user-list.png' style={{marginTop: '2vw', width: '8vw', height: '8vw'}}/>
+                <h1>THÔNG TIN NGƯỜI DÙNG</h1>
+              </div>
+
+              <div className="admin-user_menu_item" onClick={(event) => this.handleChangeComponet('add-user')}>
+                <img alt='icon-user-add' src='/image/admin/user/icon-add-user.png' style={{marginTop: '3vw', width: '6vw', height: '6vw'}}/>
+                <h1 style={{marginTop: '1vw'}}>THÊM NGƯỜI DÙNG</h1>
+              </div>
             </div>
 
-            <div className="admin-user_menu_item" onClick={(event) => this.handleChangeComponet('add-user')}>
-              <img alt='icon-user-add' src='/image/admin/user/icon-add-user.png' style={{marginTop: '3vw', width: '6vw', height: '6vw'}}/>
-              <h1 style={{marginTop: '1vw'}}>THÊM NGƯỜI DÙNG</h1>
-            </div>
-          </div>,
+            <div className="admin-user_menu">
+              <div className="admin-user_menu_item" onClick={(event) => this.handleChangeComponet('shop')}>
+                <img alt='icon-user-shop' src='/image/admin/user/icon-shop.png' style={{width: '10vw', height: '10vw'}}/>
+                <h1>MUA HÀNG</h1>
+              </div>
 
-          <div className="admin-user_menu">
-            <div className="admin-user_menu_item" onClick={(event) => this.handleChangeComponet('shop')}>
-              <img alt='icon-user-shop' src='/image/admin/user/icon-shop.png' style={{width: '10vw', height: '10vw'}}/>
-              <h1>MUA HÀNG</h1>
-            </div>
-
-            <div className="admin-user_menu_item" onClick={(event) => this.handleChangeComponet('feedback')}>
-              <img alt='icon-user-feedback' src='/image/admin/user/icon-feedback.png' style={{marginTop: '2vw', width: '7vw', height: '7vw'}}/>
-              {haveFeedback ? (
-                <div style={{marginTop: '1vw'}}>
-                  <Badge dot>
-                      <h1>PHẢN HỒI</h1>
-                  </Badge>
-                </div>
-              ) : (
-                <h1 style={{marginTop: '1vw'}}>PHẢN HỒI</h1>
-              )}
+              <div className="admin-user_menu_item" onClick={(event) => this.handleChangeComponet('feedback')}>
+                <img alt='icon-user-feedback' src='/image/admin/user/icon-feedback.png' style={{marginTop: '2vw', width: '7vw', height: '7vw'}}/>
+                {haveFeedback ? (
+                  <div style={{marginTop: '1vw'}}>
+                    <Badge dot>
+                        <h1>PHẢN HỒI</h1>
+                    </Badge>
+                  </div>
+                ) : (
+                  <h1 style={{marginTop: '1vw'}}>PHẢN HỒI</h1>
+                )}
+              </div>
             </div>
           </div>
-        ]}
+        )}
       </div>
     )
   }
