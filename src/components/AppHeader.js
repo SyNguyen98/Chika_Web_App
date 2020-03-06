@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { Layout, Menu, Dropdown, Row, Col } from 'antd';
+import { Layout, Menu, Dropdown, Row, Col, Button, Icon } from 'antd';
 
 import '../styles/AppHeader.css';
 import { CHIKA_COLOR, LINK_INTRODUCTION, LINK_PRODUCT, LINK_LOGIN,
@@ -19,9 +19,36 @@ class AppHeader extends Component {
   }
 
   render() {
+    const { currentUser } = this.props;
     let header;
-    if (this.props.userRole === null) {
-        header = (
+    if (currentUser !== null) {
+      switch (currentUser.role) {
+        case 'ADMIN':
+          header = (
+            <Header className="app-header">
+              <img className="header_admin_img" alt="logo-chika" src="/image/logo.svg"/>
+              <p className="header_admin_chika">CHIKA</p>
+              <p className="header_admin_title">TRANG QUẢN LÝ</p>
+            </Header>
+          )
+          break;
+        case 'HOME_MASTER': case 'HOME_USER':
+          header = (
+            <Header className="app-header" style={{height: '5vw', backgroundImage: 'linear-gradient(#63ddff, #00b8eb)'}}>
+              <Button className='header_user_button' onClick={this.props.onOpenMenuUser}><Icon type="menu" /></Button>
+              <p className='header_user_title'>
+                <Icon type="home" />&ensp;<i>Nhà của {currentUser.name.substring(currentUser.name.lastIndexOf(' '))}</i>
+              </p>
+            </Header>
+          )
+          break;
+        default:
+          header = null;
+      }
+    }
+    return(
+      <div>
+        {header ? header : (
           <Header className="app-header">
             <div className="logo" onClick={(event) => this.handleClickChangePage(event, '/')}>
               <img src="/image/logo.svg" alt="logo"/>
@@ -46,19 +73,7 @@ class AppHeader extends Component {
               </Menu.Item>
             </Menu>
           </Header>
-        )
-    } else if (this.props.userRole === 'ADMIN') {
-      header = (
-        <Header className="app-header">
-          <img className="header_admin_img" alt="logo-chika" src="/image/logo.svg"/>
-          <p className="header_admin_chika">CHIKA</p>
-          <p className="header_admin_title">TRANG QUẢN LÝ</p>
-        </Header>
-      )
-    }
-    return(
-      <div>
-        {header}
+        )}
       </div>
     );
   }

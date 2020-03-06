@@ -9,7 +9,7 @@ export default class ChangeInfo extends Component {
   }
 
   render() {
-    const AntWrappedLoginForm = Form.create()(ChangeInfoForm)
+    const AntEditForm = Form.create()(ChangeInfoForm)
     const { adminInfo } = this.props;
     return(
       <div className="admin-setting_change-info">
@@ -25,7 +25,7 @@ export default class ChangeInfo extends Component {
                 <p>Số điện thoại</p>
               </div>
               <div className="admin-setting_change-info_content_content">
-                <AntWrappedLoginForm adminInfo={adminInfo} updateAdminInfo={this.props.updateAdminInfo}/>
+                <AntEditForm adminInfo={adminInfo} updateAdminInfo={this.props.updateAdminInfo}/>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@ class ChangeInfoForm extends Component {
     const { adminInfo } = this.props;
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form className="admin-setting_change-info_form" onSubmit={this.handleSubmit} autoComplete="off">
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         <Form.Item>
           {getFieldDecorator('birthday', {
             initialValue: adminInfo.birthday,

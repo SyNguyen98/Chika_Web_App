@@ -73,6 +73,17 @@ export function getAdminInfo() {
     });
 }
 
+export function getUserInfo() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/user/user",
+        method: 'GET'
+    });
+}
+
 export function getAllUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -90,6 +101,18 @@ export function updateAdminInfo(updateRequest) {
 
     return request({
         url: API_BASE_URL + "/user/admin_info",
+        method: 'PUT',
+        body: JSON.stringify(updateRequest)
+    });
+}
+
+export function updateUserInfo(updateRequest) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/user/user_info",
         method: 'PUT',
         body: JSON.stringify(updateRequest)
     });

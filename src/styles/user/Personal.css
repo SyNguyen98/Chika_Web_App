@@ -1,0 +1,94 @@
+.user-personal {
+  margin: 6vw 0 0 10vw;
+  background-color: white;
+  width: 80vw;
+  border-radius: 5%;
+  box-shadow: 5px 10px 18px #888888;
+}
+
+.user-personal_edit-button {
+  margin: 2vw 0 0 73vw;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid white;
+  width: 3vw;
+  height: 3vw;
+  font-size: 1.5vw;
+  color: white;
+  background-color: #00aaff;
+}
+
+.user-personal_edit-button:hover {
+  color: white;
+  background-color: #00aaff;
+}
+
+.user-personal_avatar {
+  height: 10vw;
+  width: 10vw;
+  border-radius: 50%;
+}
+
+.user-personal_name {
+  margin: 5px 0 0 0;
+  font-size: 1.8vw;
+  font-weight: 700;
+}
+
+.user-personal_info {
+  margin: 3vw 20vw 3vw 20vw;
+  padding-bottom: 2vw;
+}
+
+.user-personal_info_title {
+  display: flex;
+  border-bottom: 1px solid #5e5e5e;
+}
+
+.user-personal_info_title img {
+  height: 3vw;
+  width: 3vw;
+}
+
+.user-personal_info_title h1 {
+  margin-left: 10px;
+  color: #3e3e3e;
+  font-size: 2vw;
+  font-weight: 600;
+}
+
+.user-personal_info_content {
+  margin-top: 10px;
+  margin-bottom: 3vw;
+  display: flex;
+  color: black;
+}
+
+.user-personal_info_content_topic {
+  font-size: 1.2vw;
+  font-weight: 700;
+  width: 10vw;
+}
+
+.user-personal_info_content_content {
+  margin-left: 10vw;
+  font-size: 1.2vw;
+}
+
+.user-personal_edit {
+  margin: 3vw 20vw 3vw 20vw;
+  padding-bottom: 2vw;
+  text-align: center;
+}
+
+.user-personal_edit_back-btn {
+  margin-top: 5px;
+  width: 50%;
+  background-color: #e0e0e0;
+}
+
+.user-personal_edit_back-btn:hover {
+  border: 1px solid white;
+  color: white;
+  background-color: #e0e0e0;
+}

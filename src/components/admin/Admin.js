@@ -94,7 +94,7 @@ class Admin extends Component {
         component = (<Device/>);
         break;
       case 'setting':
-        component = (<Setting adminInfo={user} updateAdminInfo={this.updateAdminInfo} onLogout={this.props.handleLogoutForChangePassword}/>);
+        component = (<Setting adminInfo={user} updateAdminInfo={this.updateAdminInfo} onLogout={this.props.onLogoutForChangePassword}/>);
         break;
       default:
         component = null;

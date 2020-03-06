@@ -31,3 +31,4 @@ export const LINK_DOOR_SENSOR = '/Cam-bien-cua';
 export const LINK_MOTION_DETECTOR = '/Cam-bien-phat-hien-chuyen-dong';
 
 export const LINK_ADMIN = '/admin';
+export const LINK_USER = '/user';
