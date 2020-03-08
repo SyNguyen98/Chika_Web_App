@@ -177,7 +177,7 @@ class App extends Component {
             </Switch>
         </Content>
 
-        {currentUser !== null ? (
+        {currentUser !== null && currentUser.role !== 'ADMIN' ? (
           <Drawer className='user-menu'
                   title={<i style={{fontSize: '1.2vw'}}>Nhà thông minh Chika</i>}
                   placement='left'

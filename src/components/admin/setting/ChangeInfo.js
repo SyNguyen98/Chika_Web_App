@@ -21,8 +21,8 @@ export default class ChangeInfo extends Component {
               <div className="admin-setting_change-info_content_topic">
                 <p>Ngày sinh</p>
                 <p>Địa chỉ</p>
-                <p>Email</p>
                 <p>Số điện thoại</p>
+                <p>Email</p>
               </div>
               <div className="admin-setting_change-info_content_content">
                 <AntEditForm adminInfo={adminInfo} updateAdminInfo={this.props.updateAdminInfo}/>

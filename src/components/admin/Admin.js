@@ -30,8 +30,10 @@ class Admin extends Component {
         isLoading: false
       });
     }).catch(error => {
-      this.setState({
-        isLoading: false
+      this.setState({ isLoading: false });
+      notification.error({
+        message: 'Chika Smarthome',
+        description: error.message || "Đã có lỗi xảy ra. Vui lòng thử lại sau!"
       });
     });
   }
@@ -51,10 +53,15 @@ class Admin extends Component {
       });
     }).catch(error => {
       this.setState({ isLoading: false });
-
+      let message;
+      if (error.message.includes('Phone')) {
+        message = 'Số điện thoại đã được sử dụng';
+      } else if (error.message.includes('Email')) {
+        message = 'Email đã được sử dụng';
+      }
       notification.error({
         message: 'Chika Smarthome',
-        description: error.message || 'Đã có lỗi xảy ra. Xin vui lòng thử lại sau!'
+        description: message || "Đã có lỗi xảy ra. Vui lòng thử lại sau!"
       });
     });
   }

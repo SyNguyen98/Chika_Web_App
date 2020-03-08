@@ -211,8 +211,8 @@ export default class SensorList extends Component {
                     <Radio value={'Cảm biến chuyển động'}>Cảm biến chuyển động</Radio>
                   </div>
                   <div style={{float: 'right'}}>
-                    <Radio value={'Cảm biến nhiệt độ'} style={{marginBottom: '1vw'}}>Cảm biến nhiệt độ</Radio>
-                    <Radio value={'Cảm biến ánh sáng'}>Cảm biến ánh sáng</Radio>
+                    <Radio value={'Cảm biến nhiệt độ, độ ẩm'} style={{marginBottom: '1vw'}}>Cảm biến nhiệt độ, độ ẩm</Radio>
+                    <Radio value={'Cảm biến không khí'}>Cảm biến không khí</Radio>
                   </div>
                 </Radio.Group>
               </div>

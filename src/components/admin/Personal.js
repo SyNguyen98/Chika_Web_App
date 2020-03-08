@@ -24,16 +24,16 @@ export default class Personal extends Component {
               </div>
               <div className="admin-personal_info_content">
                 <div className="admin-personal_info_content_topic">
+                  <p>Số điện thoại</p>
+                  <p>Email</p>
                   <p>Ngày sinh</p>
                   <p>Địa chỉ</p>
-                  <p>Email</p>
-                  <p>Số điện thoại</p>
                 </div>
                 <div className="admin-personal_info_content_content">
+                  <p>{this.props.adminInfo.phone}</p>
+                  <p>{this.props.adminInfo.email}</p>
                   <p>{this.props.adminInfo.birthday}</p>
                   <p>{this.props.adminInfo.address}</p>
-                  <p>{this.props.adminInfo.email}</p>
-                  <p>{this.props.adminInfo.phone}</p>
                 </div>
               </div>
 

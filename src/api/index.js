@@ -160,6 +160,28 @@ export function updateFeedBackResponse(id, response) {
 }
 
 /* PRODUCT */
+export function getProductByUserForAdmin(userId) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/product/user/" + userId,
+        method: 'GET',
+    });
+}
+
+export function getProductByUser() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/product",
+        method: 'GET',
+    });
+}
+
 export function updateProductWithUser(updateRequest) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Button, Icon, Form, Input, DatePicker } from 'antd';
+import { Button, Icon, Form, Input, DatePicker, notification } from 'antd';
 import moment from 'moment';
 
-import { getUserInfo, updateUserInfo } from '../../api';
+import { getUserInfo, updateUserInfo, getProductByUser } from '../../api';
 
 import '../../styles/user/Personal.css';
 
@@ -12,6 +12,8 @@ class Personal extends Component {
     super(props);
     this.state = {
       userInfo: null,
+      products: null,
+      productNum: 0,
       isLoading: false,
       componentName: 'info'
     }
@@ -26,28 +28,61 @@ class Personal extends Component {
         userInfo: response,
         isLoading: false
       });
-      console.log(response);
     }).catch(error => {
+      this.setState({ isLoading: false });
+      notification.error({
+        message: 'Chika Smarthome',
+        description: "Tải dữ liệu thất bại!"
+      });
+    });
+  }
+
+  loadProduct = () => {
+    this.setState({ isLoading: true });
+    getProductByUser().then(response => {
       this.setState({
+        products: response,
         isLoading: false
+      });
+      console.log(this.state.products);
+      this.state.products.forEach(product => {
+        this.setState({ 
+          productNum: this.state.productNum + product.ids.length
+        });
+      });
+      this.forceUpdate();
+    }).catch(error => {
+      this.setState({ isLoading: false });
+      notification.error({
+        message: 'Chika Smarthome',
+        description: error.message || "Tải dữ liệu thất bại!"
       });
     });
   }
 
   updateUserInfo = (request) => {
-    this.setState({
-      isLoading: true
-    });
+    this.setState({ isLoading: true });
     updateUserInfo(request).then(response => {
       this.setState({
         userInfo: response,
         isLoading: false
       });
-      console.log(response);
+      notification.success({
+        message: 'Chika Smarthome',
+        description: "Thông tin đã được cập nhật."
+      });
       this.forceUpdate();
     }).catch(error => {
-      this.setState({
-        isLoading: false
+      this.setState({ isLoading: false });
+      let message;
+      if (error.message.includes('Phone')) {
+        message = 'Số điện thoại đã được sử dụng';
+      } else if (error.message.includes('Email')) {
+        message = 'Email đã được sử dụng';
+      }
+      notification.error({
+        message: 'Chika Smarthome',
+        description: message || "Đã có lỗi xảy ra. Vui lòng thử lại sau!"
       });
     });
   }
@@ -59,14 +94,15 @@ class Personal extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.loadUserInfo();
+    this.loadProduct();
   }
 
   render() {
-    const { userInfo, componentName } = this.state;
+    const { userInfo, products, productNum, componentName } = this.state;
     let component;
     switch (componentName) {
       case 'info':
-        component = (<UserInfo userInfo={userInfo}/>)
+        component = (<UserInfo userInfo={userInfo} products={products} productNum={productNum}/>)
         break;
       case 'edit':
         component = (<EditInfo userInfo={userInfo} updateUserInfo={this.updateUserInfo} handleChangeComponent={this.handleChangeComponent}/>)
@@ -98,12 +134,76 @@ class Personal extends Component {
 export default withRouter(Personal);
 
 class UserInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      productsComponent: false,
+      switchWifi: null,
+      switchRf: null,
+      moduleIr: null,
+      homeCenter: null,
+      sensor: null,
+    }
+  }
+
+  handleShowProduct = (bool) => {
+    if (bool) {
+      this.countProduct();
+    }
+    this.setState({ productsComponent: bool });
+  }
+
+  countProduct = () => {
+    const { products } = this.props;
+    if (products !== null) {
+      products.forEach(product => {
+        switch (product.name) {
+          case 'Switch Wifi':
+            this.setState({ switchWifi: {
+              name: 'Công tắc Wifi',
+              number: product.ids.length
+            } });
+            break;
+          case 'Switch Rf':
+            this.setState({ switchRf: {
+              name: 'Công tắc RF',
+              number: product.ids.length
+            } });
+            break;
+          case 'Module Ir':
+            this.setState({ moduleIr: {
+              name: 'Điều khiển hồng ngoại',
+              number: product.ids.length
+            } });
+            break;
+          case 'Home Center':
+            this.setState({ homeCenter: {
+              name: 'Bộ điều khiển trung tâm',
+              number: product.ids.length
+            } });
+            break;
+          case 'Sensor':
+            this.setState({ sensor: {
+              name: 'Cảm biến',
+              number: product.ids.length
+            } });
+            break;
+          default:
+            break;
+        }
+      })
+    }
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
+    
   }
 
   render() {
-    const { userInfo } = this.props;
+    const { userInfo, productNum } = this.props;
+    const { productsComponent, switchWifi, switchRf, moduleIr, homeCenter, sensor } = this.state;
+    
     return (
       <div className="user-personal_info">
         <div className="user-personal_info_title">
@@ -122,7 +222,7 @@ class UserInfo extends Component {
         </div>
 
         <div className="user-personal_info_title">
-          <img alt='icon-id-card' src='/image/user/personal/icon-contact.png'></img>
+          <img alt='icon-contact' src='/image/user/personal/icon-contact.png'></img>
           <h1>Thông tin liên hệ</h1>
         </div>
         <div className="user-personal_info_content">
@@ -137,7 +237,7 @@ class UserInfo extends Component {
         </div>
 
         <div className="user-personal_info_title">
-          <img alt='icon-id-card' src='/image/user/personal/icon-home.png'></img>
+          <img alt='icon-home' src='/image/user/personal/icon-home.png'></img>
           <h1>Thông tin về Chika</h1>
         </div>
         <div className="user-personal_info_content">
@@ -147,9 +247,38 @@ class UserInfo extends Component {
           </div>
           <div className="user-personal_info_content_content">
             <p>{userInfo.createAt}</p>
-            <p>10</p>
+            <p>{productNum} &emsp; {productsComponent ? (
+              <Icon type="up" style={{cursor: 'pointer'}} onClick={() => this.handleShowProduct(false)}/>
+            ) : (
+              <Icon type="down" style={{cursor: 'pointer'}} onClick={() => this.handleShowProduct(true)}/>
+            )}</p>
           </div>
         </div>
+
+        {productsComponent ? (
+          <div>
+            <div className="user-personal_info_title">
+              <img alt='icon-product' src='/image/user/personal/icon-product.png'></img>
+              <h1>Sản phẩm</h1>
+            </div>
+            <div className="user-personal_info_content">
+              <div className="user-personal_info_content_topic" style={{width: '15vw'}}>
+                {switchWifi ? (<p>&bull; {switchWifi.name}</p>) : null}
+                {switchRf ? (<p>&bull; {switchRf.name}</p>) : null}
+                {moduleIr ? (<p>&bull; {moduleIr.name}</p>) : null}
+                {homeCenter ? (<p>&bull; {homeCenter.name}</p>) : null}
+                {sensor ? (<p>&bull; {sensor.name}</p>) : null}
+              </div>
+              <div className="user-personal_info_content_content">
+                {switchWifi ? (<p>{switchWifi.number} sản phẩm</p>) : null}
+                {switchRf ? (<p>{switchRf.number} sản phẩm</p>) : null}
+                {moduleIr ? (<p>{moduleIr.number} sản phẩm</p>) : null}
+                {homeCenter ? (<p>{homeCenter.number} sản phẩm</p>) : null}
+                {sensor ? (<p>{sensor.number} sản phẩm</p>) : null}
+              </div>
+            </div>
+          </div>        
+        ) : null}
       </div>
     )
   }
