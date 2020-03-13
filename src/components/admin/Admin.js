@@ -110,20 +110,20 @@ class Admin extends Component {
       <div className="admin">
         <div className="admin_menu">
           {user ? (
-            <div className="admin_menu_personal" onClick={(event) => this.handleChangeComponent('info')}>
+            <div className="admin_menu_personal" onClick={() => this.handleChangeComponent('info')}>
               <img alt="avatar" src={user.avatar}/>
               <p>{this.cutName(user.name)}</p>
             </div>
           ) : null}
-          <div className="admin_menu_item" onClick={(event) => this.handleChangeComponent('user')}>
+          <div className="admin_menu_item" onClick={() => this.handleChangeComponent('user')}>
             <img className="admin_menu_icon" alt="icon-user" src="/image/admin/icon-user.png"></img>
             <p>Người Dùng</p>
           </div>
-          <div className="admin_menu_item" onClick={(event) => this.handleChangeComponent('device')}>
+          <div className="admin_menu_item" onClick={() => this.handleChangeComponent('device')}>
             <img className="admin_menu_icon" alt="icon-device" src="/image/admin/icon-device.png"></img>
             <p>Thiết Bị</p>
           </div>
-          <div className="admin_menu_item" onClick={(event) => this.handleChangeComponent('setting')}>
+          <div className="admin_menu_item" onClick={() => this.handleChangeComponent('setting')}>
             <img className="admin_menu_icon" alt="icon-setting" src="/image/admin/icon-setting.png"></img>
             <p>Quản lý<br/>tài khoản</p>
           </div>

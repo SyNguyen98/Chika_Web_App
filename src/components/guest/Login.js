@@ -21,14 +21,20 @@ class Login extends Component {
 }
 
 class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+    }
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ isLoading: true })
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const loginRequest = Object.assign({}, values);
-        login(loginRequest)
-        .then(response => {
+        login(loginRequest).then(response => {
           localStorage.setItem(ACCESS_TOKEN, response.accessToken);
           this.props.onLogin();
         }).catch(error => {
@@ -79,7 +85,7 @@ class LoginForm extends Component {
                     placeholder="Mật khẩu"/>
                 )}
               </Form.Item>
-              <Button className="login-button" type="primary" htmlType="submit" size="large" loading={this.props.loading}>Đăng Nhập</Button>
+              <Button className="login-button" type="primary" htmlType="submit" size="large" loading={this.state.isLoading}>Đăng Nhập</Button>
             </Form>
           </div>
         </div>

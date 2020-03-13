@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Icon, Button, Badge } from 'antd';
 
 import '../../styles/admin/User.css';
@@ -9,7 +10,7 @@ import AddUser from './user/AddUser';
 import Shop from './user/Shop';
 import FeedbackList from './user/FeedbackList';
 
-export default class User extends Component {
+class User extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -145,3 +146,5 @@ export default class User extends Component {
     )
   }
 }
+
+export default withRouter(User);

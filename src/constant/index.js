@@ -30,5 +30,17 @@ export const LINK_HOME_CONTROLLER = '/Bo-dieu-khien-trung-tam';
 export const LINK_DOOR_SENSOR = '/Cam-bien-cua';
 export const LINK_MOTION_DETECTOR = '/Cam-bien-phat-hien-chuyen-dong';
 
-export const LINK_ADMIN = '/admin';
-export const LINK_USER = '/user';
+export const LINK_ADMIN = '/Quan_tri_vien';
+export const LINK_ADMIN_USER = `${LINK_ADMIN}/Nguoi_dung`
+export const LINK_ADMIN_DEVICE = `${LINK_ADMIN}/Thiet_bi`
+export const LINK_ADMIN_SETTING = `${LINK_ADMIN}/Quan_ly_tai_khoan`
+
+const LINK_USER = '/Nguoi_dung';
+export const LINK_USER_HOME = `${LINK_USER}/Nha`;
+export const LINK_USER_ROOM = `${LINK_USER}/Phong`;
+export const LINK_USER_SCRIPT = `${LINK_USER}/Kich_ban`;
+export const LINK_USER_CAMERA = `${LINK_USER}/Giam_sat`;
+
+export const LINK_USER_INFO = `${LINK_USER}/Thong_tin_ca_nhan`;
+export const LINK_USER_ADD_USER = `${LINK_USER}/Them_nguoi_dung`;
+export const LINK_USER_SETTING = `${LINK_USER}/Cai_dat`;

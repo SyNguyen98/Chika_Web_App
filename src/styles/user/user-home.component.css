@@ -1,0 +1,140 @@
+.user-home {
+    margin-top: 5vw;
+    background-image: linear-gradient(#29f498, #1bd7ba, #0cb8de);
+    min-height: 90vh;
+}
+
+.user-home__title {
+    margin-bottom: 2vw;
+    display: flex;
+}
+
+.user-home__title img {
+    margin: 2vw 0 0 15vw; 
+    width: 10vw;
+}
+
+.user-home__title__avatar {
+    margin-left: 5vw !important;
+    border-radius: 50%;
+    box-shadow: 3px 5px 7px #919191;
+}
+
+.user-home__title h1 {
+    margin: 5vw 0 0 5vw; 
+    font-size: 3vw;
+    font-weight: 700;
+    text-shadow: 0 0 0 #fff, 3px 0 0 #fff, 3px 0 0 #fff, 0 0 0 #fff;
+}
+
+
+.user-home__item {
+    margin-bottom: 2vw;
+    height: 11vw;
+    background-color: #ffffff;
+    padding: 1vw 2vw;
+    border-radius: 10px;
+    text-shadow: 3px 5px 7px #d6d6d6;
+    box-shadow: 3px 5px 7px #524e4e;
+}
+
+.user-home__item h1 {
+    text-align: center;
+    font-size: 1.5vw;
+    font-weight: 700;
+}
+
+.user-home__item img {
+    width: 6vw;
+    height: 6vw;
+}
+
+.user-home__item__body {
+    display: flex;  
+    text-align: center;
+}
+
+.user-home__item i {
+    font-size: 1.3vw;
+    font-weight: 600;
+    color: black;
+}
+
+.user-home__item p {
+    margin-top: 0.5vw;
+    font-size: 1.5vw;
+    font-weight: 800;
+}
+
+.user-home__item__security {
+    float: left;
+    margin-left: 12vw;
+    padding: 1vw 4vw;
+}
+
+.user-home__item__security span {
+    margin: 0.5vw 0 0 2vw;
+}
+
+.user-home__item__security p {
+    color: green;
+}
+
+.user-home__item__info {
+    float: right;
+    margin-right: 12vw;
+}
+
+.user-home__item__info .air {
+    margin: 0.5vw 4vw 0 1vw;
+    color: mediumblue;
+}
+
+.user-home__item__info .temperature {
+    margin: 0.5vw 4vw 0 0;
+    color: red;
+}
+
+.user-home__item__info .humidity {
+    margin: 0.5vw 0 0 1vw;
+    color: deepskyblue;
+}
+
+.user-home__item__zoom-in {
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.user-home__item__zoom-in:hover {
+    transform: scale(1.05);
+}
+
+.user-home__item__room {
+    float: left;
+    margin-left: 12vw;
+transition: transform .2s;
+}
+
+.user-home__item__room i {
+    margin: 0.5vw 0 0 1vw;
+}
+
+.user-home__item__script {
+    float: left;
+    margin-left: 3vw;
+    cursor: pointer;
+}
+
+.user-home__item__script i {
+    margin: 0.5vw 0 0 0.5vw;
+}
+
+.user-home__item__camera {
+    float: right;
+    margin-right: 12vw;
+    cursor: pointer;
+}
+
+.user-home__item__camera i {
+    margin: 0.5vw 0 0 1vw;
+}

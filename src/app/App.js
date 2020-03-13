@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Route, withRouter, Switch } from 'react-router-dom';
-import { Layout, BackTop, notification, Drawer, Icon } from 'antd';
+import { Layout, BackTop, notification } from 'antd';
 import './App.css';
 
-import AppHeader from '../components/AppHeader';
+import AppHeaderComponent from '../components/app-header.component';
 import AppFooter from '../components/AppFooter';
+import SideNavComponent from '../components/sidenav.component';
 import ContactMenu from '../components/ContactMenu';
 
 import Home from '../components/guest/Home';
@@ -32,16 +33,21 @@ import Document from '../components/guest/supporting/Document';
 import Login from '../components/guest/Login';
 
 import Admin from '../components/admin/Admin';
-import User from '../components/user/User';
+
+import UserHomeComponent from '../components/user/user-home.component';
+import UserPersonalComponent from '../components/user/user-personal.component'
 
 import { ACCESS_TOKEN,
   LINK_INTRODUCTION, LINK_LOGIN, LINK_PRODUCT, LINK_SUPPORTING,
   LINK_GG_ASSISTANT, LINK_LIGHT_CONTROL, LINK_CONDITIONER_TIVI, LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED,
   LINK_SWITCH_SENSOR, LINK_SWITCH, LINK_MODULE_IR, LINK_HOME_CONTROLLER, LINK_DOOR_SENSOR, LINK_MOTION_DETECTOR,
   LINK_QUESTION, LINK_DOCUMENT,
-  LINK_ADMIN, LINK_USER} from '../constant';
+  LINK_ADMIN,
+  LINK_USER_INFO,
+  LINK_USER_HOME, LINK_USER_ROOM} from '../constant';
 
 import { getCurrentUser } from '../api';
+import { deleteAllCookies } from '../service/cookie.service'
 
 const { Content } = Layout;
 
@@ -51,8 +57,7 @@ class App extends Component {
     this.state = {
       currentUser: null,
       isLoading: false,
-      userMenuVisible: false,
-      userComponent: 'info'
+      sidenavVisible: false,
     }
   }
 
@@ -65,14 +70,15 @@ class App extends Component {
         currentUser: response,
         isLoading: false
       });
+      this.forceUpdate();
       console.log(response);
       switch (response.role) {
         case 'ADMIN':
           this.props.history.push(LINK_ADMIN);
           break;
         case 'HOME_MASTER': case 'HOME_USER':
-          this.props.history.push(LINK_USER);
-          this.setState({ userMenuVisible: false, });
+          this.props.history.push(LINK_USER_HOME);
+          this.onCloseSidenav();
           break;
         default:
           this.props.history.push('/');
@@ -84,18 +90,12 @@ class App extends Component {
     });
   }
 
-  handleOpenMenuUser = () => {
-    this.setState({ userMenuVisible: true });
+  handleOpenSidenav = () => {
+    this.setState({ sidenavVisible: true });
   }
 
-  handleChangeUserComponet = (component) => {
-    this.setState({ userComponent: component });
-  }
-
-  onCloseMenuUser = () => {
-    this.setState({
-      userMenuVisible: false,
-    });
+  onCloseSidenav = () => {
+    this.setState({ sidenavVisible: false, });
   };
 
   handleLogin = () => {
@@ -108,6 +108,7 @@ class App extends Component {
 
   handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
+    deleteAllCookies();
 
     this.setState({ currentUser: null, });
 
@@ -131,16 +132,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.handleLogout();
     this.loadCurrentUser();
   }
 
   render() {
-    const { currentUser, isLoading, userMenuVisible } = this.state;
+    const { currentUser, sidenavVisible } = this.state;
     return (
       <Layout>
-        <AppHeader currentUser={currentUser} onOpenMenuUser={this.handleOpenMenuUser}/>
-
+        <AppHeaderComponent currentUser={currentUser}
+                            onOpenSidenav={this.handleOpenSidenav}
+                            history={this.props.history}/>
         <Content>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -165,46 +166,22 @@ class App extends Component {
                 <Route exact path={LINK_QUESTION} component={Question} />
                 <Route exact path={LINK_DOCUMENT} component={Document} />
 
+              <Route path={LINK_LOGIN} render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
+
               <Route exact path={LINK_ADMIN}
                 render={(props) => <Admin onLogout={this.handleLogout} onLogoutForChangePassword={this.handleLogoutForChangePassword} {...props} />} />
 
-              <Route exact path={LINK_USER}
-                render={(props) => <User userComponent={this.state.userComponent} handleChangeUserComponet={this.handleChangeUserComponet}
-                                        onLogoutForChangePassword={this.handleLogoutForChangePassword} {...props} />} />
+              <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent {...props}/>} />
 
-              <Route path={LINK_LOGIN} render={(props) => <Login onLogin={this.handleLogin} loading={isLoading} {...props} />}/>
+              <Route exact path={LINK_USER_INFO} render={(props) => <UserPersonalComponent {...props}/>} />
 
             </Switch>
         </Content>
 
         {currentUser !== null && currentUser.role !== 'ADMIN' ? (
-          <Drawer className='user-menu'
-                  title={<i style={{fontSize: '1.2vw'}}>Nhà thông minh Chika</i>}
-                  placement='left'
-                  width='18vw'
-                  closable={false}
-                  onClose={this.onCloseMenuUser}
-                  visible={userMenuVisible}>
-            <div className='user-menu_item' onClick={() => this.handleChangeUserComponet('info')}>
-              <Icon type="idcard" /><p>Quản lý tài khoản</p>
-            </div>
-
-            {currentUser !== null && currentUser.role === 'HOME_MASTER' ? (
-              <div className='user-menu_item' onClick={() => this.handleChangeUserComponet('add-user')}>
-                <Icon type="user-add" /><p>Thêm thành viên</p>
-              </div>
-            ) : null}
-
-            <div className='user-menu_item'>
-              <Icon type="setting" /><p>Hỗ trợ</p>
-            </div>
-
-            <div className='user-menu_item' onClick={this.handleLogout}>
-              <Icon type="logout" /><p>Đăng xuất</p>
-            </div>
-
-            <i className='user-menu_bottom'>Sản phẩm của Chika Smarthome</i>
-          </Drawer>
+          <SideNavComponent sidenavVisible={sidenavVisible}
+                            onCloseSidenav={this.onCloseSidenav}
+                            handleLogout={this.handleLogout}/>
         ) : null}
 
         {currentUser === null ? (<AppFooter/>) : null}

@@ -3,11 +3,11 @@ import { withRouter } from 'react-router-dom';
 import { Button, Icon, Form, Input, DatePicker, notification } from 'antd';
 import moment from 'moment';
 
+import '../../styles/user/user-personal.component.css';
+
 import { getUserInfo, updateUserInfo, getProductByUser } from '../../api';
 
-import '../../styles/user/Personal.css';
-
-class Personal extends Component {
+class UserPersonalComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -131,7 +131,7 @@ class Personal extends Component {
   }
 }
 
-export default withRouter(Personal);
+export default withRouter(UserPersonalComponent);
 
 class UserInfo extends Component {
   constructor(props) {
