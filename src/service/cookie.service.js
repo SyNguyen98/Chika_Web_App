@@ -2,7 +2,7 @@ export function setCookie(cookieName, cookieValue, expireTime) {
     var date = new Date();
     date.setTime(date.getTime() + (expireTime * 24 * 60 * 60 * 1000));
     var expires = "expires=" + date.toUTCString();
-    document.cookie = cookieName + "=" + JSON.stringify(cookieValue) + ";" + expires + ";path=/";
+    document.cookie = cookieName + "=" + JSON.stringify(cookieValue) + ";" + expires;
 }
 
 export function getCookie(cookieName) {

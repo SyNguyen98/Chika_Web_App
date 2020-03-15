@@ -4,7 +4,7 @@ import { Layout, BackTop, notification } from 'antd';
 import './App.css';
 
 import AppHeaderComponent from '../components/app-header.component';
-import AppFooter from '../components/AppFooter';
+import AppFooterComponent from '../components/app-footer.component';
 import SideNavComponent from '../components/sidenav.component';
 import ContactMenu from '../components/ContactMenu';
 
@@ -35,6 +35,8 @@ import Login from '../components/guest/Login';
 import Admin from '../components/admin/Admin';
 
 import UserHomeComponent from '../components/user/user-home.component';
+import UserRoomComponent from '../components/user/user-room.component';
+
 import UserPersonalComponent from '../components/user/user-personal.component'
 
 import { ACCESS_TOKEN,
@@ -77,7 +79,7 @@ class App extends Component {
           this.props.history.push(LINK_ADMIN);
           break;
         case 'HOME_MASTER': case 'HOME_USER':
-          this.props.history.push(LINK_USER_HOME);
+          this.props.history.push(LINK_USER_ROOM);
           this.onCloseSidenav();
           break;
         default:
@@ -172,6 +174,7 @@ class App extends Component {
                 render={(props) => <Admin onLogout={this.handleLogout} onLogoutForChangePassword={this.handleLogoutForChangePassword} {...props} />} />
 
               <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent {...props}/>} />
+              <Route exact path={LINK_USER_ROOM} render={(props) => <UserRoomComponent {...props}/>} />
 
               <Route exact path={LINK_USER_INFO} render={(props) => <UserPersonalComponent {...props}/>} />
 
@@ -184,7 +187,7 @@ class App extends Component {
                             handleLogout={this.handleLogout}/>
         ) : null}
 
-        {currentUser === null ? (<AppFooter/>) : null}
+        {currentUser === null ? (<AppFooterComponent/>) : null}
 
         {currentUser === null ? (<ContactMenu/>) : null}
 

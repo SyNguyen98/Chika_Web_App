@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { Drawer, Icon, notification } from 'antd';
 
 import '../styles/sidenav.component.css';
-import { LINK_USER_INFO, LINK_USER_ADD_USER, LINK_USER_SETTING } from '../constant';
-
 import { getUserInfo } from '../api';
+import { setCookie } from '../service/cookie.service'
+import { LINK_USER_INFO, LINK_USER_ADD_USER, LINK_USER_SETTING } from '../constant';
 
 class SideNavComponent extends Component {
     constructor(props) {
@@ -25,6 +25,7 @@ class SideNavComponent extends Component {
             this.setState({
                 currentUser: response
             });
+            setCookie('User', JSON.stringify(response), 1000)
             this.forceUpdate();
         }).catch(error => {
             notification.error({
@@ -42,34 +43,34 @@ class SideNavComponent extends Component {
         const { sidenavVisible, onCloseSidenav, handleLogout } = this.props;
         const { currentUser } = this.state;
         return(
-                    <Drawer className='side-nav'
-                            title={<SideNavHeader currentUser={currentUser}/>}
-                            placement='left'
-                            width='23vw'
-                            visible={sidenavVisible}
-                            closable={false}
-                            onClose={onCloseSidenav}>
-                            
-                        <div className='side-nav__item' onClick={() => this.handleChangeUserComponent(LINK_USER_INFO)}>
-                            <Icon type="idcard" /><p>Quản lý tài khoản</p>
-                        </div>
-            
-                        {currentUser !== null && currentUser.role === 'HOME_MASTER' ? (
-                        <div className='side-nav__item' onClick={() => this.handleChangeUserComponent(LINK_USER_ADD_USER)}>
-                            <Icon type="user-add" /><p>Thêm thành viên</p>
-                        </div>
-                        ) : null}
-            
-                        <div className='side-nav__item' onClick={() => this.handleChangeUserComponent(LINK_USER_SETTING)}>
-                            <Icon type="setting" /><p>Hỗ trợ</p>
-                        </div>
-            
-                        <div className='side-nav__item' onClick={handleLogout}>
-                            <Icon type="logout" /><p>Đăng xuất</p>
-                        </div>
-            
-                        <i className='side-nav__bottom'>Sản phẩm của Chika Smarthome<br/>Copyright © Chika</i>
-                    </Drawer>
+                <Drawer className='side-nav'
+                        title={<SideNavHeader currentUser={currentUser}/>}
+                        placement='left'
+                        width='23vw'
+                        visible={sidenavVisible}
+                        closable={false}
+                        onClose={onCloseSidenav}>
+                        
+                    <div className='side-nav__item' onClick={() => this.handleChangeUserComponent(LINK_USER_INFO)}>
+                        <Icon type="idcard" /><p>Quản lý tài khoản</p>
+                    </div>
+        
+                    {currentUser !== null && currentUser.role === 'HOME_MASTER' ? (
+                    <div className='side-nav__item' onClick={() => this.handleChangeUserComponent(LINK_USER_ADD_USER)}>
+                        <Icon type="user-add" /><p>Thêm thành viên</p>
+                    </div>
+                    ) : null}
+        
+                    <div className='side-nav__item' onClick={() => this.handleChangeUserComponent(LINK_USER_SETTING)}>
+                        <Icon type="setting" /><p>Hỗ trợ</p>
+                    </div>
+        
+                    <div className='side-nav__item' onClick={handleLogout}>
+                        <Icon type="logout" /><p>Đăng xuất</p>
+                    </div>
+        
+                    <i className='side-nav__bottom'>Sản phẩm của Chika Smarthome<br/>Copyright © Chika</i>
+                </Drawer>
         )
     }
 }

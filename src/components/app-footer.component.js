@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Layout, Icon, Divider } from 'antd';
 
-import '../styles/AppFooter.css';
+import '../styles/app-footer.component.css';
 
 const { Footer } = Layout;
 
-class AppFooter extends Component {
+class AppFooterComponent extends Component {
 
   render() {
     return(
@@ -42,4 +42,4 @@ class AppFooter extends Component {
   }
 }
 
-export default withRouter(AppFooter);
+export default withRouter(AppFooterComponent);
