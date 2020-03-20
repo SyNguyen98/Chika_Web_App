@@ -42,7 +42,7 @@
 }
 
 .admin-device_menu_item:hover .admin-device_menu_item_title {
-  -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+  -webkit-animation: fadein 0.5s; 
   opacity: 1;
 }
 

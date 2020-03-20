@@ -18,7 +18,7 @@
     height: 8vw;
     margin: 3vw 0 0 5vw !important;
     border-radius: 50%;
-    box-shadow: 3px 5px 7px #919191;
+    box-shadow: 2px 4px 6px #919191;
 }
 
 .user-home__title h1 {
@@ -36,7 +36,7 @@
     padding: 1vw 2vw;
     border-radius: 10px;
     text-shadow: 3px 5px 7px #d6d6d6;
-    box-shadow: 3px 5px 7px #524e4e;
+    box-shadow: 2px 4px 6px #919191;
 }
 
 .user-home__item h1 {
@@ -121,7 +121,8 @@
 
 .user-home__item__script {
     float: left;
-    margin-left: 3vw;
+    margin-left: 5vw;
+    width: 20vw;
     cursor: pointer;
 }
 

@@ -35,6 +35,7 @@ import Login from '../components/guest/Login';
 import Admin from '../components/admin/Admin';
 
 import UserHomeComponent from '../components/user/user-home.component';
+import UserListRoomComponent from '../components/user/user-list-room.component';
 import UserRoomComponent from '../components/user/user-room.component';
 
 import UserPersonalComponent from '../components/user/user-personal.component'
@@ -174,7 +175,8 @@ class App extends Component {
                 render={(props) => <Admin onLogout={this.handleLogout} onLogoutForChangePassword={this.handleLogoutForChangePassword} {...props} />} />
 
               <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent {...props}/>} />
-              <Route exact path={LINK_USER_ROOM} render={(props) => <UserRoomComponent {...props}/>} />
+              <Route exact path={LINK_USER_ROOM} render={(props) => <UserListRoomComponent {...props}/>} />
+              <Route exact path={`${LINK_USER_ROOM}/:id`} render={(props) => <UserRoomComponent {...props}/>} />
 
               <Route exact path={LINK_USER_INFO} render={(props) => <UserPersonalComponent {...props}/>} />
 

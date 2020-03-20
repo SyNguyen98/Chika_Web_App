@@ -1,0 +1,87 @@
+.user-list-room {
+    margin-top: 6.5vw;
+    min-height: 90vh;
+}
+
+.user-list-room__item {
+    margin: 0 0 2vw 4vw;
+    text-align: center;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 10px;
+    box-shadow: 2px 3px 4px #524e4e;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.user-list-room__item:hover {
+    transform: scale(1.05);
+}
+
+.user-list-room__item h2 {
+    margin-top: 5px;
+    margin-left: 1vw;
+    font-size: 1.2vw;
+    font-weight: 700;
+}
+
+.user-list-room__item img {
+    width: 7vw;
+    margin-top: 1vw;
+}
+
+.user-list-room__item b {
+    color: #858585;
+    font-size: 1vw;
+    font-weight: 600;
+}
+
+.user-list-room__item__setting {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    width: 15vw;
+    height: 4vw;
+    background-color: #ebebeb;
+    border-radius: 0 0 10px 10px;
+    opacity: 0;
+}
+
+.user-list-room__item:hover .user-list-room__item__setting{
+    -webkit-animation: fadein 0.5s; 
+    opacity: 1;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.user-list-room__item__setting p {
+    font-size: 1.2vw;
+    font-weight: 700;
+    margin-top: 1.3vw;
+    margin-left: 3.3vw;
+    transition: transform .2s;
+} 
+
+.user-list-room__item__setting p:hover {
+    transform: scale(1.15);
+} 
+
+.user-list-room__item__setting__update {
+    color: blue;
+}
+
+.user-list-room__item__setting__delete {
+    color: red;
+}
+
+.modal__room-icon {
+    width: 5vw;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.modal__room-icon:hover {
+    transform: scale(1.2);
+}

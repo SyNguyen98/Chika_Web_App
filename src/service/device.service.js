@@ -23,32 +23,9 @@ const request = (options) => {
     );
 };
 
-export function getRooms() {
+export function getDevicesByRoomId(roomId) {
     return request({
-        url: `${API_BASE_URL}/room`,
+        url: `${API_BASE_URL}/device/room_id/${roomId}`,
         method: 'GET',
-    });
-}
-
-export function addRoom(addRoomRequest) {
-    return request({
-        url: `${API_BASE_URL}/room`,
-        method: 'POST',
-        body: JSON.stringify(addRoomRequest)
-    });
-}
-
-export function updateRoom(updateRoomRequest) {
-    return request({
-        url: `${API_BASE_URL}/room`,
-        method: 'PUT',
-        body: JSON.stringify(updateRoomRequest)
-    });
-}
-
-export function deleteRoom(roomId) {
-    return request({
-        url: `${API_BASE_URL}/room/${roomId}`,
-        method: 'DELETE',
     });
 }

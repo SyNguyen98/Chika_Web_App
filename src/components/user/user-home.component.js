@@ -97,7 +97,7 @@ class UserHomeComponent extends Component {
                     <h1>KỊCH BẢN</h1>
                     <div className='user-home__item__body'>
                         <img alt='script-icon' src='/image/user/home/script-icon.png'/>
-                        <i>Tạo kịch bản điều khiển<br/>cho ngôi nhà của bạn</i>
+                        <i>Tạo kịch bản<br/>cho ngôi nhà</i>
                     </div>
                 </div>
 
