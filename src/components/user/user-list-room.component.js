@@ -35,7 +35,11 @@ class UserListRoomComponent extends Component {
         })
     }
 
-    handleDeleteRoom = (id) => {
+    handleDeleteRoom = (event, id) => {
+        event.cancelBubble = true;
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } 
         deleteRoom(id).then(() => {
             let index = this.state.roomList.indexOf(this.state.roomList.find(room => room.id === id));
             this.state.roomList.splice(index, 1)
@@ -93,7 +97,7 @@ class UserListRoomComponent extends Component {
 
                     <div className='user-list-room__item__setting'>
                         <p className='user-list-room__item__setting__update' onClick={(event) => this.handleUpdateRoom(event, item)}>SỬA</p>
-                        <p className='user-list-room__item__setting__delete' onClick={() => this.handleDeleteRoom(item.id)}>XÓA</p>
+                        <p className='user-list-room__item__setting__delete' onClick={(event) => this.handleDeleteRoom(event, item.id)}>XÓA</p>
                     </div>
                 </Col>
             )

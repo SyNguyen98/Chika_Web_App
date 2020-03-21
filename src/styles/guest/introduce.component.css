@@ -1,0 +1,62 @@
+.introduction Button:hover {
+  color: white;
+  background-color: #f7931e;
+  border-color: #f7931e;
+}
+
+.introduction_header {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/image/guest/introduce/smarthome.jpg');
+  background-size: 100% 100vh;
+  min-height: 100vh;
+  position: relative;
+}
+
+.introduction_header h1 {
+  position: absolute;
+  top: 30%;
+  left: 13%;
+  color: white;
+  font-size: 4vw;
+  font-weight: bold;
+}
+
+.introduction_timeline {
+  margin: 4vw 5vw auto 5vw;
+}
+
+.introduction_timeline h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid #cccccc;
+}
+
+.introduction_timeline p {
+  color: black;
+  font-size: 1.1vw;
+  text-align: justify;
+}
+
+.introduction_timeline Button {
+  margin: 1vw auto auto 8vw;
+  color: #ff8c00;
+  border-color: #ff8c00;
+  background-color: transparent;
+  font-size: 1.1vw;
+  font-weight: bold;
+  padding: 3px 30px 3px;
+}
+
+.introduction_timeline_image {
+  float: right;
+  margin-bottom: 4vw;
+  width: 55vw;
+  height: 30vw;
+  cursor: pointer;
+}
+
+.introduction_timeline_content {
+  float: left;
+  margin-top: 6vw;
+  width: 30vw;
+}

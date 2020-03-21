@@ -1,0 +1,54 @@
+.login-page {
+  text-align: center;
+  background-image: url('/image/guest/login/smarthome.jpg');
+  background-size: 100% 100vh;
+  min-height: 100vh;
+  position: relative;
+}
+
+.login-container {
+  position: absolute;
+  top: 20%;
+  right: 15%;
+  padding: 5vh 5vh;
+  border-radius: 10%;
+  background: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  -webkit-animation: bummer 1s;
+  animation: bummer 1s;
+  -webkit-transform: scale(0,0); 
+  transform: scale(0,0);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; /* Add this so that your modal doesn't close after the animation completes */
+}
+
+@-webkit-keyframes bummer {
+  100% { -webkit-transform: scale(1,1); }
+}
+@keyframes bummer {
+  100% { transform: scale(1,1); }
+}
+
+.login-container h1 {
+  color: #00ff98;
+  font-size: 2.5vw;
+}
+
+.login-container p {
+  color: white;
+  font-size: 1.2vw;
+}
+
+.login-form {
+  margin-left: 2vw;
+  width: 20vw;
+}
+
+.login-form .item {
+  margin-top: 1vh;
+}
+
+.login-button {
+  margin-top: 1vh;
+  width: 100%;
+}

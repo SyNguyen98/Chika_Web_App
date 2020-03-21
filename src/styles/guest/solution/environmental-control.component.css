@@ -1,0 +1,214 @@
+.environmental-control img {
+  transition: transform .2s;
+}
+
+.environmental-control img:hover {
+  transform: scale(1.1);
+}
+
+.environmental-control_header {
+  margin-top: 80px;
+  background-image: url("/image/guest/solution/environmental-control/banner-moi-truong.jpg");
+  background-size: 100% 70vh;
+  height: 70vh;
+  display: flex;
+}
+
+.environmental-control_header_title {
+  margin: 25vw 1vw auto 10vw;
+  width: 33vw;
+}
+
+.environmental-control_header_title h1 {
+  color: #f3d5a8;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #fff, 0 2px 0 #000, 0 -2px 0 #fff;
+  font-size: 2.4vw;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.environmental-control_header_title p {
+  color: #000;
+  font-size: 1.3vw;
+  text-align: justify;
+}
+
+.environmental-control_introduce {
+  margin: 3vw 10vw auto 10vw;
+  width: 80%;
+  font-size: 1.2vw;
+  text-align: justify;
+  font-weight: 500;
+}
+
+.environmental-control_introduce_image {
+  padding-top: 4vw;
+  text-align: center;
+  font-size: 1.5vw;
+  font-weight: 900;
+}
+
+.environmental-control_introduce_image p {
+  margin-top: 15px;
+}
+
+.environmental-control_introduce_gg-home {
+  border-right: 0.1px solid gray;
+}
+
+.environmental-control_introduce_gg-home img {
+  width: 17vw;
+  height: 25vw;
+}
+
+.environmental-control_introduce_smartphone img {
+  width: 13vw;
+  height: 25vw;
+}
+
+.environmental-control_body {
+  margin: 2vw 7vw auto 7vw;
+}
+
+.environmental-control_body h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid #cccccc;
+}
+
+.environmental-control_body p {
+  color: black;
+  font-size: 1.1vw;
+  text-align: justify;
+}
+
+.environmental-control_body_indicators-image {
+  float: left;
+  margin: 3vw auto auto 3vw;
+  width: 40vw;
+  height: 27vw;
+}
+
+.environmental-control_body_indicators {
+  float: right;
+  margin: 7vw 3vw auto auto;
+  width: 31vw;
+}
+
+.environmental-control_body_device-image {
+  float: right;
+  margin: 10vw 4vw auto auto;
+  width: 33vw;
+  height: 30vw;
+}
+
+.environmental-control_body_device {
+  float: left;
+  margin: 11vw auto auto 7vw;
+  width: 30vw;
+}
+
+.environmental-control_automatic {
+  margin: 70vw auto 3vw auto;
+  background-image: url("/image/guest/solution/environmental-control/dam-bao-nhiet-do-phong-on-dinh.jpg");
+  background-size: 100% 35vw;
+  min-height: 35vw;
+  display: flex;
+}
+
+.environmental-control_automatic:hover h1 {
+  color: green;
+}
+
+.environmental-control_automatic_content {
+  margin: 13vw auto auto 7vw;
+  width: 35vw;
+}
+
+.environmental-control_automatic h1 {
+  color: #58595b;
+  font-size: 2.7vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid white;
+}
+
+.environmental-control_automatic p {
+  color: black;
+  font-size: 1.2vw;
+  text-align: justify;
+}
+
+.environmental-control_body_combine-device-image {
+  float: right;
+  margin: 2vw 3vw auto auto;
+  width: 37vw;
+  height: 27vw;
+}
+
+.environmental-control_body_combine-device {
+  float: left;
+  margin: 7vw auto auto 4vw;
+  width: 33vw;
+}
+
+.environmental-control_auto-light {
+  margin-top: 37vw;
+  text-align: center;
+}
+
+.environmental-control_auto-light h1 {
+  color: #58595b;
+  font-size: 2.8vw;
+  font-weight: 800;
+  margin-bottom: 1vw;
+}
+
+.environmental-control_auto-light_image {
+  background-image: url("/image/guest/solution/environmental-control/den-tu-sang-khi-troi-toi.jpg");
+  background-size: 100% 33vw;
+  height: 33vw;
+}
+
+.environmental-control_body_door-sensor-image {
+  float: left;
+  margin: 1vw auto auto 6vw;
+  width: 33vw;
+  height: 30vw;
+}
+
+.environmental-control_body_door-sensor {
+  float: right;
+  margin: 7vw 7vw auto auto;
+  width: 30vw;
+}
+
+.environmental-control_footer {
+  margin-top: 35vw;
+  background-color: #dbdbdb;
+  text-align: center;
+}
+
+.environmental-control_footer h1 {
+  padding-top: 2vw;
+  color: #f3d5a8;
+  font-size: 3vw;
+  font-weight: 900;
+  text-shadow: 2px 0 0 #000, -1px 0 0 #fff, 0 2px 0 #000, 0 -1px 0 #fff;
+}
+
+.environmental-control_footer_row {
+  margin: auto 5vw auto 5vw;
+}
+
+.environmental-control_footer_col img {
+  width: 25vw;
+  height: 15vw;
+  cursor: pointer;
+}
+
+.environmental-control_footer_col p {
+  margin: 1vw auto 2vw auto;
+  font-size: 1.25vw;
+  font-weight: 800;
+}

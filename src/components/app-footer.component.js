@@ -25,7 +25,7 @@ class AppFooterComponent extends Component {
             </div>
             <div style={{marginLeft: '11vw'}}>
               <h1>AN GIANG</h1>
-              <p><Icon type="home" theme="filled" />&ensp;41 Trần Khắc Chung, Phường Đông Xuyên, Long Xuyên</p>
+              <p><Icon type="home" theme="filled" />&ensp;43 Trần Khắc Chung, Phường Đông Xuyên, Long Xuyên</p>
               <p><Icon type="phone" theme="filled" />&ensp;<b>0905 246 809</b></p>
             </div>
           </div>

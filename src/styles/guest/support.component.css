@@ -1,0 +1,98 @@
+.supporting_header {
+  margin-top: 80px;
+  background-image: url("/image/guest/supporting/support-header.jpg");
+  background-size: 100% 70vh;
+  height: 70vh;
+  display: grid;
+}
+
+.supporting_header_title {
+  margin: 3vw 0 0 10vw;
+  display: flex;
+}
+
+.supporting_header_title img {
+  height: 6vw;
+  width: 6vw;
+}
+
+.supporting_header_title h1 {
+  margin-left: 1vw;
+  font-size: 2vw;
+  font-weight: 800;
+  color: green;
+  margin-bottom: 0;
+}
+
+.supporting_header_form {
+  margin-left: 10vw;
+}
+
+.supporting_body {
+  margin-top: 5vw;
+  text-align: center;
+}
+
+.supporting_body h1 {
+  font-size: 3vw;
+  font-weight: 800;
+  color: #454545;
+}
+
+.supporting_body_col {
+  margin: 3vw auto 2vw 9vw;
+  cursor: pointer;
+}
+
+.supporting_body_col:hover p {
+  color: green;
+}
+
+.supporting_body_col img {
+  width: 8vw;
+  height: 8vw;
+  margin-bottom: 1.2vw;
+  transition: transform .2s;
+}
+
+.supporting_body_col:hover img {
+  transform: scale(1.2);
+}
+
+.supporting_body_col p {
+  color: black;
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+
+.supporting_footer {
+  margin-top: 7vw;
+  text-align: center;
+}
+
+.supporting_footer h1 {
+  font-size: 2.5vw;
+  font-weight: 800;
+  color: #454545;
+}
+
+.supporting_footer_col {
+  margin: 1vw auto 2vw 10vw;
+  text-align: justify;
+}
+
+.supporting_footer_col h2 {
+  font-size: 1.7vw;
+  font-weight: 700;
+  color: #454545;
+}
+
+.supporting_footer_col h3 {
+  font-size: 1.2vw;
+  font-weight: 800;
+  color: #454545;
+}
+
+.question_footer_col p {
+  font-size: 1.1vw;
+}

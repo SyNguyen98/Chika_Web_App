@@ -3,22 +3,22 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 import { Layout, BackTop, notification } from 'antd';
 import './App.css';
 
-import AppHeaderComponent from '../components/app-header.component';
+import AppHeaderComponent from '../components/header/app-header.component';
 import AppFooterComponent from '../components/app-footer.component';
 import SideNavComponent from '../components/sidenav.component';
-import ContactMenu from '../components/ContactMenu';
+import ContactMenuComponent from '../components/guest/contact-menu.component';
 
-import Home from '../components/guest/Home';
-import Introduction from '../components/guest/Introduction';
-import Product from '../components/guest/Product';
-import Supporting from '../components/guest/Supporting';
+import HomeComponent from '../components/guest/home.component.';
+import IntroduceComponent from '../components/guest/introduce.component';
+import ProductComponent from '../components/guest/product.component';
+import SupportComponent from '../components/guest/support.component';
 
-import GGAssistant from '../components/guest/solution/GGAssistant';
-import AirConditionerTivi from '../components/guest/solution/AirConditionerTivi';
-import LightControl from '../components/guest/solution/LightControl';
-import EnvironmentalControl from '../components/guest/solution/EnvironmentalControl';
-import SecuritySystem from '../components/guest/solution/SecuritySystem';
-import RBGLed from '../components/guest/solution/RBGLed';
+import GoogleComponent from '../components/guest/solution/google.component';
+import ConditionerTiviComponent from '../components/guest/solution/conditioner-tivi.component';
+import LightControlComponent from '../components/guest/solution/light-control.component';
+import EnvironmentalControlComponent from '../components/guest/solution/environmental-control.component';
+import SecuritySystemComponent from '../components/guest/solution/security-system.component';
+import RgbLedComponent from '../components/guest/solution/rgb-led.component';
 
 import SwitchSensor from '../components/guest/product/SwitchSensor';
 import Switch_ from '../components/guest/product/Switch';
@@ -27,10 +27,10 @@ import HomeController from '../components/guest/product/HomeController';
 import DoorSensor from '../components/guest/product/DoorSensor';
 import MotionDetector from '../components/guest/product/MotionDetector';
 
-import Question from '../components/guest/supporting/Question';
-import Document from '../components/guest/supporting/Document';
+import QuestionComponent from '../components/guest/supporting/question.component';
+import DocumentComponent from '../components/guest/supporting/document.component';
 
-import Login from '../components/guest/Login';
+import LoginComponent from '../components/guest/login.component';
 
 import Admin from '../components/admin/Admin';
 
@@ -80,11 +80,10 @@ class App extends Component {
           this.props.history.push(LINK_ADMIN);
           break;
         case 'HOME_MASTER': case 'HOME_USER':
-          this.props.history.push(LINK_USER_ROOM);
+          this.props.history.push(LINK_USER_HOME);
           this.onCloseSidenav();
           break;
         default:
-          this.props.history.push('/');
       }
     }).catch(error => {
       this.setState({
@@ -142,22 +141,20 @@ class App extends Component {
     const { currentUser, sidenavVisible } = this.state;
     return (
       <Layout>
-        <AppHeaderComponent currentUser={currentUser}
-                            onOpenSidenav={this.handleOpenSidenav}
-                            history={this.props.history}/>
+        <AppHeaderComponent currentUser={currentUser} onOpenSidenav={this.handleOpenSidenav} {...this.props}/>
         <Content>
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path={LINK_INTRODUCTION} component={Introduction} />
+              <Route exact path="/" component={HomeComponent} />
+              <Route exact path={LINK_INTRODUCTION} component={IntroduceComponent} />
 
-              <Route exact path={LINK_GG_ASSISTANT} component={GGAssistant} />
-              <Route exact path={LINK_CONDITIONER_TIVI} component={AirConditionerTivi} />
-              <Route exact path={LINK_LIGHT_CONTROL} component={LightControl} />
-              <Route exact path={LINK_ENVIRONMANTAL_CONTROL} component={EnvironmentalControl} />
-              <Route exact path={LINK_SECURITY_SYSTEM} component={SecuritySystem} />
-              <Route exact path={LINK_RGB_LED} component={RBGLed} />
+              <Route exact path={LINK_GG_ASSISTANT} component={GoogleComponent} />
+              <Route exact path={LINK_CONDITIONER_TIVI} component={ConditionerTiviComponent} />
+              <Route exact path={LINK_LIGHT_CONTROL} component={LightControlComponent} />
+              <Route exact path={LINK_ENVIRONMANTAL_CONTROL} component={EnvironmentalControlComponent} />
+              <Route exact path={LINK_SECURITY_SYSTEM} component={SecuritySystemComponent} />
+              <Route exact path={LINK_RGB_LED} component={RgbLedComponent} />
 
-              <Route exact path={LINK_PRODUCT} component={Product} />
+              <Route exact path={LINK_PRODUCT} component={ProductComponent} />
                 <Route exact path={LINK_SWITCH_SENSOR} component={SwitchSensor} />
                 <Route exact path={LINK_SWITCH} component={Switch_} />
                 <Route exact path={LINK_MODULE_IR} component={ModuleIr} />
@@ -165,11 +162,11 @@ class App extends Component {
                 <Route exact path={LINK_DOOR_SENSOR} component={DoorSensor} />
                 <Route exact path={LINK_MOTION_DETECTOR} component={MotionDetector} />
 
-              <Route exact path={LINK_SUPPORTING} component={Supporting} />
-                <Route exact path={LINK_QUESTION} component={Question} />
-                <Route exact path={LINK_DOCUMENT} component={Document} />
+              <Route exact path={LINK_SUPPORTING} component={SupportComponent} />
+                <Route exact path={LINK_QUESTION} component={QuestionComponent} />
+                <Route exact path={LINK_DOCUMENT} component={DocumentComponent} />
 
-              <Route path={LINK_LOGIN} render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
+              <Route path={LINK_LOGIN} render={(props) => <LoginComponent onLogin={this.handleLogin} {...props} />}/>
 
               <Route exact path={LINK_ADMIN}
                 render={(props) => <Admin onLogout={this.handleLogout} onLogoutForChangePassword={this.handleLogoutForChangePassword} {...props} />} />
@@ -191,7 +188,7 @@ class App extends Component {
 
         {currentUser === null ? (<AppFooterComponent/>) : null}
 
-        {currentUser === null ? (<ContactMenu/>) : null}
+        {currentUser === null ? (<ContactMenuComponent/>) : null}
 
         <BackTop/>
       </Layout>

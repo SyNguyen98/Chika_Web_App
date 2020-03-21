@@ -1,0 +1,302 @@
+.home-page__header {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/image/guest/home/smarthome.jpg');
+  background-size: 100% 100vh;
+  min-height: 100vh;
+  position: relative;
+}
+
+.home-page__header__content {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+}
+
+.home-page__header__content h1 { 
+  color: #00ff98;
+  font-size: 4vw;
+  font-weight: bold;
+  text-shadow: 0 0 0 #000, 2px 0 0 #fff, 0 0 0 #000, 0 2px 0 #fff;
+  animation: fadein 3s ease-out forwards;
+  -webkit-animation: fadein 3s;
+}
+
+.home-page__header__content p {
+  color: white;
+  font-size: 1.7vw;
+  animation: fadein 3s ease-out forwards;
+  -webkit-animation: fadein 3s;
+}
+
+@keyframes fadein { 
+  from { opacity: 0;}
+  to { opacity: 1}
+}
+@-webkit-keyframes fadein {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
+
+.home-page__header__content Button {
+  height: auto;
+  padding: 2px 3px 5px;
+  font-size: 1.5vw;
+  font-weight: 600;
+  border: 2px solid white;
+  border-radius: 30px;
+  -webkit-animation: bummer 2s;
+  animation: bummer 2s;
+  -webkit-transform: scale(0,0); 
+  transform: scale(0,0);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; /* Add this so that your modal doesn't close after the animation completes */
+}
+
+@-webkit-keyframes bummer {
+  100% { -webkit-transform: scale(1,1); }
+}
+@keyframes bummer {
+  100% { transform: scale(1,1); }
+}
+
+.home-page__header__content Button:hover {
+  border-color: white;
+}
+
+.home-page__header__btn-login {
+  width: 25%;
+  margin-top: 5%;
+  margin-left: 5%;
+  background-color: #003eff;
+  color: white;
+}
+
+.home-page__header__btn-login:hover {
+  background-color: #002db4;
+  color: white;
+}
+
+.home-page__header__btn-product {
+  width: 33%;
+  margin-left: 7%;
+  background-color: #00ff98;
+  color: #432c58;
+}
+
+.home-page__header__btn-product:hover {
+  background-color: #00dd85;
+  color: #432c58;
+}
+
+
+.home_introduce {
+  background-color: #e0e0e0;
+  display: flow-root;
+}
+
+.home_introduce h1 {
+  margin: 2vw auto auto 10vw;
+  font-size: 2vw;
+  font-weight: bold;
+}
+
+.home_introduce p {
+  margin: 5px 10vw 3vh 10vw;
+  font-size: 1.5vw;
+  font-weight: 500;
+  color: black;
+}
+
+.home_body {
+  margin: 5vh 7vw auto 7vw;
+}
+
+.home_body h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid #cccccc;
+}
+
+.home_body p {
+  color: black;
+  font-size: 1.1vw;
+  text-align: justify;
+}
+
+.home_body Button {
+  margin: 1vw auto auto 7vw;
+  color: #ff8c00;
+  border-color: #ff8c00;
+  background-color: transparent;
+  font-size: 1.1vw;
+  font-weight: bold;
+  padding: 0.3vw 2vw 2vw;
+}
+
+.home_body Button:hover {
+  color: white;
+  background-color: #f7931e;
+  border-color: #f7931e;
+}
+
+.home_body_gg-assitant-img {
+  float: right;
+  margin-right: 4vw;
+  width: 40vw;
+  height: 25vw;
+  cursor: pointer;
+}
+
+.home_body_gg-assitant {
+  float: left;
+  margin: 4vw auto auto 7vw;
+  width: 27vw;
+}
+
+.home_security {
+  margin-top: 32vw;
+  background-image: url("/image/guest/home/security.jpg");
+  background-size: 100vw 33vw;
+  min-height: 33vw;
+  display: flex;
+  cursor: pointer;
+}
+
+.home_security:hover h1 {
+  color: green;
+}
+
+.home_security_content {
+  margin: 10vw auto auto 68vw;
+}
+
+.home_security h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.1px solid gray;
+}
+
+.home_security p {
+  padding-left: 6vw;
+  color: black;
+  font-size: 1.1vw;
+}
+
+.home_security Button {
+  margin: 1vw auto auto 7vw;
+  color: #ff8c00;
+  border-color: #ff8c00;
+  background-color: transparent;
+  font-size: 1.1vw;
+  font-weight: bold;
+  padding: 0.3vw 2vw 2vw;
+}
+
+.home_body_led-rgb-img {
+  float: left;
+  margin-top: 1vw;
+  width: 42vw;
+  height: 23vw;
+  cursor: pointer;
+}
+
+.home_body_led-rgb {
+  float: right;
+  margin: 6vw 6vw auto auto;
+  width: 30vw;
+}
+
+.home_body_conditioner-tivi-img {
+  float: right;
+  margin-top: 10vw;
+  width: 42vw;
+  height: 23vw;
+  cursor: pointer;
+}
+
+.home_body_conditioner-tivi {
+  float: left;
+  margin: 10vw auto auto 3vw;
+}
+
+.home_light-control {
+  margin-top: 58vw;
+  background-image: url("/image/guest/home/light-control.jpg");
+  background-size: 100vw 35vw;
+  min-height: 35vw;
+  display: flex;
+  cursor: pointer;
+}
+
+.home_light-control:hover h1 {
+  color: green;
+}
+
+.home_light-control_content {
+  margin: 10vw auto auto 5vw;
+  width: 35vw;
+}
+
+.home_light-control h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+  border-bottom: 0.5px solid #cccccc;
+}
+
+.home_light-control p {
+  color: black;
+  font-size: 1.1vw;
+  text-align: justify;
+}
+
+.home_light-control Button {
+  margin: 1vw auto auto 7vw;
+  color: #ff8c00;
+  border-color: #ff8c00;
+  font-size: 1vw;
+  font-weight: bold;
+  padding: 0.3vw 2vw 2vw;
+}
+
+.home_body_environmental-control-img img {
+  float: left;
+  width: 40vw;
+  height: 23vw;
+  margin: 2vw auto auto 3vw;
+  cursor: pointer;
+}
+
+.home_body_environmental-control {
+  float: right;
+  margin: 7vw 4vw auto auto;
+  width: 33vw;
+}
+
+.home_reasons {
+  margin: 33vw 10vw auto 10vw;
+  text-align: center;
+}
+
+.home_reasons h1 {
+  color: #58595b;
+  font-size: 2.5vw;
+  font-weight: 800;
+}
+
+.home_reasons_col {
+  margin: 3vw auto 2vw auto;
+}
+
+.home_reasons_col img {
+  width: 5vw;
+  height: 5vw;
+  margin-bottom: 1.2vw;
+}
+
+.home_reasons_col p {
+  color: black;
+  font-size: 1.3vw;
+  font-weight: bold;
+}
