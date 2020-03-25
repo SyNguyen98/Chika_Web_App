@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Row, Col, notification } from 'antd';
 import { getDevicesByRoomId } from '../../service/device.service'
+import { mqttPublish } from '../../service/mqtt.service'
 
 import '../../styles/user/user-room.component.css';
 
@@ -25,6 +26,10 @@ class UserRoomComponent extends Component {
             })
         })
     }
+
+    handlePublishMessage = (topic, message) => {
+        mqttPublish(topic, message)
+    }
     
     componentDidMount() {
       window.scrollTo(0, 0);
@@ -36,7 +41,7 @@ class UserRoomComponent extends Component {
         const deviceListComponent = [];
         deviceList.forEach((item, i) => {
             deviceListComponent.push(
-                <Col className='user-room__device' span={6} key={i}>
+                <Col className='user-room__device' span={6} key={i} onClick={() => this.handlePublishMessage('mqtttest', item.id)}>
                     <h2>{item.name.toUpperCase()}</h2>
                     <img alt="device-icon" src={`/image/user/device/${item.logo}.png`}/>
                     <br/><br/>

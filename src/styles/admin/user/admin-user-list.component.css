@@ -1,0 +1,52 @@
+.admin-user__list {
+  margin-top: 90px;
+  text-align: center;
+}
+
+.admin-user__list h1 {
+  color: #432c58;
+  font-size: 3vw;
+  font-weight: 700;
+}
+
+.admin-user__info {
+  margin: 1vw 5vw 0 5vw;
+}
+
+.admin-user__info__avatar {
+  height: 8vw;
+  width: 8vw;
+  border-radius: 50%;
+}
+  
+.admin-user__info__name {
+  margin: 5px 0 10px 0;
+  font-size: 1.5vw;
+  font-weight: 600;
+}
+
+.admin-user__info__title {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #5e5e5e;
+  color: #3e3e3e;
+  font-size: 1.3vw;
+  font-weight: 600;
+}
+
+.admin-user__info__content {
+  margin: 10px 0 1vw 0;
+  display: flex;
+  color: black;
+}
+  
+.admin-user__info__content__topic {
+  font-size: 1vw;
+  font-weight: 600;
+  width: 8vw;
+}
+  
+.admin-user__info__content__content {
+  margin-left: 8vw;
+  font-size: 1vw;
+}
+  

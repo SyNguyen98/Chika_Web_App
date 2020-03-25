@@ -1,8 +1,6 @@
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://chika-server.herokuapp.com';
 export const ACCESS_TOKEN = 'accessToken';
 
-export const CHIKA_COLOR = '#f3d5a8';
-
 export const SWITCH_WIFI = 'Switch Wifi';
 export const SWITCH_RF = 'Switch Rf';
 export const MODULE_IR = 'Module Ir';
@@ -30,10 +28,24 @@ export const LINK_HOME_CONTROLLER = '/Bo-dieu-khien-trung-tam';
 export const LINK_DOOR_SENSOR = '/Cam-bien-cua';
 export const LINK_MOTION_DETECTOR = '/Cam-bien-phat-hien-chuyen-dong';
 
-export const LINK_ADMIN = '/Quan_tri_vien';
-export const LINK_ADMIN_USER = `${LINK_ADMIN}/Nguoi_dung`
-export const LINK_ADMIN_DEVICE = `${LINK_ADMIN}/Thiet_bi`
-export const LINK_ADMIN_SETTING = `${LINK_ADMIN}/Quan_ly_tai_khoan`
+const LINK_ADMIN = '/Quan-tri-vien';
+export const LINK_ADMIN_INFO = `${LINK_ADMIN}/Thong-tin-ca-nhan`
+export const LINK_ADMIN_USER = `${LINK_ADMIN}/Nguoi-dung`
+export const LINK_ADMIN_LIST_USER = `${LINK_ADMIN_USER}/Danh-sach`
+export const LINK_ADMIN_ADD_USER = `${LINK_ADMIN_USER}/Them-nguoi-dung`
+export const LINK_ADMIN_SHOP = `${LINK_ADMIN_USER}/Mua-hang`
+export const LINK_ADMIN_FEEDBACK = `${LINK_ADMIN_USER}/Phan-hoi`
+
+export const LINK_ADMIN_PRODUCT = `${LINK_ADMIN}/Thiet-bi`
+export const LINK_ADMIN_SWITCH_WIFI = `${LINK_ADMIN_PRODUCT}/Cong-tac-wifi`
+export const LINK_ADMIN_SWITCH_RF = `${LINK_ADMIN_PRODUCT}/Cong-tac-rf`
+export const LINK_ADMIN_MODULE_IR = `${LINK_ADMIN_PRODUCT}/Dieu-khien-hong-ngoai`
+export const LINK_ADMIN_HOME_CENTER = `${LINK_ADMIN_PRODUCT}/Bo-dieu-khien-trung-tam`
+export const LINK_ADMIN_SENSOR = `${LINK_ADMIN_PRODUCT}/Cam-bien`
+
+export const LINK_ADMIN_SETTING = `${LINK_ADMIN}/Quan-ly-tai-khoan`
+export const LINK_ADMIN_CHANGE_INFO = `${LINK_ADMIN_SETTING}/Cap-nhat-thong-tin`
+export const LINK_ADMIN_CHANGE_PASS = `${LINK_ADMIN_SETTING}/Cap-nhat-mat-khau`
 
 const LINK_USER = '/Nguoi_dung';
 export const LINK_USER_HOME = `${LINK_USER}/Nha`;

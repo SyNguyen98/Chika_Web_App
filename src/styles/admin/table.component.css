@@ -1,0 +1,18 @@
+.admin__table {
+    margin: 2vw 10vw 0 10vw;
+}
+  
+.ant-table-thead > tr > th {
+    background-color: #dfdfdf;
+    text-align: center;
+}
+  
+span.ant-table-column-title {
+    font-size: 1.3vw;
+    color: #2c0073;
+}
+  
+tr.ant-table-row.ant-table-row-level-0 {
+    font-size: 1vw;
+    text-align: center;
+}

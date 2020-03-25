@@ -4,14 +4,14 @@
     color: black;
   }
   
-  .header_user_button {
+.header_user_button {
     margin: 1.5vw 0 auto 1vw;
     background-color: rgba(0,0,0,0);
     color: black;
     border: none;
     font-size: 1.5vw;
     transition: transform .2s;
-  }
+}
   
 .header_user_button:hover {
     background-color: rgba(0,0,0,0);

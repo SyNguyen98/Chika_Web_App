@@ -30,7 +30,7 @@
 .app-header__nav__item:hover {
   font-size: 22px;
   color: #000290;
-  border-bottom: 5px solid #000290;
+  border-bottom: 4px solid #000290;
 }
 
 .dropdown-row {
@@ -50,29 +50,6 @@
   background-color: #00ff98;
 }
 
-/* ADMIN */
-.header_admin_img {
-  margin: 1vw 0 auto 3vw;
-  width: 4vw;
-  height: 4vw;
-}
-
-.header_admin_chika {
-  margin: 1.2vw 0 0 0.5vw;
-  color: #f3d5a8;
-  font-size: 2vw;
-  font-weight: 800;
-  text-align: center;
-}
-
-.header_admin_title {
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  margin: 1.4vw 0 auto 30vw;
-  color: white;
-  font-size: 2vw;
-  font-weight: 700;
-}
-
 @media only screen and (max-width: 1920px) {
   .app-header__nav__item {
     padding: 23px 30px;
@@ -82,17 +59,5 @@
 @media only screen and (max-width: 1400px) {
   .app-header__nav__item {
     padding: 23px 20px;
-  }
-
-  .header_admin_img {
-    margin-top: 0.6vw;
-  }
-
-  .header_admin_chika {
-    margin-top: 0;
-  }
-
-  .header_admin_title {
-    margin-top: 0;
   }
 }

@@ -1,0 +1,11 @@
+.admin-user__feedback {
+    min-height: 100vh;
+    text-align: center;
+}
+
+.admin-user__feedback h1 {
+    margin-top: 90px;
+    color: #432c58;
+    font-size: 3vw;
+    font-weight: 700;
+}

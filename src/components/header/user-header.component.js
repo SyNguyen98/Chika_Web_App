@@ -16,7 +16,7 @@ const UserHeaderComponent = ({ currentUser, onOpenSidenav, history }) => {
       <Header className="app-header user-header">
         <Button className='header_user_button' onClick={onOpenSidenav}><Icon type="menu" /></Button>
         <p className='header_user_title'>
-          <img alt='logo-icon' src='/image/logo.png' style={{width: '3.5vw'}}/>&ensp;
+          <img alt='logo-icon' src='/image/logo.svg' style={{width: '3.5vw'}}/>&ensp;
           <i>Nhà của {currentUser.name.substring(currentUser.name.lastIndexOf(' '))}</i>
         </p>
         <nav className="user-header__nav">

@@ -1,0 +1,51 @@
+.admin-setting {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom right, #432c58 70%, #00ff98 30%);
+  position: relative;
+}
+
+.admin-setting__float {
+  position: absolute;
+  display: flex;
+  margin: 110px auto 30px 10%;
+  padding: 0 5vw;
+  width: 80%;
+  height: calc(100vh - 140px);
+  background-color: white;
+  box-shadow: 3px 6px 9px #3b3b3b;
+}
+
+.ant-tabs-bar {
+  border-bottom: 1px solid !important;
+  border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
+}
+
+.ant-tabs-nav .ant-tabs-tab-active {
+  font-size: 1.8vw;
+  font-weight: 600 !important;
+}
+
+.ant-tabs-nav .ant-tabs-tab {
+  font-size: 1.5vw;
+  font-weight: 400;
+}
+
+.admin-setting__corner1 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 9vw;
+  height: 9vw;
+  border-radius: 57% 43% 0% 32% / 59% 18% 0% 41% ;
+  background-image: linear-gradient(135deg, #00ff98, #003eff 80%);
+}
+.admin-setting__corner2 {
+  position: absolute;
+  bottom: 0;
+  right: 7%;
+  width: 8vw;
+  height: 4vw;
+  border-radius: 50% 50% 49% 51% / 100% 100% 0% 0%;
+  background-image: linear-gradient(-45deg, #00ff98, #003eff);
+}

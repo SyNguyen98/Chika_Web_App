@@ -3,6 +3,7 @@ import { Layout, Dropdown, Row, Col } from 'antd';
 
 import '../../styles/header/app-header.component.css';
 import UserHeaderComponent from './user-header.component';
+import AdminHeaderComponent from './admin-header.component';
 import { LINK_INTRODUCTION, LINK_PRODUCT, LINK_LOGIN,
         LINK_GG_ASSISTANT, LINK_LIGHT_CONTROL, LINK_CONDITIONER_TIVI, 
         LINK_SECURITY_SYSTEM, LINK_ENVIRONMANTAL_CONTROL, LINK_RGB_LED} from '../../constant'
@@ -17,7 +18,7 @@ export default class AppHeaderComponent extends Component {
     }
   }
 
-  handleClickChangePage = (link) => {
+  handleChangePage = (link) => {
     this.props.history.push(link);
   }
 
@@ -37,18 +38,13 @@ export default class AppHeaderComponent extends Component {
     if (currentUser !== null) {
       switch (currentUser.role) {
         case 'ADMIN':
-          headerComponent = (
-            <Header className="app-header">
-              <img className="header_admin_img" alt="logo-chika" src="/image/logo.svg"/>
-              <p className="header_admin_chika">CHIKA</p>
-              <p className="header_admin_title">TRANG QUẢN LÝ</p>
-            </Header>
-          )
+          headerComponent = (<AdminHeaderComponent  onOpenSidenav={onOpenSidenav}
+                                                    handleChangePage={this.handleChangePage}/>)
           break;
         case 'HOME_MASTER': case 'HOME_USER':
           headerComponent = (<UserHeaderComponent currentUser={currentUser} 
-                                onOpenSidenav={onOpenSidenav} 
-                                history={this.props.history}/>)
+                                                  onOpenSidenav={onOpenSidenav} 
+                                                  history={this.props.history}/>)
           break;
         default:
           headerComponent = null;
@@ -59,15 +55,15 @@ export default class AppHeaderComponent extends Component {
       <div>
         {headerComponent ? headerComponent : (
           <Header style={colorStyle} className="app-header">
-            <img  className="app-header__logo" alt="chika-logo" src="/image/logo.svg" 
-                  onClick={() => this.handleClickChangePage('/')}/>
+            <img  className="app-header__logo" alt="chika-logo" src="/image/logo-name.svg" 
+                  onClick={() => this.handleChangePage('/')}/>
             <nav className="app-header__nav">
-              <a className="app-header__nav__item" href={LINK_INTRODUCTION}>Giới thiệu</a>
+              <a className="app-header__nav__item" onClick={() => this.handleChangePage(LINK_INTRODUCTION)}>Giới thiệu</a>
               <span className="solutions-menu">
-                <SmarthomeDropdownMenu/>
+                <SmarthomeDropdownMenu handleChangePage={this.handleChangePage}/>
               </span>
-              <a className="app-header__nav__item" href={LINK_PRODUCT}>Thiết bị</a>
-              <a className="app-header__nav__item" href={LINK_LOGIN}>Đăng nhập</a>
+              <a className="app-header__nav__item" onClick={() => this.handleChangePage(LINK_PRODUCT)}>Thiết bị</a>
+              <a className="app-header__nav__item" onClick={() => this.handleChangePage(LINK_LOGIN)}>Đăng nhập</a>
             </nav>
           </Header>
         )}
@@ -76,29 +72,29 @@ export default class AppHeaderComponent extends Component {
   }
 }
 
-const SmarthomeDropdownMenu = () => {
+const SmarthomeDropdownMenu = ({ handleChangePage }) => {
   const dropdownMenu = (
     <Row>
       <Row className="dropdown-row">
         <Col className="solutions-item" span={8}>
-          <a href={LINK_GG_ASSISTANT}>Kết nối google assistant</a>
+          <a onClick={() => handleChangePage(LINK_GG_ASSISTANT)}>Kết nối google assistant</a>
         </Col>
         <Col className="solutions-item" span={8}>
-          <a href={LINK_CONDITIONER_TIVI}>Hệ thống điều hòa - tivi</a>
+          <a onClick={() => handleChangePage(LINK_CONDITIONER_TIVI)}>Hệ thống điều hòa - tivi</a>
         </Col>
         <Col className="solutions-item" span={8}>
-          <a href={LINK_LIGHT_CONTROL}>Chiếu sáng thông minh</a>
+          <a onClick={() => handleChangePage(LINK_LIGHT_CONTROL)}>Chiếu sáng thông minh</a>
         </Col>
       </Row>
       <Row className="dropdown-row">
         <Col className="solutions-item" span={8}>
-          <a href={LINK_ENVIRONMANTAL_CONTROL}>Kiểm soát môi trường</a>
+          <a onClick={() => handleChangePage(LINK_ENVIRONMANTAL_CONTROL)}>Kiểm soát môi trường</a>
         </Col>
         <Col className="solutions-item" span={8}>
-          <a href={LINK_SECURITY_SYSTEM}>An ninh chống trộm</a>
+          <a onClick={() => handleChangePage(LINK_SECURITY_SYSTEM)}>An ninh chống trộm</a>
         </Col>
         <Col className="solutions-item" span={8}>
-          <a href={LINK_RGB_LED}>Đèn led 16 triệu màu</a>
+          <a onClick={() => handleChangePage(LINK_RGB_LED)}>Đèn led 16 triệu màu</a>
         </Col>
       </Row>
     </Row>
