@@ -4,7 +4,8 @@
   display: flex;
   z-index: 1;
   position: fixed;
-  box-shadow: 0 4px 2px -2px gray;
+  border-bottom: 2px solid !important;
+  border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
 }
 
 .app-header__logo {

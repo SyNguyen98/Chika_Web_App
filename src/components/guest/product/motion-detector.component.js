@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Carousel, Row, Col } from 'antd';
 
-import '../../../styles/guest/product/MotionDetector.css';
-import { LINK_SWITCH_SENSOR, LINK_SWITCH, LINK_MODULE_IR, LINK_HOME_CONTROLLER, LINK_DOOR_SENSOR } from '../../../constant';
+import '../../../styles/guest/product/motion-detector.component.css';
+import ProductFooterComponent from './product-footer.component';
 
-class MotionDetector extends Component {
+const imageUri = "/image/guest/product/motion-detector/";
 
-  handleClickChangePage = (event, link) => {
-    event.preventDefault();
-    this.props.history.push(link);
-  }
-
-  toTopPage = (event) => {
-    window.scrollTo(0, 0);
-  }
+export default class MotionDetectorComponent extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -26,7 +19,7 @@ class MotionDetector extends Component {
         <div className="motion-detector_introduce">
           <div className="motion-detector_introduce_image">
             <Carousel className="switch-sensor_introduce_carousel" autoplay dots='false'>
-              <img alt="motion-detector" src="/image/product/motion-detector/motion-detector.png"></img>
+              <img alt="motion-detector" src={`${imageUri}motion-detector.png`}/>
             </Carousel>
           </div>
           <div className="motion-detector_introduce_content">
@@ -50,7 +43,7 @@ class MotionDetector extends Component {
           <br/><strong>Cảm biến chuyển động</strong> được ứng dụng tại khu vực hành lang, khu vệ sinh của các bệnh viện, khách sạn, nhà ở, trường học …
             tránh tình trạng người dùng quên tắt đèn khi ra vào. Cảm biến phát hiện người di chuyển và thông báo cho HC để bật đèn khi có người,
             không có người thì tự động tắt đèn. Giải pháp này giúp tiết kiệm, tránh lãng phí điện năng cho người sử dụng một các tối ưu nhất.
-          <br/><img alt="cam-bien-chuyen-dong" src="/image/product/motion-detector/cam-bien-chuyen-dong.jpg"/>
+          <br/><img alt="cam-bien-chuyen-dong" src={`${imageUri}cam-bien-chuyen-dong.jpg`}/>
           <br/><i style={{marginLeft: '10vw'}}>Cảm biến chuyển động truyền tín hiệu đến HC và từ HC đến công tắc đèn thông minh bằng sóng không dây Zigbee</i>
           <br/>
           <br/>Cảm biến chuyển động còn được tích hợp cảm biến đo nhiệt độ, ánh sáng, độ ẩm … trong ngôi nhà.
@@ -63,7 +56,7 @@ class MotionDetector extends Component {
           <br/>
           <br/>Thời gian bật/tắt sẽ được bạn cài đặt một cách linh hoạt. Ví dụ: thời gian sáng khi người đi qua hoặc đứng trong vùng cảm biến sẽ 1 – 3 phút.
             Và sẽ tắt sau khi người di chuyển qua từ 30s – 1 phút.
-          <br/><img alt="cam-bien-chuyen-dong-1" src="/image/product/motion-detector/cam-bien-chuyen-dong-1.jpg"/>
+          <br/><img alt="cam-bien-chuyen-dong-1" src={`${imageUri}cam-bien-chuyen-dong-1.jpg`}/>
           <br/><i style={{marginLeft: '20vw'}}>Cảm biến phát hiện chuyển động là 1 trong 6 giải pháp nhà thông minh Chika</i>
           <br/>
           <br/><b><i>An toàn và tiện dụng</i></b>
@@ -91,46 +84,8 @@ class MotionDetector extends Component {
           <br/>Cảm biến chuyển động là bộ phận không thể thiếu trong hệ thống an ninh.
         </div>
 
-        <div className="motion-detector_footer">
-          <h1>CÁC THIẾT BỊ KHÁC</h1>
-          <Row className="motion-detector_footer_row">
-            <Col className="motion-detector_footer_col" span={8}>
-              <img alt="Cong-tac-tich-hop-cam-bien" src="/image/product/cong-tac-tich-hop-cam-bien-cau-thang.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH_SENSOR)}></img>
-                <p>CÔNG TẮC TÍCH HỢP CẢM BIẾN</p>
-            </Col>
-            <Col className="motion-detector_footer_col" span={8}>
-              <img alt="Cong-tac-vien-nhom" src="/image/product/cong-tac-vien-nhom.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH)}></img>
-                <p>CÔNG TẮC VIỀN NHÔM</p>
-            </Col>
-            <Col className="motion-detector_footer_col" span={8}>
-              <img alt="Dieu-khien-hong-ngoai" src="/image/product/cam-bien-hong-ngoai.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_MODULE_IR)}></img>
-              <p>ĐIỀU KHIỂN HỒNG NGOẠI</p>
-            </Col>
-          </Row>
-          <Row className="motion-detector_footer_row">
-            <Col className="motion-detector_footer_col" span={8}>
-              <img alt="Bo-dieu-khien-trung-tam" src="/image/product/bo-dieu-khien-trung-tam.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_HOME_CONTROLLER)}></img>
-              <p>BỘ ĐIỀU KHIỂN TRUNG TÂM</p>
-            </Col>
-            <Col className="motion-detector_footer_col" span={8}>
-              <img alt="Cam-bien-cua" src="/image/product/cam-bien-cua.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_DOOR_SENSOR)}></img>
-                <p>CẢM BIẾN CỬA</p>
-            </Col>
-            <Col className="motion-detector_footer_col" span={8}>
-              <img alt="Cam-bien-chuyen-dong" src="/image/product/cam-bien-chuyen-dong.png"
-                  onClick={this.toTopPage}></img>
-                <p>CẢM BIẾN PHÁT HIỆN CHUYỂN ĐỘNG</p>
-            </Col>
-          </Row>
-        </div>
+        <ProductFooterComponent history={this.props.history}/>
       </div>
     )
   }
 }
-
-export default withRouter(MotionDetector);

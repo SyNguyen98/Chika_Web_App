@@ -1,9 +1,9 @@
 .module-ir {
-  margin-top: 15vh;
+  margin-top: 80px;
 }
 
 .module-ir_introduce {
-  margin-top: 5vw;
+  padding-top: 20px;
   display: flex;
   border-bottom: 1px solid #dbdbdb;
 }
@@ -75,46 +75,4 @@
   font-weight: 800;
   font-size: 1.5vw;
   line-height: 3vw;
-}
-
-.module-ir_footer {
-  margin-top: 4vw;
-  background-color: #f0f0f0;
-  text-align: center;
-}
-
-.module-ir_footer h1 {
-  padding-top: 2vw;
-  color: #f3d5a8;
-  font-size: 3vw;
-  font-weight: 900;
-  text-shadow: 2px 0 0 #000, -1px 0 0 #fff, 0 2px 0 #000, 0 -1px 0 #fff;
-}
-
-.module-ir_footer_row {
-  margin: auto 5vw auto 5vw;
-}
-
-.module-ir_footer_col img {
-  width: 20vw;
-  height: 15vw;
-  cursor: pointer;
-}
-
-.module-ir_footer_col img {
-  transition: transform .2s;
-}
-
-.module-ir_footer_col img:hover {
-  transform: scale(1.1);
-}
-
-.module-ir_footer_col img:hover + p {
-  color: green;
-}
-
-.module-ir_footer_col p {
-  margin: 1vw auto 2vw auto;
-  font-size: 1.25vw;
-  font-weight: 800;
 }

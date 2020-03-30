@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Route, withRouter, Switch } from 'react-router-dom';
 import { Layout, BackTop, notification } from 'antd';
 import './App.css';
-import '../styles/ihover.min.css'
 
 import AppHeaderComponent from '../components/header/app-header.component';
 import AppFooterComponent from '../components/app-footer.component';
 import SideNavComponent from '../components/sidenav/sidenav.component';
 import ContactMenuComponent from '../components/guest/contact-menu.component';
 
-import HomeComponent from '../components/guest/home.component.';
+import HomeComponent from '../components/guest/home.component';
 import IntroduceComponent from '../components/guest/introduce.component';
 import ProductComponent from '../components/guest/product.component';
 import SupportComponent from '../components/guest/support.component';
@@ -21,12 +20,12 @@ import EnvironmentalControlComponent from '../components/guest/solution/environm
 import SecuritySystemComponent from '../components/guest/solution/security-system.component';
 import RgbLedComponent from '../components/guest/solution/rgb-led.component';
 
-import SwitchSensor from '../components/guest/product/SwitchSensor';
-import Switch_ from '../components/guest/product/Switch';
-import ModuleIr from '../components/guest/product/ModuleIr';
-import HomeController from '../components/guest/product/HomeController';
-import DoorSensor from '../components/guest/product/DoorSensor';
-import MotionDetector from '../components/guest/product/MotionDetector';
+import SwitchSensorComponent from '../components/guest/product/switch-sensor.component';
+import SwitchComponent from '../components/guest/product/switch.component';
+import ModuleIrComponent from '../components/guest/product/module-ir.component';
+import HomeControllerComponent from '../components/guest/product/home-controller.component';
+import DoorSensorComponent from '../components/guest/product/door-sensor.component';
+import MotionDetectorComponent from '../components/guest/product/motion-detector.component';
 
 import QuestionComponent from '../components/guest/supporting/question.component';
 import DocumentComponent from '../components/guest/supporting/document.component';
@@ -191,12 +190,12 @@ class App extends Component {
               <Route exact path={LINK_RGB_LED} component={RgbLedComponent} />
 
               <Route exact path={LINK_PRODUCT} component={ProductComponent} />
-                <Route exact path={LINK_SWITCH_SENSOR} component={SwitchSensor} />
-                <Route exact path={LINK_SWITCH} component={Switch_} />
-                <Route exact path={LINK_MODULE_IR} component={ModuleIr} />
-                <Route exact path={LINK_HOME_CONTROLLER} component={HomeController} />
-                <Route exact path={LINK_DOOR_SENSOR} component={DoorSensor} />
-                <Route exact path={LINK_MOTION_DETECTOR} component={MotionDetector} />
+                <Route exact path={LINK_SWITCH_SENSOR} component={SwitchSensorComponent} />
+                <Route exact path={LINK_SWITCH} component={SwitchComponent} />
+                <Route exact path={LINK_MODULE_IR} component={ModuleIrComponent} />
+                <Route exact path={LINK_HOME_CONTROLLER} component={HomeControllerComponent} />
+                <Route exact path={LINK_DOOR_SENSOR} component={DoorSensorComponent} />
+                <Route exact path={LINK_MOTION_DETECTOR} component={MotionDetectorComponent} />
 
               <Route exact path={LINK_SUPPORTING} component={SupportComponent} />
                 <Route exact path={LINK_QUESTION} component={QuestionComponent} />
@@ -223,7 +222,7 @@ class App extends Component {
                                                           updateAdminInfo={this.updateAdminInfo} 
                                                           onLogout={this.onChangePasswordLogout} {...props} />} />
 
-              <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent {...props}/>} />
+              <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent currentUser={currentUser} {...props}/>} />
               <Route exact path={LINK_USER_ROOM} render={(props) => <UserListRoomComponent {...props}/>} />
               <Route exact path={`${LINK_USER_ROOM}/:id`} render={(props) => <UserRoomComponent {...props}/>} />
 

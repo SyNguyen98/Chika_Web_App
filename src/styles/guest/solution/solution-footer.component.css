@@ -1,0 +1,33 @@
+.solution__footer {
+    margin-top: 100px;
+    background-color: #dbdbdb;
+    text-align: center;
+}
+  
+.solution__footer h1 {
+    padding-top: 2vw;
+    color: #003eff;
+    font-size: 40px;
+    font-weight: 900;
+    text-shadow: 2px 0 0 #00ff98, 0 -2px 0 #432c58, 0 2px 0 #00ff98, 0 -2px 0 #432c58;
+}
+  
+.solution__footer__row {
+    margin: auto 5vw;
+}
+  
+.solution__footer__col img {
+    width: 25vw;
+    cursor: pointer;
+    transition: transform .4s;
+}
+.solution__footer__col:hover img {
+    transform: scale(1.05);
+    transform-origin: 50% 50%;
+}
+.solution__footer__col p {
+    margin: 10px auto 20px auto;
+    color: #432c58;
+    font-size: 18px;
+    font-weight: 800;
+}

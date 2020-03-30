@@ -51,11 +51,11 @@ class FeedbackComponent extends Component {
     let feedback = this.state.feedbackList.find(feedback => feedback.time === time);
     this.setState({ isLoading: true });
     updateFeedBackResponse(feedback.id, true).then(response => {
+      let index = this.state.feedbackList.indexOf(this.state.feedbackList.find(feedback => feedback.id === response.id));
+      this.state.feedbackList[index] = response;
       this.setState({
         isLoading: false
       });
-      let index = this.state.feedbackList.indexOf(this.state.feedbackList.find(feedback => feedback.id === response.id));
-      this.state.feedbackList[index] = response;
       this.forceUpdate();
     }).catch(error => {
       this.setState({

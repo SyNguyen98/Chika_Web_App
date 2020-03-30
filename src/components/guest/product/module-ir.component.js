@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Carousel, Row, Col } from 'antd';
 
-import '../../../styles/guest/product/ModuleIr.css';
-import { LINK_SWITCH_SENSOR, LINK_SWITCH, LINK_HOME_CONTROLLER, LINK_DOOR_SENSOR, LINK_MOTION_DETECTOR } from '../../../constant';
+import '../../../styles/guest/product/module-ir.component.css';
+import ProductFooterComponent from './product-footer.component';
 
-class ModuleIr extends Component {
+const imageUri = "/image/guest/product/module-ir/";
 
-  handleClickChangePage = (event, link) => {
-    event.preventDefault();
-    this.props.history.push(link);
-  }
-
-  toTopPage = (event) => {
-    window.scrollTo(0, 0);
-  }
+export default class ModuleIrComponent extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -26,9 +19,9 @@ class ModuleIr extends Component {
         <div className="module-ir_introduce">
           <div className="module-ir_introduce_image">
             <Carousel className="switch-sensor_introduce_carousel" autoplay dots='false'>
-              <img alt="ca-irx" src="/image/product/module-ir/ca-irx.png"></img>
-              <img alt="ca-irx" src="/image/product/module-ir/ca-irx-1.png"></img>
-              <img alt="ca-irx" src="/image/product/module-ir/ca-irx-2.png"></img>
+              <img alt="ca-irx" src={`${imageUri}ca-irx.png`}/>
+              <img alt="ca-irx" src={`${imageUri}ca-irx-1.png`}/>
+              <img alt="ca-irx" src={`${imageUri}ca-irx-2.png`}/>
             </Carousel>
           </div>
           <div className="module-ir_introduce_content">
@@ -57,7 +50,7 @@ class ModuleIr extends Component {
           <b><i>Thiết kế sang trọng, bắt mắt với kiểu dáng bo tròn</i></b>
           <br/><strong>Bộ điều khiển hồng ngoại</strong> của Chika chính là thiết bị chủ đạo trong giải pháp điều hòa, tivi thông minh.
             Từ thiết kế tinh tế, hình ảnh và màu sắc đều được các kỹ sư chăm chút đến từng chi tiết.
-          <br/><img alt="cam-bien-hong-ngoai-1" src="/image/product/module-ir/cam-bien-hong-ngoai-1.jpg"/>
+          <br/><img alt="cam-bien-hong-ngoai-1" src={`${imageUri}cam-bien-hong-ngoai-1.jpg`}/>
           <br/><i style={{marginLeft: '8vw'}}>Bộ điều khiển trung tâm có thể học lệnh Remote – lên tới 1.000 lệnh và cập nhật lệnh cho các thiết bị trong gia đình</i>
           <br/>
           <br/>Với 2 màu đen trắng kết hợp tạo nên thiết bị cảm biến ưa nhìn trên mọi góc độ.
@@ -69,7 +62,7 @@ class ModuleIr extends Component {
           <br/>Thiết bị chứa các thư viện hơn 300 mã lệnh có sẵn cho 4 chủng loại điều khiển : Tivi, Quạt, điều hòa, đầu kỹ thuật số.
           <br/>Kết hợp bộ điều khiển trung tâm bạn có thể lên lịch <strong>bật tắt điều hòa thông minh</strong> theo giờ ví dụ bật điều hòa lúc 10 giờ tối và tắt lúc 4 giờ sáng.
             Ngoài ra cảm biến hồng ngoại thông minh còn có tích hợp với các cảm biến đo thông số môi trường để tăng giảm nhiệt độ theo môi trường bên ngoài.
-          <br/><img alt="cam-bien-hong-ngoai-2" src="/image/product/module-ir/cam-bien-hong-ngoai-2.jpg"/>
+          <br/><img alt="cam-bien-hong-ngoai-2" src={`${imageUri}cam-bien-hong-ngoai-2.jpg`}/>
           <br/><i style={{marginLeft: '25vw'}}>Điều khiển góc rộng 360 nửa bán cầu với 7 led IR</i>
           <br/>
           <br/>Với 1 thiết bị cảm biến hồng ngoại, có thể tạo được nhiều giao diện trên điện thoại để điều khiển nhiều thiết bị cùng 1 lúc.
@@ -88,14 +81,14 @@ class ModuleIr extends Component {
             Khi đó, trên app điện thoại của người dùng sẽ có từng mục như: điều hòa, ti vi, quạt …
             Thay vì dùng Remote, người dùng sẽ trực tiếp dùng điện thoại của mình để điều khiển các thiết bị.
           <br/>Mỗi thiết bị sẽ có một Giao diện khác nhau. Ví dụ: quạt sẽ có thư mục quạt, tivi, điều hòa …
-          <br/><img alt="cam-bien-hong-ngoai-3" src="/image/product/module-ir/cam-bien-hong-ngoai-3.jpg"/>
+          <br/><img alt="cam-bien-hong-ngoai-3" src={`${imageUri}cam-bien-hong-ngoai-3.jpg`}/>
           <br/><i style={{marginLeft: '25vw'}}>Dùng để điều khiển điều hòa, quạt, TV, Ampli, …</i>
           <br/>
           <br/><b><i>Ưu điểm nổi bật của bộ điều khiển hồng ngoại</i></b>
           <br/>Thay vì 10 cái remote bạn chỉ cần 1 chiếc điện thoại là hoàn toàn điều khiển được các thiết bị sử remote trong ngôi nhà.
           <br/>Mặt khác, người dùng có thể cài đặt theo ngữ cảnh “về nhà” – một hệ thống các thiết bị: điều hòa, bình nước nóng, đèn chiếu sáng, rèm cửa…
             sẽ sẵn sàng phục vụ bạn, chỉ cần chọn chế độ “về nhà” trên điện thoại, trước khi rời cơ quan.
-          <br/><img alt="cam-bien-hong-ngoai-4" src="/image/product/module-ir/cam-bien-hong-ngoai-4.jpg"/>
+          <br/><img alt="cam-bien-hong-ngoai-4" src={`${imageUri}cam-bien-hong-ngoai-4.jpg`}/>
           <br/><i style={{marginLeft: '5vw'}}>Với giải pháp nhà thông minh điều khiển bằng giọng nói, bạn hoàn toàn có thể điều khiển các thiết bị trong nhà bằng giọng nói</i>
           <br/>
           <br/><b><i>Cách lắp đặt cảm biến hồng ngoại Chika</i></b>
@@ -107,46 +100,8 @@ class ModuleIr extends Component {
             Cách này áp dụng trong trường hợp gắn cố định sản phẩm lên trần nhà.
         </div>
 
-        <div className="module-ir_footer">
-          <h1>CÁC THIẾT BỊ KHÁC</h1>
-          <Row className="module-ir_footer_row">
-            <Col className="module-ir_footer_col" span={8}>
-              <img alt="Cong-tac-tich-hop-cam-bien" src="/image/product/cong-tac-tich-hop-cam-bien-cau-thang.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH_SENSOR)}></img>
-                <p>CÔNG TẮC TÍCH HỢP CẢM BIẾN</p>
-            </Col>
-            <Col className="module-ir_footer_col" span={8}>
-              <img alt="Cong-tac-vien-nhom" src="/image/product/cong-tac-vien-nhom.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH)}></img>
-                <p>CÔNG TẮC VIỀN NHÔM</p>
-            </Col>
-            <Col className="module-ir_footer_col" span={8}>
-              <img alt="Dieu-khien-hong-ngoai" src="/image/product/cam-bien-hong-ngoai.png"
-                  onClick={this.toTopPage}></img>
-              <p>ĐIỀU KHIỂN HỒNG NGOẠI</p>
-            </Col>
-          </Row>
-          <Row className="module-ir_footer_row">
-            <Col className="switch_footer_col" span={8}>
-              <img alt="Bo-dieu-khien-trung-tam" src="/image/product/bo-dieu-khien-trung-tam.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_HOME_CONTROLLER)}></img>
-              <p>BỘ ĐIỀU KHIỂN TRUNG TÂM</p>
-            </Col>
-            <Col className="module-ir_footer_col" span={8}>
-              <img alt="Cam-bien-cua" src="/image/product/cam-bien-cua.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_DOOR_SENSOR)}></img>
-                <p>CẢM BIẾN CỬA</p>
-            </Col>
-            <Col className="module-ir_footer_col" span={8}>
-              <img alt="Cam-bien-chuyen-dong" src="/image/product/cam-bien-chuyen-dong.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_MOTION_DETECTOR)}></img>
-                <p>CẢM BIẾN PHÁT HIỆN CHUYỂN ĐỘNG</p>
-            </Col>
-          </Row>
-        </div>
+        <ProductFooterComponent history={this.props.history}/>
       </div>
     )
   }
 }
-
-export default withRouter(ModuleIr);

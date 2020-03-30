@@ -1,9 +1,9 @@
 .switch-sensor {
-  margin-top: 15vh;
+  margin-top: 80px;
 }
 
 .switch-sensor_introduce {
-  margin-top: 5vw;
+  padding-top: 20px;
   display: flex;
   border-bottom: 1px solid #dbdbdb;
 }
@@ -59,46 +59,4 @@
   font-weight: 800;
   font-size: 1.5vw;
   line-height: 3vw;
-}
-
-.switch-sensor_footer {
-  margin-top: 4vw;
-  background-color: #f0f0f0;
-  text-align: center;
-}
-
-.switch-sensor_footer h1 {
-  padding-top: 2vw;
-  color: #f3d5a8;
-  font-size: 3vw;
-  font-weight: 900;
-  text-shadow: 2px 0 0 #000, -1px 0 0 #fff, 0 2px 0 #000, 0 -1px 0 #fff;
-}
-
-.switch-sensor_footer_row {
-  margin: auto 5vw auto 5vw;
-}
-
-.switch-sensor_footer_col img {
-  width: 20vw;
-  height: 15vw;
-  cursor: pointer;
-}
-
-.switch-sensor_footer_col img {
-  transition: transform .2s;
-}
-
-.switch-sensor_footer_col img:hover {
-  transform: scale(1.1);
-}
-
-.switch-sensor_footer_col img:hover + p {
-  color: green;
-}
-
-.switch-sensor_footer_col p {
-  margin: 1vw auto 2vw auto;
-  font-size: 1.25vw;
-  font-weight: 800;
 }

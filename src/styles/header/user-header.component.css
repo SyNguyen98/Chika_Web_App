@@ -1,50 +1,40 @@
 .user-header {
-    height: 5vw;
-    background-image: linear-gradient(#fff, #fff) !important;
     color: black;
-  }
+    background-color: white;
+}
   
-.header_user_button {
-    margin: 1.5vw 0 auto 1vw;
+.user-header Button {
+    margin-top: 25px;
     background-color: rgba(0,0,0,0);
     color: black;
-    border: none;
-    font-size: 1.5vw;
+    border: 0;
+    font-size: 20px;
     transition: transform .2s;
 }
   
-.header_user_button:hover {
+.user-header Button:hover {
     background-color: rgba(0,0,0,0);
     color: black;
-    transform: scale(1.3);
-}
-  
-.header_user_title {
-    margin: 0.5vw 0 auto 5vw;
-    font-size: 2vw;
-    font-weight: 600;
-    color: #001170;
-}
-  
-.user-header__nav {
-    display: flex;
-    float: right;
-    margin: 1vw 10vw 0 auto;
-    font-size: 1.2vw;
-    font-weight: 600;
-}
-  
-.user-header__nav__item {
-    margin-right: 5vw;
-    cursor: pointer;
-    transition: transform .2s;
-}
-  
-.user-header__nav__item img {
-    width: 1.5vw;
-}
-  
-.user-header__nav__item:hover {
     transform: scale(1.2);
-    text-shadow: 3px 5px 7px #bbbbbb;
+}
+
+.user-header .app-header__logo {
+    margin-left: 35px;
+    cursor: unset;
+}
+  
+.user-header i {
+    margin-top: 7px;
+    margin-left: 10px;
+    color: #000290;
+    font-size: 30px;
+    font-weight: 600;
+}
+  
+.user-header .app-header__nav__item img {
+    width: 23px;
+}
+
+.user-header .app-header__nav__item {
+    margin-left: 20px;
 }

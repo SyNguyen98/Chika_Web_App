@@ -14,24 +14,22 @@ const UserHeaderComponent = ({ currentUser, onOpenSidenav, history }) => {
   
     return(
       <Header className="app-header user-header">
-        <Button className='header_user_button' onClick={onOpenSidenav}><Icon type="menu" /></Button>
-        <p className='header_user_title'>
-          <img alt='logo-icon' src='/image/logo.svg' style={{width: '3.5vw'}}/>&ensp;
-          <i>Nhà của {currentUser.name.substring(currentUser.name.lastIndexOf(' '))}</i>
-        </p>
-        <nav className="user-header__nav">
-          <p className="user-header__nav__item" onClick={() => handleChangeUserComponent(LINK_USER_HOME)}>
+        <Button onClick={onOpenSidenav}><Icon type="menu" /></Button>
+        <img className="app-header__logo" alt='logo-icon' src='/image/logo.svg'/>&ensp;
+        <i>Nhà của {currentUser.name.substring(currentUser.name.lastIndexOf(' '))}</i>
+        <nav className="app-header__nav">
+          <a className="app-header__nav__item" onClick={() => handleChangeUserComponent(LINK_USER_HOME)}>
             <img alt='house-icon' src='/image/header/house-icon.png'/>&ensp;Nhà
-          </p>
-          <p className="user-header__nav__item" onClick={() => handleChangeUserComponent(LINK_USER_ROOM)}>
+          </a>
+          <a className="app-header__nav__item" onClick={() => handleChangeUserComponent(LINK_USER_ROOM)}>
             <img alt='room-icon' src='/image/header/room-icon.png'/>&ensp;Phòng
-          </p>
-          <p className="user-header__nav__item" onClick={() => handleChangeUserComponent(LINK_USER_SCRIPT)}>
+          </a>
+          <a className="app-header__nav__item" onClick={() => handleChangeUserComponent(LINK_USER_SCRIPT)}>
             <img alt='script-icon' src='/image/header/script-icon.png'/>&ensp;Kịch bản
-          </p>
-          <p className="user-header__nav__item" onClick={() => handleChangeUserComponent(LINK_USER_CAMERA)}>
+          </a>
+          <a className="app-header__nav__item" onClick={() => handleChangeUserComponent(LINK_USER_CAMERA)}>
             <img alt='camera-icon' src='/image/header/camera-icon.png'/>&ensp;Giám sát
-          </p>
+          </a>
         </nav>
       </Header>
     )

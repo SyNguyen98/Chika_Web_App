@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Carousel, Row, Col } from 'antd';
+import { Carousel } from 'antd';
 
-import '../../../styles/guest/product/SwitchSensor.css';
-import { LINK_SWITCH, LINK_MODULE_IR, LINK_HOME_CONTROLLER, LINK_DOOR_SENSOR, LINK_MOTION_DETECTOR } from '../../../constant';
+import '../../../styles/guest/product/switch-sensor.component.css';
+import ProductFooterComponent from './product-footer.component';
 
-class SwitchSensor extends Component {
+const imageUri = "/image/guest/product/switch-sensor/";
 
-  handleClickChangePage = (event, link) => {
-    event.preventDefault();
-    this.props.history.push(link);
-  }
-
-  toTopPage = (event) => {
-    window.scrollTo(0, 0);
-  }
+class SwitchSensorComponent extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -26,10 +19,10 @@ class SwitchSensor extends Component {
         <div className="switch-sensor_introduce">
           <div className="switch-sensor_introduce_image">
             <Carousel className="switch-sensor_introduce_carousel" autoplay dots='false'>
-              <img alt="switch" src="/image/product/switch-sensor/switch-sensor-1.png"></img>
-              <img alt="switch" src="/image/product/switch-sensor/switch-sensor-2.png"></img>
-              <img alt="switch" src="/image/product/switch-sensor/switch-sensor-1.png"></img>
-              <img alt="switch" src="/image/product/switch-sensor/switch-sensor-3.png"></img>
+              <img alt="switch" src={`${imageUri}switch-sensor-1.png`} />
+              <img alt="switch" src={`${imageUri}switch-sensor-2.png`} />
+              <img alt="switch" src={`${imageUri}switch-sensor-1.png`} />
+              <img alt="switch" src={`${imageUri}switch-sensor-3.png`} />
             </Carousel>
           </div>
           <div className="switch-sensor_introduce_content">
@@ -71,9 +64,9 @@ class SwitchSensor extends Component {
           <br/>Thiết bị công tắc cầu thang tích hợp cảm biến của Chika có 2 góc quét phát hiện chuyển động, vì vậy bạn cần lưu ý để lắp đặt sản phẩm cho hợp lý.
             Nhìn hình cảm biến dưới, sẽ thấy:
           <br/>+ Góc phát hiện chuyển động 1 : góc 150.
-          <br/><img alt="switch" src="/image/product/switch-sensor/cong-tac-tich-hop-cam-bien-cau-thang.jpg"/>
+          <br/><img alt="switch" src={`${imageUri}cong-tac-tich-hop-cam-bien-cau-thang.jpg`}/>
           <br/>+ Góc phát hiện chuyển động 2 : góc 35 .
-          <br/><img alt="switch" src="/image/product/switch-sensor/cong-tac-tich-hop-cam-bien-cau-thang-2.jpg"/>
+          <br/><img alt="switch" src={`${imageUri}cong-tac-tich-hop-cam-bien-cau-thang-2.jpg`}/>
           <br/>Góc phát hiện chuyển động 2 nhỏ hơn góc phát hiện chuyển động 1.
           <br/>Góc phát hiện chuyển động 1 Góc phát hiện chuyển động 2
           <br/>Với mong muốn tăng thêm sự tiện lợi, bộ sản phẩm còn có một mắt che cảm biến đi kèm. Vật dụng đi kèm thu hẹp phạm vi góc phát hiện chuyển động 1 còn một nửa là 75,
@@ -98,46 +91,10 @@ class SwitchSensor extends Component {
             Ngoài ra thiết bị này còn được sử dụng như một vật trang trí giúp ngôi nhà của bạn trở nên đẹp và sang trọng hơn.
         </div>
 
-        <div className="switch-sensor_footer">
-          <h1>CÁC THIẾT BỊ KHÁC</h1>
-          <Row className="switch-sensor_footer_row">
-            <Col className="switch-sensor_footer_col" span={8}>
-              <img alt="Cong-tac-tich-hop-cam-bien" src="/image/product/cong-tac-tich-hop-cam-bien-cau-thang.png"
-                  onClick={this.toTopPage}></img>
-                <p>CÔNG TẮC TÍCH HỢP CẢM BIẾN</p>
-            </Col>
-            <Col className="switch-sensor_footer_col" span={8}>
-              <img alt="Cong-tac-vien-nhom" src="/image/product/cong-tac-vien-nhom.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH)}></img>
-                <p>CÔNG TẮC VIỀN NHÔM</p>
-            </Col>
-            <Col className="switch_footer_col" span={8}>
-              <img alt="Dieu-khien-hong-ngoai" src="/image/product/cam-bien-hong-ngoai.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_MODULE_IR)}></img>
-              <p>ĐIỀU KHIỂN HỒNG NGOẠI</p>
-            </Col>
-          </Row>
-          <Row className="switch_footer_row">
-            <Col className="switch_footer_col" span={8}>
-              <img alt="Bo-dieu-khien-trung-tam" src="/image/product/bo-dieu-khien-trung-tam.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_HOME_CONTROLLER)}></img>
-              <p>BỘ ĐIỀU KHIỂN TRUNG TÂM</p>
-            </Col>
-            <Col className="switch_footer_col" span={8}>
-              <img alt="Cam-bien-cua" src="/image/product/cam-bien-cua.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_DOOR_SENSOR)}></img>
-                <p>CẢM BIẾN CỬA</p>
-            </Col>
-            <Col className="switch-sensor_footer_col" span={8}>
-              <img alt="Cam-bien-chuyen-dong" src="/image/product/cam-bien-chuyen-dong.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_MOTION_DETECTOR)}></img>
-                <p>CẢM BIẾN PHÁT HIỆN CHUYỂN ĐỘNG</p>
-            </Col>
-          </Row>
-        </div>
+        <ProductFooterComponent history={this.props.history}/>
       </div>
     )
   }
 }
 
-export default withRouter(SwitchSensor);
+export default withRouter(SwitchSensorComponent);

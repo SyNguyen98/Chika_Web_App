@@ -1,5 +1,5 @@
 .home-page__header {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/image/guest/home/smarthome.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/image/guest/home/smarthome-header.jpg');
   background-size: 100% 100vh;
   min-height: 100vh;
   position: relative;
@@ -15,7 +15,7 @@
   color: #00ff98;
   font-size: 4vw;
   font-weight: bold;
-  text-shadow: 0 0 0 #000, 2px 0 0 #fff, 0 0 0 #000, 0 2px 0 #fff;
+  text-shadow: 0 0 0 #000, 2px 0 0 #003eff, 0 0 0 #000, 0 2px 0 #003eff;
   animation: fadein 3s ease-out forwards;
   -webkit-animation: fadein 3s;
 }
@@ -69,7 +69,6 @@
   background-color: #003eff;
   color: white;
 }
-
 .home-page__header__btn-login:hover {
   background-color: #002db4;
   color: white;
@@ -81,222 +80,154 @@
   background-color: #00ff98;
   color: #432c58;
 }
-
 .home-page__header__btn-product:hover {
   background-color: #00dd85;
   color: #432c58;
 }
 
-
-.home_introduce {
-  background-color: #e0e0e0;
-  display: flow-root;
+.home-page__row {
+  margin-top: 100px;
+  margin-left: 7vw !important;
+  margin-right: 7vw !important;
 }
-
-.home_introduce h1 {
-  margin: 2vw auto auto 10vw;
-  font-size: 2vw;
-  font-weight: bold;
-}
-
-.home_introduce p {
-  margin: 5px 10vw 3vh 10vw;
-  font-size: 1.5vw;
-  font-weight: 500;
-  color: black;
-}
-
-.home_body {
-  margin: 5vh 7vw auto 7vw;
-}
-
-.home_body h1 {
-  color: #58595b;
-  font-size: 2.5vw;
+.home-page__row h1 {
+  margin-top: 20px;
+  color: #432c58;
+  font-size: 35px;
   font-weight: 800;
-  border-bottom: 0.5px solid #cccccc;
+  border-bottom: 1px solid !important;
+  border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
 }
-
-.home_body p {
+.home-page__row p {
   color: black;
-  font-size: 1.1vw;
+  font-size: 18px;
   text-align: justify;
 }
-
-.home_body Button {
-  margin: 1vw auto auto 7vw;
+.home-page__row img{
+  width: 500px;
+  cursor: pointer;
+  transition: transform .4s;
+}
+.home-page__row img:hover{
+  transform: scale(1.05);
+}
+.home-page__row Button {
+  margin-left: 150px;
   color: #ff8c00;
   border-color: #ff8c00;
   background-color: transparent;
-  font-size: 1.1vw;
+  font-size: 15px;
   font-weight: bold;
-  padding: 0.3vw 2vw 2vw;
 }
-
-.home_body Button:hover {
+.home-page__row Button:hover {
   color: white;
   background-color: #f7931e;
   border-color: #f7931e;
 }
 
-.home_body_gg-assitant-img {
-  float: right;
-  margin-right: 4vw;
-  width: 40vw;
-  height: 25vw;
+.home__row1 img{
+  cursor: unset;
+}
+.row1__col1 {
+  padding: 20px 60px !important;
+}
+
+.row2__col2 {
+  padding: 20px 40px !important;
+}
+
+.home__row3, .home__row4, .home__row5 img{
+  transition: transform .4s
+}
+.row3__col1, .row4__col2, .row5__col1 {
+  padding: 50px 40px !important;
+}
+.row3__col2, .row4__col1, .row5__col2 {
+  overflow: hidden;
+}
+.row3__col2:hover img, .row4__col1:hover img, .row5__col2:hover img {
+  transform: scale(1.05);
+  transform-origin: 50% 50%;
+}
+
+.home-page__panel {
+  position: relative;
+  margin-top: 130px;
+  overflow: hidden;
+  text-align: center;
+}
+.home-page__panel img {
+  width: 100%;
   cursor: pointer;
+  transition: transform .4s
 }
-
-.home_body_gg-assitant {
-  float: left;
-  margin: 4vw auto auto 7vw;
-  width: 27vw;
+.home-page__panel:hover img {
+  transform: scale(1.05);
+  transform-origin: 50% 50%;
 }
-
-.home_security {
-  margin-top: 32vw;
-  background-image: url("/image/guest/home/security.jpg");
-  background-size: 100vw 33vw;
-  min-height: 33vw;
-  display: flex;
-  cursor: pointer;
+.home-page__panel:hover h1 {
+  color: #003eff;
 }
-
-.home_security:hover h1 {
-  color: green;
-}
-
-.home_security_content {
-  margin: 10vw auto auto 68vw;
-}
-
-.home_security h1 {
-  color: #58595b;
-  font-size: 2.5vw;
+.home-page__panel h1 {
+  color: #432c58;
+  font-size: 35px;
   font-weight: 800;
-  border-bottom: 0.1px solid gray;
+  border-bottom: 1px solid !important;
+  border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
 }
-
-.home_security p {
-  padding-left: 6vw;
+.home-page__panel p {
   color: black;
-  font-size: 1.1vw;
+  font-size: 18px;
 }
-
-.home_security Button {
-  margin: 1vw auto auto 7vw;
+.home-page__panel Button {
   color: #ff8c00;
   border-color: #ff8c00;
   background-color: transparent;
-  font-size: 1.1vw;
+  font-size: 15px;
   font-weight: bold;
-  padding: 0.3vw 2vw 2vw;
+}
+.home-page__panel Button:hover {
+  color: white;
+  background-color: #f7931e;
+  border-color: #f7931e;
 }
 
-.home_body_led-rgb-img {
-  float: left;
-  margin-top: 1vw;
-  width: 42vw;
-  height: 23vw;
-  cursor: pointer;
+.security-panel__content {
+  position: absolute;
+  top: 150px;
+  right: 50px;
 }
 
-.home_body_led-rgb {
-  float: right;
-  margin: 6vw 6vw auto auto;
-  width: 30vw;
+.light-control-panel__content {
+  position: absolute;
+  top: 150px;
+  left: 50px;
+  width: 35%;
 }
-
-.home_body_conditioner-tivi-img {
-  float: right;
-  margin-top: 10vw;
-  width: 42vw;
-  height: 23vw;
-  cursor: pointer;
-}
-
-.home_body_conditioner-tivi {
-  float: left;
-  margin: 10vw auto auto 3vw;
-}
-
-.home_light-control {
-  margin-top: 58vw;
-  background-image: url("/image/guest/home/light-control.jpg");
-  background-size: 100vw 35vw;
-  min-height: 35vw;
-  display: flex;
-  cursor: pointer;
-}
-
-.home_light-control:hover h1 {
-  color: green;
-}
-
-.home_light-control_content {
-  margin: 10vw auto auto 5vw;
-  width: 35vw;
-}
-
-.home_light-control h1 {
-  color: #58595b;
-  font-size: 2.5vw;
-  font-weight: 800;
-  border-bottom: 0.5px solid #cccccc;
-}
-
-.home_light-control p {
-  color: black;
-  font-size: 1.1vw;
+.light-control-panel__content p {
   text-align: justify;
 }
 
-.home_light-control Button {
-  margin: 1vw auto auto 7vw;
-  color: #ff8c00;
-  border-color: #ff8c00;
-  font-size: 1vw;
-  font-weight: bold;
-  padding: 0.3vw 2vw 2vw;
-}
-
-.home_body_environmental-control-img img {
-  float: left;
-  width: 40vw;
-  height: 23vw;
-  margin: 2vw auto auto 3vw;
-  cursor: pointer;
-}
-
-.home_body_environmental-control {
-  float: right;
-  margin: 7vw 4vw auto auto;
-  width: 33vw;
-}
-
-.home_reasons {
-  margin: 33vw 10vw auto 10vw;
+.home__reasons {
+  margin: 100px 10vw auto 10vw;
   text-align: center;
 }
 
-.home_reasons h1 {
-  color: #58595b;
-  font-size: 2.5vw;
+.home__reasons h1 {
+  color: #432c58;
+  font-size: 30px;
   font-weight: 800;
 }
 
-.home_reasons_col {
-  margin: 3vw auto 2vw auto;
+.home__reasons__col {
+  margin: 20px auto 70px auto;
 }
-
-.home_reasons_col img {
+.home__reasons__col img {
   width: 5vw;
-  height: 5vw;
-  margin-bottom: 1.2vw;
+  margin-bottom: 15px;
 }
-
-.home_reasons_col p {
+.home__reasons__col p {
   color: black;
-  font-size: 1.3vw;
+  font-size: 20px;
   font-weight: bold;
 }

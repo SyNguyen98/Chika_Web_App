@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Carousel, Row, Col } from 'antd';
 
-import '../../../styles/guest/product/HomeController.css';
-import { LINK_SWITCH_SENSOR, LINK_SWITCH, LINK_MODULE_IR, LINK_DOOR_SENSOR, LINK_MOTION_DETECTOR } from '../../../constant';
+import '../../../styles/guest/product/home-controller.component.css';
+import ProductFooterComponent from './product-footer.component';
 
-class HomeController extends Component {
+const imageUri = "/image/guest/product/home-controller/";
 
-  handleClickChangePage = (event, link) => {
-    event.preventDefault();
-    this.props.history.push(link);
-  }
-
-  toTopPage = (event) => {
-    window.scrollTo(0, 0);
-  }
+export default class HomeControllerComponent extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -26,9 +19,9 @@ class HomeController extends Component {
         <div className="home-controller_introduce">
           <div className="home-controller_introduce_image">
             <Carousel className="switch-sensor_introduce_carousel" autoplay dots='false'>
-              <img alt="home-controller" src="/image/product/home-controller/ca-hc.png"></img>
-              <img alt="home-controller" src="/image/product/home-controller/ca-hc-1.png"></img>
-              <img alt="home-controller" src="/image/product/home-controller/ca-hc-2.png"></img>
+              <img alt="home-controller" src={`${imageUri}ca-hc.png`}/>
+              <img alt="home-controller" src={`${imageUri}ca-hc-1.png`}/>
+              <img alt="home-controller" src={`${imageUri}ca-hc-2.png`}/>
             </Carousel>
           </div>
           <div className="home-controller_introduce_content">
@@ -53,14 +46,14 @@ class HomeController extends Component {
           <br/>Là đầu mối tiếp nhận và truyền thông tin “công việc” đến các công tắc để yêu cầu thiết bị thực hiện nhiệm vụ mà người sử dụng yêu cầu.
             Nơi lưu trữ các thông tin cấu hình, cài đặt của người dùng, cập nhật trạng thái các thiết bị và tự động ra lệnh cho các thiết bị hoạt động
             theo cấu hình mà người dùng cài đặt.
-          <br/><img alt="cam-bien-hong-ngoai-1" src="/image/product/home-controller/dieu-khien-trung-tam-1.jpg"/>
+          <br/><img alt="dieu-khien-trung-tam-1" src={`${imageUri}dieu-khien-trung-tam-1.jpg`}/>
           <br/>Được thiết 2 màu cơ bản: đen – bạc, sắc nét, tỉ mỉ đến từng chi tiết
           <br/>
           <br/><b><i>Ứng dụng của bộ điều khiển nhà thông minh</i></b>
           <br/>Đóng vai trò là bộ não của giải pháp nhà thông minh. Hệ thống các công tắc kết nối thiết bị điện trong gia đình,
             nếu không có bộ điều khiển trung tâm thì sẽ trở thành công tắc cơ thông thường. Bạn không thể điều điều khiển,
             kiểm soát cũng như cài đặt chế độ tự hoạt động cho hệ thống thiết bị điện trong ngôi nhà của mình trên điện thoại, máy tính bảng …
-          <br/><img alt="cam-bien-hong-ngoai-2" src="/image/product/home-controller/dieu-khien-trung-tam-2.jpg"/>
+          <br/><img alt="dieu-khien-trung-tam-2" src={`${imageUri}dieu-khien-trung-tam-2.jpg`}/>
           <br/><i style={{marginLeft: '10vw'}}>Là nơi tiếp nhận và truyền thông tin đến từng thiết bị để yêu cầu thực hiện công việc theo nhu cầu của người dùng</i>
           <br/>
           <br/><b><i>Phương thức hoạt động</i></b>
@@ -68,7 +61,7 @@ class HomeController extends Component {
             Sau khi tiếp nhận thông tin, bộ điều khiển trung tâm – HC truyền tín hiệu đến công tắc được gắn với thiết bị, để thực hiện yêu cầu của người dùng.
           <br/>Ví dụ: Khi cảm biến phát hiện chuyển động gửi tín hiệu “có người di chuyển vào vùng cảm biến” đến HC.
             Tại đây, HC truyền tín hiệu nhận được đến công tắc kết nối với thiết bị như bóng đèn hành lang, đèn tuýp … sẽ tự động bật/tắt.
-          <br/><img alt="cam-bien-hong-ngoai-3" src="/image/product/home-controller/ca-hc.png" style={{width: '20vw', height: '18vw',marginLeft: '30vw'}}/>
+          <br/><img alt="ca-hc" src={`${imageUri}ca-hc.png`} style={{width: '20vw', height: '18vw',marginLeft: '30vw'}}/>
           <br/><i style={{marginLeft: '18vw'}}>Nơi lưu trữ tất cả các dữ liệu của giải pháp nhà thông minh trong ngôi nhà của bạn</i>
           <br/>
           <br/>Ngoài ra, HC còn cho phép người dùng tạo hoạt cảnh. Ví dụ: Bạn có thể tạo cảnh bằng cách sử dụng 1 nút công tắc bật hoặc tắt toàn bộ thiết bị trong nhà,
@@ -87,46 +80,8 @@ class HomeController extends Component {
             Điều đó cho thấy, nhà thông minh đã và đang trở thành tiêu chuẩn, xu hướng nhà ở hiện đại trong tương lai.
         </div>
 
-        <div className="home-controller_footer">
-          <h1>CÁC THIẾT BỊ KHÁC</h1>
-          <Row className="home-controller_footer_row">
-            <Col className="home-controller_footer_col" span={8}>
-              <img alt="Cong-tac-tich-hop-cam-bien" src="/image/product/cong-tac-tich-hop-cam-bien-cau-thang.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH_SENSOR)}></img>
-                <p>CÔNG TẮC TÍCH HỢP CẢM BIẾN</p>
-            </Col>
-            <Col className="home-controller_footer_col" span={8}>
-              <img alt="Cong-tac-vien-nhom" src="/image/product/cong-tac-vien-nhom.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH)}></img>
-                <p>CÔNG TẮC VIỀN NHÔM</p>
-            </Col>
-            <Col className="home-controller_footer_col" span={8}>
-              <img alt="Dieu-khien-hong-ngoai" src="/image/product/cam-bien-hong-ngoai.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_MODULE_IR)}></img>
-              <p>ĐIỀU KHIỂN HỒNG NGOẠI</p>
-            </Col>
-          </Row>
-          <Row className="home-controller_footer_row">
-            <Col className="switch_footer_col" span={8}>
-              <img alt="Bo-dieu-khien-trung-tam" src="/image/product/bo-dieu-khien-trung-tam.png"
-                  onClick={this.toTopPage}></img>
-              <p>BỘ ĐIỀU KHIỂN TRUNG TÂM</p>
-            </Col>
-            <Col className="home-controller_footer_col" span={8}>
-              <img alt="Cam-bien-cua" src="/image/product/cam-bien-cua.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_DOOR_SENSOR)}></img>
-                <p>CẢM BIẾN CỬA</p>
-            </Col>
-            <Col className="home-controller_footer_col" span={8}>
-              <img alt="Cam-bien-chuyen-dong" src="/image/product/cam-bien-chuyen-dong.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_MOTION_DETECTOR)}></img>
-                <p>CẢM BIẾN PHÁT HIỆN CHUYỂN ĐỘNG</p>
-            </Col>
-          </Row>
-        </div>
+        <ProductFooterComponent history={this.props.history}/>
       </div>
     )
   }
 }
-
-export default withRouter(HomeController);

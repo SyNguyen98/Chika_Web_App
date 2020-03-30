@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import '../../styles/guest/contact-menu.component.css';
 import { LINK_SUPPORTING } from '../../constant'
+
+const imageUri = "/image/contact-menu/";
 
 class ContactMenuComponent extends Component {
 
@@ -16,24 +18,24 @@ class ContactMenuComponent extends Component {
 
   render() {
     return(
-      <div className="contact-menu">
-        <div className="contact-menu_item" onClick={() => this.handleOpenLink("https://www.facebook.com/chikacorporation/")}>
+      <Fragment>
+        <div className="contact contact-facebook" onClick={() => this.handleOpenLink("https://www.facebook.com/chikacorporation/")}>
+          <img alt="facebook" src={`${imageUri}facebook.png`}/>
           <h1>FACEBOOK</h1>
-          <img alt="facebook" src="/image/contact-menu/facebook.png"/>
         </div>
-        <div className="contact-menu_item" onClick={() => this.handleOpenLink("https://mail.google.com/mail/u/0/?view=cm&fs=1&to=chikacorporation@gmail.com")}>
+        <div className="contact contact-email" onClick={() => this.handleOpenLink("https://mail.google.com/mail/u/0/?view=cm&fs=1&to=chikacorporation@gmail.com")}>
+          <img alt="mail" src={`${imageUri}gmail.png`}/>
           <h1>EMAIL</h1>
-          <img alt="mail" src="/image/contact-menu/gmail.png"/>
         </div>
-        <div className="contact-menu_item" onClick={this.handleToSupportPage}>
-          <h1>HỖ TRỢ</h1>
-          <img alt="ho-tro" src="/image/contact-menu/ho-tro.png"/>
+        <div className="contact contact-support" onClick={this.handleToSupportPage}>
+          <img alt="ho-tro" src={`${imageUri}ho-tro.png`}/>
+          <h1>HỖ TRỢ</h1>         
         </div>
-        <div className="contact-menu_item">
+        <div className="contact contact-phone">
+          <img alt="phone" src={`${imageUri}phone.png`}/>
           <h1>070 123 4567</h1>
-          <img alt="phone" src="/image/contact-menu/phone.png"/>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

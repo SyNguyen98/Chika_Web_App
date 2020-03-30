@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Carousel, Row, Col } from 'antd';
 
-import '../../../styles/guest/product/DoorSensor.css';
-import { LINK_SWITCH_SENSOR, LINK_SWITCH, LINK_MODULE_IR, LINK_HOME_CONTROLLER, LINK_MOTION_DETECTOR } from '../../../constant';
+import '../../../styles/guest/product/door-sensor.component.css';
+import ProductFooterComponent from './product-footer.component';
 
-class DoorSensor extends Component {
+const imageUri = "/image/guest/product/door-sensor/";
 
-  handleClickChangePage = (event, link) => {
-    event.preventDefault();
-    this.props.history.push(link);
-  }
-
-  toTopPage = (event) => {
-    window.scrollTo(0, 0);
-  }
+export default class DoorSensorComponent extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -26,9 +19,9 @@ class DoorSensor extends Component {
         <div className="door-sensor_introduce">
           <div className="door-sensor_introduce_image">
             <Carousel className="switch-sensor_introduce_carousel" autoplay dots='false'>
-              <img alt="door-sensor" src="/image/product/door-sensor/door-sensor.png"></img>
-              <img alt="door-sensor" src="/image/product/door-sensor/door-sensor-1.jpg"></img>
-              <img alt="door-sensor" src="/image/product/door-sensor/door-sensor-2.jpg"></img>
+              <img alt="door-sensor" src={`${imageUri}door-sensor.png`}/>
+              <img alt="door-sensor" src={`${imageUri}door-sensor-1.jpg`}/>
+              <img alt="door-sensor" src={`${imageUri}door-sensor-2.jpg`}/>
             </Carousel>
           </div>
           <div className="door-sensor_introduce_content">
@@ -51,7 +44,7 @@ class DoorSensor extends Component {
           <br/>Cảm biến cửa Chika được thiết kế thành 2 phần riêng biệt, được gắn tại cửa ra vào của ngôi nhà hay của từng phòng, được lắp với tối đa cách nhau là 2cm.
             Được làm từ chất liệu nhựa chống cháy PP, thiết kế tinh tế, tỉ mỉ với các đầu vát tròn.
             <strong> Cảm biến phát hiện đột nhập</strong> chỉ duy nhất có màu trắng, thể hiện sự hiện đại, sang trọng.
-          <br/><img alt="cam-bien-dot-nhap" src="/image/product/door-sensor/cam-bien-dot-nhap.jpg"/>
+          <br/><img alt="cam-bien-dot-nhap" src={`${imageUri}cam-bien-dot-nhap.jpg`}/>
           <br/><i style={{marginLeft: '18vw'}}>Cảm ứng của phát hiện đột nhập của Lumi sử dụng công nghệ không dây Zigbee</i>
           <br/>
           <br/>Thiết bị phát hiện có sự kiện đóng/ mở cửa. Nếu truyền về bộ điều khiển trung tâm: Đèn chỉ thị nháy xanh, nháy nhanh 2 lần.
@@ -63,14 +56,14 @@ class DoorSensor extends Component {
             Khi lắp cảm biến phát hiện chuyển động như cửa ra vào, bạn cài đặt theo khung thời gian từ 23h – 5h sáng, 8h – 11h và 13h – 17h.
             Trong khoảng thời gian này, khi cánh cửa bị mở, cảm biến phát hiện chuyển động ngay lập tức truyền tín hiệu đến bộ điều khiển trung tâm HC.
             Tại đây, HC có chức năng kích hoạt các công tắc để bật đèn, mở rèm, còi báo động …
-          <br/><img alt="cam-bien-dot-nhap-1" src="/image/product/door-sensor/cam-bien-dot-nhap-1.jpg"/>
+          <br/><img alt="cam-bien-dot-nhap-1" src={`${imageUri}cam-bien-dot-nhap-1.jpg`}/>
           <br/>Việc gửi cảnh báo đến điện thoại và huy động các thiết bị tham gia quá trình “chống trộm” đã góp phần vào việc bảo vệ ngôi nhà bạn trước những tác nhân xấu.
           <br/>
           <br/><b><i>Cách thức hoạt động</i></b>
           <br/>Khi cửa mở, cảm biến sẽ gửi tín hiệu tới bộ điều khiển trung tâm (HC) khi phát hiện cửa mở và báo cho bạn biết.
             Tại đây, HC thực hiện chức năng gửi cảnh báo đến điện thoại di động của bạn, đồng thời gửi thông báo đến công tắc
             kích hoạt 1 hệ thống các thiết bị cùng tham gia “chống trộm” như: còi hú, rèm mở, đèn bật sáng … tùy theo ngữ cảnh mà bạn cài đặt.
-          <br/><img alt="cam-bien-dot-nhap-2" src="/image/product/door-sensor/cam-bien-dot-nhap-2.jpg"/>
+          <br/><img alt="cam-bien-dot-nhap-2" src={`${imageUri}cam-bien-dot-nhap-2.jpg`}/>
           <br/>Lưu ý: Để cảm biến hoạt động hiệu quả, bạn nên cài đặt thời gian hoạt động cho cảm biến theo khung giờ. Ví dụ: từ 23h – 5h sáng, 8h – 11h và 13h – 17h.
           <br/>
           <br/><b><i>Đảm bảo an toàn tuyệt đối cho ngôi nhà bạn</i></b>
@@ -80,7 +73,7 @@ class DoorSensor extends Component {
           <br/>
           <br/>Sử dụng công nghệ không dây zigbee, tiêu chuẩn 802.15.4 – sử dụng tín hiệu radio có tần sóng ngắn, có 2 tầng và vận hành trong vùng bảo mật của hệ thống.
             Nên trộm không thể xâm nhập vào hệ thống mạng không dây zigbee nhà bạn để mở cửa một cách dễ dàng.
-          <br/><img alt="cam-bien-dot-nhap-3" src="/image/product/door-sensor/cam-bien-dot-nhap-3.jpg"/>
+          <br/><img alt="cam-bien-dot-nhap-3" src={`${imageUri}cam-bien-dot-nhap-3.jpg`}/>
           <br/><i style={{marginLeft: '3vw'}}>Lumi là đơn vị đạt chứng chỉ CE – tiêu chuẩn xuất khẩu sang Châu Âu và chứng chỉ UL – được phép xuất khẩu đến 104 quốc gia trên thế giới</i>
           <br/>
           <br/><b><i>Lắp đặt</i></b>
@@ -90,46 +83,8 @@ class DoorSensor extends Component {
           <br/><i>Để đảm bảo cảm biến cửa hoạt động: Quý khách hàng lưu ý lắp rãnh khuyết ở cảm biến trùng với rãnh khuyết trên nam châm.</i>
         </div>
 
-        <div className="door-sensor_footer">
-          <h1>CÁC THIẾT BỊ KHÁC</h1>
-          <Row className="door-sensor_footer_row">
-            <Col className="door-sensor_footer_col" span={8}>
-              <img alt="Cong-tac-tich-hop-cam-bien" src="/image/product/cong-tac-tich-hop-cam-bien-cau-thang.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH_SENSOR)}></img>
-                <p>CÔNG TẮC TÍCH HỢP CẢM BIẾN</p>
-            </Col>
-            <Col className="door-sensor_footer_col" span={8}>
-              <img alt="Cong-tac-vien-nhom" src="/image/product/cong-tac-vien-nhom.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_SWITCH)}></img>
-                <p>CÔNG TẮC VIỀN NHÔM</p>
-            </Col>
-            <Col className="door-sensor_footer_col" span={8}>
-              <img alt="Dieu-khien-hong-ngoai" src="/image/product/cam-bien-hong-ngoai.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_MODULE_IR)}></img>
-              <p>ĐIỀU KHIỂN HỒNG NGOẠI</p>
-            </Col>
-          </Row>
-          <Row className="door-sensor_footer_row">
-            <Col className="switch_footer_col" span={8}>
-              <img alt="Bo-dieu-khien-trung-tam" src="/image/product/bo-dieu-khien-trung-tam.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_HOME_CONTROLLER)}></img>
-              <p>BỘ ĐIỀU KHIỂN TRUNG TÂM</p>
-            </Col>
-            <Col className="door-sensor_footer_col" span={8}>
-              <img alt="Cam-bien-cua" src="/image/product/cam-bien-cua.png"
-                  onClick={this.toTopPage}></img>
-                <p>CẢM BIẾN CỬA</p>
-            </Col>
-            <Col className="door-sensor_footer_col" span={8}>
-              <img alt="Cam-bien-chuyen-dong" src="/image/product/cam-bien-chuyen-dong.png"
-                  onClick={(event) => this.handleClickChangePage(event, LINK_MOTION_DETECTOR)}></img>
-                <p>CẢM BIẾN PHÁT HIỆN CHUYỂN ĐỘNG</p>
-            </Col>
-          </Row>
-        </div>
+        <ProductFooterComponent history={this.props.history}/>
       </div>
     )
   }
 }
-
-export default withRouter(DoorSensor);

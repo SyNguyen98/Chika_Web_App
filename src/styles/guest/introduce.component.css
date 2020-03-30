@@ -1,62 +1,47 @@
-.introduction Button:hover {
-  color: white;
-  background-color: #f7931e;
-  border-color: #f7931e;
-}
-
-.introduction_header {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/image/guest/introduce/smarthome.jpg');
-  background-size: 100% 100vh;
-  min-height: 100vh;
+.introduce-header {
+  margin-top: 80px;
   position: relative;
 }
+.introduce-header img {
+  width: 100%;
+  height: calc(100vh - 80px);
+}
 
-.introduction_header h1 {
+.introduce-header h1 {
   position: absolute;
-  top: 30%;
-  left: 13%;
+  top: 75%;
+  left: 10%;
+  width: 33vw;
+  color: #00ff98;
+  text-shadow: 2px 0 0 #003eff, 0 -2px 0 #432c58, 0 2px 0 #003eff, 0 -2px 0 #432c58;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.introduce-timeline {
+  padding-top: 30px;
+  padding-bottom: 50px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.pinimg.com/736x/d7/27/f3/d727f3566942c090b2802cbb19c08cf5.jpg');
+  background-size: 100% auto;
+}
+
+.introduce-timeline h2 {
+  padding-bottom: 5px;
+  border-bottom: 2px solid !important;
+  border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
+}
+
+.vertical-timeline-element-icon img {
+  margin: 15px 15px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+
+.vertical-timeline-element-date {
   color: white;
-  font-size: 4vw;
-  font-weight: bold;
-}
-
-.introduction_timeline {
-  margin: 4vw 5vw auto 5vw;
-}
-
-.introduction_timeline h1 {
-  color: #58595b;
-  font-size: 2.5vw;
-  font-weight: 800;
-  border-bottom: 0.5px solid #cccccc;
-}
-
-.introduction_timeline p {
-  color: black;
-  font-size: 1.1vw;
-  text-align: justify;
-}
-
-.introduction_timeline Button {
-  margin: 1vw auto auto 8vw;
-  color: #ff8c00;
-  border-color: #ff8c00;
-  background-color: transparent;
-  font-size: 1.1vw;
-  font-weight: bold;
-  padding: 3px 30px 3px;
-}
-
-.introduction_timeline_image {
-  float: right;
-  margin-bottom: 4vw;
-  width: 55vw;
-  height: 30vw;
-  cursor: pointer;
-}
-
-.introduction_timeline_content {
-  float: left;
-  margin-top: 6vw;
-  width: 30vw;
+  top: 0 !important;
+  font-size: 1.2rem !important;
+  font-weight: 700;
 }

@@ -1,14 +1,14 @@
-.door-sensor {
-  margin-top: 15vh;
+.switch {
+  margin-top: 80px;
 }
 
-.door-sensor_introduce {
-  margin-top: 5vw;
+.switch_introduce {
+  padding-top: 20px;
   display: flex;
   border-bottom: 1px solid #dbdbdb;
 }
 
-.door-sensor_introduce_image {
+.switch_introduce_image {
   float: left;
   margin-left: 7vw;
   margin-bottom: 3vw;
@@ -17,39 +17,39 @@
   height: 30vw;
 }
 
-.door-sensor_introduce_carousel {
+.switch_introduce_carousel {
   margin: 5vw auto auto 8vw;
   width: 20vw;
   height: 20vw;
 }
 
-.door-sensor_introduce_content {
+.switch_introduce_content {
   float: right;
-  margin: 0 7vw auto 3vw;
+  margin: auto 7vw auto 3vw;
   width: 45vw;
 }
 
-.door-sensor_introduce_content h1 {
+.switch_introduce_content h1 {
   color: green;
   font-size: 2.5vw;
   font-weight: 800;
   border-bottom: 0.5px solid #cccccc;
 }
 
-.door-sensor_introduce_content b {
+.switch_introduce_content b {
   color: #787878;
   font-size: 1.2vw;
   font-weight: 800;
 }
 
-.door-sensor_introduce_content p {
+.switch_introduce_content p {
   line-height: 1.7vw;
   color: black;
   font-size: 1.2vw;
   text-align: justify;
 }
 
-.door-sensor_body {
+.switch_body {
   margin: 5vw 10vw auto 10vw;
   line-height: 1.8vw;
   color: black;
@@ -57,33 +57,33 @@
   text-align: justify;
 }
 
-.door-sensor_body img {
-  margin: 1vw auto 1vw 8vw;
+.switch_body img {
+  margin: 1vw auto 1vw 7vw;
   width: 65vw;
   height: 40vw;
 }
 
-.door-sensor_body b {
+.switch_body b {
   color: #4f4f4f;
   font-weight: 800;
   font-size: 1.5vw;
   line-height: 3vw;
 }
 
-.door-sensor_body_title {
+.switch_body_title {
   color: #4f4f4f;
   font-weight: 800;
   font-size: 1.5vw;
   line-height: 3vw;
 }
 
-.door-sensor_footer {
+.switch_footer {
   margin-top: 4vw;
   background-color: #f0f0f0;
   text-align: center;
 }
 
-.door-sensor_footer h1 {
+.switch_footer h1 {
   padding-top: 2vw;
   color: #f3d5a8;
   font-size: 3vw;
@@ -91,29 +91,29 @@
   text-shadow: 2px 0 0 #000, -1px 0 0 #fff, 0 2px 0 #000, 0 -1px 0 #fff;
 }
 
-.door-sensor_footer_row {
+.switch_footer_row {
   margin: auto 5vw auto 5vw;
 }
 
-.door-sensor_footer_col img {
+.switch_footer_col img {
   width: 20vw;
   height: 15vw;
   cursor: pointer;
 }
 
-.door-sensor_footer_col img {
+.switch_footer_col img {
   transition: transform .2s;
 }
 
-.door-sensor_footer_col img:hover {
+.switch_footer_col img:hover {
   transform: scale(1.1);
 }
 
-.door-sensor_footer_col img:hover + p {
+.switch_footer_col img:hover + p {
   color: green;
 }
 
-.door-sensor_footer_col p {
+.switch_footer_col p {
   margin: 1vw auto 2vw auto;
   font-size: 1.25vw;
   font-weight: 800;

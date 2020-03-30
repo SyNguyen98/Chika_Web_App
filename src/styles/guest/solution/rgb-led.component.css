@@ -1,163 +1,123 @@
-.rgb-led img {
-  transition: transform .2s;
-}
-
-.rgb-led img:hover {
-  transform: scale(1.1);
-}
-
-.rgb-led_header {
+.rgb-led-header {
   margin-top: 80px;
-  background-image: url("/image/guest/solution/rgb-led/banner-led-16-trieu-mau.jpg");
-  background-size: 100% 70vh;
-  height: 70vh;
-  display: flex;
+  position: relative;
+}
+.rgb-led-header img {
+  width: 100%;
 }
 
-.rgb-led_header_title {
-  margin: 20vw 1vw auto 15vw;
+.rgb-led-header__content {
+  position: absolute;
+  top: 60%;
+  left: 15%;
   width: 33vw;
 }
-
-.rgb-led_header_title h1 {
-  color: #f3d5a8;
-  text-shadow: 2px 0 0 #000, -2px 0 0 #fff, 0 2px 0 #000, 0 -2px 0 #fff;
-  font-size: 2.4vw;
+.rgb-led-header__content h1 {
+  color: #003eff;
+  text-shadow: 2px 0 0 #00ff98, 0 -2px 0 #432c58, 0 2px 0 #00ff98, 0 -2px 0 #432c58;
+  font-size: 35px;
   font-weight: bold;
   margin-bottom: 5px;
 }
-
-.rgb-led_header_title p {
+.rgb-led-header__content p {
   color: #000;
-  font-size: 1.3vw;
+  font-size: 18px;
+  font-weight: 500;
   text-align: justify;
 }
 
-.rgb-led_introduce {
-  margin: 3vw 10vw auto 10vw;
-  width: 80%;
-  font-size: 1.2vw;
+.rgb-led__introduce {
+  margin: 50px 10vw auto 10vw;
+  font-size: 18px;
   text-align: justify;
   font-weight: 500;
 }
 
-.rgb-led_body {
-  margin: 2vw 7vw auto 7vw;
+.rgb-led__row {
+  margin-top: 100px;
+  margin-left: 7vw !important;
+  margin-right: 7vw !important;
 }
-
-.rgb-led_body h1 {
-  color: #58595b;
-  font-size: 2.5vw;
+.rgb-led__row h1 {
+  margin-top: 20px;
+  color: #432c58;
+  font-size: 35px;
   font-weight: 800;
-  border-bottom: 0.5px solid #cccccc;
+  border-bottom: 1px solid !important;
+  border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
 }
-
-.rgb-led_body p {
+.rgb-led__row p {
   color: black;
-  font-size: 1.1vw;
+  font-size: 18px;
   text-align: justify;
 }
-
-.rgb-led_body_color-space-image {
-  float: left;
-  margin: 4vw auto auto 3vw;
-  width: 40vw;
-  height: 27vw;
+.rgb-led__row img{
+  width: 500px;
+  transition: transform .4s;
 }
 
-.rgb-led_body_color-space {
-  float: right;
-  margin: 10vw 5vw auto auto;
-  width: 27vw;
+.rgb-led__row1__col2, .rgb-led__row2__col1 {
+  padding: 50px 40px !important;
+}
+.rgb-led__row1__col1, .rgb-led__row2__col2 {
+  overflow: hidden;
+}
+.rgb-led__row1__col1:hover img, .rgb-led__row2__col2:hover img {
+  transform: scale(1.05);
+  transform-origin: 50% 50%;
 }
 
-.rgb-led_change-color {
-  margin: 40vw auto 3vw auto;
-  background-image: url("/image/guest/solution/rgb-led/doi-mau-sac.jpg");
-  background-size: 100% 35vw;
-  min-height: 35vw;
-  display: flex;
-}
-
-.rgb-led_change-color:hover h1 {
-  color: green;
-}
-
-.rgb-led_change-color_content {
-  margin: 10vw auto auto 10vw;
-  width: 25vw;
-}
-
-.rgb-led_change-color h1 {
-  color: #58595b;
-  font-size: 2.5vw;
-  font-weight: 800;
-  border-bottom: 0.5px solid white;
-}
-
-.rgb-led_change-color p {
-  color: black;
-  font-size: 1.2vw;
+.rgb-led__panel {
+  position: relative;
+  margin-top: 130px;
+  overflow: hidden;
   text-align: justify;
 }
-
-.rgb-led_body_combine-device-image {
-  float: right;
-  margin: 4vw 3vw auto auto;
-  width: 40vw;
-  height: 27vw;
+.rgb-led__panel img {
+  width: 100%;
+  transition: transform .4s
 }
-
-.rgb-led_body_combine-device {
-  float: left;
-  margin: 13vw auto auto 5vw;
-  width: 32vw;
+.rgb-led__panel:hover img {
+  transform: scale(1.05);
+  transform-origin: 50% 50%;
 }
-
-.rgb-led_timer {
-  margin-top: 40vw;
-  text-align: center;
+.rgb-led__panel:hover h1 {
+  color: #003eff;
 }
-
-.rgb-led_timer h1 {
-  color: #58595b;
-  font-size: 2.8vw;
+.rgb-led__panel h1 {
+  color: #432c58;
+  font-size: 35px;
   font-weight: 800;
-  margin-bottom: 2vw;
+  border-bottom: 1px solid !important;
+  border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
+}
+.rgb-led__panel p {
+  color: black;
+  font-size: 18px;
 }
 
-.rgb-led_timer_image {
-  background-image: url("/image/guest/solution/rgb-led/hen-gio-doi-mau-sac-led.jpg");
-  background-size: 100% 33vw;
-  height: 33vw;
+.change-color-panel__content {
+  position: absolute;
+  top: 130px;
+  left: 150px;
+  width: 30%;
 }
 
-.rgb-led_footer {
-  margin-top: 5vw;
-  background-color: #dbdbdb;
+.rgb-led__timer {
+  margin-top: 70px;
   text-align: center;
+  overflow: hidden;
 }
-
-.rgb-led_footer h1 {
-  padding-top: 2vw;
-  color: #f3d5a8;
-  font-size: 3vw;
-  font-weight: 900;
-  text-shadow: 2px 0 0 #000, -1px 0 0 #fff, 0 2px 0 #000, 0 -1px 0 #fff;
-}
-
-.rgb-led_footer_row {
-  margin: auto 5vw auto 5vw;
-}
-
-.rgb-led_footer_col img {
-  width: 25vw;
-  height: 15vw;
-  cursor: pointer;
-}
-
-.rgb-led_footer_col p {
-  margin: 1vw auto 2vw auto;
-  font-size: 1.25vw;
+.rgb-led__timer h1 {
+  font-size: 35px;
   font-weight: 800;
+  color: #643591;
+}
+.rgb-led__timer img {
+  width: 100%;
+  transition: transform .4s
+}
+.rgb-led__timer:hover img {
+  transform: scale(1.05);
+  transform-origin: 50% 50%;
 }
