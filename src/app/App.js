@@ -50,7 +50,7 @@ import UserHomeComponent from '../components/user/user-home.component';
 import UserListRoomComponent from '../components/user/user-list-room.component';
 import UserRoomComponent from '../components/user/user-room.component';
 
-import UserPersonalComponent from '../components/user/user-personal.component'
+import UserPersonalComponent from '../components/user/setting/user-personal.component'
 
 import { ACCESS_TOKEN,
   LINK_INTRODUCTION, LINK_LOGIN, LINK_PRODUCT, LINK_SUPPORTING,
@@ -89,7 +89,7 @@ class App extends Component {
           this.onCloseSidenav();
           break;
         case 'HOME_MASTER': case 'HOME_USER':
-          this.props.history.push(LINK_USER_HOME);
+          this.props.history.push(LINK_USER_ROOM);
           this.onCloseSidenav();
           break;
         default:
@@ -222,25 +222,26 @@ class App extends Component {
                                                           updateAdminInfo={this.updateAdminInfo} 
                                                           onLogout={this.onChangePasswordLogout} {...props} />} />
 
-              <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent currentUser={currentUser} {...props}/>} />
+              <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent {...props}/>} />
               <Route exact path={LINK_USER_ROOM} render={(props) => <UserListRoomComponent {...props}/>} />
               <Route exact path={`${LINK_USER_ROOM}/:id`} render={(props) => <UserRoomComponent {...props}/>} />
 
-              <Route exact path={LINK_USER_INFO} render={(props) => <UserPersonalComponent {...props}/>} />
+              <Route exact path={LINK_USER_INFO} render={(props) => <UserPersonalComponent currentUser={currentUser} {...props}/>} />
 
             </Switch>
         </Content>
 
-        {currentUser !== null ? (
+        {currentUser ? (
           <SideNavComponent currentUser={currentUser}
                             sidenavVisible={sidenavVisible}
                             onCloseSidenav={this.onCloseSidenav}
                             handleLogout={this.handleLogout}/>
         ) : null}
 
-        {currentUser === null ? (<AppFooterComponent/>) : null}
-
-        {currentUser === null ? (<ContactMenuComponent/>) : null}
+        {currentUser ? null : [
+          <AppFooterComponent/>,
+          <ContactMenuComponent/>
+        ]}
 
         <BackTop/>
       </Layout>

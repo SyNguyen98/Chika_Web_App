@@ -41,6 +41,16 @@ export function getAllFeedback() {
     });
 }
 
+export function haveFeedback() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: API_BASE_URL + "/feedback/is_response",
+        method: 'GET'
+    });
+}
+
 export function updateFeedBackResponse(id, response) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");

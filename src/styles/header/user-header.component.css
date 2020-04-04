@@ -11,7 +11,6 @@
     font-size: 20px;
     transition: transform .2s;
 }
-  
 .user-header Button:hover {
     background-color: rgba(0,0,0,0);
     color: black;
@@ -19,22 +18,31 @@
 }
 
 .user-header .app-header__logo {
+    margin-top: 15px;
+    margin-left: 50px !important;
+    height: 50px;
     margin-left: 35px;
     cursor: unset;
 }
   
-.user-header i {
-    margin-top: 7px;
-    margin-left: 10px;
+.user-header b {
+    margin-top: 10px;
+    margin-left: 5px;
     color: #000290;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 600;
+    font-style: italic;
 }
-  
+
+.user-header .app-header__nav {
+    right: 10%;
+}
+
 .user-header .app-header__nav__item img {
     width: 23px;
 }
 
 .user-header .app-header__nav__item {
+    font-size: 18px;
     margin-left: 20px;
 }

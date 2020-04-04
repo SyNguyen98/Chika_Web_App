@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Icon, notification } from 'antd';
-import { updatePassword } from '../../../api';
+import { updatePassword } from '../../../service/user.service';
 
 import '../../../styles/admin/setting/admin-change-pass.component.css';
 

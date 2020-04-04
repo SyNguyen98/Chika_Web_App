@@ -24,11 +24,12 @@
 
 .admin-user__item .anticon {
   margin-top: 20%;
+  margin-bottom: 1vw;
   font-size: 6vw;
 }
 
 .admin-user__item h1 {
-  margin-top: 1vw;
+  padding-top: 5px;
   width: 100%;
   font-size: 1.2vw;
   font-weight: 700;

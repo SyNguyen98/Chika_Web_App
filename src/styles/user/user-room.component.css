@@ -1,37 +1,53 @@
 .user-room {
-    margin-top: 6vw;
-    min-height: 90vh;
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
 }
 
-.user-room__device {
-    margin: 0 0 2vw 4vw;
-    text-align: center;
-    width: 15vw;
-    height: 15vw;
-    border-radius: 10px;
+.user-room__list-room {
+    background-color: #eceaea;
+    height: calc(100vh - 80px);
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.user-room__list-room:hover {
+    overflow-y: visible;
+}
+.user-room__list-room::-webkit-scrollbar {
+    width: 0;
+}
+.user-room__list-room::-webkit-scrollbar-thumb {
+    background: #003eff;
+    border-radius: 20px;
+}
+
+.user-room__list-room__item {
+    position: relative;
+    margin: 10px auto 2vw 4.5vw;
+    padding: 0 !important;
+    width: 20vw;
+    height: 20vh;
     box-shadow: 2px 3px 4px #524e4e;
     cursor: pointer;
     transition: transform .2s;
 }
-
-.user-room__device:hover {
+.user-room__list-room__item:hover {
     transform: scale(1.05);
 }
 
-.user-room__device h2 {
-    margin-top: 5px;
-    margin-left: 1vw;
-    font-size: 1.2vw;
-    font-weight: 700;
+.user-room__list-room__item img {
+    margin-top: 3vh;
+    margin-left: 2vw;
+    width: 4vw;
+    border-radius: 50%;
+    opacity: 0.9;
 }
-
-.user-room__device img {
-    width: 7vw;
-    margin-top: 1vw;
-}
-
-.user-room__device b {
-    color: #858585;
-    font-size: 1vw;
+.user-room__list-room__item p {
+    position: absolute;
+    top: 13vh;
+    left: 2vw;
+    color: white;
+    font-size: 20px;
     font-weight: 600;
+    text-shadow: 1px 2px 3px #807f7f;
 }

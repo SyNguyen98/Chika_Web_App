@@ -56,6 +56,17 @@ export function getAllNumberOfProduct() {
     });
 }
 
+export function getAllNumberOfProductByUserId(userId) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/product/number/user_id/" + userId,
+        method: 'GET',
+    });
+}
+
 export function updateProductWithUser(updateRequest) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");

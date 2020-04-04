@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { Carousel, Row, Col } from 'antd';
+import { Carousel } from 'antd';
 
 import '../../../styles/guest/product/door-sensor.component.css';
 import ProductFooterComponent from './product-footer.component';

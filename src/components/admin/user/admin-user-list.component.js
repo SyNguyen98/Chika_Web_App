@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Icon, Button, Modal, notification } from 'antd';
 
 import '../../../styles/admin/user/admin-user-list.component.css';
-import { getProductByUserForAdmin } from '../../../api';
+import { getProductByUserForAdmin } from '../../../service/product.service';
 import { getAllUser } from '../../../service/user.service';
 import TableComponent from '../table.component';
 

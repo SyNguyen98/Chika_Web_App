@@ -48,12 +48,16 @@ class FeedbackComponent extends Component {
 
   handleChangeResponse = (event, time) => {
     event.preventDefault();
-    let feedback = this.state.feedbackList.find(feedback => feedback.time === time);
+    let feedbacks = this.state.feedbackList.concat();
+    let feedback = feedbacks.find(feedback => feedback.time === time);
     this.setState({ isLoading: true });
     updateFeedBackResponse(feedback.id, true).then(response => {
-      let index = this.state.feedbackList.indexOf(this.state.feedbackList.find(feedback => feedback.id === response.id));
-      this.state.feedbackList[index] = response;
+      // let index = feedbacks.indexOf(feedbacks.find(feedback => feedback.id === response.id));
+      // this.state.feedbackList[index] = response;
+      let index = feedbacks.indexOf(feedback);
+      feedbacks[index] = response;
       this.setState({
+        feedbackList: feedbacks.concat(),
         isLoading: false
       });
       this.forceUpdate();
@@ -101,6 +105,7 @@ class FeedbackComponent extends Component {
     return(
       <div className="admin-user__feedback">
         <h1>DANH SÁCH PHẢN HỒI</h1>
+        
         {feedbackList ? (<TableComponent list={feedbackList} columns={columns}/>) : null}
 
         {feedbackInfo ? (

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { Carousel } from 'antd';
 
 import '../../../styles/guest/product/switch-sensor.component.css';
@@ -7,7 +6,7 @@ import ProductFooterComponent from './product-footer.component';
 
 const imageUri = "/image/guest/product/switch-sensor/";
 
-class SwitchSensorComponent extends Component {
+export default class SwitchSensorComponent extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -96,5 +95,3 @@ class SwitchSensorComponent extends Component {
     )
   }
 }
-
-export default withRouter(SwitchSensorComponent);

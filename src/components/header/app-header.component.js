@@ -42,9 +42,8 @@ export default class AppHeaderComponent extends Component {
                                                     handleChangePage={this.handleChangePage}/>)
           break;
         case 'HOME_MASTER': case 'HOME_USER':
-          headerComponent = (<UserHeaderComponent currentUser={currentUser} 
-                                                  onOpenSidenav={onOpenSidenav} 
-                                                  history={this.props.history}/>)
+          headerComponent = (<UserHeaderComponent onOpenSidenav={onOpenSidenav} 
+                                                  handleChangePage={this.handleChangePage}/>)
           break;
         default:
           headerComponent = null;

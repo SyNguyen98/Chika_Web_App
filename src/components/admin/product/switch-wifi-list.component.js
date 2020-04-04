@@ -112,11 +112,6 @@ class SwitchWifiListComponent extends Component {
         render: (text) => <span>{text ? text : 'Chưa có'}</span>,
       },
       {
-        title: 'Mã nút',
-        key: 'buttonId',
-        render: (text) => <span style={{ lineHeight: '2vw', whiteSpace: "pre-line" }}>{text.join('\n')}</span>
-      },
-      {
         key: 'delete',
         render: (text, row) => <Popconfirm title="Bạn có chắc muốn xóa?"
                                   onConfirm={() => this.handleDeleteSwitch(row.id)}
@@ -159,8 +154,6 @@ class SwitchWifiListComponent extends Component {
                   <p><b>Mã sản phẩm: </b></p>
                   <p>{saveSwitchResponse.id}</p>
                   <p><b>Loại: </b>{saveSwitchResponse.type}</p>
-                  <p><b>Mã nút: </b></p>
-                  <p style={{ lineHeight: '2vw', whiteSpace: "pre-line" }}>{saveSwitchResponse.buttonId.join('\n')}</p>
                 </div>
               </div>
             ) : (

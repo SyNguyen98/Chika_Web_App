@@ -13,7 +13,7 @@ class AdminInfoComponent extends Component {
   render() {
     const { currentUser } = this.props;
     return(
-      <Fragment >
+      <Fragment>
         <div className="admin-info">
           {currentUser ? (
             <div className="admin-info__float">
