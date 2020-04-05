@@ -89,7 +89,8 @@ class App extends Component {
           this.onCloseSidenav();
           break;
         case 'HOME_MASTER': case 'HOME_USER':
-          this.props.history.push(LINK_USER_ROOM);
+          // this.props.history.push(LINK_USER_ROOM + "/b2693580-a57f-4344-a466-ab2ea2aafa1d");
+          this.props.history.push(LINK_USER_HOME);
           this.onCloseSidenav();
           break;
         default:
