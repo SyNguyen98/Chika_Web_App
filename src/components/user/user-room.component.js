@@ -4,7 +4,7 @@ import { Row, Col, Switch, notification } from 'antd';
 
 import '../../styles/user/user-room.component.css';
 import { getDevicesByRoomId } from '../../service/device.service'
-import { mqttPublish } from '../../service/mqtt.service'
+import { mqttPublish, mqttSubscribe, mqttMessage } from '../../service/mqtt.service'
 import { LINK_USER_ROOM } from '../../constant'
 
 const headerColor = [
@@ -21,7 +21,8 @@ class UserRoomComponent extends Component {
         this.state = {
             roomId: window.location.pathname.substring(18),
             roomList: JSON.parse(sessionStorage.getItem("listRoom")),
-            deviceList: []
+            deviceList: [],
+
         }
     }
 
@@ -29,6 +30,9 @@ class UserRoomComponent extends Component {
         getDevicesByRoomId(roomId).then(response => {
             this.setState({ deviceList: response });
             console.log(response);
+            response.forEach(element => {
+                mqttSubscribe(`${element.productId}/#`);
+            });
         }).catch(error => {
             notification.error({
                 message: 'Chika Smarthome',
@@ -45,11 +49,16 @@ class UserRoomComponent extends Component {
 
     onChange = (device, checked) => {
         console.log(`${device.name} switch to ${checked}`);
-        let json = {
-            button: parseInt(device.type.slice(-1), 10),
-            state: checked
+        let topic = `${device.productId}/button${device.type.slice(-1)}`
+        mqttPublish(topic, String(checked))
+        if (checked) {
+            document.getElementById(`${device.id}-img`).style.opacity = "1"
+            document.getElementById(`${device.id}-b`).style.opacity = "1"
+        } else {
+            document.getElementById(`${device.id}-img`).style.opacity = "0.3"
+            document.getElementById(`${device.id}-b`).style.opacity = "0.3"
         }
-        mqttPublish(device.productId, JSON.stringify(json))
+        console.log(mqttMessage);
     }
 
     setHeaderBackground = (color, url) => {
@@ -61,12 +70,14 @@ class UserRoomComponent extends Component {
     
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.loadDevices(window.location.pathname.substring(18)); 
+        this.loadDevices(window.location.pathname.substring(18));
+         
     }
 
     render() {
         const { roomId, roomList, deviceList } = this.state;
-        const room = roomList.find(room => room.id === roomId) 
+        const room = roomList.find(room => room.id === roomId);
+        console.log(mqttMessage);
         return(
             <Fragment>
                 <Row className='user-room'>
@@ -96,10 +107,10 @@ class UserRoomComponent extends Component {
                                 return (
                                     <Col className='user-room__device-item' span={8} key={i}>
                                         <div className='user-room__device-item__header'>
-                                            <img alt="device-icon" src={`/image/user/device/light.png`}/>
+                                            <img id={`${item.id}-img`} alt="device-icon" src={`/image/user/device/light.png`}/>
                                         </div>
                                         <div className='user-room__device-item__footer'>
-                                            <b>{item.name.toUpperCase()}</b>
+                                            <b id={`${item.id}-b`}>{item.name.toUpperCase()}</b>
                                             <Switch onChange={(checked) => this.onChange(item, checked)}/>
                                         </div>
                                     </Col>

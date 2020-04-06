@@ -65,7 +65,7 @@ import { ACCESS_TOKEN,
 
 import { getUserInfo, updateAdminInfo } from '../service/user.service';
 import { deleteAllCookies } from '../service/cookie.service'
-import { mqttConnect, mqttSubscribe } from '../service/mqtt.service'
+import { mqttConnect } from '../service/mqtt.service'
 
 const { Content } = Layout;
 
@@ -76,6 +76,7 @@ class App extends Component {
       currentUser: null,
       isLoading: false,
       sidenavVisible: false,
+      mqttMessage: null
     }
   }
 
@@ -89,8 +90,8 @@ class App extends Component {
           this.onCloseSidenav();
           break;
         case 'HOME_MASTER': case 'HOME_USER':
-          // this.props.history.push(LINK_USER_ROOM + "/b2693580-a57f-4344-a466-ab2ea2aafa1d");
-          this.props.history.push(LINK_USER_HOME);
+          this.props.history.push(LINK_USER_ROOM + "/b2693580-a57f-4344-a466-ab2ea2aafa1d");
+          // this.props.history.push(LINK_USER_HOME);
           this.onCloseSidenav();
           break;
         default:
@@ -170,11 +171,10 @@ class App extends Component {
   componentDidMount() {
     this.loadCurrentUser();
     mqttConnect();
-    mqttSubscribe("mqtttest")
   }
 
   render() {
-    const { currentUser, sidenavVisible } = this.state;
+    const { currentUser, sidenavVisible } = this.state;   
     return (
       <Layout>
         <AppHeaderComponent currentUser={currentUser} onOpenSidenav={this.handleOpenSidenav} {...this.props}/>
