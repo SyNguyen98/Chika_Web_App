@@ -80,10 +80,7 @@ export function mqttSubscribe(topic) {
 }
 
 export function mqttPublish(topic, message) {
-  let options = {
-      retain: true
-  }
-  client.publish(topic, message, options);
+  client.publish(topic, message, { retain: true });
 }
 
 class App extends Component {
@@ -107,8 +104,8 @@ class App extends Component {
           this.onCloseSidenav();
           break;
         case 'HOME_MASTER': case 'HOME_USER':
-          this.props.history.push(LINK_USER_ROOM + "/b2693580-a57f-4344-a466-ab2ea2aafa1d");
-          // this.props.history.push(LINK_USER_HOME);
+          // this.props.history.push(LINK_USER_ROOM + "/b2693580-a57f-4344-a466-ab2ea2aafa1d");
+          this.props.history.push(LINK_USER_HOME);
           this.onCloseSidenav();
           break;
         default:
