@@ -65,9 +65,26 @@ import { ACCESS_TOKEN,
 
 import { getUserInfo, updateAdminInfo } from '../service/user.service';
 import { deleteAllCookies } from '../service/cookie.service'
-import { mqttConnect } from '../service/mqtt.service'
 
 const { Content } = Layout;
+
+var mqtt = require('mqtt')
+var client;
+
+export function mqttDisconnect() {
+  client.end(); 
+}
+
+export function mqttSubscribe(topic) {
+  client.subscribe(topic)
+}
+
+export function mqttPublish(topic, message) {
+  let options = {
+      retain: true
+  }
+  client.publish(topic, message, options);
+}
 
 class App extends Component {
   constructor(props) {
@@ -170,11 +187,22 @@ class App extends Component {
 
   componentDidMount() {
     this.loadCurrentUser();
-    mqttConnect();
+    client = mqtt.connect('ws://chika.gq:8080', { username: 'chika', password: '2502' });
+    console.log("connect to mqtt successfully");
+    client.on('message', (topic, message) => {
+        // message is Buffer
+        console.log(`From: ${topic} , message: ${message.toString()}`);
+        this.setState({
+          mqttMessage: {
+            topic: topic,
+            message: message.toString()
+          }
+        })  
+    })
   }
 
   render() {
-    const { currentUser, sidenavVisible } = this.state;   
+    const { currentUser, sidenavVisible, mqttMessage } = this.state;   
     return (
       <Layout>
         <AppHeaderComponent currentUser={currentUser} onOpenSidenav={this.handleOpenSidenav} {...this.props}/>
@@ -225,7 +253,8 @@ class App extends Component {
 
               <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent {...props}/>} />
               <Route exact path={LINK_USER_ROOM} render={(props) => <UserListRoomComponent {...props}/>} />
-              <Route exact path={`${LINK_USER_ROOM}/:id`} render={(props) => <UserRoomComponent {...props}/>} />
+              <Route exact path={`${LINK_USER_ROOM}/:id`} 
+                render={(props) => <UserRoomComponent mqttMessage={mqttMessage} {...props}/>} />
 
               <Route exact path={LINK_USER_INFO} render={(props) => <UserPersonalComponent currentUser={currentUser} {...props}/>} />
 

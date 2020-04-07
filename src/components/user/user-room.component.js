@@ -4,7 +4,7 @@ import { Row, Col, Switch, notification } from 'antd';
 
 import '../../styles/user/user-room.component.css';
 import { getDevicesByRoomId } from '../../service/device.service'
-import { mqttPublish, mqttSubscribe, mqttMessage } from '../../service/mqtt.service'
+import { mqttPublish, mqttSubscribe } from '../../app/App'
 import { LINK_USER_ROOM } from '../../constant'
 
 const headerColor = [
@@ -19,20 +19,23 @@ class UserRoomComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            mqttMessage: null,
             roomId: window.location.pathname.substring(18),
             roomList: JSON.parse(sessionStorage.getItem("listRoom")),
             deviceList: [],
-
+            switchChecked: []
         }
     }
 
     loadDevices = (roomId) => {
         getDevicesByRoomId(roomId).then(response => {
-            this.setState({ deviceList: response });
             console.log(response);
             response.forEach(element => {
                 mqttSubscribe(`${element.productId}/#`);
             });
+            this.setState({ 
+                deviceList: response,
+             });
         }).catch(error => {
             notification.error({
                 message: 'Chika Smarthome',
@@ -48,17 +51,12 @@ class UserRoomComponent extends Component {
     }
 
     onChange = (device, checked) => {
-        console.log(`${device.name} switch to ${checked}`);
-        let topic = `${device.productId}/button${device.type.slice(-1)}`
-        mqttPublish(topic, String(checked))
-        if (checked) {
-            document.getElementById(`${device.id}-img`).style.opacity = "1"
-            document.getElementById(`${device.id}-b`).style.opacity = "1"
-        } else {
-            document.getElementById(`${device.id}-img`).style.opacity = "0.3"
-            document.getElementById(`${device.id}-b`).style.opacity = "0.3"
-        }
-        console.log(mqttMessage);
+        let switchChecked = this.state.switchChecked;
+        switchChecked[this.state.deviceList.indexOf(device)] = checked;  
+        this.setState({
+            switchChecked: switchChecked
+        })  
+        mqttPublish(device.topic, checked.toString())
     }
 
     setHeaderBackground = (color, url) => {
@@ -70,14 +68,32 @@ class UserRoomComponent extends Component {
     
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.loadDevices(window.location.pathname.substring(18));
-         
+        this.loadDevices(window.location.pathname.substring(18));    
+    }
+
+    componentDidUpdate() {
+        const { mqttMessage } = this.props;
+        if (mqttMessage !== this.state.mqttMessage) {
+            const { deviceList } = this.state;
+            let device = deviceList.find(device =>  device.topic === mqttMessage.topic);
+            let switchChecked = this.state.switchChecked;
+            if (deviceList.length > 0) {               
+                if (mqttMessage.message === "true") {
+                    switchChecked[deviceList.indexOf(device)] = true;       
+                } else {
+                    switchChecked[deviceList.indexOf(device)] = false;    
+                }
+            }
+            this.setState({
+                mqttMessage: mqttMessage,
+                switchChecked: switchChecked
+            })  
+        }
     }
 
     render() {
-        const { roomId, roomList, deviceList } = this.state;
+        const { roomId, roomList, deviceList, switchChecked } = this.state;
         const room = roomList.find(room => room.id === roomId);
-        console.log(mqttMessage);
         return(
             <Fragment>
                 <Row className='user-room'>
@@ -107,11 +123,12 @@ class UserRoomComponent extends Component {
                                 return (
                                     <Col className='user-room__device-item' span={8} key={i}>
                                         <div className='user-room__device-item__header'>
-                                            <img id={`${item.id}-img`} alt="device-icon" src={`/image/user/device/light.png`}/>
+                                            <img id={`${item.id}-img`} alt="device-icon" src={`/image/user/device/light.png`} 
+                                                style={switchChecked[i] ? {opacity: '1'} : {opacity: '0.2'}}/>
                                         </div>
                                         <div className='user-room__device-item__footer'>
-                                            <b id={`${item.id}-b`}>{item.name.toUpperCase()}</b>
-                                            <Switch onChange={(checked) => this.onChange(item, checked)}/>
+                                            <b style={switchChecked[i] ? {opacity: '1'} : {opacity: '0.2'}}>{item.name.toUpperCase()}</b>
+                                            <Switch checked={switchChecked[i]} onChange={(checked) => this.onChange(item, checked)}/>
                                         </div>
                                     </Col>
                                 )
