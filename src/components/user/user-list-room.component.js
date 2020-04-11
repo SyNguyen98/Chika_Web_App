@@ -6,14 +6,14 @@ import { LINK_USER_ROOM } from '../../constant'
 
 import '../../styles/user/user-list-room.component.css';
 
-const headerColor = [
+export const headerColor = [
     "rgba(192, 226, 37, 0.6), rgba(86, 228, 116, 0.6)", "rgba(63, 114, 253, 0.6), rgba(255, 42, 237, 0.6)",
     "rgba(89, 230, 255, 0.6), rgba(253, 241, 72, 0.6)", "rgba(255, 89, 227, 0.6), rgba(253, 154, 72, 0.6)",
     "rgba(255, 62, 62, 0.6), rgba(166, 72, 253, 0.6)", "rgba(96, 255, 33, 0.6), rgba(72, 90, 253, 0.6)",
     "rgba(255, 70, 141, 0.6), rgba(204, 255, 22, 0.6)", "rgba(255, 153, 20, 0.6), rgba(0, 136, 41, 0.6)"
 ]
-const roomName = [
-    "living room", "kitchen", "bedroom", "bathroom", "working room", "garden", "balcony", "garage"
+export const roomName = [
+    "living-room", "kitchen", "bedroom", "bathroom", "working-room", "garden", "balcony", "garage"
 ]
 const imageUri = "/image/user/room/"
 
@@ -26,15 +26,15 @@ class UserListRoomComponent extends Component {
             roomList: JSON.parse(sessionStorage.getItem("listRoom")) || [],
         }
     }
-    
+
     componentDidMount() {
-      window.scrollTo(0, 0);
-      this.loadRooms();
+        window.scrollTo(0, 0);
+        this.loadRooms();   
     }
 
     loadRooms = () => {
         getRooms().then(response => {
-            this.setState({ roomList: response });
+            this.setState({ roomList: response })
             sessionStorage.setItem("listRoom", JSON.stringify(response));
             console.log(response);
         }).catch(error => {
@@ -54,9 +54,7 @@ class UserListRoomComponent extends Component {
     };
     
     handleCancelModal = () => {
-        this.setState({ 
-            addModalVisible: false,
-        });
+        this.setState({ addModalVisible: false });
     }
 
     setHeaderBackground = (color, url) => {
@@ -74,7 +72,7 @@ class UserListRoomComponent extends Component {
                 <Row className='user-list-room'>
                     {roomList.map((item, i) => {
                         return (
-                            <Col className='user-list-room__item' span={6} key={i} onClick={() => this.handleGoToRoomPage(item.id)}>
+                            <Col id={item.id} className='user-list-room__item' span={6} key={i} onClick={() => this.handleGoToRoomPage(item.id)}>
                                 <div className='user-list-room__item__header'
                                     style={this.setHeaderBackground(headerColor[i], `${imageUri}${item.logo}.jpg`)}>
                                     <img alt="icon" src={`${imageUri}${item.logo}-icon.png`}/>
@@ -136,15 +134,13 @@ class AddRoomForm extends Component {
     handleSubmitAddRoom = () => {
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                sessionStorage.removeItem("listRoom");
                 const request = Object.assign({}, values);
-                console.log(request);
                 addRoom(request).then(response => {
-                    console.log(response);
                     notification.success({
                         message: 'Chika Smarthome',
                         description: "Thêm phòng thành công."
                     })
-                    this.forceUpdate();
                 }).catch(error => {
                     notification.error({
                         message: 'Chika Smarthome',
@@ -205,7 +201,7 @@ class AddRoomForm extends Component {
                         {roomName.map((item, i) => {
                             return (
                                 <Col key={i} span={6} onClick={() => this.handleChangeLogoName(item)}>
-                                    <img className="modal__room-icon" alt="living-room-icon" src={`${imageUri}${item}-icon.png`}/>
+                                    <img className="modal__room-icon" alt={`${imageUri}${item}-icon`} src={`${imageUri}${item}-icon.png`}/>
                                 </Col>
                             )
                         })}

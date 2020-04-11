@@ -105,7 +105,7 @@ class App extends Component {
           break;
         case 'HOME_MASTER': case 'HOME_USER':
           // this.props.history.push(LINK_USER_ROOM + "/b2693580-a57f-4344-a466-ab2ea2aafa1d");
-          this.props.history.push(LINK_USER_HOME);
+          this.props.history.push(LINK_USER_ROOM);
           this.onCloseSidenav();
           break;
         default:
@@ -251,7 +251,7 @@ class App extends Component {
               <Route exact path={LINK_USER_HOME} render={(props) => <UserHomeComponent {...props}/>} />
               <Route exact path={LINK_USER_ROOM} render={(props) => <UserListRoomComponent {...props}/>} />
               <Route exact path={`${LINK_USER_ROOM}/:id`} 
-                render={(props) => <UserRoomComponent mqttMessage={mqttMessage} {...props}/>} />
+                render={(props) => <UserRoomComponent mqttMessage={mqttMessage} currentUser={currentUser} {...props}/>} />
 
               <Route exact path={LINK_USER_INFO} render={(props) => <UserPersonalComponent currentUser={currentUser} {...props}/>} />
 

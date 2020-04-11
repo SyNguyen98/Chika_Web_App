@@ -1,18 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Row, Col, Switch, notification } from 'antd';
+import { Row, Col, Switch, notification, Button, Icon, Popover, Divider, Modal, Form, Input } from 'antd';
 
 import '../../styles/user/user-room.component.css';
 import { getDevicesByRoomId } from '../../service/device.service'
+import { updateRoom, deleteRoom } from '../../service/room.service'
 import { mqttPublish, mqttSubscribe } from '../../app/App'
 import { LINK_USER_ROOM } from '../../constant'
+import { headerColor, roomName } from './user-list-room.component'
+import AddDeviceModal from './user-add-device.component';
 
-const headerColor = [
-    "rgba(192, 226, 37, 0.6), rgba(86, 228, 116, 0.6)", "rgba(63, 114, 253, 0.6), rgba(255, 42, 237, 0.6)",
-    "rgba(89, 230, 255, 0.6), rgba(253, 241, 72, 0.6)", "rgba(255, 89, 227, 0.6), rgba(253, 154, 72, 0.6)",
-    "rgba(255, 62, 62, 0.6), rgba(166, 72, 253, 0.6)", "rgba(96, 255, 33, 0.6), rgba(72, 90, 253, 0.6)",
-    "rgba(255, 70, 141, 0.6), rgba(204, 255, 22, 0.6)", "rgba(255, 153, 20, 0.6), rgba(0, 136, 41, 0.6)"
-]
+const { confirm } = Modal;
+
 const imageRoomUri = "/image/user/room/"
 
 class UserRoomComponent extends Component {
@@ -23,19 +22,21 @@ class UserRoomComponent extends Component {
             roomId: window.location.pathname.substring(18),
             roomList: JSON.parse(sessionStorage.getItem("listRoom")),
             deviceList: [],
-            switchChecked: []
+            switchChecked: [],
+            popoverVisible: false,
+            updateModalVisible: false,
+            addDeviceModalVisible: false
         }
     }
 
     loadDevices = (roomId) => {
         getDevicesByRoomId(roomId).then(response => {
-            console.log(response);
             response.forEach(element => {
-                mqttSubscribe(`${element.productId}/#`);
+                mqttSubscribe(`${element.topic}`);
             });
             this.setState({ 
                 deviceList: response,
-             });
+            });
         }).catch(error => {
             notification.error({
                 message: 'Chika Smarthome',
@@ -44,18 +45,59 @@ class UserRoomComponent extends Component {
         })
     }
 
-    handleGoToRoomPage = (id) => {
-        this.props.history.push(`${LINK_USER_ROOM}/${id}`);
-        this.setState({ roomId: id }); 
-        this.loadDevices(id); 
+    handleGoToRoomPage = (roomId) => {
+        this.props.history.push(`${LINK_USER_ROOM}/${roomId}`);
+        this.setState({ roomId }); 
+        this.loadDevices(roomId); 
     }
+
+    handlePopoverVisibleChange = popoverVisible => {
+        this.setState({ popoverVisible });
+    };
+
+    handleShowUpdateRoomModal = () => {
+        this.setState({ updateModalVisible: true });
+    };
+    
+    handleShowAddDeviceModal = () => {
+        this.setState({ addDeviceModalVisible: true });
+    };
+    
+    handleCancelModal = () => {
+        this.setState({ 
+            updateModalVisible: false,
+            addDeviceModalVisible: false
+        });
+    }
+
+    showDeleteConfirm = (roomId, history) => {
+        confirm({
+            title: 'Bạn thật sự muốn xóa phòng này?',
+            okText: 'Xóa',
+            okType: 'danger',
+            cancelText: 'Không',
+            centered: true,
+            onOk() {
+                deleteRoom(roomId).then(response => {
+                    history.push(LINK_USER_ROOM);
+                    notification.success({
+                        message: 'Chika Smarthome',
+                        description:"Xóa phòng thành công"
+                    })
+                }).catch(error => {
+                    notification.error({
+                        message: 'Chika Smarthome',
+                        description: error.message || "Tải danh sách thiết bị thất bại"
+                    })
+                })
+            },
+        });
+      }
 
     onChange = (device, checked) => {
         let switchChecked = this.state.switchChecked;
         switchChecked[this.state.deviceList.indexOf(device)] = checked;  
-        this.setState({
-            switchChecked: switchChecked
-        })  
+        this.setState({ switchChecked })  
         mqttPublish(device.topic, checked.toString())
     }
 
@@ -84,16 +126,14 @@ class UserRoomComponent extends Component {
                     switchChecked[deviceList.indexOf(device)] = false;    
                 }
             }
-            this.setState({
-                mqttMessage: mqttMessage,
-                switchChecked: switchChecked
-            })  
+            this.setState({ mqttMessage, switchChecked })  
         }
     }
 
     render() {
-        const { roomId, roomList, deviceList, switchChecked } = this.state;
+        const { roomId, roomList, deviceList, switchChecked, popoverVisible, updateModalVisible, addDeviceModalVisible } = this.state;
         const room = roomList.find(room => room.id === roomId);
+        const AntUpdateRoomForm = Form.create()(UpdateRoomForm)
         return(
             <Fragment>
                 <Row className='user-room'>
@@ -117,6 +157,31 @@ class UserRoomComponent extends Component {
                         <div className='user-room__list-device__title'>
                             <img alt="icon" src={`${imageRoomUri}${room.logo}-icon.png`}/>
                             <h1>{room.name.toUpperCase()}</h1>
+                            <Button type="primary" className='user-room__btn user-room__add-btn'
+                                    onClick={this.handleShowAddDeviceModal}>
+                                <Icon type="plus" />
+                            </Button>
+                            <Popover trigger="click" placement="bottom"
+                                    visible={popoverVisible}
+                                    onVisibleChange={this.handlePopoverVisibleChange}
+                                    content={
+                                        <div style={{textAlign: 'right'}}>
+                                            <a style={{margin: '0', fontSize: '1vw', fontWeight: 'bold'}}
+                                                onClick={this.handleShowUpdateRoomModal}>
+                                                    Chỉnh Sửa
+                                            </a>
+                                            <Divider style={{margin: '10px auto'}}/>
+                                            <a style={{margin: '0', fontSize: '1vw', fontWeight: 'bold', color: 'red'}}
+                                                onClick={() => this.showDeleteConfirm(room.id, this.props.history)}>
+                                                    Xóa
+                                            </a>
+                                        </div>
+                                    }>
+                                <Button type="primary" className='user-room__btn user-room__setting-btn'>
+                                    <Icon type="more" />
+                                </Button>
+                            </Popover>
+                           
                         </div>
                         <Row>
                             {deviceList.map((item, i) => {
@@ -134,6 +199,21 @@ class UserRoomComponent extends Component {
                                 )
                             })}
                         </Row>
+
+                        <Modal visible={updateModalVisible} closable={false}
+                                title="CHỈNH SỬA PHÒNG"
+                                centered
+                                width='20vw'
+                                footer={(
+                                    <Button type="primary" onClick={this.handleCancelModal}>
+                                        Quay về
+                                    </Button>
+                                )}>
+                            <AntUpdateRoomForm room={room}/>
+                        </Modal>
+
+                        <AddDeviceModal modalVisible={addDeviceModalVisible} handleCancelModal={this.handleCancelModal} {...this.props}/>
+
                     </Col>
                 </Row>
             </Fragment>
@@ -142,3 +222,102 @@ class UserRoomComponent extends Component {
 }
   
 export default withRouter(UserRoomComponent);
+
+class UpdateRoomForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            logoModalVisible: false,
+            logoName: this.props.room.logo
+        }
+    }
+
+    handleChangeLogoName = (name) => {
+        this.setState({ 
+            logoName: name,
+            logoModalVisible: false
+        });
+    }
+
+    handleSubmitUpdateRoom = () => {
+        this.props.form.validateFields((err, values) => {
+            if (!err) {   
+                const request = Object.assign({}, values);
+                request.id = this.props.room.id;
+                updateRoom(request).then(response => {
+                    this.props.history.push(LINK_USER_ROOM);
+                    notification.success({
+                        message: 'Chika Smarthome',
+                        description: "Sửa phòng thành công."
+                    })
+                }).catch(error => {
+                    notification.error({
+                        message: 'Chika Smarthome',
+                        description: "Sửa phòng thất bại" || error.message
+                    })
+                })
+            }
+        });
+    }
+
+    handleShowModal = () => {
+        this.setState({ logoModalVisible: true });
+    };
+
+    handleCancelModal = () => {
+        this.setState({ logoModalVisible: false });
+    }
+
+    render() {
+        const { getFieldDecorator } = this.props.form;
+        const { logoModalVisible, logoName } = this.state;
+        return(
+            <div>
+                <Form onSubmit={this.handleSubmitUpdateRoom} autoComplete='off'>
+                    <Form.Item label='Tên phòng'>
+                        {getFieldDecorator('name', {
+                            initialValue: this.props.room.name,
+                            rules: [{ required: true, message: 'Vui lòng nhập tên phòng!' }]
+                        })(
+                            <Input  size="large"
+                                    prefix={<Icon type="form" />}
+                                    placeholder="Tên phòng"/>
+                        )}
+                    </Form.Item>
+                    <Form.Item label='Logo'>
+                        {getFieldDecorator('logo', {
+                            initialValue: logoName
+                        })(
+                            <Input type='hidden' />
+                        )}
+                        <img alt={logoName} src={`${imageRoomUri}${logoName}-icon.png`} style={{width: '5vw', marginRight: '2vw'}}/>
+                        <Button type='dashed' onClick={this.handleShowModal}>
+                            Chọn Logo
+                        </Button>
+                    </Form.Item>
+                    <Button type="primary" htmlType="submit" size="large">Cập Nhật</Button>
+                </Form>
+
+                <Modal visible={logoModalVisible} closable={false}
+                        title="LOGO"
+                        centered
+                        width='35vw'
+                        footer={(
+                            <Button type="primary" onClick={this.handleCancelModal}>
+                                Quay về
+                            </Button>
+                        )}>
+                    <Row gutter={[18,24]}>
+                        {roomName.map((item, i) => {
+                            return (
+                                <Col key={i} span={6} onClick={() => this.handleChangeLogoName(item)}>
+                                    <img className="modal__room-icon" alt={`${imageRoomUri}${item}-icon`} src={`${imageRoomUri}${item}-icon.png`}/>
+                                </Col>
+                            )
+                        })}
+                    </Row>
+                </Modal>
+            </div>            
+        )
+    }
+}
