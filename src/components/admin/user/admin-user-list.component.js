@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Icon, Button, Modal, notification } from 'antd';
 
 import '../../../styles/admin/user/admin-user-list.component.css';
-import { getProductByUserForAdmin } from '../../../service/product.service';
+import { getAllNumberOfProductByUserId } from '../../../service/product.service';
 import { getAllUser } from '../../../service/user.service';
 import TableComponent from '../table.component';
 
@@ -97,30 +97,30 @@ class UserInfo extends Component {
     super(props);
     this.state = {
       productsComponent: false,
-      products: null,
-      productNum: 0,
-      switchWifi: null,
-      switchRf: null,
-      moduleIr: null,
-      homeCenter: null,
-      sensor: null,
+      productNum: {
+        switchWifi: 0,
+        switchRf: 0,
+        moduleIr: 0,
+        homeCenter: 0,
+        sensor: 0
+      }
     }
   }
 
-  loadProduct = (userId) => {
+  loadProductNum = (userId) => {
     this.setState({ isLoading: true });
-    getProductByUserForAdmin(userId).then(response => {
+    getAllNumberOfProductByUserId(userId).then(response => {
       this.setState({
-        products: response,
+        productNum: {
+          switchWifi: response.switchWifi,
+          switchRf: response.switchRf,
+          moduleIr: response.moduleIr,
+          homeCenter: response.homeCenter,
+          sensor: response.sensor
+        },
         isLoading: false
       });
       console.log(this.state.products);
-      this.state.products.forEach(product => {
-        this.setState({ 
-          productNum: this.state.productNum + product.ids.length
-        });
-      });
-      this.forceUpdate();
     }).catch(error => {
       this.setState({ isLoading: false });
       notification.error({
@@ -131,63 +131,18 @@ class UserInfo extends Component {
   }
 
   handleShowProduct = (bool) => {
-    if (bool) {
-      this.countProduct();
-    }
     this.setState({ productsComponent: bool });
-  }
-
-  countProduct = () => {
-    const { products } = this.state;
-    if (products !== null) {
-      products.forEach(product => {
-        switch (product.name) {
-          case 'Switch Wifi':
-            this.setState({ switchWifi: {
-              name: 'Công tắc Wifi',
-              number: product.ids.length
-            } });
-            break;
-          case 'Switch Rf':
-            this.setState({ switchRf: {
-              name: 'Công tắc RF',
-              number: product.ids.length
-            } });
-            break;
-          case 'Module Ir':
-            this.setState({ moduleIr: {
-              name: 'Điều khiển hồng ngoại',
-              number: product.ids.length
-            } });
-            break;
-          case 'Home Center':
-            this.setState({ homeCenter: {
-              name: 'Bộ điều khiển trung tâm',
-              number: product.ids.length
-            } });
-            break;
-          case 'Sensor':
-            this.setState({ sensor: {
-              name: 'Cảm biến',
-              number: product.ids.length
-            } });
-            break;
-          default:
-            break;
-        }
-      })
-    }
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    this.loadProduct(this.props.userInfo.id);
+    this.loadProductNum(this.props.userInfo.id);
   }
 
   render() {
     const { userInfo } = this.props;
-    const { productsComponent, productNum, switchWifi, switchRf, moduleIr, homeCenter, sensor } = this.state;
-    
+    const { productsComponent, productNum } = this.state;
+    const numOfProduct = productNum.switchWifi + productNum.switchRf + productNum.moduleIr + productNum.homeCenter + productNum.sensor;
     return (
       <div className="admin-user__info">
         <div style={{ textAlign: 'center' }}>
@@ -227,7 +182,7 @@ class UserInfo extends Component {
           </div>
           <div className="admin-user__info__content__content">
             <p>{userInfo.createAt}</p>
-            <p>{productNum} &emsp; 
+            <p>{numOfProduct} &emsp; 
             {productsComponent ? (
               <Icon type="up" style={{cursor: 'pointer'}} onClick={() => this.handleShowProduct(false)}/>
             ) : (
@@ -241,18 +196,18 @@ class UserInfo extends Component {
             <h1 className="admin-user__info__title">Sản phẩm</h1>
             <div className="admin-user__info__content">
               <div className="admin-user__info_content__topic" style={{width: '15vw'}}>
-                {switchWifi ? (<p>&bull; {switchWifi.name}</p>) : null}
-                {switchRf ? (<p>&bull; {switchRf.name}</p>) : null}
-                {moduleIr ? (<p>&bull; {moduleIr.name}</p>) : null}
-                {homeCenter ? (<p>&bull; {homeCenter.name}</p>) : null}
-                {sensor ? (<p>&bull; {sensor.name}</p>) : null}
+                {productNum.switchWifi !== 0 ? (<p>&bull; Công tắc Wifi</p>) : null}
+                {productNum.switchRf !== 0 ? (<p>&bull; Công tắc Rf</p>) : null}
+                {productNum.moduleIr !== 0 ? (<p>&bull; Điều khiển hồng ngoại</p>) : null}
+                {productNum.homeCenter !== 0 ? (<p>&bull; Điều khiển trung tâm</p>) : null}
+                {productNum.sensor !== 0 ? (<p>&bull; Cảm biến</p>) : null}
               </div>
               <div className="admin-user__info_content__content">
-                {switchWifi ? (<p>{switchWifi.number} sản phẩm</p>) : null}
-                {switchRf ? (<p>{switchRf.number} sản phẩm</p>) : null}
-                {moduleIr ? (<p>{moduleIr.number} sản phẩm</p>) : null}
-                {homeCenter ? (<p>{homeCenter.number} sản phẩm</p>) : null}
-                {sensor ? (<p>{sensor.number} sản phẩm</p>) : null}
+                {productNum.switchWifi !== 0 ? (<p>{productNum.switchWifi} sản phẩm</p>) : null}
+                {productNum.switchRf !== 0 ? (<p>{productNum.switchRf} sản phẩm</p>) : null}
+                {productNum.moduleIr !== 0 ? (<p>{productNum.moduleIr} sản phẩm</p>) : null}
+                {productNum.homeCenter !== 0 ? (<p>{productNum.homeCenter} sản phẩm</p>) : null}
+                {productNum.sensor !== 0 ? (<p>{productNum.sensor} sản phẩm</p>) : null}
               </div>
             </div>
           </div>        
