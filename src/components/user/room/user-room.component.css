@@ -8,17 +8,9 @@
     height: calc(100vh - 80px);
     overflow: scroll;
     overflow-x: hidden;
-    overflow-y: hidden;
-}
-.user-room__list-room:hover {
-    overflow-y: visible;
 }
 .user-room__list-room::-webkit-scrollbar {
     width: 0;
-}
-.user-room__list-room::-webkit-scrollbar-thumb {
-    background: #003eff;
-    border-radius: 20px;
 }
 
 .user-room__list-room__item {
@@ -73,6 +65,14 @@
     font-weight: 700;
     color: #432c58;
 }
+.user-room__list-device__list {
+    height: calc(100vh - 12.5vw);
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.user-room__list-device__list::-webkit-scrollbar {
+    width: 0;
+}
 
 .user-room__btn {
     position: absolute;
@@ -114,6 +114,10 @@
     width: 6vw;
     height: 6vw;
 }
+.user-room__device-item__header svg {
+    margin-top: 1.5vw;
+    margin-left: 2vw;
+}
 
 .user-room__device-item__footer {
     position: relative;
@@ -127,4 +131,11 @@
 .user-room__device-item__footer button {
     position: absolute;
     right: 15px;
+}
+
+.user-room__device-item__footer i {
+    position: absolute;
+    right: 15px;
+    font-size: 1.7vw;
+    cursor: pointer;
 }

@@ -1,29 +1,29 @@
 .app-footer {
-  background-color: #282c34;
+    background-color: #282c34;
 }
 
 .app-footer_agency {
-  display: flex;
+    display: flex;
 }
 
 .app-footer_agency h1 {
-  font-size: 1.5vw;
-  font-weight: 700;
-  color: #00ff98;
+    font-size: 1.5vw;
+    font-weight: 700;
+    color: #00ff98;
 }
 
 .app-footer_agency p {
-  font-size: 1vw;
-  color: white;
+    font-size: 1vw;
+    color: white;
 }
 
 .app-footer_contact {
-  color: white;
-  font-size: 1.3vw;
+    color: white;
+    font-size: 1.3vw;
 }
 
 .app-footer_contact img {
-  margin-right: 10px;
-  width: 2vw;
-  height: 2vw;
+    margin-right: 10px;
+    width: 2vw;
+    height: 2vw;
 }

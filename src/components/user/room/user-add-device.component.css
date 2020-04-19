@@ -1,0 +1,13 @@
+.add-device__product-row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.add-device__product-col {
+    text-align: center;
+    cursor: pointer;
+}
+
+.add-device__product-col:hover {
+    transform: scale(1.05);
+}

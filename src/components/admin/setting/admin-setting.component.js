@@ -10,14 +10,6 @@ const { TabPane } = Tabs;
 
 class AdminSettingComponent extends Component {
 
-  handleChangeComponent = (link) => {
-    this.props.history.push(link);
-  }
-
-  callback = (key) => {
-    console.log(key);
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -27,7 +19,7 @@ class AdminSettingComponent extends Component {
       <Fragment>
         <div className="admin-setting">
           <div className="admin-setting__float">
-            <Tabs defaultActiveKey="1" onChange={this.callback}>
+            <Tabs defaultActiveKey="1">
               <TabPane tab="Thay đổi thông tin" key="1">
                 <AdminChangeInfoComponent currentUser={this.props.currentUser} updateAdminInfo={this.props.updateAdminInfo}/>
               </TabPane>
@@ -35,8 +27,8 @@ class AdminSettingComponent extends Component {
                 <AdminChangePassComponent onLogout={this.props.onLogout}/>
               </TabPane>
             </Tabs>
-            <div className="admin-setting__corner1"></div>
-            <div className="admin-setting__corner2"></div>
+            <div className="admin-setting__corner1"/>
+            <div className="admin-setting__corner2"/>
           </div>
         </div>
       </Fragment>

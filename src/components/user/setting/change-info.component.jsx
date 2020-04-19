@@ -3,14 +3,14 @@ import { Button, Icon, Form, Input, DatePicker } from 'antd';
 import moment from 'moment';
 
 const ChangeInfoComponent = ({ userInfo, updateUserInfo }) => {
-    const AntEditForm = Form.create()(ChangeInfoForm)
+    const AntEditForm = Form.create()(ChangeInfoForm);
       
     return (
       <div className="user-info__edit">
           <AntEditForm userInfo={userInfo} updateUserInfo={updateUserInfo}/>
       </div>
     )
-}
+};
 
 export default ChangeInfoComponent;
   
@@ -24,12 +24,10 @@ class ChangeInfoForm extends Component {
   
     isChange = (values) => {
         const { userInfo } = this.props;   
-        if (userInfo.birthday !== values.birthday.format('DD/MM/YYYY') || userInfo.address !== values.address ||
-            userInfo.phone !== values.phone || userInfo.email !== values.email) {
-            return false;
-        }
-        return true;
-    }
+        return !(userInfo.birthday !== values.birthday.format('DD/MM/YYYY') || userInfo.address !== values.address ||
+            userInfo.phone !== values.phone || userInfo.email !== values.email);
+
+    };
   
     handleSubmit = (event) => {
         event.preventDefault();
@@ -45,7 +43,7 @@ class ChangeInfoForm extends Component {
             this.props.updateUserInfo(request);
             }
         });
-    }
+    };
   
     render() {
         const { userInfo } = this.props;

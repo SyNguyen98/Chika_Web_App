@@ -47,7 +47,7 @@ class UserPersonalComponent extends Component {
         description: error.message || "Tải dữ liệu thất bại!"
       });
     });
-  }
+  };
 
   updateUserInfo = (request) => {
     this.setState({ isLoading: true });
@@ -74,11 +74,11 @@ class UserPersonalComponent extends Component {
         description: message || "Đã có lỗi xảy ra. Vui lòng thử lại sau!"
       });
     });
-  }
+  };
 
   handleModal = () => {
     this.setState({ productModalVisible: !this.state.productModalVisible });
-  }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);

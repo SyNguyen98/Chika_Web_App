@@ -29,3 +29,19 @@ export function getDevicesByRoomId(roomId) {
         method: 'GET',
     });
 }
+
+export function getSwitchButtonsByDeviceTopic(topic) {
+    return request({
+        url: `${API_BASE_URL}/device/topic/${topic}`,
+        method: 'GET',
+    });
+}
+
+
+export function saveDevice(deviceRequest) {
+    return request({
+        url: `${API_BASE_URL}/device/`,
+        method: 'POST',
+        body: JSON.stringify(deviceRequest)
+    });
+}

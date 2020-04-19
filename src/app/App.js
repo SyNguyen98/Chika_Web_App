@@ -48,7 +48,7 @@ import AdminSettingComponent from '../components/admin/setting/admin-setting.com
 
 import UserHomeComponent from '../components/user/user-home.component';
 import UserListRoomComponent from '../components/user/user-list-room.component';
-import UserRoomComponent from '../components/user/user-room.component';
+import UserRoomComponent from '../components/user/room/user-room.component';
 
 import UserPersonalComponent from '../components/user/setting/user-personal.component'
 
@@ -266,8 +266,8 @@ class App extends Component {
         ) : null}
 
         {currentUser ? null : [
-          <AppFooterComponent/>,
-          <ContactMenuComponent/>
+          <AppFooterComponent key={0}/>,
+          <ContactMenuComponent key={1}/>
         ]}
 
         <BackTop/>

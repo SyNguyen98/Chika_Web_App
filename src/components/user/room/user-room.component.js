@@ -2,13 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Row, Col, Switch, notification, Button, Icon, Popover, Divider, Modal, Form, Input } from 'antd';
 
-import '../../styles/user/user-room.component.css';
-import { getDevicesByRoomId } from '../../service/device.service'
-import { updateRoom, deleteRoom } from '../../service/room.service'
-import { mqttPublish, mqttSubscribe } from '../../app/App'
-import { LINK_USER_ROOM } from '../../constant'
-import { headerColor, roomName } from './user-list-room.component'
+import './user-room.component.css';
+import { getDevicesByRoomId } from '../../../service/device.service'
+import { updateRoom, deleteRoom } from '../../../service/room.service'
+import { mqttPublish, mqttSubscribe } from '../../../app/App'
+import { LINK_USER_ROOM } from '../../../constant'
+import { headerColor, roomName } from '../user-list-room.component'
 import AddDeviceModal from './user-add-device.component';
+import { DoorSensorComponent, MotionDetectorComponent, AirSensorComponent, FireSensorComponent } from './device.component';
 
 const { confirm } = Modal;
 
@@ -47,7 +48,7 @@ class UserRoomComponent extends Component {
 
     handleGoToRoomPage = (roomId) => {
         this.props.history.push(`${LINK_USER_ROOM}/${roomId}`);
-        this.setState({ roomId }); 
+        this.setState({ roomId, deviceList: [] }); 
         this.loadDevices(roomId); 
     }
 
@@ -92,7 +93,36 @@ class UserRoomComponent extends Component {
                 })
             },
         });
-      }
+    }
+
+    showDevice = (device, index) => {
+        const { switchChecked } = this.state;
+        if (device.type.includes("SW") || device.type.includes("SR")) {
+            return (
+                <Col key={index} className='user-room__device-item' span={8} >
+                    <div className='user-room__device-item__header'>
+                        <img id={`${device.id}-img`} alt="device-icon" src={`/image/user/device/${device.logo}-icon.png`} 
+                            style={switchChecked[index] ? {opacity: '1'} : {opacity: '0.2'}}/>
+                    </div>
+                    <div className='user-room__device-item__footer'>
+                        <b style={switchChecked[index] ? {opacity: '1'} : {opacity: '0.2'}}>{device.name.toUpperCase()}</b>
+                        <Switch checked={switchChecked[index]} onChange={(checked) => this.onChange(device, checked)}/>
+                    </div>
+                </Col>
+            )
+        } else {
+            switch (device.type) {
+                case "SS01":
+                    return (<DoorSensorComponent key={index} device={device}/>);
+                case "SS02":
+                    return (<MotionDetectorComponent key={index} device={device}/>);
+                case "SS03":
+                    return (<AirSensorComponent key={index} device={device}/>);
+                default:
+                    return (<FireSensorComponent key={index} device={device}/>);
+            }
+        }
+    }
 
     onChange = (device, checked) => {
         let switchChecked = this.state.switchChecked;
@@ -107,10 +137,10 @@ class UserRoomComponent extends Component {
             backgroundSize: '100% 20vh'
         } 
     }
-    
-    componentDidMount() {
+
+    componentWillMount() {
         window.scrollTo(0, 0);
-        this.loadDevices(window.location.pathname.substring(18));    
+        this.loadDevices(window.location.pathname.substring(18)); 
     }
 
     componentDidUpdate() {
@@ -131,7 +161,7 @@ class UserRoomComponent extends Component {
     }
 
     render() {
-        const { roomId, roomList, deviceList, switchChecked, popoverVisible, updateModalVisible, addDeviceModalVisible } = this.state;
+        const { roomId, roomList, deviceList, popoverVisible, updateModalVisible, addDeviceModalVisible } = this.state;
         const room = roomList.find(room => room.id === roomId);
         const AntUpdateRoomForm = Form.create()(UpdateRoomForm)
         return(
@@ -183,21 +213,8 @@ class UserRoomComponent extends Component {
                             </Popover>
                            
                         </div>
-                        <Row>
-                            {deviceList.map((item, i) => {
-                                return (
-                                    <Col className='user-room__device-item' span={8} key={i}>
-                                        <div className='user-room__device-item__header'>
-                                            <img id={`${item.id}-img`} alt="device-icon" src={`/image/user/device/light.png`} 
-                                                style={switchChecked[i] ? {opacity: '1'} : {opacity: '0.2'}}/>
-                                        </div>
-                                        <div className='user-room__device-item__footer'>
-                                            <b style={switchChecked[i] ? {opacity: '1'} : {opacity: '0.2'}}>{item.name.toUpperCase()}</b>
-                                            <Switch checked={switchChecked[i]} onChange={(checked) => this.onChange(item, checked)}/>
-                                        </div>
-                                    </Col>
-                                )
-                            })}
+                        <Row className='user-room__list-device__list'>
+                            {deviceList.map((item, i) => this.showDevice(item, i))}
                         </Row>
 
                         <Modal visible={updateModalVisible} closable={false}
@@ -212,7 +229,10 @@ class UserRoomComponent extends Component {
                             <AntUpdateRoomForm room={room}/>
                         </Modal>
 
-                        <AddDeviceModal modalVisible={addDeviceModalVisible} handleCancelModal={this.handleCancelModal} {...this.props}/>
+                        <AddDeviceModal modalVisible={addDeviceModalVisible} 
+                                        handleCancelModal={this.handleCancelModal} 
+                                        loadDevices={this.loadDevices} 
+                                        {...this.props}/>
 
                     </Col>
                 </Row>

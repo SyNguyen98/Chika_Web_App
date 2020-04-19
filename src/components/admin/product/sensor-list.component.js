@@ -11,7 +11,7 @@ class SensorListComponent extends Component {
       this.state = {
         sensorList: [],
         modalVisible: false,
-        sensorName: 'Cảm biến cửa',
+        sensorType: 'SS01',
         sensorChannel: '',
         saveSensorResponse: null,
         disableAddSensor: false
@@ -49,8 +49,25 @@ class SensorListComponent extends Component {
   handleAddSensor = () => {
     this.setState({ isLoading: true });
     let sensorRequest = {
-      name: this.state.sensorName,
+      type: this.state.sensorType,
       rfChannel: this.state.sensorChannel
+    }
+    switch (sensorRequest.type) {
+      case "SS01": {
+        sensorRequest.name = "Cảm biến cửa";
+        break;
+      }
+      case "SS02": {
+        sensorRequest.name = "Cảm biến chuyển động";
+        break;
+      }
+      case "SS03": {
+        sensorRequest.name = "Cảm biến không khí";
+        break;
+      }
+      default: {
+        sensorRequest.name = "Cảm biến cảnh báo cháy";
+      }
     }
     saveSensor(sensorRequest).then(response => {
       this.setState({
@@ -101,7 +118,7 @@ class SensorListComponent extends Component {
   }
 
   render() {
-    const { sensorList, modalVisible, sensorName, saveSensorResponse, disableAddSensor } = this.state;
+    const { sensorList, modalVisible, saveSensorResponse, disableAddSensor, sensorType } = this.state;
     const columns = [
       {
         title: 'Ngày sản xuất',
@@ -112,8 +129,8 @@ class SensorListComponent extends Component {
         key: 'id',
       },
       {
-        title: 'Tên',
-        key: 'name',
+        title: 'Loại',
+        key: 'type',
       },
       {
         title: 'Kênh',
@@ -166,7 +183,7 @@ class SensorListComponent extends Component {
                   <p><b>Ngày sản xuất: </b>{saveSensorResponse.day}</p>
                   <p><b>Mã sản phẩm: </b></p>
                   <p>{saveSensorResponse.id}</p>
-                  <p><b>Tên: </b>{saveSensorResponse.name}</p>
+                  <p><b>Loại: </b>{saveSensorResponse.type}</p>
                   <p><b>Kênh: </b>{saveSensorResponse.rfChannel}</p>
                 </div>
               </div>
@@ -174,23 +191,28 @@ class SensorListComponent extends Component {
               <div style={{fontSize: '1.2vw'}}>
                 <p>&bull;&emsp;Chọn loại cảm biến muốn thêm:</p>
                 <Radio.Group  style={{display: 'flex'}}
-                              onChange={e => { this.setState({ sensorName: e.target.value })}}
-                              value={sensorName}>
+                              onChange={e => { this.setState({ sensorType: e.target.value })}}
+                              value={sensorType}>
                   <div style={{float: 'left'}}>
-                    <Radio value={'Cảm biến cửa'} style={{marginBottom: '1vw'}}>Cảm biến cửa</Radio>
-                    <Radio value={'Cảm biến chuyển động'}>Cảm biến chuyển động</Radio>
+                    <Radio value={'SS01'} style={{marginBottom: '1vw'}}>SS01</Radio>
+                    <Radio value={'SS02'}>SS02</Radio>
                   </div>
                   <div style={{float: 'right'}}>
-                    <Radio value={'Cảm biến cảnh báo cháy'} style={{marginBottom: '1vw'}}>Cảm biến cảnh báo cháy</Radio>
-                    <Radio value={'Cảm biến không khí'}>Cảm biến không khí</Radio>
+                    <Radio value={'SS03'} style={{marginBottom: '1vw'}}>SS03</Radio>
+                    <Radio value={'SS04'}>SS04</Radio>
                   </div>
                 </Radio.Group>
                 <br/>
-                <p>&bull;&emsp;Kênh vô tuyến</p>
-                <Input  size='large' 
+                
+                {sensorType !== "SS01" ? (
+                  <span>
+                    <p>&bull;&emsp;Kênh vô tuyến</p>
+                    <Input  size='large' 
                         placeholder='Vd: 1002502019006'
                         prefix={<Icon type="wifi" />}
                         onChange={(e) => {this.setState({ sensorChannel: e.target.value })}}></Input>
+                  </span>
+                ) : null}
               </div>
             )}
           </div>

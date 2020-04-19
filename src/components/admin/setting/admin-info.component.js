@@ -33,8 +33,8 @@ class AdminInfoComponent extends Component {
                 <p><Icon type="team" />&emsp;&emsp;{currentUser.department}</p>
                 <p><Icon type="laptop" />&emsp;&emsp;{currentUser.function}</p>
               </div>
-              <div className="admin-info__corner1"></div>
-              <div className="admin-info__corner2"></div>
+              <div className="admin-info__corner1"/>
+              <div className="admin-info__corner2"/>
             </div>
           ) : null}
         </div>
