@@ -120,8 +120,8 @@ class UserPersonalComponent extends Component {
                   </TabPane>
                 </Tabs>
               </div>
-              <div className="user-info__corner1"></div>
-              <div className="user-info__corner2"></div>
+              <div className="user-info__corner1"/>
+              <div className="user-info__corner2"/>
             </div>
           ) : null}
 

@@ -107,6 +107,7 @@
 .user-room__device-item__header {
     height: 9vw;
     background-color: #e7e7e7;
+    cursor: pointer;
 }
 .user-room__device-item__header img {
     margin-top: 1.5vw;

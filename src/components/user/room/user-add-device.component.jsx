@@ -120,14 +120,14 @@ class ProductListComponent extends Component {
 
     onChangePage = (currentPage) => {
         const { productList } = this.props;
-        let productPage = [];
+        let productPage;
         productPage = productList.slice(currentPage * 3 - 3, currentPage * 3);
         this.setState({ currentPage, productPage })
 
     }
 
     showProduct = (product, index) => {
-        let imgSrc = "";
+        let imgSrc;
         if (product.type.includes("SW")) {
             imgSrc = `${imgProductUri}SW.png`;
         } else if (product.type.includes("SR")) {
@@ -156,7 +156,7 @@ class ProductListComponent extends Component {
             
         )
     }
-};
+}
 
 class ProductInfoForm extends Component {
     constructor(props) {
@@ -210,7 +210,7 @@ class ProductInfoForm extends Component {
                     request.topic = product.id;
                 }
                 console.log(request)
-                saveDevice(request).then(response => {
+                saveDevice(request).then(() => {
                     this.props.handleCancelModal();
                     this.props.loadDevices(window.location.pathname.substring(18));
                     notification.success({
@@ -255,7 +255,7 @@ class ProductInfoForm extends Component {
                         })(
                             <Input  size="large"
                                     prefix={<Icon type="form" />}
-                                    placeholder="Tên thiết bị"/>
+                                    placeholder="Vd: Đèn Trần, Quạt Trần ..."/>
                         )}
                     </Form.Item>
         

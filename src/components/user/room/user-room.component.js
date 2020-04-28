@@ -3,13 +3,14 @@ import { withRouter } from 'react-router-dom';
 import { Row, Col, Switch, notification, Button, Icon, Popover, Divider, Modal, Form, Input } from 'antd';
 
 import './user-room.component.css';
-import { getDevicesByRoomId } from '../../../service/device.service'
+import { getDevicesByRoomId, deleteDevice } from '../../../service/device.service'
 import { updateRoom, deleteRoom } from '../../../service/room.service'
 import { mqttPublish, mqttSubscribe } from '../../../app/App'
 import { LINK_USER_ROOM } from '../../../constant'
 import { headerColor, roomName } from '../user-list-room.component'
 import AddDeviceModal from './user-add-device.component';
-import { DoorSensorComponent, MotionDetectorComponent, AirSensorComponent, FireSensorComponent } from './device.component';
+import { DoorSensorComponent, AirSensorComponent } from './device.component';
+import DeviceModalComponent from './device-modal.component'
 
 const { confirm } = Modal;
 
@@ -22,22 +23,27 @@ class UserRoomComponent extends Component {
             mqttMessage: null,
             roomId: window.location.pathname.substring(18),
             roomList: JSON.parse(sessionStorage.getItem("listRoom")),
+            device: null,
             deviceList: [],
             switchChecked: [],
+            // doorState: null,
+            // motionState: null,
+            // airState: null,
+            // fireState: null,
             popoverVisible: false,
             updateModalVisible: false,
-            addDeviceModalVisible: false
+            addDeviceModalVisible: false,
+            deviceModalVisible: false
         }
     }
 
     loadDevices = (roomId) => {
         getDevicesByRoomId(roomId).then(response => {
+            console.log(response);
             response.forEach(element => {
                 mqttSubscribe(`${element.topic}`);
             });
-            this.setState({ 
-                deviceList: response,
-            });
+            this.setState({ deviceList: response });
         }).catch(error => {
             notification.error({
                 message: 'Chika Smarthome',
@@ -63,12 +69,33 @@ class UserRoomComponent extends Component {
     handleShowAddDeviceModal = () => {
         this.setState({ addDeviceModalVisible: true });
     };
+
+    handleShowDeviceModal = (device) => {
+        this.setState({ device, deviceModalVisible: true });
+    }
     
     handleCancelModal = () => {
         this.setState({ 
             updateModalVisible: false,
-            addDeviceModalVisible: false
+            addDeviceModalVisible: false,
+            deviceModalVisible: false
         });
+    }
+
+    handleDeleteDevice = (deviceId) => {
+        deleteDevice(deviceId).then(() => {
+            this.handleCancelModal();
+            notification.success({
+                message: 'Chika Smarthome',
+                description: "Xóa thiết bị thành công"
+            })
+            this.loadDevices(this.state.roomId);
+        }).catch(error => {
+            notification.error({
+                message: 'Chika Smarthome',
+                description: "Đã có lỗi xảy ra, vui lòng thử lại sau"
+            })
+        })
     }
 
     showDeleteConfirm = (roomId, history) => {
@@ -79,7 +106,7 @@ class UserRoomComponent extends Component {
             cancelText: 'Không',
             centered: true,
             onOk() {
-                deleteRoom(roomId).then(response => {
+                deleteRoom(roomId).then(() => {
                     history.push(LINK_USER_ROOM);
                     notification.success({
                         message: 'Chika Smarthome',
@@ -99,32 +126,29 @@ class UserRoomComponent extends Component {
         const { switchChecked } = this.state;
         if (device.type.includes("SW") || device.type.includes("SR")) {
             return (
-                <Col key={index} className='user-room__device-item' span={8} >
+                <Col className='user-room__device-item' span={8}>
                     <div className='user-room__device-item__header'>
                         <img id={`${device.id}-img`} alt="device-icon" src={`/image/user/device/${device.logo}-icon.png`} 
                             style={switchChecked[index] ? {opacity: '1'} : {opacity: '0.2'}}/>
                     </div>
                     <div className='user-room__device-item__footer'>
                         <b style={switchChecked[index] ? {opacity: '1'} : {opacity: '0.2'}}>{device.name.toUpperCase()}</b>
-                        <Switch checked={switchChecked[index]} onChange={(checked) => this.onChange(device, checked)}/>
+                        <Switch checked={switchChecked[index]} onChange={(checked, event) => this.onChange(event, device, checked)}/>
                     </div>
                 </Col>
             )
         } else {
             switch (device.type) {
                 case "SS01":
-                    return (<DoorSensorComponent key={index} device={device}/>);
-                case "SS02":
-                    return (<MotionDetectorComponent key={index} device={device}/>);
+                    return (<DoorSensorComponent device={device} doorState={this.state.doorState}/>);
                 case "SS03":
-                    return (<AirSensorComponent key={index} device={device}/>);
-                default:
-                    return (<FireSensorComponent key={index} device={device}/>);
+                    return (<AirSensorComponent device={device} airState={this.state.airState}/>);
             }
         }
     }
 
-    onChange = (device, checked) => {
+    onChange = (event, device, checked) => {
+        event.stopPropagation();
         let switchChecked = this.state.switchChecked;
         switchChecked[this.state.deviceList.indexOf(device)] = checked;  
         this.setState({ switchChecked })  
@@ -148,20 +172,39 @@ class UserRoomComponent extends Component {
         if (mqttMessage !== this.state.mqttMessage) {
             const { deviceList } = this.state;
             let device = deviceList.find(device =>  device.topic === mqttMessage.topic);
-            let switchChecked = this.state.switchChecked;
-            if (deviceList.length > 0) {               
-                if (mqttMessage.message === "true") {
-                    switchChecked[deviceList.indexOf(device)] = true;       
-                } else {
-                    switchChecked[deviceList.indexOf(device)] = false;    
+
+            if (device.type.includes("SW") || device.type.includes("SR")) {
+                let switchChecked = this.state.switchChecked;
+                if (deviceList.length > 0) {               
+                    switchChecked[deviceList.indexOf(device)] = mqttMessage.message === "true";
+                }
+                this.setState({ mqttMessage, switchChecked })  
+            } else {
+                switch (device.type) {
+                    case "SS01":
+                        console.log("Cảm biến cửa");
+                        this.setState({ mqttMessage, doorState: JSON.parse(mqttMessage.message) });
+                        break;
+                    case "SS02":
+                        console.log("Cảm biến chuyển động");
+                        this.setState({ mqttMessage, motionState: JSON.parse(mqttMessage.message) });
+                        break;
+                    case "SS03":
+                        console.log("Cảm biến không khí");
+                        this.setState({ mqttMessage, airState: JSON.parse(mqttMessage.message) });
+                        break;
+                    default:
+                        console.log("Cảm biến lửa");
+                        this.setState({ mqttMessage, fireState: JSON.parse(mqttMessage.message) });
+                        break;
                 }
             }
-            this.setState({ mqttMessage, switchChecked })  
         }
     }
 
     render() {
-        const { roomId, roomList, deviceList, popoverVisible, updateModalVisible, addDeviceModalVisible } = this.state;
+        const { roomId, roomList, device, deviceList, popoverVisible, 
+                updateModalVisible, addDeviceModalVisible, deviceModalVisible } = this.state;
         const room = roomList.find(room => room.id === roomId);
         const AntUpdateRoomForm = Form.create()(UpdateRoomForm)
         return(
@@ -214,7 +257,12 @@ class UserRoomComponent extends Component {
                            
                         </div>
                         <Row className='user-room__list-device__list'>
-                            {deviceList.map((item, i) => this.showDevice(item, i))}
+                            {deviceList.map((item, i) => (
+                                <div key={i} onClick={() => this.handleShowDeviceModal(item)}>
+                                    {this.showDevice(item, i)}
+                                </div>
+                                
+                            ))}
                         </Row>
 
                         <Modal visible={updateModalVisible} closable={false}
@@ -233,7 +281,13 @@ class UserRoomComponent extends Component {
                                         handleCancelModal={this.handleCancelModal} 
                                         loadDevices={this.loadDevices} 
                                         {...this.props}/>
-
+                        {device ? (
+                            <DeviceModalComponent   device={device} visible={deviceModalVisible}
+                                                    handleCancelModal={this.handleCancelModal}
+                                                    handleDeleteDevice={this.handleDeleteDevice}
+                                                    loadDevices={this.loadDevices}/>
+                        ) : null}
+                        
                     </Col>
                 </Row>
             </Fragment>
@@ -264,7 +318,7 @@ class UpdateRoomForm extends Component {
             if (!err) {   
                 const request = Object.assign({}, values);
                 request.id = this.props.room.id;
-                updateRoom(request).then(response => {
+                updateRoom(request).then(() => {
                     this.props.history.push(LINK_USER_ROOM);
                     notification.success({
                         message: 'Chika Smarthome',

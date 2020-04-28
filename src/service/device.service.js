@@ -45,3 +45,18 @@ export function saveDevice(deviceRequest) {
         body: JSON.stringify(deviceRequest)
     });
 }
+
+export function updateDevice(deviceRequest) {
+    return request({
+        url: `${API_BASE_URL}/device/`,
+        method: 'PUT',
+        body: JSON.stringify(deviceRequest)
+    });
+}
+
+export function deleteDevice(deviceId) {
+    return request({
+        url: `${API_BASE_URL}/device/${deviceId}`,
+        method: 'DELETE'
+    });
+}
