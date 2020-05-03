@@ -1,0 +1,162 @@
+.user-room {
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
+}
+
+.user-room__list-room {
+    background-color: #eceaea;
+    height: calc(100vh - 80px);
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.user-room__list-room::-webkit-scrollbar {
+    width: 0;
+}
+
+.user-room__list-room__item {
+    position: relative;
+    margin: 10px auto 2vw 4.5vw;
+    padding: 0 !important;
+    width: 20vw;
+    height: 20vh;
+    box-shadow: 2px 3px 4px #524e4e;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.user-room__list-room__item:hover {
+    transform: scale(1.05);
+}
+
+.user-room__list-room__item img {
+    margin-top: 3vh;
+    margin-left: 2vw;
+    width: 4vw;
+    border-radius: 50%;
+    opacity: 0.9;
+}
+
+.user-room__list-room__item p {
+    position: absolute;
+    top: 13vh;
+    left: 2vw;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-shadow: 1px 2px 3px #807f7f;
+}
+
+.user-room__list-device__title {
+    position: relative;
+    margin: 10px 7vw 15px 3vw;
+    padding-bottom: 10px;
+    display: flex;
+    border-bottom: 1px solid !important;
+    border-image: linear-gradient(90deg, #003eff, #00ff98) 1;
+}
+
+.user-room__list-device__title img {
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    box-shadow: 2px 3px 4px #524e4e;
+}
+
+.user-room__list-device__title h1 {
+    margin: 4px 0 0 20px;
+    font-size: 2.3vw;
+    font-weight: 700;
+    color: #432c58;
+}
+
+.user-room__btn {
+    position: absolute;
+    top: 15%;
+    padding: 0;
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    font-size: 1.8vw;
+}
+
+.user-room__add-btn {
+    right: 4vw;
+    background-color: #01cc23;
+    border-color: #00a81c;
+}
+
+.user-room__add-btn:hover {
+    background-color: #00a71c;
+    border-color: #008f18;
+}
+
+.user-room__setting-btn {
+    right: 0;
+}
+
+.user-room__list-device__list {
+    height: calc(100vh - 13vw);
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.user-room__list-device__list::-webkit-scrollbar {
+    width: 0;
+}
+
+.user-room__sensor-item {
+    margin-left: 3vw;
+    margin-bottom: 2vw;
+    width: 13.5vw;
+    height: 8vw;
+}
+
+.user-room__device-item {
+    margin-left: 3vw;
+    margin-bottom: 2vw;
+    width: 19vw;
+    height: 13vw;
+    box-shadow: 2px 3px 4px #524e4e;
+}
+
+.user-room__device-item__header {
+    height: 9vw;
+    background-color: #e7e7e7;
+    cursor: pointer;
+}
+
+.user-room__device-item__header img {
+    margin-top: 1.5vw;
+    margin-left: 6.5vw;
+    width: 6vw;
+    height: 6vw;
+}
+
+.user-room__device-item__header svg {
+    margin-top: 1.5vw;
+    margin-left: 2vw;
+}
+
+.user-room__device-item__footer {
+    position: relative;
+    padding-top: 1vw;
+}
+
+.user-room__device-item__footer b {
+    position: absolute;
+    left: 10px;
+    font-size: 1.3vw;
+}
+
+.user-room__device-item__footer button {
+    position: absolute;
+    right: 15px;
+}
+
+.user-room__device-item__footer i {
+    position: absolute;
+    right: 15px;
+    font-size: 1.7vw;
+    cursor: pointer;
+}
