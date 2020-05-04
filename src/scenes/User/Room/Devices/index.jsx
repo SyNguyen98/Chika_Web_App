@@ -182,25 +182,26 @@ export default class UserRoomComponent extends Component {
         const {mqttMessage} = this.props;
         if (mqttMessage !== this.state.mqttMessage) {
             const {deviceList} = this.state;
-            let device = deviceList.find(device => device.topic === mqttMessage.topic);
-
-            if (device.type.includes("SW") || device.type.includes("SR")) {
+            let device;
+            device = deviceList.sensors.find(device => device.topic === mqttMessage.topic);
+            if (device === undefined) {
+                device = deviceList.switches.find(device => device.topic === mqttMessage.topic);
                 let switchChecked = this.state.switchChecked;
                 if (deviceList.length > 0) {
                     switchChecked[deviceList.indexOf(device)] = mqttMessage.message === "true";
                 }
                 this.setState({mqttMessage, switchChecked})
-            } else {
-                switch (device.type) {
-                    case "SS01":
-                        this.setState({mqttMessage, doorState: JSON.parse(mqttMessage.message)});
-                        break;
-                    case "SS03":
-                        this.setState({mqttMessage, airState: JSON.parse(mqttMessage.message)});
-                        break;
-                    default:
-                        break;
-                }
+            }
+
+            switch (device.type) {
+                case "SS01":
+                    this.setState({mqttMessage, doorState: JSON.parse(mqttMessage.message)});
+                    break;
+                case "SS03":
+                    this.setState({mqttMessage, airState: JSON.parse(mqttMessage.message)});
+                    break;
+                default:
+                    break;
             }
         }
     }
