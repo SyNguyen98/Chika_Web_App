@@ -88,13 +88,3 @@
 .user-list-room__item__add:hover {
     border: 3px solid #a8a8a8;
 }
-
-.modal__room-icon {
-    width: 5vw;
-    cursor: pointer;
-    transition: transform .2s;
-}
-
-.modal__room-icon:hover {
-    transform: scale(1.2);
-}

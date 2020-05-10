@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react';
-import {Modal, Button, Timeline, Row, Col, Tabs, notification, Form, Input, Icon} from 'antd';
+import React, {Component} from 'react';
+import {Button, Col, Form, Icon, Input, Row, Tabs, Timeline} from 'antd';
 import moment from 'moment';
 
 import './device-detail.css'
@@ -8,11 +8,12 @@ import {getDeviceHistories, updateDevice} from "../../../../../../services/Devic
 
 import {DEVICE_NAME} from "../../../../../../constant/name";
 import {DEVICE_IMG_URI} from "../../../../../../constant/uri";
+import {IconModal} from "../../../../../../components/modal";
+import {ErrorNotification, SuccessNotification} from "../../../../../../components/notification";
 
-const {confirm} = Modal;
 const {TabPane} = Tabs;
 
-export default class DeviceModalComponent extends Component {
+export default class DeviceDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,27 +21,11 @@ export default class DeviceModalComponent extends Component {
         }
     }
 
-    showConfirm = (handleDeleteDevice, deviceId) => {
-        confirm({
-            title: 'Bạn thật sự muốn xóa thiết bị này?',
-            centered: true,
-            okText: 'Có',
-            okType: 'danger',
-            cancelText: 'Không',
-            onOk() {
-                handleDeleteDevice(deviceId);
-            },
-        });
-    }
-
     loadHistories = (deviceId) => {
         getDeviceHistories(deviceId).then(deviceHistories => {
             this.setState({deviceHistories})
         }).catch(error => {
-            notification.error({
-                message: 'Chika Smarthome',
-                description: error.message || "Tải danh sách thất bại"
-            })
+            ErrorNotification(error.message || "Tải danh sách thất bại");
         })
     }
 
@@ -49,158 +34,54 @@ export default class DeviceModalComponent extends Component {
     }
 
     render() {
-        const {device, visible, handleCancelModal, handleDeleteDevice, loadDevices} = this.props;
+        const {device, handleCancelModal, loadDevices} = this.props;
         const {deviceHistories} = this.state;
         const AntUpdateDeviceForm = Form.create()(UpdateDeviceForm);
         return (
-            <Modal className="device-info-modal"
-                   visible={visible} closable={false}
-                   title="CHI TIẾT THIẾT BỊ"
-                   centered
-                   width='50vw'
-                   onCancel={handleCancelModal}
-                   footer={(
-                       <Fragment>
-                           <Button type="danger" onClick={() => this.showConfirm(handleDeleteDevice, device.id)}>Xóa
-                               Thiết Bị</Button>
-                           <Button onClick={handleCancelModal}>Quay Về</Button>
-                       </Fragment>
-                   )}>
-                <Tabs defaultActiveKey="1" onChange={this.callback}>
-                    <TabPane tab="Lịch Sử Thiết Bị" key="1">
-                        <Row>
-                            <Col span={12}>
-                                <Timeline className="device-info-modal__timeline">
-                                    {deviceHistories.map((item, i) => (
-                                        <Timeline.Item key={i} color={item.state ? "green" : "red"}>
-                                            {item.state ? "Bật" : "Tắt"} lúc {item.time}
-                                        </Timeline.Item>
-                                    ))}
-                                </Timeline>
-                            </Col>
-                            <Col span={12}>
-                                <div className="device-info-modal__detail">
-                                    <img alt={`${device.logo}-icon`} src={`${DEVICE_IMG_URI}${device.logo}-icon.png`}/>
-                                    <text>{device.name}</text>
-                                    <p><b>Ngày tạo: </b> {moment(device.createdAt).format("DD/MM/YYYY")}</p>
-                                    <p><b>Công suất tiêu thụ: </b> 15kWh</p>
-                                    <p>Thuộc bộ Công tắc {device.type.includes("SW") ? "Wifi" : "RF"}</p>
-                                    <Button type="primary">Xuất File</Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </TabPane>
-                    <TabPane tab="Chỉnh Sửa" key="2">
-                        <AntUpdateDeviceForm device={device} handleCancelModal={handleCancelModal}
-                                             loadDevices={loadDevices}/>
-                    </TabPane>
-                </Tabs>
-            </Modal>
+            <Tabs defaultActiveKey={"1"} onChange={this.callback}>
+                <TabPane tab="Lịch Sử Thiết Bị" key="1">
+                    <Row>
+                        <Col span={12}>
+                            <Timeline className="device-info-modal__timeline">
+                                {deviceHistories.map((item, i) => (
+                                    <Timeline.Item key={i} color={item.state ? "green" : "red"}>
+                                        {item.state ? "Bật" : "Tắt"} lúc {item.time}
+                                    </Timeline.Item>
+                                ))}
+                            </Timeline>
+                        </Col>
+                        <Col span={12}>
+                            <div className="device-info-modal__detail">
+                                <img alt={`${device.logo}-icon`} src={`${DEVICE_IMG_URI}${device.logo}-icon.png`}/>
+                                <p><b>Ngày tạo: </b> {moment(device.createdAt).format("DD/MM/YYYY")}</p>
+                                <p><b>Công suất tiêu thụ: </b> 15kWh</p>
+                                <p>Thuộc bộ Công tắc {device.type.includes("SW") ? "Wifi" : "RF"}</p>
+                                <Button type="primary">Xuất File</Button>
+                            </div>
+                        </Col>
+                    </Row>
+                </TabPane>
+                <TabPane tab="Chỉnh Sửa" key="2">
+                    <AntUpdateDeviceForm device={device} handleCancelModal={handleCancelModal}
+                                         loadDevices={loadDevices}/>
+                </TabPane>
+            </Tabs>
         )
     }
 }
-
-// class SwitchDetail extends Component {
-//
-//     render() {
-//         const {device} = this.props;
-//         return (
-//             <Row>
-//                 <Col span={12}>
-//                     <Timeline className="device-info-modal__timeline">
-//                         <Timeline.Item color="green">Bật lúc 20:31 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">Tắt lúc 20:00 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="green">Bật lúc 19:04 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">Tắt lúc 16:30 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="green">Bật lúc 12:53 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">Tắt lúc 8:24 23/04/2020</Timeline.Item>
-//                     </Timeline>
-//                 </Col>
-//                 <Col span={12}>
-//                     <div className="device-info-modal__detail">
-//                         <img alt={`${device.logo}-icon`} src={`${DEVICE_IMG_URI}${device.logo}-icon.png`}/>
-//                         <text>{device.name}</text>
-//                         <p><b>Ngày tạo: </b> {moment(device.createdAt).format("DD/MM/YYYY")}</p>
-//                         <p><b>Công suất tiêu thụ: </b> 15kWh</p>
-//                         <p>Thuộc bộ Công tắc {device.type.includes("SW") ? "Wifi" : "RF"}</p>
-//                         <Button type="primary">Xuất File</Button>
-//                     </div>
-//                 </Col>
-//             </Row>
-//         );
-//     }
-// }
-
-// class DoorSensorDetail extends Component {
-//
-//     render() {
-//         const {device} = this.props;
-//         return (
-//             <Row>
-//                 <Col span={12}>
-//                     <Timeline className="device-info-modal__timeline">
-//                         <Timeline.Item color="green">Đóng lúc 20:31 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">Mở lúc 20:00 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="green">Đóng lúc 19:04 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">Mở lúc 16:30 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="green">Đóng lúc 12:53 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">Mở lúc 8:24 23/04/2020</Timeline.Item>
-//                     </Timeline>
-//                 </Col>
-//                 <Col span={12}>
-//                     <div className="device-info-modal__detail">
-//                         <img alt={`${device.logo}-icon`} src={`${DEVICE_IMG_URI}door-close-icon.png`}
-//                              style={{width: '10vw', height: '10vw'}}/>
-//                         <p><b>Ngày tạo: </b> {moment(device.createdAt).format("DD/MM/YYYY")}</p>
-//                         <Button type="primary">Xuất File</Button>
-//                     </div>
-//                 </Col>
-//             </Row>
-//         );
-//     }
-// }
-//
-// class AirSensorDetail extends Component {
-//
-//     render() {
-//         const {device} = this.props;
-//         return (
-//             <Row>
-//                 <Col span={12}>
-//                     <Timeline className="device-info-modal__timeline">
-//                         <Timeline.Item color="green">1.7 lúc 20:30 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">1.6 lúc 20:00 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="green">1.7 lúc 19:30 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">1.5 lúc 19:00 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="green">1.5 lúc 18:30 23/04/2020</Timeline.Item>
-//                         <Timeline.Item color="red">1.6 lúc 18:00 23/04/2020</Timeline.Item>
-//                     </Timeline>
-//                 </Col>
-//                 <Col span={12}>
-//                     <div className="device-info-modal__detail">
-//                         <img alt={`${device.logo}-icon`} src={`${DEVICE_IMG_URI}air-icon.png`}
-//                              style={{width: '10vw', height: '10vw'}}/>
-//                         <p><b>Ngày tạo: </b> {moment(device.createdAt).format("DD/MM/YYYY")}</p>
-//                         <Button type="primary">Xuất File</Button>
-//                     </div>
-//                 </Col>
-//             </Row>
-//         );
-//     }
-// }
 
 class UpdateDeviceForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logoModalVisible: false,
+            logoModal: false,
             logoName: this.props.device.logo
         }
     }
 
     handleChangeLogoName = (logoName) => {
         this.setState({
-            logoName, logoModalVisible: false
+            logoName, logoModal: false
         });
     }
 
@@ -212,31 +93,25 @@ class UpdateDeviceForm extends Component {
                 updateDevice(request).then(() => {
                     this.props.handleCancelModal();
                     this.props.loadDevices(this.props.device.roomId);
-                    notification.success({
-                        message: 'Chika Smarthome',
-                        description: "Sửa phòng thành công."
-                    })
+                    SuccessNotification("Sửa phòng thành công.");
                 }).catch(error => {
-                    notification.error({
-                        message: 'Chika Smarthome',
-                        description: "Sửa phòng thất bại" || error.message
-                    })
+                    ErrorNotification(error.message || "Sửa phòng thất bại")
                 })
             }
         });
     }
 
     handleShowModal = () => {
-        this.setState({logoModalVisible: true});
+        this.setState({logoModal: true});
     };
 
     handleCancelModal = () => {
-        this.setState({logoModalVisible: false});
+        this.setState({logoModal: false});
     }
 
     render() {
         const {getFieldDecorator} = this.props.form;
-        const {logoModalVisible, logoName} = this.state;
+        const {logoModal, logoName} = this.state;
         return (
             <div>
                 <Form autoComplete='off'>
@@ -247,9 +122,9 @@ class UpdateDeviceForm extends Component {
                             })(
                                 <Input type='hidden'/>
                             )}
-                            <img alt={logoName} src={`${DEVICE_IMG_URI}${logoName}-icon.png`}
+                            <img alt={logoName} src={`${DEVICE_IMG_URI}${logoName}-icon.png`} onClick={this.handleShowModal}
                                  style={{width: '5vw', marginRight: '2vw'}}/>
-                            <Button type='dashed' onClick={this.handleShowModal}>
+                            <Button type='dashed' >
                                 Chọn Logo
                             </Button>
                         </Form.Item>
@@ -264,30 +139,12 @@ class UpdateDeviceForm extends Component {
                                    placeholder="Tên phòng"/>
                         )}
                     </Form.Item>
-                    <Button type="primary" htmlType="submit" size="large" onClick={this.handleSubmitUpdateDevice}>Cập
-                        Nhật</Button>
+                    <Button type="primary" size="large" onClick={this.handleSubmitUpdateDevice}>Cập Nhật</Button>
                 </Form>
 
-                <Modal visible={logoModalVisible} closable={false}
-                       title="LOGO"
-                       centered
-                       width='35vw'
-                       footer={(
-                           <Button type="primary" onClick={this.handleCancelModal}>
-                               Quay về
-                           </Button>
-                       )}>
-                    <Row gutter={[18, 24]}>
-                        {DEVICE_NAME.map((item, i) => {
-                            return (
-                                <Col key={i} span={6} onClick={() => this.handleChangeLogoName(item)}>
-                                    <img className="modal__room-icon" alt={`${DEVICE_IMG_URI}${item}-icon`}
-                                         src={`${DEVICE_IMG_URI}${item}-icon.png`}/>
-                                </Col>
-                            )
-                        })}
-                    </Row>
-                </Modal>
+                <IconModal visible={logoModal} logoName={DEVICE_NAME} imgUri={DEVICE_IMG_URI}
+                           handleCancelModal={this.handleCancelModal}
+                           handleChangeLogo={this.handleChangeLogoName}/>
             </div>
         )
     }

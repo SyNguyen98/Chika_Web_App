@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import {Row, Col, Modal, Button, Form, Input, Icon, notification} from 'antd';
-import {getRooms, addRoom} from '../../../services/RoomService'
+import {Button, Col, Form, Icon, Input, Modal, notification, Row} from 'antd';
+import {addRoom, getRooms} from '../../../services/RoomService'
 
 import './room.css';
 
@@ -8,6 +8,7 @@ import {ROOM_NAME} from "../../../constant/name";
 import {ROOM_IMG_URI} from "../../../constant/uri";
 import {USER_ROOM_LINK} from "../../../constant/link";
 import {ROOM_COLOR} from "../../../constant/color";
+import {IconModal} from "../../../components/modal";
 
 export default class UserListRoomComponent extends Component {
     constructor(props) {
@@ -180,26 +181,9 @@ class AddRoomForm extends Component {
                     <Button type="primary" htmlType="submit" size="large">Thêm Phòng</Button>
                 </Form>
 
-                <Modal visible={logoModalVisible} closable={false}
-                       title="LOGO"
-                       centered
-                       width='35vw'
-                       footer={(
-                           <Button type="primary" onClick={this.handleCancelModal}>
-                               Quay về
-                           </Button>
-                       )}>
-                    <Row gutter={[18, 24]}>
-                        {ROOM_NAME.map((item, i) => {
-                            return (
-                                <Col key={i} span={6} onClick={() => this.handleChangeLogoName(item)}>
-                                    <img className="modal__room-icon" alt={`${ROOM_IMG_URI}${item}-icon`}
-                                         src={`${ROOM_IMG_URI}${item}-icon.png`}/>
-                                </Col>
-                            )
-                        })}
-                    </Row>
-                </Modal>
+                <IconModal visible={logoModalVisible} logoName={ROOM_NAME} imgUri={ROOM_IMG_URI}
+                           handleCancelModal={this.handleCancelModal}
+                           handleChangeLogo={this.handleChangeLogoName}/>
             </div>
         )
     }

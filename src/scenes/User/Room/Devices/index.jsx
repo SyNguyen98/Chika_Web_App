@@ -4,16 +4,17 @@ import {Button, Col, Divider, Icon, Modal, notification, Popover, Row, Switch} f
 import './devices.css';
 import {deleteDevice, getDevicesByRoomId} from '../../../../services/DeviceService';
 import {deleteRoom} from '../../../../services/RoomService';
-import {mqttPublish, mqttSubscribe} from '../../../../app/App';
 
 import AddDeviceModal from './components/add-device';
 import UpdateRoomModal from './components/update-room';
-import {DoorSensorComponent, AirSensorComponent} from './components/sensor'
-import DeviceModalComponent from './components/device-detail'
+import {AirSensorComponent, DoorSensorComponent} from './components/sensor'
 
-import {ROOM_IMG_URI} from "../../../../constant/uri";
+import {DEVICE_IMG_URI, ROOM_IMG_URI} from "../../../../constant/uri";
 import {USER_ROOM_LINK} from "../../../../constant/link";
 import {ROOM_COLOR} from "../../../../constant/color";
+import DeviceModal from "./components/device-modal";
+import {ErrorNotification, SuccessNotification} from "../../../../components/notification";
+import {mqttPublish, mqttSubscribe} from "../../../../services/MqttService";
 
 const {confirm} = Modal;
 
@@ -36,9 +37,9 @@ export default class UserRoomComponent extends Component {
             },
             switchChecked: [],
             popoverVisible: false,
-            updateModalVisible: false,
-            addDeviceModalVisible: false,
-            deviceModalVisible: false
+            updateRoomModal: false,
+            addDeviceModal: false,
+            deviceModal: false
         }
     }
 
@@ -46,10 +47,10 @@ export default class UserRoomComponent extends Component {
         getDevicesByRoomId(roomId).then(deviceList => {
             console.log(deviceList);
             deviceList.sensors.forEach(sensor => {
-                mqttSubscribe(`${sensor.topic}`);
+                mqttSubscribe(sensor.topic);
             })
             deviceList.switches.forEach(device => {
-                mqttSubscribe(`${device.topic}`);
+                mqttSubscribe(device.topic);
             })
             let sensor = {
                 door: deviceList.sensors.find(sensor => sensor.type === "SS01"),
@@ -79,38 +80,32 @@ export default class UserRoomComponent extends Component {
     };
 
     handleShowUpdateRoomModal = () => {
-        this.setState({updateModalVisible: true});
+        this.setState({updateRoomModal: true});
     };
 
     handleShowAddDeviceModal = () => {
-        this.setState({addDeviceModalVisible: true});
+        this.setState({addDeviceModal: true});
     };
 
     handleShowDeviceModal = (device) => {
-        this.setState({device, deviceModalVisible: true});
+        this.setState({device, deviceModal: true});
     }
 
     handleCancelModal = () => {
         this.setState({
-            updateModalVisible: false,
-            addDeviceModalVisible: false,
-            deviceModalVisible: false
+            updateRoomModal: false,
+            addDeviceModal: false,
+            deviceModal: false
         });
     }
 
     handleDeleteDevice = (deviceId) => {
         deleteDevice(deviceId).then(() => {
             this.handleCancelModal();
-            notification.success({
-                message: 'Chika Smarthome',
-                description: "Xóa thiết bị thành công"
-            })
+            SuccessNotification("Xóa thiết bị thành công");
             this.loadDevices(this.state.roomId);
         }).catch(() => {
-            notification.error({
-                message: 'Chika Smarthome',
-                description: "Đã có lỗi xảy ra, vui lòng thử lại sau"
-            })
+            ErrorNotification("Đã có lỗi xảy ra, vui lòng thử lại sau");
         })
     }
 
@@ -124,44 +119,18 @@ export default class UserRoomComponent extends Component {
             onOk() {
                 deleteRoom(roomId).then(() => {
                     history.push(USER_ROOM_LINK);
-                    notification.success({
-                        message: 'Chika Smarthome',
-                        description: "Xóa phòng thành công"
-                    })
+                    SuccessNotification("Xóa phòng thành công");
                 }).catch(error => {
-                    notification.error({
-                        message: 'Chika Smarthome',
-                        description: error.message || "Tải danh sách thiết bị thất bại"
-                    })
+                    ErrorNotification(error.message || "Tải danh sách thiết bị thất bại");
                 })
             },
         });
     }
 
-    showDevice = (device, index) => {
-        const {switchChecked} = this.state;
-        if (device.type.includes("SW") || device.type.includes("SR")) {
-            return (
-                <Col className='user-room__device-item' span={8}>
-                    <div className='user-room__device-item__header'>
-                        <img id={`${device.id}-img`} alt="device-icon"
-                             src={`/image/user/device/${device.logo}-icon.png`}
-                             style={switchChecked[index] ? {opacity: '1'} : {opacity: '0.2'}}/>
-                    </div>
-                    <div className='user-room__device-item__footer'>
-                        <b style={switchChecked[index] ? {opacity: '1'} : {opacity: '0.2'}}>{device.name.toUpperCase()}</b>
-                        <Switch checked={switchChecked[index]}
-                                onChange={(checked, event) => this.onChange(event, device, checked)}/>
-                    </div>
-                </Col>
-            )
-        }
-    }
-
     onChange = (event, device, checked) => {
         event.stopPropagation();
         let switchChecked = this.state.switchChecked;
-        switchChecked[this.state.deviceList.indexOf(device)] = checked;
+        switchChecked[this.state.deviceList.switches.indexOf(device)] = checked;
         this.setState({switchChecked})
         mqttPublish(device.topic, checked.toString())
     }
@@ -182,34 +151,33 @@ export default class UserRoomComponent extends Component {
         const {mqttMessage} = this.props;
         if (mqttMessage !== this.state.mqttMessage) {
             const {deviceList} = this.state;
-            let device;
-            device = deviceList.sensors.find(device => device.topic === mqttMessage.topic);
+            let device = deviceList.sensors.find(device => device.topic === mqttMessage.topic);
             if (device === undefined) {
                 device = deviceList.switches.find(device => device.topic === mqttMessage.topic);
                 let switchChecked = this.state.switchChecked;
-                if (deviceList.length > 0) {
-                    switchChecked[deviceList.indexOf(device)] = mqttMessage.message === "true";
+                if (deviceList.switches.length > 0) {
+                    switchChecked[deviceList.switches.indexOf(device)] = mqttMessage.message === "true";
                 }
                 this.setState({mqttMessage, switchChecked})
-            }
-
-            switch (device.type) {
-                case "SS01":
-                    this.setState({mqttMessage, doorState: JSON.parse(mqttMessage.message)});
-                    break;
-                case "SS03":
-                    this.setState({mqttMessage, airState: JSON.parse(mqttMessage.message)});
-                    break;
-                default:
-                    break;
+            } else {
+                switch (device.type) {
+                    case "SS01":
+                        this.setState({mqttMessage, doorState: JSON.parse(mqttMessage.message)});
+                        break;
+                    case "SS03":
+                        this.setState({mqttMessage, airState: JSON.parse(mqttMessage.message)});
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
 
     render() {
         const {
-            roomId, roomList, device, deviceList, sensor, popoverVisible, doorState, airState,
-            updateModalVisible, addDeviceModalVisible, deviceModalVisible
+            roomId, roomList, device, deviceList, sensor, switchChecked, doorState, airState,
+            popoverVisible, updateRoomModal, addDeviceModal, deviceModal
         } = this.state;
         const room = roomList.find(room => room.id === roomId);
         return (
@@ -293,28 +261,47 @@ export default class UserRoomComponent extends Component {
                             </Row>
                             <Row>
                                 {deviceList.switches.map((item, i) => (
-                                    <div key={i} onClick={() => this.handleShowDeviceModal(item)}>
-                                        {this.showDevice(item, i)}
-                                    </div>
+                                    <Col className='user-room__switch' span={8} key={i}
+                                         onClick={() => this.handleShowDeviceModal(item)}>
+                                        <div className='user-room__switch__header'>
+                                            <img id={`${item.id}-img`} alt="device-icon"
+                                                 src={`${DEVICE_IMG_URI}${item.logo}-icon.png`}
+                                                 style={switchChecked[i] ? {opacity: '1'} : {opacity: '0.2'}}/>
+                                        </div>
+                                        <div className='user-room__switch__footer'>
+                                            <b style={switchChecked[i] ? {opacity: '1'} : {opacity: '0.2'}}>{item.name.toUpperCase()}</b>
+                                            <Switch checked={switchChecked[i]}
+                                                    onChange={(checked, event) => this.onChange(event, item, checked)}/>
+                                        </div>
+                                    </Col>
+                                ))}
+                                {deviceList.remoteIr.map((item, i) => (
+                                    <Col className='user-room__remote' span={8} key={i}
+                                         onClick={() => this.handleShowDeviceModal(item)}>
+                                        <div className='user-room__remote__header'>
+                                            <img id={`${item.id}-img`} alt="device-icon"
+                                                 src={`${DEVICE_IMG_URI}${item.logo}-icon.png`}/>
+                                        </div>
+                                        <div className='user-room__remote__footer'>
+                                            <b>{item.name.toUpperCase()}</b>
+                                        </div>
+                                    </Col>
                                 ))}
                             </Row>
                         </div>
 
                         <UpdateRoomModal room={room}
-                                         visible={updateModalVisible}
+                                         visible={updateRoomModal}
                                          handleCancelModal={this.handleCancelModal}/>
 
-                        <AddDeviceModal modalVisible={addDeviceModalVisible}
+                        <AddDeviceModal visible={addDeviceModal}
                                         handleCancelModal={this.handleCancelModal}
                                         loadDevices={this.loadDevices}
                                         {...this.props}/>
 
                         {device ? (
-                            <DeviceModalComponent device={device}
-                                                  visible={deviceModalVisible}
-                                                  handleCancelModal={this.handleCancelModal}
-                                                  handleDeleteDevice={this.handleDeleteDevice}
-                                                  loadDevices={this.loadDevices}/>
+                            <DeviceModal device={device} visible={deviceModal} handleCancelModal={this.handleCancelModal}
+                                         handleDeleteDevice={this.handleDeleteDevice} loadDevices={this.loadDevices}/>
                         ) : null}
 
                     </Col>

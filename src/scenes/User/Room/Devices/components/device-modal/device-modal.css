@@ -1,0 +1,17 @@
+.remote__header {
+    position: relative;
+    height: 20px;
+}
+
+.remote__header b {
+    position: absolute;
+    left: 47%;
+}
+
+.remote__header i {
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    color: red;
+    cursor: pointer;
+}

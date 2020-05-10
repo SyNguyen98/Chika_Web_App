@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
-import {BackTop, Layout, notification} from 'antd';
+import {BackTop, Layout} from 'antd';
 import './App.css';
 
 import HeaderComponent from '../components/header';
@@ -50,11 +50,13 @@ import UserListRoomComponent from '../scenes/User/Room';
 import UserRoomComponent from '../scenes/User/Room/Devices';
 import UserPersonalComponent from '../scenes/User/PersonalInfo'
 
-import {ACCESS_TOKEN, MQTT_URL} from '../constant';
+import {ErrorNotification, SuccessNotification} from "../components/notification";
 
 import {getUserInfo, updateAdminInfo} from '../services/UserService';
 import {deleteAllCookies} from '../services/CookieService'
+import {getClient, mqttConnect, mqttDisconnect} from "../services/MqttService";
 
+import {ACCESS_TOKEN} from '../constant';
 import {
     ADMIN_ADD_USER_LINK,
     ADMIN_FEEDBACK_LINK,
@@ -94,21 +96,6 @@ import {
 
 const {Content} = Layout;
 
-const mqtt = require('mqtt');
-let client;
-
-export function mqttDisconnect() {
-    client.end();
-}
-
-export function mqttSubscribe(topic) {
-    client.subscribe(topic)
-}
-
-export function mqttPublish(topic, message) {
-    client.publish(topic, message, {retain: true});
-}
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -132,12 +119,13 @@ class App extends Component {
                     break;
                 case 'HOME_MASTER':
                 case 'HOME_USER':
-                    this.props.history.push(USER_HOME_LINK);
+                    this.props.history.push(USER_ROOM_LINK);
                     this.onCloseSidenav();
                     break;
                 default:
             }
         }).catch(error => {
+            ErrorNotification("Đã có lỗi xảy ra")
         });
     }
 
@@ -149,10 +137,7 @@ class App extends Component {
                 isLoading: false
             });
             this.props.history.push(ADMIN_INFO_LINK);
-            notification.success({
-                message: 'Chika Smarthome',
-                description: "Thông tin đã được cập nhật."
-            });
+            SuccessNotification("Thông tin đã được cập nhật.")
         }).catch(error => {
             this.setState({isLoading: false});
             let message;
@@ -161,10 +146,7 @@ class App extends Component {
             } else if (error.message.includes('Email')) {
                 message = 'Email đã được sử dụng';
             }
-            notification.error({
-                message: 'Chika Smarthome',
-                description: message || "Đã có lỗi xảy ra. Vui lòng thử lại sau!"
-            });
+            ErrorNotification(message || "Đã có lỗi xảy ra. Vui lòng thử lại sau!")
         });
     }
 
@@ -177,10 +159,7 @@ class App extends Component {
     };
 
     handleLogin = () => {
-        notification.success({
-            message: 'Chika Smarthome',
-            description: "Đăng nhập thành công.",
-        });
+        SuccessNotification("Đăng nhập thành công.")
         this.loadCurrentUser();
     }
 
@@ -191,10 +170,7 @@ class App extends Component {
         this.setState({currentUser: null,});
 
         this.props.history.push("/");
-        notification.success({
-            message: 'Chika Smarthome',
-            description: "Đăng xuất thành công.",
-        });
+        SuccessNotification("Đăng xuất thành công.");
     }
 
     onChangePasswordLogout = () => {
@@ -203,17 +179,13 @@ class App extends Component {
         this.setState({currentUser: null,});
 
         this.props.history.push("/");
-        notification.success({
-            message: 'Chika Smarthome',
-            description: "Đổi mật khẩu thành công",
-        });
+        SuccessNotification("Đổi mật khẩu thành công.");
     }
 
     componentDidMount() {
         this.loadCurrentUser();
-        client = mqtt.connect(MQTT_URL, {username: 'chika', password: '2502'});
-        console.log("connect to mqtt successfully");
-        client.on('message', (topic, message) => {
+        mqttConnect();
+        getClient().on('message', (topic, message) => {
             // message is Buffer
             console.log(`From: ${topic} , message: ${message.toString()}`);
             this.setState({
@@ -223,6 +195,10 @@ class App extends Component {
                 }
             })
         })
+    }
+
+    componentWillUnmount() {
+        mqttDisconnect();
     }
 
     render() {

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Button, Col, Form, Icon, Input, Modal, notification, Row} from "antd";
+import {Button, Form, Icon, Input, Modal, notification} from "antd";
 
 import {ROOM_NAME} from "../../../../../../constant/name";
 import {ROOM_IMG_URI} from "../../../../../../constant/uri";
 import {USER_ROOM_LINK} from "../../../../../../constant/link";
 
 import {updateRoom} from "../../../../../../services/RoomService";
+import {IconModal} from "../../../../../../components/modal";
 
 
 const UpdateRoomModal = ({room, visible, handleCancelModal}) => {
@@ -103,26 +104,9 @@ class UpdateRoomForm extends Component {
                     <Button type="primary" htmlType="submit" size="large">Cập Nhật</Button>
                 </Form>
 
-                <Modal visible={logoModalVisible} closable={false}
-                       title="LOGO"
-                       centered
-                       width='35vw'
-                       footer={(
-                           <Button type="primary" onClick={this.handleCancelModal}>
-                               Quay về
-                           </Button>
-                       )}>
-                    <Row gutter={[18, 24]}>
-                        {ROOM_NAME.map((item, i) => {
-                            return (
-                                <Col key={i} span={6} onClick={() => this.handleChangeLogoName(item)}>
-                                    <img className="modal__room-icon" alt={`${ROOM_IMG_URI}${item}-icon`}
-                                         src={`${ROOM_IMG_URI}${item}-icon.png`}/>
-                                </Col>
-                            )
-                        })}
-                    </Row>
-                </Modal>
+                <IconModal visible={logoModalVisible} logoName={ROOM_NAME} imgUri={ROOM_IMG_URI}
+                           handleCancelModal={this.handleCancelModal}
+                           handleChangeLogo={this.handleChangeLogoName}/>
             </div>
         )
     }

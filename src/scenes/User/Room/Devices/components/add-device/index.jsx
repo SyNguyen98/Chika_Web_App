@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Modal, Steps, notification, Row, Col, Form, Input, Icon, Radio, Pagination} from 'antd';
+import {Button, Col, Form, Icon, Input, Modal, Pagination, Radio, Row, Steps} from 'antd';
 
 import './add-device.css';
 
@@ -8,6 +8,8 @@ import {getSwitchButtonsByDeviceTopic, saveDevice} from '../../../../../../servi
 
 import {DEVICE_NAME} from "../../../../../../constant/name";
 import {DEVICE_IMG_URI, USER_PRODUCT_IMG_URI} from "../../../../../../constant/uri";
+import {IconModal} from "../../../../../../components/modal";
+import {ErrorNotification, SuccessNotification} from "../../../../../../components/notification";
 
 const {Step} = Steps;
 
@@ -25,12 +27,10 @@ export default class AddDeviceModal extends Component {
     loadProducts = () => {
         if (this.props.currentUser !== null) {
             getProductByUser(this.props.currentUser.id).then(productList => {
+                console.log(productList)
                 this.setState({productList})
             }).catch(error => {
-                notification.error({
-                    message: 'Chika Smarthome',
-                    description: error.message || "Tải danh sách thiết bị thất bại"
-                })
+                ErrorNotification(error.message || "Tải danh sách thiết bị thất bại")
             })
         }
     }
@@ -43,14 +43,10 @@ export default class AddDeviceModal extends Component {
     handleChooseProduct = (product) => {
         if (product.type.includes("SW") || product.type.includes("SR")) {
             getSwitchButtonsByDeviceTopic(product.id).then(usedButton => {
-                console.log(usedButton);
                 let currentStep = this.state.currentStep + 1;
                 this.setState({currentStep, product, usedButton})
             }).catch(error => {
-                notification.error({
-                    message: 'Chika Smarthome',
-                    description: error.message || "Tải danh sách thiết bị thất bại"
-                })
+                ErrorNotification(error.message || "Tải danh sách thiết bị thất bại")
             })
         } else {
             let currentStep = this.state.currentStep + 1;
@@ -63,26 +59,30 @@ export default class AddDeviceModal extends Component {
     }
 
     render() {
-        const {modalVisible, handleCancelModal} = this.props;
+        const {visible, handleCancelModal} = this.props;
         const {currentStep, productList, product, usedButton} = this.state;
-        const AntProductInfoForm = Form.create()(ProductInfoForm);
+        const AntSwitchForm = Form.create()(SwitchForm);
+        const AntModuleIrForm = Form.create()(ModuleIrForm);
+        let formComponent;
+        if (product && product.type.includes("IR")) {
+            formComponent = (<AntModuleIrForm product={product} {...this.props}/>)
+        } else {
+            formComponent = (<AntSwitchForm product={product} usedButton={usedButton}
+                                            prevStep={this.prevStep}
+                                            {...this.props}/>)
+        }
         const steps = [
             {
                 title: 'Chọn Thiết Bị',
-                content: (
-                    <ProductListComponent productList={productList} handleChooseProduct={this.handleChooseProduct}/>
-                )
+                content: (<ProductListComponent productList={productList} handleChooseProduct={this.handleChooseProduct}/>)
             },
             {
                 title: 'Điền thông tin',
-                content: (
-                    <AntProductInfoForm product={product} usedButton={usedButton} prevStep={this.prevStep}
-                                        {...this.props}/>
-                )
+                content: formComponent
             }
         ];
         return (
-            <Modal visible={modalVisible} closable={false}
+            <Modal visible={visible} closable={false}
                    title="THÊM THIẾT BỊ"
                    centered
                    width='50vw'
@@ -160,7 +160,7 @@ class ProductListComponent extends Component {
     }
 }
 
-class ProductInfoForm extends Component {
+class SwitchForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -169,8 +169,7 @@ class ProductInfoForm extends Component {
     }
 
     handleChangeLogo = (logoName) => {
-        const {form} = this.props;
-        form.setFieldsValue({logo: logoName});
+        this.props.form.setFieldsValue({logo: logoName});
         this.handleCancelModal();
     };
 
@@ -190,22 +189,6 @@ class ProductInfoForm extends Component {
                 request.type = product.type;
                 request.roomId = window.location.pathname.substring(18);
 
-                if (request.type.includes("SS")) {
-                    switch (request.type) {
-                        case "SS01":
-                            request.logo = "door"
-                            break;
-                        case "SS02":
-                            request.logo = "motion"
-                            break;
-                        case "SS03":
-                            request.logo = "air"
-                            break;
-                        default:
-                            request.logo = "fire"
-                    }
-                }
-
                 if (request.type.includes("SW")) {
                     request.topic = `${product.id}/button${request.switchButton}`;
                 } else {
@@ -215,15 +198,9 @@ class ProductInfoForm extends Component {
                 saveDevice(request).then(() => {
                     this.props.handleCancelModal();
                     this.props.loadDevices(window.location.pathname.substring(18));
-                    notification.success({
-                        message: 'Chika Smarthome',
-                        description: "Thêm thiết bị thành công"
-                    })
+                    SuccessNotification("Thêm thiết bị thành công");
                 }).catch(error => {
-                    notification.error({
-                        message: 'Chika Smarthome',
-                        description: error.message || "Vui lòng thử lại sau"
-                    })
+                    ErrorNotification(error.message || "Vui lòng thử lại sau");
                 })
             }
         });
@@ -241,12 +218,9 @@ class ProductInfoForm extends Component {
                 )
             }
         }
-        if ((product.type.includes("SW") || product.type.includes("SR")) && buttonCheckbox.length === 0) {
+        if (buttonCheckbox.length === 0) {
             this.props.prevStep();
-            notification.error({
-                message: 'Chika Smarthome',
-                description: "Công tắc đã sử dụng hết số nút"
-            })
+            ErrorNotification("Công tắc đã sử dụng hết số nút");
         }
         return (
             <Fragment>
@@ -260,61 +234,94 @@ class ProductInfoForm extends Component {
                                    placeholder="Vd: Đèn Trần, Quạt Trần ..."/>
                         )}
                     </Form.Item>
-
-                    {product.type.includes("SW") || product.type.includes("SR") ? (
-                        <Fragment>
-                            <Form.Item label='Logo'>
-                                {getFieldDecorator('logo', {
-                                    rules: [{required: true, message: 'Vui lòng chọn logo!'}]
-                                })(
-                                    <Input type='hidden'/>
-                                )}
-                                {getFieldValue("logo") !== undefined ? <img alt={getFieldValue("logo")}
-                                                                            src={`${DEVICE_IMG_URI}${getFieldValue("logo")}-icon.png`}
-                                                                            style={{
-                                                                                width: '5vw',
-                                                                                marginRight: '2vw'
-                                                                            }}/> : null}
-                                <Button type='dashed' onClick={this.handleShowModal}>
-                                    {getFieldValue("logo") === undefined ? 'Chọn Logo' : 'Chọn Lại'}
-                                </Button>
-                            </Form.Item>
-                            <Form.Item label='Nút'>
-                                {getFieldDecorator('switchButton', {
-                                    rules: [{required: true, message: 'Vui lòng chọn nút!'}]
-                                })(
-                                    <Radio.Group>
-                                        {buttonCheckbox}
-                                    </Radio.Group>
-                                )}
-                            </Form.Item>
-                        </Fragment>
-                    ) : null}
-                    <Button type="primary" htmlType="submit" size="large" onClick={this.handleSubmitAddDevice}>Thêm
-                        Thiết Bị</Button>
+                    <Form.Item label='Logo'>
+                        {getFieldDecorator('logo', {
+                            rules: [{required: true, message: 'Vui lòng chọn logo!'}]
+                        })(
+                            <Input type='hidden'/>
+                        )}
+                        {getFieldValue("logo") !== undefined ? (
+                            <img alt={getFieldValue("logo")}
+                                 src={`${DEVICE_IMG_URI}${getFieldValue("logo")}-icon.png`}
+                                 style={{
+                                     width: '5vw',
+                                     marginRight: '2vw'
+                                 }}/>
+                        ) : null}
+                        <Button type='dashed' onClick={this.handleShowModal}>
+                            {getFieldValue("logo") === undefined ? 'Chọn Logo' : 'Chọn Lại'}
+                        </Button>
+                    </Form.Item>
+                    <Form.Item label='Nút'>
+                        {getFieldDecorator('switchButton', {
+                            rules: [{required: true, message: 'Vui lòng chọn nút!'}]
+                        })(
+                            <Radio.Group>
+                                {buttonCheckbox}
+                            </Radio.Group>
+                        )}
+                    </Form.Item>
+                    <Button type="primary" htmlType="submit" size="large" onClick={this.handleSubmitAddDevice}>
+                        Thêm Thiết Bị
+                    </Button>
                 </Form>
 
-                <Modal visible={logoModalVisible} closable={false}
-                       title="LOGO"
-                       centered
-                       width='35vw'
-                       footer={(
-                           <Button type="primary" onClick={this.handleCancelModal}>
-                               Quay về
-                           </Button>
-                       )}>
-                    <Row gutter={[18, 24]}>
-                        {DEVICE_NAME.map((item, i) => {
-                            return (
-                                <Col key={i} span={6} onClick={() => this.handleChangeLogo(item)}>
-                                    <img className="modal__room-icon" alt={`${DEVICE_IMG_URI}${item}-icon`}
-                                         src={`${DEVICE_IMG_URI}${item}-icon.png`}/>
-                                </Col>
-                            )
-                        })}
-                    </Row>
-                </Modal>
+                <IconModal visible={logoModalVisible} logoName={DEVICE_NAME} imgUri={DEVICE_IMG_URI}
+                           handleCancelModal={this.handleCancelModal}
+                           handleChangeLogo={this.handleChangeLogo}/>
             </Fragment>
+        )
+    }
+}
+
+class ModuleIrForm extends Component {
+
+    handleSubmitAddDevice = () => {
+        const {product} = this.props;
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const request = Object.assign({}, values);
+                request.type = product.type;
+                request.roomId = window.location.pathname.substring(18);
+                request.topic = product.id;
+                saveDevice(request).then(() => {
+                    this.props.handleCancelModal();
+                    this.props.loadDevices(window.location.pathname.substring(18));
+                    SuccessNotification("Thêm thiết bị thành công");
+                }).catch(error => {
+                    ErrorNotification(error.message || "Vui lòng thử lại sau");
+                })
+            }
+        });
+    };
+
+    render() {
+        const {getFieldDecorator} = this.props.form;
+        return (
+            <Form autoComplete='off'>
+                <Form.Item label='Tên thiết bị'>
+                    {getFieldDecorator('name', {
+                        rules: [{required: true, message: 'Vui lòng nhập tên thiết bị!'}]
+                    })(
+                        <Input size="large"
+                               prefix={<Icon type="form"/>}
+                               placeholder="Vd: Tivi, Máy Lạnh ..."/>
+                    )}
+                </Form.Item>
+                <Form.Item label='Loại thiết bị'>
+                    {getFieldDecorator('logo', {
+                        rules: [{required: true, message: 'Vui lòng chọn loại thiết bị!'}]
+                    })(
+                        <Radio.Group>
+                            <Radio value="television">Tivi</Radio>
+                            <Radio value="air-conditioner">Máy Lạnh</Radio>
+                        </Radio.Group>
+                    )}
+                </Form.Item>
+                <Button type="primary" size="large" onClick={this.handleSubmitAddDevice}>
+                    Thêm Thiết Bị
+                </Button>
+            </Form>
         )
     }
 }

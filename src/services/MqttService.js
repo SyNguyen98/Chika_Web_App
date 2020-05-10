@@ -1,23 +1,25 @@
-var mqtt = require('mqtt')
+import {MQTT_URL} from "../constant";
 
-var option = {
-  username: 'chika',
-  password: '2502',
+const mqtt = require('mqtt');
+
+const option = {
+    username: 'chika',
+    password: '2502',
+};
+
+let client;
+
+export function mqttConnect() {
+    client = mqtt.connect(MQTT_URL, option);
+    console.log("connect to mqtt successfully");
 }
 
-var client;
-
-// export function mqttConnect() {
-//     client = mqtt.connect('ws://chika.gq:8080', option);
-//     console.log("connect to mqtt successfully");
-//     client.on('message', (topic, message) => {
-//         // message is Buffer
-//         console.log(`From: ${topic} , message: ${message.toString()}`);
-//     })
-// }
+export function getClient() {
+    return client;
+}
 
 export function mqttDisconnect() {
-    client.end(); 
+    client.end();
 }
 
 export function mqttSubscribe(topic) {

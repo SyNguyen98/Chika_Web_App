@@ -112,7 +112,7 @@
     height: 8vw;
 }
 
-.user-room__device-item {
+.user-room__switch, .user-room__remote {
     margin-left: 3vw;
     margin-bottom: 2vw;
     width: 19vw;
@@ -120,43 +120,42 @@
     box-shadow: 2px 3px 4px #524e4e;
 }
 
-.user-room__device-item__header {
+.user-room__switch__header, .user-room__remote__header {
     height: 9vw;
     background-color: #e7e7e7;
     cursor: pointer;
 }
 
-.user-room__device-item__header img {
+.user-room__switch__header img, .user-room__remote__header img {
     margin-top: 1.5vw;
     margin-left: 6.5vw;
     width: 6vw;
     height: 6vw;
 }
 
-.user-room__device-item__header svg {
+.user-room__switch__header svg, .user-room__remote__header svg {
     margin-top: 1.5vw;
     margin-left: 2vw;
 }
 
-.user-room__device-item__footer {
+.user-room__switch__footer {
     position: relative;
     padding-top: 1vw;
 }
 
-.user-room__device-item__footer b {
+.user-room__switch__footer b {
     position: absolute;
     left: 10px;
     font-size: 1.3vw;
 }
 
-.user-room__device-item__footer button {
+.user-room__switch__footer button {
     position: absolute;
     right: 15px;
 }
 
-.user-room__device-item__footer i {
-    position: absolute;
-    right: 15px;
-    font-size: 1.7vw;
-    cursor: pointer;
+.user-room__remote__footer {
+    padding-top: 1vw;
+    text-align: center;
+    font-size: 1.3vw;
 }

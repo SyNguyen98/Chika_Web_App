@@ -1,0 +1,39 @@
+.remote p {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.remote__volume {
+    padding-left: 40px;
+}
+
+.remote__volume button {
+    height: 100px;
+    width: 50px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+
+.remote__channel-row {
+    margin-bottom: 10px;
+}
+
+.remote__channel-row button {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.remote__channel {
+    padding-left: 20px;
+}
+
+.remote__channel button {
+    height: 100px;
+    width: 50px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
