@@ -65,15 +65,16 @@ export default class DeviceModal extends Component {
         if (device.type.includes("IR")) {
             component = (<RemoteTV sendIrValue={this.sendIrValue}/>)
         } else {
-            component = (<DeviceDetail device={device} handleCancelModal={handleCancelModal}
-                                       handleDeleteDevice={handleDeleteDevice} loadDevices={loadDevices}/>)
+            component = (<DeviceDetail device={device} handleCancelModal={handleCancelModal} loadDevices={loadDevices}/>)
         }
         return (
             <Modal visible={visible} closable={false}
                    title={device.type.includes("IR") ? (
                        <div className="remote__header">
                            <b>{device.name}</b>
-                           <Icon type="poweroff" onClick={() => this.sendIrValue("ON/OFF")}/>
+                           <Button>
+                               <Icon type="poweroff" onClick={() => this.sendIrValue("ON/OFF")}/>
+                           </Button>
                        </div>
                    ) : device.name}
                    centered

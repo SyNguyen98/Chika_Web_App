@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Col, Divider, Icon, Modal, notification, Popover, Row, Switch} from 'antd';
+import {Button, Col, Divider, Icon, Modal, Popover, Row, Switch} from 'antd';
 
 import './devices.css';
 import {deleteDevice, getDevicesByRoomId} from '../../../../services/DeviceService';
@@ -58,10 +58,7 @@ export default class UserRoomComponent extends Component {
             };
             this.setState({deviceList, sensor});
         }).catch(error => {
-            notification.error({
-                message: 'Chika Smarthome',
-                description: error.message || "Tải danh sách thiết bị thất bại"
-            })
+            ErrorNotification("Tải danh sách thiết bị thất bại");
         })
     }
 
@@ -132,7 +129,13 @@ export default class UserRoomComponent extends Component {
         let switchChecked = this.state.switchChecked;
         switchChecked[this.state.deviceList.switches.indexOf(device)] = checked;
         this.setState({switchChecked})
-        mqttPublish(device.topic, checked.toString())
+
+        if (device.type.includes("SW")) {
+            mqttPublish(device.topic, checked.toString())
+        } else {
+            mqttPublish(device.topic, `{"type": "SR", "button":${device.switchButton}, "state":${checked}}`)
+        }
+
     }
 
     setHeaderBackground = (color, url) => {
@@ -154,9 +157,15 @@ export default class UserRoomComponent extends Component {
             let device = deviceList.sensors.find(device => device.topic === mqttMessage.topic);
             if (device === undefined) {
                 device = deviceList.switches.find(device => device.topic === mqttMessage.topic);
+                console.log(device)
                 let switchChecked = this.state.switchChecked;
                 if (deviceList.switches.length > 0) {
-                    switchChecked[deviceList.switches.indexOf(device)] = mqttMessage.message === "true";
+                    if (device.type.includes("SW")) {
+                        switchChecked[deviceList.switches.indexOf(device)] = mqttMessage.message === "true";
+                    } else {
+                        switchChecked[deviceList.switches.indexOf(device)] = JSON.parse(mqttMessage.message).state;
+                    }
+
                 }
                 this.setState({mqttMessage, switchChecked})
             } else {

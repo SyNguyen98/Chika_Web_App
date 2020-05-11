@@ -8,10 +8,13 @@
     left: 47%;
 }
 
-.remote__header i {
+.remote__header button {
     position: absolute;
     right: 10px;
-    font-size: 25px;
+    padding: 0;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    font-size: 17px;
     color: red;
-    cursor: pointer;
 }

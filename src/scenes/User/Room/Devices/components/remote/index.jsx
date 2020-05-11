@@ -13,7 +13,6 @@ export default class RemoteTV extends Component {
                     <Button onClick={() => sendIrValue("VOLUME_UP")}><Icon type="plus"/></Button>
                     <br/>
                     <Button onClick={() => sendIrValue("VOLUME_DOWN")}><Icon type="minus"/></Button>
-
                 </Col>
                 <Col span={12} style={{textAlign: "center"}}>
                     <p>Chọn Kênh</p>
