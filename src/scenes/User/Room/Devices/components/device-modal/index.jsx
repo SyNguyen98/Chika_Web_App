@@ -1,11 +1,11 @@
 import React, {Component, Fragment} from "react";
 import {Button, Icon, Modal} from "antd";
-import RemoteTV from "../remote";
 import DeviceDetail from "../device-detail";
 import {getAllIrValueByDeviceAndProtocol} from "../../../../../../services/IRService";
 import {ErrorNotification} from "../../../../../../components/notification";
 import "./device-modal.css";
 import {mqttPublish} from "../../../../../../services/MqttService";
+import RemoteComponent from "../remote";
 
 const {confirm} = Modal;
 
@@ -63,7 +63,7 @@ export default class DeviceModal extends Component {
         const {device, visible, handleCancelModal, handleDeleteDevice, loadDevices} = this.props;
         let component;
         if (device.type.includes("IR")) {
-            component = (<RemoteTV sendIrValue={this.sendIrValue}/>)
+            component = (<RemoteComponent device={device} sendIrValue={this.sendIrValue}/>)
         } else {
             component = (<DeviceDetail device={device} handleCancelModal={handleCancelModal} loadDevices={loadDevices}/>)
         }
@@ -72,14 +72,14 @@ export default class DeviceModal extends Component {
                    title={device.type.includes("IR") ? (
                        <div className="remote__header">
                            <b>{device.name}</b>
-                           <Button>
-                               <Icon type="poweroff" onClick={() => this.sendIrValue("ON/OFF")}/>
+                           <Button onClick={() => this.sendIrValue("ON/OFF")}>
+                               <Icon type="poweroff"/>
                            </Button>
                        </div>
                    ) : device.name}
                    centered
                    onCancel={handleCancelModal}
-                   width='50vw'
+                   width='40vw'
                    footer={(
                        <Fragment>
                            <Button type="danger" onClick={() => this.showConfirm(handleDeleteDevice, device.id)}>

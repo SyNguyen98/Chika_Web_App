@@ -23,10 +23,17 @@ export default class DeviceDetail extends Component {
 
     loadHistories = (deviceId) => {
         getDeviceHistories(deviceId).then(deviceHistories => {
+            console.log(deviceHistories)
             this.setState({deviceHistories})
         }).catch(error => {
             ErrorNotification(error.message || "Tải danh sách thất bại");
         })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.device !== prevProps.device) {
+            this.loadHistories(this.props.device.id)
+        }
     }
 
     componentDidMount() {

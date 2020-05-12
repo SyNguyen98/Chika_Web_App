@@ -3,11 +3,6 @@
     height: 20px;
 }
 
-.remote__header b {
-    position: absolute;
-    left: 47%;
-}
-
 .remote__header button {
     position: absolute;
     right: 10px;

@@ -28,6 +28,7 @@ export function mqttSubscribe(topic) {
 
 export function mqttPublish(topic, message) {
     let options = {
+        qos: 2,
         retain: true
     }
     client.publish(topic, message, options);

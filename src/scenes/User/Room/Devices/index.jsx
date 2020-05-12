@@ -22,7 +22,6 @@ export default class UserRoomComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mqttMessage: null,
             roomId: window.location.pathname.substring(18),
             roomList: JSON.parse(sessionStorage.getItem("listRoom")),
             device: null,
@@ -152,29 +151,28 @@ export default class UserRoomComponent extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {mqttMessage} = this.props;
-        if (mqttMessage !== this.state.mqttMessage) {
+        if (mqttMessage !== prevProps.mqttMessage) {
             const {deviceList} = this.state;
             let device = deviceList.sensors.find(device => device.topic === mqttMessage.topic);
             if (device === undefined) {
-                device = deviceList.switches.find(device => device.topic === mqttMessage.topic);
-                console.log(device)
                 let switchChecked = this.state.switchChecked;
                 if (deviceList.switches.length > 0) {
-                    if (device.type.includes("SW")) {
+                    device = deviceList.switches.find(device => device.type.includes("SW") && device.topic === mqttMessage.topic);
+                    if (device !== undefined) {
                         switchChecked[deviceList.switches.indexOf(device)] = mqttMessage.message === "true";
                     } else {
+                        device = deviceList.switches.find(device => device.topic === mqttMessage.topic && device.switchButton === JSON.parse(mqttMessage.message).button);
                         switchChecked[deviceList.switches.indexOf(device)] = JSON.parse(mqttMessage.message).state;
                     }
-
                 }
-                this.setState({mqttMessage, switchChecked})
+                this.setState({switchChecked})
             } else {
                 switch (device.type) {
                     case "SS01":
-                        this.setState({mqttMessage, doorState: JSON.parse(mqttMessage.message)});
+                        this.setState({doorState: JSON.parse(mqttMessage.message)});
                         break;
                     case "SS03":
-                        this.setState({mqttMessage, airState: JSON.parse(mqttMessage.message)});
+                        this.setState({airState: JSON.parse(mqttMessage.message)});
                         break;
                     default:
                         break;
@@ -309,7 +307,8 @@ export default class UserRoomComponent extends Component {
                                         {...this.props}/>
 
                         {device ? (
-                            <DeviceModal device={device} visible={deviceModal} handleCancelModal={this.handleCancelModal}
+                            <DeviceModal device={device} visible={deviceModal}
+                                         handleCancelModal={this.handleCancelModal}
                                          handleDeleteDevice={this.handleDeleteDevice} loadDevices={this.loadDevices}/>
                         ) : null}
 
