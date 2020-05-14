@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Button, Col, Form, Icon, Input, Row, Tabs, Timeline} from 'antd';
+import React, {Component, Fragment} from 'react';
+import {Button, Col, Form, Icon, Input, Menu, Row, Timeline} from 'antd';
 import moment from 'moment';
 
 import './device-detail.css'
@@ -11,13 +11,12 @@ import {DEVICE_IMG_URI} from "../../../../../../constant/uri";
 import {IconModal} from "../../../../../../components/modal";
 import {ErrorNotification, SuccessNotification} from "../../../../../../components/notification";
 
-const {TabPane} = Tabs;
-
 export default class DeviceDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            deviceHistories: []
+            deviceHistories: [],
+            menuKey: "1"
         }
     }
 
@@ -28,6 +27,11 @@ export default class DeviceDetail extends Component {
         }).catch(error => {
             ErrorNotification(error.message || "Tải danh sách thất bại");
         })
+    }
+
+    onSelectMenu = (key) => {
+        console.log(key);
+        this.setState({menuKey: key});
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -42,37 +46,58 @@ export default class DeviceDetail extends Component {
 
     render() {
         const {device, handleCancelModal, loadDevices} = this.props;
-        const {deviceHistories} = this.state;
+        const {deviceHistories, menuKey} = this.state;
         const AntUpdateDeviceForm = Form.create()(UpdateDeviceForm);
-        return (
-            <Tabs defaultActiveKey={"1"} onChange={this.callback}>
-                <TabPane tab="Lịch Sử Thiết Bị" key="1">
-                    <Row>
-                        <Col span={12}>
-                            <Timeline className="device-info-modal__timeline">
-                                {deviceHistories.map((item, i) => (
-                                    <Timeline.Item key={i} color={item.state ? "green" : "red"}>
-                                        {item.state ? "Bật" : "Tắt"} lúc {item.time}
-                                    </Timeline.Item>
-                                ))}
-                            </Timeline>
-                        </Col>
-                        <Col span={12}>
-                            <div className="device-info-modal__detail">
-                                <img alt={`${device.logo}-icon`} src={`${DEVICE_IMG_URI}${device.logo}-icon.png`}/>
-                                <p><b>Ngày tạo: </b> {moment(device.createdAt).format("DD/MM/YYYY")}</p>
-                                <p><b>Công suất tiêu thụ: </b> 15kWh</p>
-                                <p>Thuộc bộ Công tắc {device.type.includes("SW") ? "Wifi" : "RF"}</p>
-                                <Button type="primary">Xuất File</Button>
-                            </div>
-                        </Col>
-                    </Row>
-                </TabPane>
-                <TabPane tab="Chỉnh Sửa" key="2">
+        let component;
+        switch (menuKey) {
+            case "1":
+                component =
+                    <div className="device-detail__info">
+                        <p><b>Ngày tạo: </b> {moment(device.createdAt).format("DD/MM/YYYY")}</p>
+                        <p><b>Công suất tiêu thụ: </b> 15kWh</p>
+                        <p>Thuộc bộ Công tắc {device.type.includes("SW") ? "Wifi" : "RF"}</p>
+                    </div>
+                break;
+            case "2":
+                component =
                     <AntUpdateDeviceForm device={device} handleCancelModal={handleCancelModal}
                                          loadDevices={loadDevices}/>
-                </TabPane>
-            </Tabs>
+                break;
+            case "3":
+                component =
+                    <Timeline className="device-detail__timeline">
+                        {deviceHistories.map((item, i) => (
+                            <Timeline.Item key={i} color={item.state ? "green" : "red"}>
+                                {item.state ? "Bật" : "Tắt"} lúc {item.time}
+                            </Timeline.Item>
+                        ))}
+                    </Timeline>
+                break;
+            default:
+                break;
+        }
+        return (
+            <Row>
+                <Col span={10}>
+                    <Menu defaultSelectedKeys={["1"]} mode="inline" onClick={(item) => this.onSelectMenu(item.key)}>
+                        <Menu.Item key="1">
+                            <Icon type="info-circle" />
+                            <span>Thông Tin</span>
+                        </Menu.Item>
+                        <Menu.Item key="2">
+                            <Icon type="form" />
+                            <span>Chỉnh Sửa</span>
+                        </Menu.Item>
+                        <Menu.Item key="3">
+                            <Icon type="unordered-list" />
+                            <span>Lịch Sử</span>
+                        </Menu.Item>
+                    </Menu>
+                </Col>
+                <Col span={14}>
+                    {component}
+                </Col>
+            </Row>
         )
     }
 }
@@ -81,15 +106,13 @@ class UpdateDeviceForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logoModal: false,
-            logoName: this.props.device.logo
+            logoModal: false
         }
     }
 
     handleChangeLogoName = (logoName) => {
-        this.setState({
-            logoName, logoModal: false
-        });
+        this.props.form.setFieldsValue({logo: logoName});
+        this.handleCancelModal();
     }
 
     handleSubmitUpdateDevice = () => {
@@ -117,42 +140,39 @@ class UpdateDeviceForm extends Component {
     }
 
     render() {
-        const {getFieldDecorator} = this.props.form;
-        const {logoModal, logoName} = this.state;
+        const {getFieldDecorator, getFieldValue} = this.props.form;
+        const {logoModal} = this.state;
         return (
-            <div>
-                <Form autoComplete='off'>
+            <Fragment>
+                <Form autoComplete='off' className="device-detail__form">
                     {this.props.device.type.includes("SS") ? null : (
-                        <Form.Item label='Logo'>
+                        <Form.Item>
                             {getFieldDecorator('logo', {
-                                initialValue: logoName,
+                                initialValue: this.props.device.logo,
                             })(
                                 <Input type='hidden'/>
                             )}
-                            <img alt={logoName} src={`${DEVICE_IMG_URI}${logoName}-icon.png`} onClick={this.handleShowModal}
-                                 style={{width: '5vw', marginRight: '2vw'}}/>
-                            <Button type='dashed' >
-                                Chọn Logo
-                            </Button>
+                            <img alt={getFieldValue("logo")} src={`${DEVICE_IMG_URI}${getFieldValue("logo")}-icon.png`}
+                                 onClick={this.handleShowModal}/>
                         </Form.Item>
                     )}
-                    <Form.Item label='Tên thiết bị'>
+                    <Form.Item>
                         {getFieldDecorator('name', {
                             initialValue: this.props.device.name,
-                            rules: [{required: true, message: 'Vui lòng nhập tên phòng!'}]
+                            rules: [{required: true, message: 'Vui lòng nhập tên thiết bị!'}]
                         })(
-                            <Input size="large"
+                            <Input size="default"
                                    prefix={<Icon type="form"/>}
-                                   placeholder="Tên phòng"/>
+                                   placeholder="Vd: Đèn trần, Quạt Trần"/>
                         )}
                     </Form.Item>
-                    <Button type="primary" size="large" onClick={this.handleSubmitUpdateDevice}>Cập Nhật</Button>
+                    <Button type="primary" size="default" onClick={this.handleSubmitUpdateDevice}>Cập Nhật</Button>
                 </Form>
 
                 <IconModal visible={logoModal} logoName={DEVICE_NAME} imgUri={DEVICE_IMG_URI}
                            handleCancelModal={this.handleCancelModal}
                            handleChangeLogo={this.handleChangeLogoName}/>
-            </div>
+            </Fragment>
         )
     }
 }

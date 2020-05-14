@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Col, Form, Icon, Input, Modal, Pagination, Radio, Row, Steps} from 'antd';
+import {Button, Col, Form, Icon, Input, Modal, Pagination, Radio, Row, Steps, Switch, Tooltip} from 'antd';
 
 import './add-device.css';
 
@@ -10,6 +10,7 @@ import {DEVICE_NAME} from "../../../../../../constant/name";
 import {DEVICE_IMG_URI, USER_PRODUCT_IMG_URI} from "../../../../../../constant/uri";
 import {IconModal} from "../../../../../../components/modal";
 import {ErrorNotification, SuccessNotification} from "../../../../../../components/notification";
+import {mqttPublish} from "../../../../../../services/MqttService";
 
 const {Step} = Steps;
 
@@ -65,16 +66,16 @@ export default class AddDeviceModal extends Component {
         const AntModuleIrForm = Form.create()(ModuleIrForm);
         let formComponent;
         if (product && product.type.includes("IR")) {
-            formComponent = (<AntModuleIrForm product={product} {...this.props}/>)
+            formComponent = <AntModuleIrForm product={product} {...this.props}/>
         } else {
-            formComponent = (<AntSwitchForm product={product} usedButton={usedButton}
-                                            prevStep={this.prevStep}
-                                            {...this.props}/>)
+            formComponent =
+                <AntSwitchForm product={product} usedButton={usedButton} prevStep={this.prevStep} {...this.props}/>
         }
         const steps = [
             {
                 title: 'Chọn Thiết Bị',
-                content: (<ProductListComponent productList={productList} handleChooseProduct={this.handleChooseProduct}/>)
+                content: <ProductListComponent productList={productList}
+                                               handleChooseProduct={this.handleChooseProduct}/>
             },
             {
                 title: 'Điền thông tin',
@@ -194,7 +195,6 @@ class SwitchForm extends Component {
                 } else {
                     request.topic = product.id;
                 }
-                console.log(request)
                 saveDevice(request).then(() => {
                     this.props.handleCancelModal();
                     this.props.loadDevices(window.location.pathname.substring(18));
@@ -205,6 +205,14 @@ class SwitchForm extends Component {
             }
         });
     };
+
+    onChange = (product, checked) => {
+        if (product.type.includes("SW")) {
+            mqttPublish(`${product.id}/button1`, checked.toString())
+        } else {
+            mqttPublish(product.id, `{"type": "SR", "button":1, "state":${checked}}`)
+        }
+    }
 
     render() {
         const {product, usedButton} = this.props;
@@ -224,46 +232,50 @@ class SwitchForm extends Component {
         }
         return (
             <Fragment>
-                <Form autoComplete='off'>
-                    <Form.Item label='Tên thiết bị'>
-                        {getFieldDecorator('name', {
-                            rules: [{required: true, message: 'Vui lòng nhập tên thiết bị!'}]
-                        })(
-                            <Input size="large"
-                                   prefix={<Icon type="form"/>}
-                                   placeholder="Vd: Đèn Trần, Quạt Trần ..."/>
-                        )}
-                    </Form.Item>
-                    <Form.Item label='Logo'>
-                        {getFieldDecorator('logo', {
-                            rules: [{required: true, message: 'Vui lòng chọn logo!'}]
-                        })(
-                            <Input type='hidden'/>
-                        )}
-                        {getFieldValue("logo") !== undefined ? (
-                            <img alt={getFieldValue("logo")}
-                                 src={`${DEVICE_IMG_URI}${getFieldValue("logo")}-icon.png`}
-                                 style={{
-                                     width: '5vw',
-                                     marginRight: '2vw'
-                                 }}/>
-                        ) : null}
-                        <Button type='dashed' onClick={this.handleShowModal}>
-                            {getFieldValue("logo") === undefined ? 'Chọn Logo' : 'Chọn Lại'}
-                        </Button>
-                    </Form.Item>
-                    <Form.Item label='Nút'>
-                        {getFieldDecorator('switchButton', {
-                            rules: [{required: true, message: 'Vui lòng chọn nút!'}]
-                        })(
-                            <Radio.Group>
-                                {buttonCheckbox}
-                            </Radio.Group>
-                        )}
-                    </Form.Item>
-                    <Button type="primary" htmlType="submit" size="large" onClick={this.handleSubmitAddDevice}>
-                        Thêm Thiết Bị
-                    </Button>
+                <Form autoComplete='off' className="add-device__switch-form">
+                    <Row>
+                        <Col span={14} className="add-device__switch-form__col1">
+                            <Form.Item label='Tên thiết bị'>
+                                {getFieldDecorator('name', {
+                                    rules: [{required: true, message: 'Vui lòng nhập tên thiết bị!'}]
+                                })(
+                                    <Input size="large"
+                                           prefix={<Icon type="form"/>}
+                                           placeholder="Vd: Đèn Trần, Quạt Trần ..."
+                                           className="add-device__switch-form__col1__item"/>
+                                )}
+                            </Form.Item>
+                            <Form.Item label='Nút'>
+                                {getFieldDecorator('switchButton', {
+                                    rules: [{required: true, message: 'Vui lòng chọn nút!'}]
+                                })(
+                                    <Radio.Group className="add-device__switch-form__col1__item">
+                                        {buttonCheckbox}
+                                    </Radio.Group>
+                                )}
+                            </Form.Item>
+                            <Button type="primary" size="large" onClick={this.handleSubmitAddDevice}>
+                                Thêm Thiết Bị
+                            </Button>
+                        </Col>
+                        <Col span={10} className="add-device__switch-form__col2">
+                            <Form.Item>
+                                {getFieldDecorator('logo', {
+                                    rules: [{required: true, message: 'Vui lòng chọn logo!'}]
+                                })(
+                                    <Input type='hidden'/>
+                                )}
+                                <img alt={getFieldValue("logo")}
+                                     src={getFieldValue("logo") === undefined
+                                         ? '/image/logo-here-icon.png'
+                                         : `${DEVICE_IMG_URI}${getFieldValue("logo")}-icon.png`}
+                                     onClick={this.handleShowModal}/>
+                            </Form.Item>
+                            <Tooltip placement="bottom" title="Thử Công Tắc">
+                                <Switch onChange={(checked) => this.onChange(product, checked)}/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
                 </Form>
 
                 <IconModal visible={logoModalVisible} logoName={DEVICE_NAME} imgUri={DEVICE_IMG_URI}

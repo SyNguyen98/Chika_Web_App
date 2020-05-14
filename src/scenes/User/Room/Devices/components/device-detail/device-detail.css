@@ -1,27 +1,22 @@
-.device-info-modal .ant-modal-body {
-    padding: 0 50px !important;
-}
-
-.device-info-modal .ant-tabs-bar {
-    width: 270px;
-}
-
-.device-info-modal .ant-tabs-nav .ant-tabs-tab {
+.device-detail__info {
+    margin-left: 70px;
     font-size: 15px;
-    padding-bottom: 5px;
 }
 
-.device-info-modal__detail {
-    margin-left: 30px;
-    font-size: 17px;
+.device-detail__form {
+    text-align: center;
+    padding-left: 20px;
 }
 
-.device-info-modal__detail img {
-    margin-bottom: 30px;
-    width: 4vw;
-    height: 4vw;
+.device-detail__form img {
+    width: 60px;
+    cursor: pointer;
 }
 
-.device-info-modal__timeline {
-    margin-left: 30px;
+.device-detail__form img:hover {
+    opacity: 50%;
+}
+
+.device-detail__timeline {
+    margin-left: 70px;
 }

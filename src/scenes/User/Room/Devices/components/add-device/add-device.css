@@ -11,3 +11,25 @@
 .add-device__product-col:hover {
     transform: scale(1.05);
 }
+
+.add-device__switch-form {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.add-device__switch-form img {
+    width: 100px;
+    cursor: pointer;
+}
+
+.add-device__switch-form img:hover {
+    opacity: 50%;
+}
+
+.add-device__switch-form__col1 .ant-form-item {
+    display: flex;
+}
+
+.add-device__switch-form__col1__item {
+    margin-left: 20px;
+}

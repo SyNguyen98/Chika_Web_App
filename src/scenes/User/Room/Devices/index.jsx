@@ -134,7 +134,6 @@ export default class UserRoomComponent extends Component {
         } else {
             mqttPublish(device.topic, `{"type": "SR", "button":${device.switchButton}, "state":${checked}}`)
         }
-
     }
 
     setHeaderBackground = (color, url) => {
