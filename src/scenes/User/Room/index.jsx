@@ -10,7 +10,7 @@ import {USER_ROOM_LINK} from "../../../constant/link";
 import {ROOM_COLOR} from "../../../constant/color";
 import {IconModal} from "../../../components/modal";
 
-export default class UserListRoomComponent extends Component {
+export default class ListRoomComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {

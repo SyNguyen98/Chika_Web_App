@@ -46,8 +46,9 @@ import AdminInfoComponent from '../scenes/Admin/PersonalInfo';
 import AdminSettingComponent from '../scenes/Admin/Setting';
 
 import UserHomeComponent from '../scenes/User/Home';
-import UserListRoomComponent from '../scenes/User/Room';
+import ListRoomComponent from '../scenes/User/Room';
 import UserRoomComponent from '../scenes/User/Room/Devices';
+import ListScriptComponent from "../scenes/User/Script";
 import UserPersonalComponent from '../scenes/User/PersonalInfo'
 
 import {ErrorNotification, SuccessNotification} from "../components/notification";
@@ -91,7 +92,7 @@ import {
     SWITCH_SENSOR_LINK,
     USER_HOME_LINK,
     USER_INFO_LINK,
-    USER_ROOM_LINK
+    USER_ROOM_LINK, USER_SCRIPT_LINK
 } from "../constant/link";
 
 const {Content} = Layout;
@@ -185,8 +186,10 @@ class App extends Component {
     componentDidMount() {
         this.loadCurrentUser();
         mqttConnect();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
         getClient().on('message', (topic, message) => {
-            // message is Buffer
             console.log(`From: ${topic} , message: ${message.toString()}`);
             this.setState({
                 mqttMessage: {
@@ -259,10 +262,11 @@ class App extends Component {
                                                                          onLogout={this.onChangePasswordLogout} {...props} />}/>
 
                         <Route exact path={USER_HOME_LINK} render={(props) => <UserHomeComponent {...props}/>}/>
-                        <Route exact path={USER_ROOM_LINK} render={(props) => <UserListRoomComponent {...props}/>}/>
+                        <Route exact path={USER_ROOM_LINK} render={(props) => <ListRoomComponent {...props}/>}/>
                         <Route exact path={`${USER_ROOM_LINK}/:id`}
                                render={(props) => <UserRoomComponent mqttMessage={mqttMessage}
                                                                      currentUser={currentUser} {...props}/>}/>
+                        <Route exact path={USER_SCRIPT_LINK} render={(props) => <ListScriptComponent {...props}/>}/>
 
                         <Route exact path={USER_INFO_LINK}
                                render={(props) => <UserPersonalComponent currentUser={currentUser} {...props}/>}/>
