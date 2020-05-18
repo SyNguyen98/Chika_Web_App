@@ -55,7 +55,7 @@ import {ErrorNotification, SuccessNotification} from "../components/notification
 
 import {getUserInfo, updateAdminInfo} from '../services/UserService';
 import {deleteAllCookies} from '../services/CookieService'
-import {getClient, mqttConnect, mqttDisconnect} from "../services/MqttService";
+import {getClient, mqttConnect} from "../services/MqttService";
 
 import {ACCESS_TOKEN} from '../constant';
 import {
@@ -92,7 +92,8 @@ import {
     SWITCH_SENSOR_LINK,
     USER_HOME_LINK,
     USER_INFO_LINK,
-    USER_ROOM_LINK, USER_SCRIPT_LINK
+    USER_ROOM_LINK,
+    USER_SCRIPT_LINK
 } from "../constant/link";
 
 const {Content} = Layout;
@@ -186,9 +187,6 @@ class App extends Component {
     componentDidMount() {
         this.loadCurrentUser();
         mqttConnect();
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
         getClient().on('message', (topic, message) => {
             console.log(`From: ${topic} , message: ${message.toString()}`);
             this.setState({
@@ -198,10 +196,6 @@ class App extends Component {
                 }
             })
         })
-    }
-
-    componentWillUnmount() {
-        mqttDisconnect();
     }
 
     render() {
