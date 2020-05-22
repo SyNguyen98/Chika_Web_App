@@ -14,7 +14,7 @@ export const SWITCH_SENSOR_IMG_URI = `${PRODUCT_IMG_URI}switch-sensor/`;
 export const SWITCH_IMG_URI = `${PRODUCT_IMG_URI}switch/`;
 export const MODULE_IR_URI = `${PRODUCT_IMG_URI}module-ir/`;
 export const HOME_CENTRAL_URI = `${PRODUCT_IMG_URI}home-central/`;
-export const DOOR_SENSOR_URI = `${PRODUCT_IMG_URI}door=sensor/`;
+export const DOOR_SENSOR_URI = `${PRODUCT_IMG_URI}door-sensor/`;
 export const MOTION_DETECTOR_URI = `${PRODUCT_IMG_URI}motion-detector/`;
 
 export const SUPPORTING_IMG_URI = '/image/guest/supporting/';

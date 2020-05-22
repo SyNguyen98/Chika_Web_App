@@ -1,24 +1,94 @@
 import React, {Component, Fragment} from "react";
-import {Button, Col, Icon, Row} from "antd";
+import {Button, Col, Icon, Popover, Row} from "antd";
 
 import "./remote.css";
 import {DEVICE_IMG_URI} from "../../../../../../constant/uri";
+import {ErrorNotification, SuccessNotification} from "../../../../../../components/notification";
+import {deleteButtonById, getAllButtonByRemoteId} from "../../../../../../services/IRService";
+import LearningModal from "../learning-modal";
+import {mqttPublish} from "../../../../../../services/MqttService";
+
 
 export default class RemoteComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuVisible: [],
+            buttons: []
+        }
+    }
+
+    handleLeftClick = (data) => {
+        mqttPublish(this.props.device.topic + "/control", data);
+    }
+
+    handleRightClick = (event, index) => {
+        event.preventDefault();
+        let menuVisible = this.state.menuVisible;
+        menuVisible[index] = !menuVisible[index];
+        this.setState({menuVisible});
+    }
+
+    handleDeleteButton = (id) => {
+        deleteButtonById(id).then(() => {
+            this.setState({menuVisible: false});
+            this.loadButtons();
+            SuccessNotification("Đã xóa nút")
+        }).catch(error => {
+            ErrorNotification(error.message || "Đã có lỗi xảy ra")
+        })
+    }
+
+    loadButtons = () => {
+        getAllButtonByRemoteId(this.props.device.id).then(buttons => {
+            let menuVisible = [];
+            for (let i = 0; i < buttons.length; i++) {
+                menuVisible.push(false);
+            }
+            this.setState({buttons, menuVisible});
+        }).catch(error => {
+            ErrorNotification(error.message || "Đã có lỗi xảy ra")
+        })
+    }
+
+    componentDidMount() {
+        this.loadButtons();
+    }
+
     render() {
-        const {device, sendIrValue} = this.props;
+        const {device, sendIrValue, modalVisible} = this.props;
+        const {menuVisible, buttons} = this.state;
         return (
             <Fragment>
                 {device.logo === "television" ? <RemoteTV sendIrValue={sendIrValue}/> : <RemoteConditioner/>}
-            </Fragment>
+                <Row className="remote__add-btn">
+                    {buttons.map((item, i) => {
+                        return (
+                            <Col key={i} span={6}>
+                                <Popover content={<a onClick={() => this.handleDeleteButton(item.id)}>Xóa</a>}
+                                         visible={menuVisible[i]}>
+                                    <Button onClick={() => this.handleLeftClick(item.data)}
+                                            onContextMenu={(event) => this.handleRightClick(event, i)}>
+                                        <Icon type={item.logo}/>
+                                    </Button>
+                                </Popover>
+                            </Col>
+                        )
+                    })}
+                </Row>
 
+                <LearningModal remoteId={device.id} topic={device.topic + "/learn"} visible={modalVisible}
+                               loadButtons={this.loadButtons}
+                               mqttMessage={this.props.mqttMessage}
+                               handleCancelLearning={this.props.handleCancelLearning}/>
+            </Fragment>
         )
     }
 }
 
 const RemoteTV = ({sendIrValue}) => (
-    <Row className="remote">
-        <Col span={6} className="remote__volume">
+    <Row className="remote__tv">
+        <Col span={6} className="remote__tv__volume">
             <p>Âm Lượng</p>
             <Button onClick={() => sendIrValue("VOLUME_UP")}><Icon type="plus"/></Button>
             <br/>
@@ -26,7 +96,7 @@ const RemoteTV = ({sendIrValue}) => (
         </Col>
         <Col span={12} style={{textAlign: "center"}}>
             <p>Chọn Kênh</p>
-            <Row className="remote__channel-row">
+            <Row className="remote__tv__channel-row">
                 <Col span={8}>
                     <Button onClick={() => sendIrValue("CHANNEL_1")}>1</Button>
                 </Col>
@@ -37,7 +107,7 @@ const RemoteTV = ({sendIrValue}) => (
                     <Button onClick={() => sendIrValue("CHANNEL_3")}>3</Button>
                 </Col>
             </Row>
-            <Row className="remote__channel-row">
+            <Row className="remote__tv__channel-row">
                 <Col span={8}>
                     <Button onClick={() => sendIrValue("CHANNEL_4")}>4</Button>
                 </Col>
@@ -48,7 +118,7 @@ const RemoteTV = ({sendIrValue}) => (
                     <Button onClick={() => sendIrValue("CHANNEL_6")}>6</Button>
                 </Col>
             </Row>
-            <Row className="remote__channel-row">
+            <Row className="remote__tv__channel-row">
                 <Col span={8}>
                     <Button onClick={() => sendIrValue("CHANNEL_7")}>7</Button>
                 </Col>
@@ -59,12 +129,12 @@ const RemoteTV = ({sendIrValue}) => (
                     <Button onClick={() => sendIrValue("CHANNEL_9")}>9</Button>
                 </Col>
             </Row>
-            <Row className="remote__channel-row">
+            <Row className="remote__tv__channel-row">
                 <Button onClick={() => sendIrValue("CHANNEL_0")}>0</Button>
             </Row>
 
         </Col>
-        <Col span={6} className="remote__channel">
+        <Col span={6} className="remote__tv__channel">
             <p>Chuyển Kênh</p>
             <Button onClick={() => sendIrValue("CHANNEL_UP")}><Icon type="up"/></Button><br/>
             <Button onClick={() => sendIrValue("CHANNEL_DOWN")}><Icon type="down"/></Button>
@@ -78,8 +148,8 @@ class RemoteConditioner extends Component {
             <div className="remote__air-conditioner">
                 <h1>22 &#8451;</h1>
                 <div>
-                    <Button className="down-btn"><Icon type="minus" /></Button>
-                    <Button className="up-btn"><Icon type="plus" /></Button>
+                    <Button className="down-btn"><Icon type="minus"/></Button>
+                    <Button className="up-btn"><Icon type="plus"/></Button>
                 </div>
                 <Row>
                     <Col span={8}>
@@ -99,4 +169,3 @@ class RemoteConditioner extends Component {
         )
     }
 }
-

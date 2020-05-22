@@ -7,7 +7,7 @@ import AdminHeaderComponent from './admin';
 import "./header.css";
 
 import {
-  CONDITIONER_TIVI_LINK,
+  CONDITIONER_TV_LINK,
   ENVIRONMENTAL_CONTROL_LINK,
   GOOGLE_ASSISTANT_LINK,
   INTRODUCTION_LINK,
@@ -89,7 +89,7 @@ const SmarthomeDropdownMenu = ({ handleChangePage }) => {
           <a onClick={() => handleChangePage(GOOGLE_ASSISTANT_LINK)}>Kết nối google assistant</a>
         </Col>
         <Col className="solutions-item" span={8}>
-          <a onClick={() => handleChangePage(CONDITIONER_TIVI_LINK)}>Hệ thống điều hòa - tivi</a>
+          <a onClick={() => handleChangePage(CONDITIONER_TV_LINK)}>Hệ thống điều hòa - tivi</a>
         </Col>
         <Col className="solutions-item" span={8}>
           <a onClick={() => handleChangePage(LIGHT_CONTROL_LINK)}>Chiếu sáng thông minh</a>

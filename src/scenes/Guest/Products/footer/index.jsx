@@ -13,7 +13,7 @@ import {
 } from "../../../../constant/link";
 
 
-const ProductFooterComponent = (history) => {
+const ProductFooterComponent = ({history}) => {
 
     const handleChangePage = (link) => {
         if (window.location.pathname.includes(link)) {

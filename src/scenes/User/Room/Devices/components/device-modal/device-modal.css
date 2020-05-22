@@ -5,11 +5,19 @@
 
 .remote__header button {
     position: absolute;
-    right: 10px;
     padding: 0;
     border-radius: 50%;
     height: 30px;
     width: 30px;
     font-size: 17px;
+}
+
+.remote__header__add {
+    left: 10px;
+    color: green;
+}
+
+.remote__header__power {
+    right: 10px;
     color: red;
 }

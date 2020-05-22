@@ -1,0 +1,33 @@
+.learning {
+    text-align: center;
+}
+
+.learning h5 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.learning__icon i {
+    font-size: 25px;
+    cursor: pointer;
+    transition: transform .1s
+}
+
+.learning__icon i:hover {
+    transform: scale(1.3);
+}
+
+.learning__learn img {
+    width: 15vw;
+}
+
+.learning__learn span {
+    width: 35px;
+    height: 35px;
+}
+
+.learning__learn i {
+    width: 15px;
+    height: 15px;
+}

@@ -32,3 +32,34 @@ export function getAllIrValueByDeviceAndProtocol(device, protocol) {
         method: 'GET'
     });
 }
+
+export function getAllButtonByRemoteId(remoteId) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: `${API_BASE_URL}/remote-button/remote/${remoteId}`,
+        method: 'GET'
+    });
+}
+
+export function saveRemoteButton(button) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: API_BASE_URL + "/remote-button",
+        method: 'POST',
+        body: JSON.stringify(button)
+    });
+}
+
+export function deleteButtonById(id) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: `${API_BASE_URL}/remote-button/${id}`,
+        method: 'DELETE'
+    });
+}

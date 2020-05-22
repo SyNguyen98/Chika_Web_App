@@ -1,13 +1,13 @@
-.remote p {
+.remote__tv p {
     font-size: 15px;
     font-weight: bold;
 }
 
-.remote__volume {
-    padding-left: 40px;
+.remote__tv__volume {
+    padding-left: 25px;
 }
 
-.remote__volume button {
+.remote__tv__volume button {
     height: 100px;
     width: 50px;
     margin-left: 10px;
@@ -15,11 +15,11 @@
 }
 
 
-.remote__channel-row {
+.remote__tv__channel-row {
     margin-bottom: 10px;
 }
 
-.remote__channel-row button {
+.remote__tv__channel-row button {
     border-radius: 50%;
     height: 50px;
     width: 50px;
@@ -27,11 +27,11 @@
     font-weight: bold;
 }
 
-.remote__channel {
+.remote__tv__channel {
     padding-left: 20px;
 }
 
-.remote__channel button {
+.remote__tv__channel button {
     height: 100px;
     width: 50px;
     margin-left: 20px;
@@ -43,13 +43,14 @@
 }
 
 .remote__air-conditioner h1 {
+    margin-bottom: 20px;
     font-size: 60px;
     font-weight: 600;
 }
 
 
 .remote__air-conditioner button {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     width: 100px;
     height: 40px;
     font-size: 20px;
@@ -74,4 +75,24 @@
     border-radius: 50%;
     border: 2px solid black;
     padding: 5px;
+}
+
+.remote__add-btn {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.remote__add-btn button {
+    padding: 0;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    font-size: 17px;
+}
+
+.remote__add-btn a {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: red;
 }

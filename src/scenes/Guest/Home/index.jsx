@@ -3,7 +3,7 @@ import { Button, Icon, Row, Col } from 'antd';
 
 import {GUEST_HOME_IMG_URI} from "../../../constant/uri";
 import {
-  CONDITIONER_TIVI_LINK, ENVIRONMENTAL_CONTROL_LINK,
+  CONDITIONER_TV_LINK, ENVIRONMENTAL_CONTROL_LINK,
   GOOGLE_ASSISTANT_LINK, LIGHT_CONTROL_LINK,
   LOGIN_LINK,
   PRODUCT_LINK,
@@ -84,12 +84,12 @@ export default class HomeComponent extends Component {
         <Row className="home-page__row home__row4" gutter={40}>
           <Col className="row4__col1" span={12}>
             <img alt="google-assitant" src={`${GUEST_HOME_IMG_URI}air-conditioner-tivi.jpg`}
-                  onClick={() => this.handleChangePage(CONDITIONER_TIVI_LINK)}/>
+                  onClick={() => this.handleChangePage(CONDITIONER_TV_LINK)}/>
           </Col>
           <Col className="row4__col2" span={12}>
             <h1>GIẢI PHÁP ĐIỀU HÒA - TIVI</h1>
             <p>Bộ điều khiển hồng ngoại – CA-IRX được Chika phát triển mạnh mẽ hơn.</p>
-            <Button shape="round" onClick={() => this.handleChangePage(CONDITIONER_TIVI_LINK)}>Xem thêm<Icon type="double-right" /></Button>
+            <Button shape="round" onClick={() => this.handleChangePage(CONDITIONER_TV_LINK)}>Xem thêm<Icon type="double-right" /></Button>
           </Col>
         </Row>
 

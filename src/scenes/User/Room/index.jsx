@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Col, Form, Icon, Input, Modal, notification, Row} from 'antd';
+import {Button, Col, Form, Icon, Input, Modal, Row} from 'antd';
 import {addRoom, getRooms} from '../../../services/RoomService'
 
 import './room.css';
@@ -9,6 +9,8 @@ import {ROOM_IMG_URI} from "../../../constant/uri";
 import {USER_ROOM_LINK} from "../../../constant/link";
 import {ROOM_COLOR} from "../../../constant/color";
 import {IconModal} from "../../../components/modal";
+import {LIST_ROOM} from "../../../constant";
+import {ErrorNotification, SuccessNotification} from "../../../components/notification";
 
 export default class ListRoomComponent extends Component {
     constructor(props) {
@@ -28,13 +30,10 @@ export default class ListRoomComponent extends Component {
     loadRooms = () => {
         getRooms().then(response => {
             this.setState({roomList: response})
-            sessionStorage.setItem("listRoom", JSON.stringify(response));
+            sessionStorage.setItem(LIST_ROOM, JSON.stringify(response));
             console.log(response);
         }).catch(error => {
-            notification.error({
-                message: 'Chika Smarthome',
-                description: error.message || "Tải danh sách phòng thất bại"
-            })
+            ErrorNotification(error.message || "Tải danh sách phòng thất bại");
         })
     }
 
@@ -129,15 +128,9 @@ class AddRoomForm extends Component {
                 sessionStorage.removeItem("listRoom");
                 const request = Object.assign({}, values);
                 addRoom(request).then(response => {
-                    notification.success({
-                        message: 'Chika Smarthome',
-                        description: "Thêm phòng thành công."
-                    })
+                    SuccessNotification("Thêm phòng thành công.")
                 }).catch(error => {
-                    notification.error({
-                        message: 'Chika Smarthome',
-                        description: "Thêm phòng thất bại" || error.message
-                    })
+                    ErrorNotification("Thêm phòng thất bại")
                 })
             }
         });

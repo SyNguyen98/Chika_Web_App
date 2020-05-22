@@ -6,7 +6,7 @@ export const QUESTION_LINK = '/Cau-hoi-thuong-gap';
 export const DOCUMENT_LINK = '/Tai-lieu-huong-dan';
 
 export const GOOGLE_ASSISTANT_LINK = '/google-assitant';
-export const CONDITIONER_TIVI_LINK = '/He-thong-dieu-hoa-ti-ti';
+export const CONDITIONER_TV_LINK = '/He-thong-dieu-hoa-ti-ti';
 export const LIGHT_CONTROL_LINK = '/Chieu-sang-thong-minh';
 export const ENVIRONMENTAL_CONTROL_LINK = '/Kiem-soat-moi-truong';
 export const SECURITY_SYSTEM_LINK = '/An-ninh-chong-trom';

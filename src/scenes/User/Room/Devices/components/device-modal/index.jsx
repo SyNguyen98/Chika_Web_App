@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Button, Icon, Modal} from "antd";
+import {Button, Icon, Modal, Tooltip} from "antd";
 import DeviceDetail from "../device-detail";
 import {getAllIrValueByDeviceAndProtocol} from "../../../../../../services/IRService";
 import {ErrorNotification} from "../../../../../../components/notification";
@@ -13,7 +13,8 @@ export default class DeviceModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            irValues: []
+            irValues: [],
+            modalVisible: false
         }
     }
 
@@ -53,6 +54,15 @@ export default class DeviceModal extends Component {
         })
     }
 
+    handleStartLearning = () => {
+        this.setState({modalVisible: true});
+    }
+
+    handleCancelLearning = () => {
+        mqttPublish(`${this.props.device.topic}/learn`, "0");
+        this.setState({modalVisible: false});
+    }
+
     componentDidMount() {
         if (this.props.device.type.includes("IR")) {
             this.loadIrValues();
@@ -61,22 +71,35 @@ export default class DeviceModal extends Component {
 
     render() {
         const {device, visible, handleCancelModal, handleDeleteDevice, loadDevices} = this.props;
+        const {modalVisible} = this.state;
         let component;
         if (device.type.includes("IR")) {
-            component = (<RemoteComponent device={device} sendIrValue={this.sendIrValue}/>)
+            component = {
+                header:
+                    <div className="remote__header">
+                        <Tooltip placement="bottom" title="Thêm Nút">
+                            <Button className="remote__header__add" onClick={this.handleStartLearning}>
+                                <Icon type="plus"/>
+                            </Button>
+                        </Tooltip>
+                        <b>{device.name}</b>
+                        <Button className="remote__header__power" onClick={() => this.sendIrValue("ON/OFF")}>
+                            <Icon type="poweroff"/>
+                        </Button>
+                    </div>,
+                body: <RemoteComponent device={device} modalVisible={modalVisible} mqttMessage={this.props.mqttMessage}
+                                       sendIrValue={this.sendIrValue}
+                                       handleCancelLearning={this.handleCancelLearning}/>
+            }
         } else {
-            component = (<DeviceDetail device={device} handleCancelModal={handleCancelModal} loadDevices={loadDevices}/>)
+            component = {
+                header: device.name,
+                body: <DeviceDetail device={device} handleCancelModal={handleCancelModal} loadDevices={loadDevices}/>
+            }
         }
         return (
             <Modal visible={visible} closable={false}
-                   title={device.type.includes("IR") ? (
-                       <div className="remote__header">
-                           <b>{device.name}</b>
-                           <Button onClick={() => this.sendIrValue("ON/OFF")}>
-                               <Icon type="poweroff"/>
-                           </Button>
-                       </div>
-                   ) : device.name}
+                   title={component.header}
                    centered
                    onCancel={handleCancelModal}
                    width='40vw'
@@ -88,7 +111,7 @@ export default class DeviceModal extends Component {
                            <Button onClick={handleCancelModal}>Quay Về</Button>
                        </Fragment>
                    )}>
-                {component}
+                {component.body}
             </Modal>
         )
     }

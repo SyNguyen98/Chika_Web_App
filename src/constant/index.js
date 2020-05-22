@@ -7,3 +7,5 @@ export const SWITCH_RF = 'Switch Rf';
 export const MODULE_IR = 'Module Ir';
 export const HOME_CENTER = 'Home Center';
 export const SENSOR = 'Sensor';
+
+export const LIST_ROOM = 'ListRoom';

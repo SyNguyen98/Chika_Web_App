@@ -4,17 +4,18 @@ import {Button, Col, Divider, Icon, Modal, Popover, Row, Switch} from 'antd';
 import './devices.css';
 import {deleteDevice, getDevicesByRoomId} from '../../../../services/DeviceService';
 import {deleteRoom} from '../../../../services/RoomService';
+import {mqttPublish, mqttSubscribe} from "../../../../services/MqttService";
 
 import AddDeviceModal from './components/add-device';
 import UpdateRoomModal from './components/update-room';
 import {AirSensorComponent, DoorSensorComponent} from './components/sensor'
+import DeviceModal from "./components/device-modal";
+import {ErrorNotification, SuccessNotification} from "../../../../components/notification";
 
 import {DEVICE_IMG_URI, ROOM_IMG_URI} from "../../../../constant/uri";
 import {USER_ROOM_LINK} from "../../../../constant/link";
 import {ROOM_COLOR} from "../../../../constant/color";
-import DeviceModal from "./components/device-modal";
-import {ErrorNotification, SuccessNotification} from "../../../../components/notification";
-import {mqttPublish, mqttSubscribe} from "../../../../services/MqttService";
+import {LIST_ROOM} from "../../../../constant";
 
 const {confirm} = Modal;
 
@@ -23,7 +24,7 @@ export default class UserRoomComponent extends Component {
         super(props);
         this.state = {
             roomId: window.location.pathname.substring(18),
-            roomList: JSON.parse(sessionStorage.getItem("listRoom")),
+            roomList: JSON.parse(sessionStorage.getItem(LIST_ROOM)),
             device: null,
             deviceList: {
                 sensors: [],
@@ -306,7 +307,7 @@ export default class UserRoomComponent extends Component {
                                         {...this.props}/>
 
                         {device ? (
-                            <DeviceModal device={device} visible={deviceModal}
+                            <DeviceModal device={device} visible={deviceModal} mqttMessage={this.props.mqttMessage}
                                          handleCancelModal={this.handleCancelModal}
                                          handleDeleteDevice={this.handleDeleteDevice} loadDevices={this.loadDevices}/>
                         ) : null}

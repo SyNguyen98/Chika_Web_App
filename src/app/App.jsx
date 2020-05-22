@@ -72,7 +72,7 @@ import {
     ADMIN_SWITCH_WIFI_LINK,
     ADMIN_USER_LINK,
     ADMIN_USER_LIST_LINK,
-    CONDITIONER_TIVI_LINK,
+    CONDITIONER_TV_LINK,
     DOCUMENT_LINK,
     DOOR_SENSOR_LINK,
     ENVIRONMENTAL_CONTROL_LINK,
@@ -127,7 +127,7 @@ class App extends Component {
                 default:
             }
         }).catch(error => {
-            ErrorNotification("Đã có lỗi xảy ra")
+            // ErrorNotification("Đã có lỗi xảy ra")
         });
     }
 
@@ -209,7 +209,7 @@ class App extends Component {
                         <Route exact path={INTRODUCTION_LINK} component={IntroduceComponent}/>
 
                         <Route exact path={GOOGLE_ASSISTANT_LINK} component={GoogleComponent}/>
-                        <Route exact path={CONDITIONER_TIVI_LINK} component={ConditionerTiviComponent}/>
+                        <Route exact path={CONDITIONER_TV_LINK} component={ConditionerTiviComponent}/>
                         <Route exact path={LIGHT_CONTROL_LINK} component={LightControlComponent}/>
                         <Route exact path={ENVIRONMENTAL_CONTROL_LINK} component={EnvironmentalControlComponent}/>
                         <Route exact path={SECURITY_SYSTEM_LINK} component={SecuritySystemComponent}/>

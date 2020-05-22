@@ -4,7 +4,7 @@ import { Row, Col } from 'antd';
 import "./solution-footer.css"
 
 import {
-    CONDITIONER_TIVI_LINK,
+    CONDITIONER_TV_LINK,
     ENVIRONMENTAL_CONTROL_LINK,
     GOOGLE_ASSISTANT_LINK,
     LIGHT_CONTROL_LINK, RGB_LED_LINK, SECURITY_SYSTEM_LINK
@@ -37,7 +37,7 @@ export default class SolutionFooterComponent extends Component {
                 </Col>
                 <Col className="solution__footer__col" span={8}>
                     <img alt="conditioner-tivi" src={`${GUEST_SOLUTION_IMG_URI}conditioner-tivi.jpg`}
-                        onClick={() => this.handleChangePage(CONDITIONER_TIVI_LINK)}/>
+                        onClick={() => this.handleChangePage(CONDITIONER_TV_LINK)}/>
                     <p>ĐIỀU HÒA, TV THÔNG MINH</p>
                 </Col>
                 <Col className="solution__footer__col" span={8}>

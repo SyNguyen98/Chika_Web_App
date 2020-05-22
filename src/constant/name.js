@@ -19,3 +19,14 @@ export const DEVICE_NAME = [
     "curtain",
     "speaker"
 ];
+
+export const REMOTE_ICON = [
+    "step-backward",
+    "step-forward",
+    "fast-backward",
+    "fast-forward",
+    "fullscreen",
+    "pause",
+    "audio",
+    "sound"
+]
