@@ -68,8 +68,8 @@ export default class AddDeviceModal extends Component {
         if (product && product.type.includes("IR")) {
             formComponent = <AntModuleIrForm product={product} {...this.props}/>
         } else {
-            formComponent =
-                <AntSwitchForm product={product} usedButton={usedButton} prevStep={this.prevStep} {...this.props}/>
+            formComponent = <AntSwitchForm product={product} usedButton={usedButton}
+                                           prevStep={this.prevStep} {...this.props}/>
         }
         const steps = [
             {

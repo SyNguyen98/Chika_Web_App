@@ -6,7 +6,7 @@ const imgDeviceUri = "/image/user/device/"
 export class DoorSensorComponent extends Component {
 
     render() {
-        const { doorState } = this.props;
+        const {doorState} = this.props;
         let imgSrc = "";
         if (doorState && doorState.state) {
             imgSrc = `${imgDeviceUri}door-open-icon.png`;
@@ -23,7 +23,7 @@ export class AirSensorComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 1,
+            value: 0,
             color: '#00b856'
         }
     }
@@ -39,28 +39,24 @@ export class AirSensorComponent extends Component {
     }
 
     render() {
-        const { airState } = this.props;
-        let value = 0;
-        let color = "#dedede";
-        if (airState) {
-            value = airState.aqi;
-            if (value < 2) {
-                color = "#00b856";
-            } else if (value < 6.5) {
-                color = "#ff9900";
-            } else {
-                color = "#bf0000";
-            }
+        const {aqi} = this.props;
+        let color;
+        if (aqi < 2) {
+            color = "#00b856";
+        } else if (aqi < 6.5) {
+            color = "#ff9900";
+        } else {
+            color = "#bf0000";
         }
         return (
-            <Gauge  value={value} max={10}
-                    width={190} height={100}
-                    backgroundColor={"#dedede"}
-                    color={color}
-                    label={null}
-                    minMaxLabelStyle={{fontSize: '0'}}
-                    valueLabelStyle={{fontSize: '16px', fontWeight: 'bold'}}
-                    valueFormatter={(value) => this.setLabel(value)}/>
+            <Gauge value={this.props.aqi} max={10}
+                   width={190} height={100}
+                   backgroundColor={"#dedede"}
+                   color={color}
+                   label={null}
+                   minMaxLabelStyle={{fontSize: '0'}}
+                   valueLabelStyle={{fontSize: '15px', fontWeight: 'bold'}}
+                   valueFormatter={(value) => this.setLabel(value)}/>
         )
     }
 }

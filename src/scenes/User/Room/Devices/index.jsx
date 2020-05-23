@@ -247,19 +247,19 @@ export default class UserRoomComponent extends Component {
                                     <Fragment>
                                         <Col className='user-room__sensor-item' span={6}>
                                             <b>KHÔNG KHÍ</b><br/>
-                                            <AirSensorComponent airState={airState}/>
+                                            <AirSensorComponent aqi={airState ? airState.aqi : 0}/>
                                         </Col>
                                         <Col className='user-room__sensor-item' span={6}>
                                             <b>NHIỆT ĐỘ</b><br/>
                                             <b style={{
-                                                fontSize: '50px',
+                                                fontSize: '45px',
                                                 color: 'red'
                                             }}>{airState ? airState.temperature : '0'} &#8451;</b>
                                         </Col>
                                         <Col className='user-room__sensor-item' span={6}>
                                             <b>ĐỘ ẨM</b><br/>
                                             <b style={{
-                                                fontSize: '50px',
+                                                fontSize: '45px',
                                                 color: 'blue'
                                             }}>{airState ? airState.humidity : '0'} &#37;</b>
                                         </Col>
