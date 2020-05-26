@@ -28,7 +28,7 @@ export function getAllIrValueByDeviceAndProtocol(device, protocol) {
         return Promise.reject("No access token set.");
     }
     return request({
-        url: `${API_BASE_URL}/ir-value/batch?device=${device}&protocol=${protocol}`,
+        url: `${API_BASE_URL}/ir/value/?device=${device}&protocol=${protocol}`,
         method: 'GET'
     });
 }

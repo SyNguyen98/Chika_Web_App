@@ -18,7 +18,7 @@ export default class ListRoomComponent extends Component {
         this.state = {
             currentUser: null,
             addModalVisible: false,
-            roomList: JSON.parse(sessionStorage.getItem("listRoom")) || [],
+            roomList: JSON.parse(sessionStorage.getItem(LIST_ROOM)) || [],
         }
     }
 
@@ -127,9 +127,9 @@ class AddRoomForm extends Component {
             if (!err) {
                 sessionStorage.removeItem("listRoom");
                 const request = Object.assign({}, values);
-                addRoom(request).then(response => {
+                addRoom(request).then(() => {
                     SuccessNotification("Thêm phòng thành công.")
-                }).catch(error => {
+                }).catch(() => {
                     ErrorNotification("Thêm phòng thất bại")
                 })
             }

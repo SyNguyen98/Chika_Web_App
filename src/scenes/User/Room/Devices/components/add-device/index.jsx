@@ -55,12 +55,17 @@ export default class AddDeviceModal extends Component {
         }
     };
 
+    handleCancelModal = () => {
+        this.props.handleCancelModal();
+        this.setState({currentStep: 0});
+    }
+
     componentDidMount() {
         this.loadProducts();
     }
 
     render() {
-        const {visible, handleCancelModal} = this.props;
+        const {visible} = this.props;
         const {currentStep, productList, product, usedButton} = this.state;
         const AntSwitchForm = Form.create()(SwitchForm);
         const AntModuleIrForm = Form.create()(ModuleIrForm);
@@ -93,7 +98,7 @@ export default class AddDeviceModal extends Component {
                                <Button style={{marginLeft: 8}} onClick={this.prevStep}>Quay Về</Button>
                            )}
                            {currentStep < steps.length && (
-                               <Button type="danger" onClick={handleCancelModal}>Hủy</Button>
+                               <Button type="danger" onClick={this.handleCancelModal}>Hủy</Button>
                            )}
                        </div>
                    )}>
@@ -134,7 +139,7 @@ class ProductListComponent extends Component {
         } else if (product.type.includes("SR")) {
             imgSrc = `${USER_PRODUCT_IMG_URI}SR.png`;
         } else {
-            imgSrc = `${USER_PRODUCT_IMG_URI}${product.type}.png`;
+            imgSrc = `${USER_PRODUCT_IMG_URI}IRX.png`;
         }
         return (
             <Col key={index} span={8} className="add-device__product-col"
@@ -310,26 +315,32 @@ class ModuleIrForm extends Component {
     render() {
         const {getFieldDecorator} = this.props.form;
         return (
-            <Form autoComplete='off'>
-                <Form.Item label='Tên thiết bị'>
-                    {getFieldDecorator('name', {
-                        rules: [{required: true, message: 'Vui lòng nhập tên thiết bị!'}]
-                    })(
-                        <Input size="large"
-                               prefix={<Icon type="form"/>}
-                               placeholder="Vd: Tivi, Máy Lạnh ..."/>
-                    )}
-                </Form.Item>
-                <Form.Item label='Loại thiết bị'>
-                    {getFieldDecorator('logo', {
-                        rules: [{required: true, message: 'Vui lòng chọn loại thiết bị!'}]
-                    })(
-                        <Radio.Group>
-                            <Radio value="television">Tivi</Radio>
-                            <Radio value="air-conditioner">Máy Lạnh</Radio>
-                        </Radio.Group>
-                    )}
-                </Form.Item>
+            <Form autoComplete='off' style={{textAlign: 'center'}}>
+                <Row>
+                    <Col span={12}>
+                        <Form.Item label='Tên thiết bị'>
+                            {getFieldDecorator('name', {
+                                rules: [{required: true, message: 'Vui lòng nhập tên thiết bị!'}]
+                            })(
+                                <Input size="large"
+                                       prefix={<Icon type="form"/>}
+                                       placeholder="Vd: Tivi, Máy Lạnh ..."/>
+                            )}
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item label='Loại thiết bị'>
+                            {getFieldDecorator('logo', {
+                                rules: [{required: true, message: 'Vui lòng chọn loại thiết bị!'}]
+                            })(
+                                <Radio.Group>
+                                    <Radio value="television">Tivi</Radio>
+                                    <Radio value="air-conditioner">Máy Lạnh</Radio>
+                                </Radio.Group>
+                            )}
+                        </Form.Item>
+                    </Col>
+                </Row>
                 <Button type="primary" size="large" onClick={this.handleSubmitAddDevice}>
                     Thêm Thiết Bị
                 </Button>

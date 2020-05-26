@@ -98,39 +98,39 @@ const RemoteTV = ({sendIrValue}) => (
             <p>Chọn Kênh</p>
             <Row className="remote__tv__channel-row">
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_1")}>1</Button>
+                    <Button onClick={() => sendIrValue("1")}>1</Button>
                 </Col>
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_2")}>2</Button>
+                    <Button onClick={() => sendIrValue("2")}>2</Button>
                 </Col>
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_3")}>3</Button>
+                    <Button onClick={() => sendIrValue("3")}>3</Button>
                 </Col>
             </Row>
             <Row className="remote__tv__channel-row">
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_4")}>4</Button>
+                    <Button onClick={() => sendIrValue("4")}>4</Button>
                 </Col>
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_5")}>5</Button>
+                    <Button onClick={() => sendIrValue("5")}>5</Button>
                 </Col>
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_6")}>6</Button>
+                    <Button onClick={() => sendIrValue("6")}>6</Button>
                 </Col>
             </Row>
             <Row className="remote__tv__channel-row">
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_7")}>7</Button>
+                    <Button onClick={() => sendIrValue("7")}>7</Button>
                 </Col>
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_8")}>8</Button>
+                    <Button onClick={() => sendIrValue("8")}>8</Button>
                 </Col>
                 <Col span={8}>
-                    <Button onClick={() => sendIrValue("CHANNEL_9")}>9</Button>
+                    <Button onClick={() => sendIrValue("9")}>9</Button>
                 </Col>
             </Row>
             <Row className="remote__tv__channel-row">
-                <Button onClick={() => sendIrValue("CHANNEL_0")}>0</Button>
+                <Button onClick={() => sendIrValue("0")}>0</Button>
             </Row>
 
         </Col>

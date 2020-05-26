@@ -13,7 +13,7 @@ export default class DeviceModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            irValues: [],
+            irValue: null,
             modalVisible: false
         }
     }
@@ -32,23 +32,27 @@ export default class DeviceModal extends Component {
     }
 
     sendIrValue = (name) => {
-        if (this.state.irValues.length > 0) {
-            let value = this.state.irValues.find(irValue => irValue.function === name);
-            let irValue = {
-                protocol: value.protocol,
-                nbit: value.nbit,
-                value: value.value,
-                state: value.state,
-                rawData: value.rawData
+        const {irValue} = this.state;
+        if (irValue) {
+            let value = irValue.dataList.find(data => data.function === name);
+            let data = {
+                protocol: irValue.protocol,
+                size: irValue.size,
             }
-            mqttPublish(this.props.device.topic + "/control", JSON.stringify(irValue));
+            if (irValue.device === "TV") {
+                data.rawData = value.rawData;
+            } else {
+                data.binaryData = value.binaryData;
+            }
+            mqttPublish(this.props.device.topic + "/control", JSON.stringify(data));
         }
     }
 
-    loadIrValues = () => {
-        getAllIrValueByDeviceAndProtocol("tivi", "sony")
-            .then(irValues => {
-                this.setState({irValues})
+    loadIrValues = (device, protocol) => {
+        getAllIrValueByDeviceAndProtocol(device, protocol)
+            .then(irValue => {
+                console.log(irValue)
+                this.setState({irValue})
             }).catch(error => {
             ErrorNotification(error.message || "Đã có lỗi xảy ra")
         })
@@ -65,7 +69,10 @@ export default class DeviceModal extends Component {
 
     componentDidMount() {
         if (this.props.device.type.includes("IR")) {
-            this.loadIrValues();
+            if (this.props.device.logo === "television") {
+                this.loadIrValues("TV", "SONY");
+            }
+
         }
     }
 
@@ -102,7 +109,7 @@ export default class DeviceModal extends Component {
                    title={component.header}
                    centered
                    onCancel={handleCancelModal}
-                   width='40vw'
+                   width='500px'
                    footer={(
                        <Fragment>
                            <Button type="danger" onClick={() => this.showConfirm(handleDeleteDevice, device.id)}>
