@@ -7,3 +7,20 @@
 .modal-icon:hover {
     transform: scale(1.1);
 }
+
+.fire-alert B {
+    color: red;
+}
+
+.fire-alert div {
+    text-align: center;
+}
+
+.fire-alert .ant-modal-body {
+    padding: 0;
+}
+
+.fire-alert img {
+    width: 200px;
+}
+

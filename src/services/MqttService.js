@@ -30,7 +30,7 @@ export function mqttPublish(topic, message) {
     let options = {
         qos: 2
     };
-    if (!topic.includes("button")) {
+    if (topic.includes("button")) {
         options.retain = true;
     }
     client.publish(topic, message, options);

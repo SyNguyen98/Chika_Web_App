@@ -25,3 +25,19 @@ export const IconModal = ({visible, logoName, imgUri, handleCancelModal, handleC
         </Row>
     </Modal>
 )
+
+export const FireAlertModal = ({visible, handleCancelModal}) => (
+    <Modal className="fire-alert" visible={visible} closable={false}
+           title={(<b>CẢNH BÁO CHÁY</b>)}
+           centered
+           width='300px'
+           footer={(
+               <Button type="danger" onClick={handleCancelModal}>
+                   TẮT CẢNH BÁO
+               </Button>
+           )}>
+        <div>
+            <img alt="alert" src="https://www.snowdonia-fire.co.uk/images/icon-fire-alarms.png"/>
+        </div>
+    </Modal>
+)

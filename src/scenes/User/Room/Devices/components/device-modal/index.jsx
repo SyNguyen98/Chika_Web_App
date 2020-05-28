@@ -90,7 +90,7 @@ export default class DeviceModal extends Component {
                             </Button>
                         </Tooltip>
                         <b>{device.name}</b>
-                        <Button className="remote__header__power" onClick={() => this.sendIrValue("ON/OFF")}>
+                        <Button className="remote__header__power" onClick={() => this.sendIrValue("POWER")}>
                             <Icon type="poweroff"/>
                         </Button>
                     </div>,

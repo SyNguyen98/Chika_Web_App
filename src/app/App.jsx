@@ -55,9 +55,9 @@ import {ErrorNotification, SuccessNotification} from "../components/notification
 
 import {getUserInfo, updateAdminInfo} from '../services/UserService';
 import {deleteAllCookies} from '../services/CookieService'
-import {getClient, mqttConnect} from "../services/MqttService";
+import {getClient, mqttConnect, mqttPublish, mqttSubscribe} from "../services/MqttService";
 
-import {ACCESS_TOKEN} from '../constant';
+import {ACCESS_TOKEN, FIRE_SENSOR_TOPIC} from '../constant';
 import {
     ADMIN_ADD_USER_LINK,
     ADMIN_FEEDBACK_LINK,
@@ -95,8 +95,11 @@ import {
     USER_ROOM_LINK,
     USER_SCRIPT_LINK
 } from "../constant/link";
+import {FireAlertModal} from "../components/modal";
+import {getAllSensorByUserId} from "../services/ProductService";
 
 const {Content} = Layout;
+const alertAudio = new Audio("/sound/Fire-Alarm-Sound.mp3");
 
 class App extends Component {
     constructor(props) {
@@ -104,9 +107,9 @@ class App extends Component {
         this.state = {
             currentUser: null,
             isLoading: false,
-            alertModal: false,
             sidenavVisible: false,
-            mqttMessage: null
+            mqttMessage: null,
+            fireAlertModal: false
         }
     }
 
@@ -121,6 +124,27 @@ class App extends Component {
                     break;
                 case 'HOME_MASTER':
                 case 'HOME_USER':
+                    getAllSensorByUserId().then(sensors => {
+                        sensors.forEach(sensor => {
+                            switch (sensor.type) {
+                                case 'SS01':
+                                    break;
+                                case 'SS02':
+                                    break;
+                                case 'SS03':
+                                    break;
+                                case 'SS04':
+                                    sessionStorage.setItem(FIRE_SENSOR_TOPIC, sensor.id);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            mqttSubscribe(sensor.id);
+                        })
+
+                    }).catch(error => {
+                        ErrorNotification("Đã có lỗi xảy ra")
+                    });
                     this.props.history.push(USER_ROOM_LINK);
                     this.onCloseSidenav();
                     break;
@@ -175,6 +199,12 @@ class App extends Component {
         SuccessNotification("Đăng xuất thành công.");
     }
 
+    handleCancelModal = () => {
+        alertAudio.pause();
+        this.setState({fireAlertModal: false})
+        mqttPublish(sessionStorage.getItem(FIRE_SENSOR_TOPIC), "{\"type\": \"SS04\", \"flameWarning\":false, \"gasWarning\":false}")
+    }
+
     onChangePasswordLogout = () => {
         localStorage.removeItem(ACCESS_TOKEN);
 
@@ -196,6 +226,16 @@ class App extends Component {
                 }
             })
         })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const {mqttMessage} = this.state;
+        if (mqttMessage !== prevState.mqttMessage) {
+            let message = JSON.parse(mqttMessage.message);
+            if (mqttMessage.topic === sessionStorage.getItem(FIRE_SENSOR_TOPIC) && message.flameWarning === true) {
+                alertAudio.play().then(() => this.setState({fireAlertModal: true}));
+            }
+        }
     }
 
     render() {
@@ -268,13 +308,12 @@ class App extends Component {
                     </Switch>
                 </Content>
 
-                {currentUser ? (
-                    <SideNavComponent history={this.props.history}
-                                      currentUser={currentUser}
-                                      sidenavVisible={sidenavVisible}
-                                      onCloseSidenav={this.onCloseSidenav}
-                                      handleLogout={this.handleLogout}/>
-                ) : [
+                {currentUser ? [
+                    <SideNavComponent key={0} history={this.props.history} currentUser={currentUser} sidenavVisible={sidenavVisible}
+                                      onCloseSidenav={this.onCloseSidenav} handleLogout={this.handleLogout}/>,
+
+                    <FireAlertModal key={1} visible={this.state.fireAlertModal} handleCancelModal={this.handleCancelModal}/>
+                ] : [
                     <FooterComponent key={0}/>,
                     <ContactMenuComponent key={1} history={this.props.history}/>
                 ]}

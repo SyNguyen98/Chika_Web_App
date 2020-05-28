@@ -203,6 +203,16 @@ export function getAllSensor() {
     });
 }
 
+export function getAllSensorByUserId() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+    return request({
+        url: API_BASE_URL + "/sensor/user",
+        method: 'GET'
+    });
+}
+
 export function saveSensor(sensorRequest) {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
