@@ -3,6 +3,9 @@ export const MQTT_URL = 'ws://chika.gq:8080';
 export const ACCESS_TOKEN = 'accessToken';
 
 export const LIST_ROOM = 'ListRoom';
+export const DOOR_SENSOR_TOPIC = 'DoorSensorTopic';
+export const MOTION_DETECTOR_TOPIC = 'MotionDetectorTopic';
+export const AIR_SENSOR_TOPIC = 'AirSensorTopic';
 export const FIRE_SENSOR_TOPIC = 'FireSensorTopic';
 
 export const SWITCH_WIFI = 'Switch Wifi';

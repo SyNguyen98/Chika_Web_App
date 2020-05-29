@@ -26,18 +26,48 @@ export const IconModal = ({visible, logoName, imgUri, handleCancelModal, handleC
     </Modal>
 )
 
-export const FireAlertModal = ({visible, handleCancelModal}) => (
-    <Modal className="fire-alert" visible={visible} closable={false}
-           title={(<b>CẢNH BÁO CHÁY</b>)}
-           centered
-           width='300px'
-           footer={(
-               <Button type="danger" onClick={handleCancelModal}>
-                   TẮT CẢNH BÁO
-               </Button>
-           )}>
-        <div>
-            <img alt="alert" src="https://www.snowdonia-fire.co.uk/images/icon-fire-alarms.png"/>
-        </div>
-    </Modal>
-)
+export const AlertModal = ({type, visible, handleCancelModal}) => {
+
+    const getHeader = () => {
+        switch (type) {
+            case 'SS01':
+                return 'CẢNH BÁO ĐỘT NHẬP';
+            case 'SS02':
+                return 'CẢNH BÁO CÓ TRỘM';
+            case 'SS04':
+                return 'CẢNH BÁO CHÁY';
+            default:
+                break;
+        }
+    }
+
+    const getImage = () => {
+        switch (type) {
+            case 'SS01':
+                return 'https://cdn0.iconfinder.com/data/icons/security-protection-2/64/Security-152-512.png';
+            case 'SS02':
+                return 'https://cdn0.iconfinder.com/data/icons/people-lifestyle/100/Thief-02-512.png';
+            case 'SS04':
+                return 'https://www.snowdonia-fire.co.uk/images/icon-fire-alarms.png';
+            default:
+                break;
+        }
+    }
+
+    return (
+        <Modal className="fire-alert" visible={visible} closable={false}
+               title={(<b>{getHeader()}</b>)}
+               centered
+               width='300px'
+               footer={(
+                   <Button type="danger" onClick={handleCancelModal}>
+                       TẮT CẢNH BÁO
+                   </Button>
+               )}>
+            <div>
+                <img alt="alert" src={getImage()}/>
+            </div>
+        </Modal>
+    )
+
+}

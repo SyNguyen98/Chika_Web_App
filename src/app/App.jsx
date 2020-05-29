@@ -57,7 +57,7 @@ import {getUserInfo, updateAdminInfo} from '../services/UserService';
 import {deleteAllCookies} from '../services/CookieService'
 import {getClient, mqttConnect, mqttPublish, mqttSubscribe} from "../services/MqttService";
 
-import {ACCESS_TOKEN, FIRE_SENSOR_TOPIC} from '../constant';
+import {ACCESS_TOKEN, AIR_SENSOR_TOPIC, DOOR_SENSOR_TOPIC, FIRE_SENSOR_TOPIC, MOTION_DETECTOR_TOPIC} from '../constant';
 import {
     ADMIN_ADD_USER_LINK,
     ADMIN_FEEDBACK_LINK,
@@ -95,7 +95,7 @@ import {
     USER_ROOM_LINK,
     USER_SCRIPT_LINK
 } from "../constant/link";
-import {FireAlertModal} from "../components/modal";
+import {AlertModal} from "../components/modal";
 import {getAllSensorByUserId} from "../services/ProductService";
 
 const {Content} = Layout;
@@ -109,7 +109,8 @@ class App extends Component {
             isLoading: false,
             sidenavVisible: false,
             mqttMessage: null,
-            fireAlertModal: false
+            alertModal: false,
+            alertType: null
         }
     }
 
@@ -128,10 +129,13 @@ class App extends Component {
                         sensors.forEach(sensor => {
                             switch (sensor.type) {
                                 case 'SS01':
+                                    sessionStorage.setItem(DOOR_SENSOR_TOPIC, sensor.id);
                                     break;
                                 case 'SS02':
+                                    sessionStorage.setItem(MOTION_DETECTOR_TOPIC, sensor.id);
                                     break;
                                 case 'SS03':
+                                    sessionStorage.setItem(AIR_SENSOR_TOPIC, sensor.id);
                                     break;
                                 case 'SS04':
                                     sessionStorage.setItem(FIRE_SENSOR_TOPIC, sensor.id);
@@ -142,7 +146,7 @@ class App extends Component {
                             mqttSubscribe(sensor.id);
                         })
 
-                    }).catch(error => {
+                    }).catch(() => {
                         ErrorNotification("Đã có lỗi xảy ra")
                     });
                     this.props.history.push(USER_ROOM_LINK);
@@ -150,7 +154,7 @@ class App extends Component {
                     break;
                 default:
             }
-        }).catch(error => {
+        }).catch(() => {
             // ErrorNotification("Đã có lỗi xảy ra")
         });
     }
@@ -199,10 +203,25 @@ class App extends Component {
         SuccessNotification("Đăng xuất thành công.");
     }
 
-    handleCancelModal = () => {
+    handleCancelModal = (type) => {
         alertAudio.pause();
-        this.setState({fireAlertModal: false})
-        mqttPublish(sessionStorage.getItem(FIRE_SENSOR_TOPIC), "{\"type\": \"SS04\", \"flameWarning\":false, \"gasWarning\":false}")
+        this.setState({alertModal: false})
+        switch (type) {
+            case 'SS01':
+                mqttPublish(sessionStorage.getItem(DOOR_SENSOR_TOPIC), 0)
+                break;
+            case 'SS02':
+                mqttPublish(sessionStorage.getItem(MOTION_DETECTOR_TOPIC), "{\"type\": \"SS04\", \"flameWarning\":false, \"gasWarning\":false}")
+                break;
+            // case 'SS03':
+            //     mqttPublish(sessionStorage.getItem(AIR_SENSOR_TOPIC), "")
+            //     break;
+            case 'SS04':
+                mqttPublish(sessionStorage.getItem(FIRE_SENSOR_TOPIC), "{\"type\": \"SS04\", \"offWarning\":true}")
+                break;
+            default:
+                break;
+        }
     }
 
     onChangePasswordLogout = () => {
@@ -232,8 +251,10 @@ class App extends Component {
         const {mqttMessage} = this.state;
         if (mqttMessage !== prevState.mqttMessage) {
             let message = JSON.parse(mqttMessage.message);
-            if (mqttMessage.topic === sessionStorage.getItem(FIRE_SENSOR_TOPIC) && message.flameWarning === true) {
-                alertAudio.play().then(() => this.setState({fireAlertModal: true}));
+            if (mqttMessage.topic === sessionStorage.getItem(DOOR_SENSOR_TOPIC) && message === 1) {
+                alertAudio.play().then(() => this.setState({alertModal: true, alertType: 'SS01'}));
+            } else if (mqttMessage.topic === sessionStorage.getItem(FIRE_SENSOR_TOPIC) && message.flameWarning === true) {
+                alertAudio.play().then(() => this.setState({alertModal: true, alertType: 'SS04'}));
             }
         }
     }
@@ -312,7 +333,7 @@ class App extends Component {
                     <SideNavComponent key={0} history={this.props.history} currentUser={currentUser} sidenavVisible={sidenavVisible}
                                       onCloseSidenav={this.onCloseSidenav} handleLogout={this.handleLogout}/>,
 
-                    <FireAlertModal key={1} visible={this.state.fireAlertModal} handleCancelModal={this.handleCancelModal}/>
+                    <AlertModal key={1} type={this.state.alertType} visible={this.state.alertModal} handleCancelModal={this.handleCancelModal}/>
                 ] : [
                     <FooterComponent key={0}/>,
                     <ContactMenuComponent key={1} history={this.props.history}/>
