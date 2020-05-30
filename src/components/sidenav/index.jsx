@@ -77,11 +77,11 @@ const UserSidenavComponent = ({currentUser, handleChangeComponent}) => (
             <Icon type="idcard"/><p>Quản lý tài khoản</p>
         </div>
 
-        {currentUser.role === 'HOME_MASTER' ? (
-            <div className='side-nav__item' onClick={() => handleChangeComponent(USER_ADD_USER_LINK)}>
-                <Icon type="user-add"/><p>Thêm thành viên</p>
-            </div>
-        ) : null}
+        {/*{currentUser.role === 'HOME_MASTER' ? (*/}
+        {/*    <div className='side-nav__item' onClick={() => handleChangeComponent(USER_ADD_USER_LINK)}>*/}
+        {/*        <Icon type="user-add"/><p>Thêm thành viên</p>*/}
+        {/*    </div>*/}
+        {/*) : null}*/}
 
         <div className='side-nav__item' onClick={() => handleChangeComponent(USER_SETTING_LINK)}>
             <Icon type="setting"/><p>Hỗ trợ</p>

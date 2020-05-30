@@ -217,7 +217,7 @@ class App extends Component {
             //     mqttPublish(sessionStorage.getItem(AIR_SENSOR_TOPIC), "")
             //     break;
             case 'SS04':
-                mqttPublish(sessionStorage.getItem(FIRE_SENSOR_TOPIC), "{\"type\": \"SS04\", \"offWarning\":true}")
+                mqttPublish(sessionStorage.getItem(FIRE_SENSOR_TOPIC), "{\"type\": \"SS04\", \"offWarning\":0}")
                 break;
             default:
                 break;
@@ -253,7 +253,8 @@ class App extends Component {
             let message = JSON.parse(mqttMessage.message);
             if (mqttMessage.topic === sessionStorage.getItem(DOOR_SENSOR_TOPIC) && message === 1) {
                 alertAudio.play().then(() => this.setState({alertModal: true, alertType: 'SS01'}));
-            } else if (mqttMessage.topic === sessionStorage.getItem(FIRE_SENSOR_TOPIC) && message.flameWarning === true) {
+            }
+            if (mqttMessage.topic === sessionStorage.getItem(FIRE_SENSOR_TOPIC) && message.flameWarning === 1) {
                 alertAudio.play().then(() => this.setState({alertModal: true, alertType: 'SS04'}));
             }
         }

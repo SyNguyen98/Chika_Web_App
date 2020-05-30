@@ -13,9 +13,9 @@ export const DEVICE_NAME = [
     "light",
     "chandelier",
     "lamp",
-    "air-conditioner",
+    "garden-light",
     "fan",
-    "television",
+    "selling-fan",
     "curtain",
     "speaker"
 ];
