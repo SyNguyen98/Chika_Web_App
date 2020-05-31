@@ -3,13 +3,7 @@ import {Drawer, Icon} from 'antd';
 
 import "./sidenav.css";
 
-import {
-    ADMIN_INFO_LINK,
-    ADMIN_SETTING_LINK,
-    USER_ADD_USER_LINK,
-    USER_INFO_LINK,
-    USER_SETTING_LINK
-} from "../../constant/link";
+import {ADMIN_INFO_LINK, ADMIN_SETTING_LINK, USER_INFO_LINK, USER_SETTING_LINK} from "../../constant/link";
 
 const SideNavComponent = ({history, currentUser, sidenavVisible, onCloseSidenav, handleLogout}) => {
 

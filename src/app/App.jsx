@@ -89,7 +89,7 @@ import {
     SECURITY_SYSTEM_LINK,
     SUPPORTING_LINK,
     SWITCH_LINK,
-    SWITCH_SENSOR_LINK,
+    SWITCH_SENSOR_LINK, USER_CAMERA_LINK,
     USER_HOME_LINK,
     USER_INFO_LINK,
     USER_ROOM_LINK,
@@ -97,6 +97,7 @@ import {
 } from "../constant/link";
 import {AlertModal} from "../components/modal";
 import {getAllSensorByUserId} from "../services/ProductService";
+import {CameraComponent} from "../scenes/User/Camera";
 
 const {Content} = Layout;
 const alertAudio = new Audio("/sound/Fire-Alarm-Sound.mp3");
@@ -323,6 +324,7 @@ class App extends Component {
                                render={(props) => <UserRoomComponent mqttMessage={mqttMessage}
                                                                      currentUser={currentUser} {...props}/>}/>
                         <Route exact path={USER_SCRIPT_LINK} render={(props) => <ListScriptComponent {...props}/>}/>
+                        <Route exact path={USER_CAMERA_LINK} render={(props) => <CameraComponent {...props}/>}/>
 
                         <Route exact path={USER_INFO_LINK}
                                render={(props) => <UserPersonalComponent currentUser={currentUser} {...props}/>}/>
