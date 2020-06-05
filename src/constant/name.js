@@ -30,3 +30,14 @@ export const REMOTE_ICON = [
     "audio",
     "sound"
 ]
+
+export const SCRIPT_NAME = [
+    "wake-up",
+    "go-school",
+    "go-work",
+    "go-sleep",
+    "security",
+    "eat",
+    "play-music",
+    "water-plant"
+]

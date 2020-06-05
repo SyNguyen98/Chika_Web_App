@@ -26,3 +26,4 @@ export const USER_PRODUCT_IMG_URI = "/image/user/product/";
 
 export const ROOM_IMG_URI = "/image/user/room/";
 export const DEVICE_IMG_URI = "/image/user/device/";
+export const SCRIPT_IMG_URI = "/image/user/script/";

@@ -56,8 +56,8 @@ export default class AddDeviceModal extends Component {
     };
 
     handleCancelModal = () => {
-        this.props.handleCancelModal();
         this.setState({currentStep: 0});
+        this.props.handleCancelModal();
     }
 
     componentDidMount() {

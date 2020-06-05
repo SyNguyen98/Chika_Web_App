@@ -150,7 +150,7 @@ class App extends Component {
                     }).catch(() => {
                         ErrorNotification("Đã có lỗi xảy ra")
                     });
-                    this.props.history.push(USER_ROOM_LINK);
+                    this.props.history.push(USER_SCRIPT_LINK);
                     this.onCloseSidenav();
                     break;
                 default:

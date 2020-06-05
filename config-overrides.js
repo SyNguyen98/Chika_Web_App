@@ -1,5 +1,6 @@
 const { injectBabelPlugin } = require('react-app-rewired');
 const rewireLess = require('react-app-rewire-less');
+const rewireSass = require('react-app-rewire-sass-modules');
 
 module.exports = {
   // The Webpack config to use when compiling your react app for development or production.
@@ -8,6 +9,7 @@ module.exports = {
     config = rewireLess.withLoaderOptions({
       javascriptEnabled: true
     })(config, env);
+    config = rewireSass(config, env);
     return config;
   },
   jest: function (config) {

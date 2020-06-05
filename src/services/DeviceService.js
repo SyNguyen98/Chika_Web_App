@@ -30,6 +30,13 @@ export function getDevicesByRoomId(roomId) {
     });
 }
 
+export function getDevicesForScript() {
+    return request({
+        url: `${API_BASE_URL}/device/script`,
+        method: 'GET',
+    });
+}
+
 export function getSwitchButtonsByDeviceTopic(topic) {
     return request({
         url: `${API_BASE_URL}/device/topic/${topic}`,
