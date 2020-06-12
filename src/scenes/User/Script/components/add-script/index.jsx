@@ -1,9 +1,11 @@
 import React, {Component} from "react";
-import {Button, Modal, Steps} from "antd";
+import {Button, Modal, Result, Steps} from "antd";
 
 import "./add-script.scss";
 import InfoFormComponent from "../info-form";
 import DeviceFormComponent from "../device-form";
+import {createScript} from "../../../../../services/ScriptService";
+import {ErrorNotification} from "../../../../../components/notification";
 
 const {Step} = Steps;
 
@@ -11,7 +13,7 @@ export default class AddScriptModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentStep: 1,
+            currentStep: 0,
             scriptInfo: null,
             scriptDevice: null
         }
@@ -27,11 +29,38 @@ export default class AddScriptModal extends Component {
         this.setState({currentStep});
     };
 
-    fillInForm = () => {
-        let scriptInfo = this.infoForm.handleSubmit();
-        if (scriptInfo) {
-            const currentStep = this.state.currentStep + 1;
-            this.setState({currentStep, scriptInfo});
+    nextStep = () => {
+        const {currentStep} = this.state;
+        switch (currentStep) {
+            case 0:
+                let scriptInfo = this.infoForm.handleSubmit();
+                if (scriptInfo) {
+                    const currentStep = this.state.currentStep + 1;
+                    this.setState({currentStep, scriptInfo});
+                }
+                break;
+            case 1:
+                let scriptDevice = this.deviceForm.handleSubmit();
+                if (scriptDevice) {
+                    const {scriptInfo} = this.state;
+                    let request = {
+                        logo: scriptInfo.logo,
+                        name: scriptInfo.name,
+                        time: scriptInfo.time,
+                        days: scriptInfo.days,
+                        devices: scriptDevice
+                    }
+                    console.log(request);
+                    createScript(request).then(response => {
+                        const currentStep = this.state.currentStep + 1;
+                        this.setState({currentStep, scriptDevice});
+                    }).catch(error => {
+                        ErrorNotification("Đã có lỗi xảy ra")
+                    });
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -49,11 +78,11 @@ export default class AddScriptModal extends Component {
             },
             {
                 title: 'Chọn thiết bị',
-                content: <DeviceFormComponent />
+                content: <DeviceFormComponent ref={instance => { this.deviceForm = instance; }}/>
             },
             {
                 title: 'Hoàn tất',
-                content: ''
+                content: <Result status="success" title="Tạo kịch bản hoàn tất"/>
             }
         ];
         return (
@@ -67,9 +96,19 @@ export default class AddScriptModal extends Component {
                                <Button style={{marginLeft: 8}} onClick={this.prevStep}>Quay Về</Button>
                            )}
                            {currentStep === 0 && (
-                               <Button type="danger" onClick={this.handleCancelModal}>Hủy</Button>
+                               <span>
+                                   <Button type="danger" onClick={this.handleCancelModal}>Hủy</Button>
+                                   <Button type="primary" onClick={this.nextStep}>Tiếp Tục</Button>
+                               </span>
+
                            )}
-                           <Button type="primary" onClick={this.fillInForm}>Tiếp Tục</Button>
+                           {currentStep === 1 && (
+                               <Button type="primary" onClick={this.nextStep}>Tạo Kịch Bản</Button>
+                           )}
+                           {currentStep === 2 && (
+                               <Button type="primary" onClick={this.handleCancelModal}>Hoàn Tất</Button>
+                           )}
+
                        </div>
                    )}>
                 <Steps current={currentStep}>

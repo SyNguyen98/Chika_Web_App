@@ -5,6 +5,8 @@ import "./scripts.css";
 import {ROOM_COLOR} from "../../../constant/color";
 import {ROOM_IMG_URI} from "../../../constant/uri";
 import AddScriptModal from "./components/add-script";
+import {getAllScriptByUserId} from "../../../services/ScriptService";
+import {ErrorNotification} from "../../../components/notification";
 
 export default class ListScriptComponent extends Component {
     constructor(props) {
@@ -29,8 +31,17 @@ export default class ListScriptComponent extends Component {
         }
     }
 
+    loadScripts = () => {
+        getAllScriptByUserId().then(scripts => {
+            console.log(scripts)
+        }).catch(error => {
+            ErrorNotification(error);
+        })
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0);
+        this.loadScripts();
     }
 
     render() {

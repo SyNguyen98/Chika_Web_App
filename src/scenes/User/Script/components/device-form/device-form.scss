@@ -1,0 +1,25 @@
+.script__device-form {
+  margin-top: 10px;
+
+  .ant-row {
+    width: 750px;
+  }
+
+  .device-checkbox-group {
+    margin-bottom: 20px;
+
+    .device-checkbox {
+      width: 110px;
+
+      .ant-checkbox + span {
+        font-size: 15px;
+        font-weight: 500;
+        padding-right: 15px;
+      }
+    }
+  }
+
+  .error-message {
+    color: red;
+  }
+}
