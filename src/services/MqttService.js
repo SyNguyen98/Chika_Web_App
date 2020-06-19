@@ -3,8 +3,8 @@ import {MQTT_URL} from "../constant";
 const mqtt = require('mqtt');
 
 const option = {
-    username: 'chika',
-    password: '2502',
+    username: 'pcnlljoy',
+    password: 'q2zXZf4CSUUE',
 };
 
 let client;

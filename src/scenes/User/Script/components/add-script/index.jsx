@@ -21,6 +21,7 @@ export default class AddScriptModal extends Component {
 
     handleCancelModal = () => {
         this.setState({currentStep: 0})
+        this.props.loadDevices();
         this.props.handleCancelModal();
     }
 
@@ -62,10 +63,6 @@ export default class AddScriptModal extends Component {
             default:
                 break;
         }
-    }
-
-    componentDidMount() {
-
     }
 
     render() {

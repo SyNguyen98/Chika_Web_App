@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import {BackTop, Layout} from 'antd';
-import './App.css';
+import './App.scss';
 
 import HeaderComponent from '../components/header';
 import FooterComponent from '../components/footer';
@@ -150,7 +150,7 @@ class App extends Component {
                     }).catch(() => {
                         ErrorNotification("Đã có lỗi xảy ra")
                     });
-                    this.props.history.push(USER_SCRIPT_LINK);
+                    this.props.history.push(USER_ROOM_LINK);
                     this.onCloseSidenav();
                     break;
                 default:
@@ -214,9 +214,6 @@ class App extends Component {
             case 'SS02':
                 mqttPublish(sessionStorage.getItem(MOTION_DETECTOR_TOPIC), "{\"type\": \"SS04\", \"flameWarning\":false, \"gasWarning\":false}")
                 break;
-            // case 'SS03':
-            //     mqttPublish(sessionStorage.getItem(AIR_SENSOR_TOPIC), "")
-            //     break;
             case 'SS04':
                 mqttPublish(sessionStorage.getItem(FIRE_SENSOR_TOPIC), "{\"type\": \"SS04\", \"offWarning\":0}")
                 break;

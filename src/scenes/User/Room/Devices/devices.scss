@@ -1,0 +1,179 @@
+@import "components/room-list/room-list";
+@import "components/sensor-item/sensor-item";
+@import "components/device-item/device-item";
+
+.user-room {
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
+
+    .button {
+        position: absolute;
+        padding: 0;
+        top: 10px;
+        font-size: 26px;
+        border-radius: 50%;
+    }
+
+    .list-room {
+        background-color: #eceaea;
+        height: calc(100vh - 80px);
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    .list-room::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .list-device {
+        .title {
+            position: relative;
+            padding-bottom: 10px;
+            display: flex;
+            border-bottom: 1px solid !important;
+            border-image: linear-gradient(90deg, #003eff, #00ff98) 1;
+
+            img {
+                border-radius: 50%;
+                box-shadow: 2px 3px 4px #524e4e;
+            }
+
+            h1 {
+                margin-left: 10px;
+                margin-bottom: 0;
+                font-weight: 700;
+                color: #432c58;
+            }
+
+            .add-button {
+                right: 4vw;
+                background-color: #01cc23;
+                border-color: #00a81c;
+            }
+
+            .add-button:hover {
+                background-color: #00a71c;
+                border-color: #008f18;
+            }
+
+            .setting-button {
+                right: 0;
+            }
+        }
+
+        .body {
+            height: calc(100vh - 13vw);
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+        .body::-webkit-scrollbar {
+            width: 0;
+        }
+    }
+}
+
+@mixin user-room--laptop-mdpi() {
+    @include room-item--laptop-mdpi();
+    @include sensor-item--laptop-mdpi();
+    @include device-item--laptop-mdpi();
+
+    .user-room {
+        .button {
+            width: 40px;
+            height: 40px;
+        }
+
+        .list-room {
+            width: 360px;
+        }
+
+        .list-device {
+            width: calc(100vw - 370px);
+
+            .title {
+                margin: 10px 30px 15px;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                h1 {
+                    margin-top: 5px;
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+}
+
+@mixin user-room--laptop-hidpi() {
+    @include room-item--laptop-hidpi();
+    @include sensor-item--laptop-hidpi();
+    @include device-item--laptop-hidpi();
+
+    .user-room {
+        .button {
+            width: 45px;
+            height: 45px;
+        }
+
+        .list-room {
+            width: 380px;
+        }
+
+        .list-device {
+            width: calc(100vw - 390px);
+
+            .title {
+                margin: 10px 50px 15px;
+
+                img {
+                    width: 55px;
+                    height: 55px;
+                }
+
+                h1 {
+                    margin-top: 8px;
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+}
+
+@mixin user-room--desktop() {
+    @include room-item--desktop();
+    @include sensor-item--desktop();
+    @include device-item--desktop();
+
+    .user-room {
+        .button {
+            width: 50px;
+            height: 50px;
+        }
+
+        .list-room {
+            width: 440px;
+        }
+
+        .list-device {
+            width: calc(100vw - 450px);
+
+            .title {
+                margin: 10px 50px 15px;
+
+                img {
+                    width: 60px;
+                    height: 60px;
+                }
+
+                h1 {
+                    margin-top: 10px;
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+}

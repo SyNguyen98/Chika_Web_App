@@ -1,0 +1,73 @@
+.room-item {
+  margin: 15px auto 30px;
+  position: relative;
+  padding: 0 !important;
+  box-shadow: 2px 3px 4px #524e4e;
+  cursor: pointer;
+  transition: transform .2s;
+
+  img {
+    margin-top: 20px;
+    margin-left: 30px;
+    border-radius: 50%;
+    opacity: 0.9;
+  }
+
+  p {
+    position: absolute;
+    left: 30px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-shadow: 1px 2px 3px #807f7f;
+  }
+}
+
+.room-item:hover {
+  transform: scale(1.05);
+}
+
+@mixin room-item--laptop-mdpi() {
+  .room-item {
+    width: 260px;
+    height: 140px;
+
+    img {
+      width: 50px;
+    }
+
+    p {
+      top: 100px;
+    }
+  }
+}
+
+@mixin room-item--laptop-hidpi() {
+  .room-item {
+    width: 300px;
+    height: 150px;
+
+    img {
+      width: 50px;
+    }
+
+    p {
+      top: 110px;
+    }
+  }
+}
+
+@mixin room-item--desktop() {
+  .room-item {
+    width: 340px;
+    height: 160px;
+
+    img {
+      width: 60px;
+    }
+
+    p {
+      top: 120px;
+    }
+  }
+}

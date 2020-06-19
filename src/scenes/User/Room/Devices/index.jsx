@@ -1,21 +1,23 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Col, Divider, Icon, Modal, Popover, Row, Switch} from 'antd';
 
-import './devices.css';
+import AddDeviceModal from './components/add-device';
+import SensorComponent from './components/sensor-item'
+import DeviceModal from "./components/device-modal";
+import UpdateRoomModal from './components/update-room';
+import {ErrorNotification, SuccessNotification} from "../../../../components/notification";
+
 import {deleteDevice, getDevicesByRoomId} from '../../../../services/DeviceService';
 import {deleteRoom} from '../../../../services/RoomService';
 import {mqttPublish, mqttSubscribe} from "../../../../services/MqttService";
 
-import AddDeviceModal from './components/add-device';
-import UpdateRoomModal from './components/update-room';
-import {AirSensorComponent, DoorSensorComponent} from './components/sensor'
-import DeviceModal from "./components/device-modal";
-import {ErrorNotification, SuccessNotification} from "../../../../components/notification";
-
 import {DEVICE_IMG_URI, ROOM_IMG_URI} from "../../../../constant/uri";
 import {USER_ROOM_LINK} from "../../../../constant/link";
-import {ROOM_COLOR} from "../../../../constant/color";
 import {LIST_ROOM} from "../../../../constant";
+
+import './devices.scss';
+import RoomListComponent from "./components/room-list";
+import DeviceComponent from "./components/device-item";
 
 const {confirm} = Modal;
 
@@ -57,7 +59,7 @@ export default class UserRoomComponent extends Component {
                 air: deviceList.sensors.find(sensor => sensor.type === "SS03")
             };
             this.setState({deviceList, sensor});
-        }).catch(error => {
+        }).catch(() => {
             ErrorNotification("Tải danh sách thiết bị thất bại");
         })
     }
@@ -137,13 +139,6 @@ export default class UserRoomComponent extends Component {
         }
     }
 
-    setHeaderBackground = (color, url) => {
-        return {
-            background: `linear-gradient(90deg, ${color}), url('${url}')`,
-            backgroundSize: '100% 20vh'
-        }
-    }
-
     componentWillMount() {
         window.scrollTo(0, 0);
         this.loadDevices(window.location.pathname.substring(18));
@@ -190,27 +185,14 @@ export default class UserRoomComponent extends Component {
         return (
             <Fragment>
                 <Row className='user-room'>
-                    <Col span={7} className='user-room__list-room'>
-                        {roomList.map((item, i) => {
-                            if (item.id === roomId) {
-                                return null;
-                            } else {
-                                return (
-                                    <div className='user-room__list-room__item' key={i}
-                                         style={this.setHeaderBackground(ROOM_COLOR[i], `${ROOM_IMG_URI}${item.logo}.jpg`)}
-                                         onClick={() => this.handleGoToRoomPage(item.id)}>
-                                        <img alt="icon" src={`${ROOM_IMG_URI}${item.logo}-icon.png`}/>
-                                        <p>{item.name.toUpperCase()}</p>
-                                    </div>
-                                )
-                            }
-                        })}
+                    <Col span={7} className='list-room'>
+                        <RoomListComponent roomList={roomList} roomId={roomId}/>
                     </Col>
-                    <Col span={17} className='user-room__list-device'>
-                        <div className='user-room__list-device__title'>
+                    <Col span={17} className='list-device'>
+                        <div className='title'>
                             <img alt="icon" src={`${ROOM_IMG_URI}${room.logo}-icon.png`}/>
                             <h1>{room.name.toUpperCase()}</h1>
-                            <Button type="primary" className='user-room__btn user-room__add-btn'
+                            <Button type="primary" className='button add-button'
                                     onClick={this.handleShowAddDeviceModal}>
                                 <Icon type="plus"/>
                             </Button>
@@ -230,70 +212,19 @@ export default class UserRoomComponent extends Component {
                                              </a>
                                          </div>
                                      }>
-                                <Button type="primary" className='user-room__btn user-room__setting-btn'>
+                                <Button type="primary" className='button setting-button'>
                                     <Icon type="more"/>
                                 </Button>
                             </Popover>
                         </div>
-                        <div className="user-room__list-device__list">
-                            <Row style={{textAlign: 'center'}}>
-                                {sensor.door ? (
-                                    <Col className='user-room__sensor-item' span={6}>
-                                        <b>CỬA</b><br/>
-                                        <DoorSensorComponent doorState={doorState}/>
-                                    </Col>
-                                ) : null}
-                                {sensor.air ? (
-                                    <Fragment>
-                                        <Col className='user-room__sensor-item' span={6}>
-                                            <b>KHÔNG KHÍ</b><br/>
-                                            <AirSensorComponent aqi={airState ? airState.aqi : 0}/>
-                                        </Col>
-                                        <Col className='user-room__sensor-item' span={6}>
-                                            <b>NHIỆT ĐỘ</b><br/>
-                                            <b style={{
-                                                fontSize: '45px',
-                                                color: 'red'
-                                            }}>{airState ? airState.temperature : '0'} &#8451;</b>
-                                        </Col>
-                                        <Col className='user-room__sensor-item' span={6}>
-                                            <b>ĐỘ ẨM</b><br/>
-                                            <b style={{
-                                                fontSize: '45px',
-                                                color: 'blue'
-                                            }}>{airState ? airState.humidity : '0'} &#37;</b>
-                                        </Col>
-                                    </Fragment>
-                                ) : null}
+                        <div className="body">
+                            <Row>
+                                <SensorComponent sensor={sensor} doorState={doorState} airState={airState}/>
                             </Row>
                             <Row>
-                                {deviceList.switches.map((item, i) => (
-                                    <Col className='user-room__switch' span={8} key={i}
-                                         onClick={() => this.handleShowDeviceModal(item)}>
-                                        <div className='user-room__switch__header'>
-                                            <img id={`${item.id}-img`} alt="device-icon"
-                                                 src={`${DEVICE_IMG_URI}${item.logo}-icon.png`}
-                                                 style={switchChecked[i] ? {opacity: '1'} : {opacity: '0.2'}}/>
-                                        </div>
-                                        <div className='user-room__switch__footer'>
-                                            <b style={switchChecked[i] ? {opacity: '1'} : {opacity: '0.2'}}>{item.name.toUpperCase()}</b>
-                                            <Switch checked={switchChecked[i]}
-                                                    onChange={(checked, event) => this.onChange(event, item, checked)}/>
-                                        </div>
-                                    </Col>
-                                ))}
-                                {deviceList.remoteIr.map((item, i) => (
-                                    <Col className='user-room__remote' span={8} key={i}
-                                         onClick={() => this.handleShowDeviceModal(item)}>
-                                        <div className='user-room__remote__header'>
-                                            <img id={`${item.id}-img`} alt="device-icon"
-                                                 src={`${DEVICE_IMG_URI}${item.logo}-icon.png`}/>
-                                        </div>
-                                        <div className='user-room__remote__footer'>
-                                            <b>{item.name.toUpperCase()}</b>
-                                        </div>
-                                    </Col>
-                                ))}
+                                <DeviceComponent deviceList={deviceList} switchChecked={switchChecked}
+                                                 handleShowDeviceModal={this.handleShowDeviceModal}
+                                                 onChange={this.onChange}/>
                             </Row>
                         </div>
 

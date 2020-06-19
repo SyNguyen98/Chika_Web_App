@@ -1,0 +1,29 @@
+.script-info {
+  font-size: 15px;
+
+  b {
+    font-size: 17px;
+  }
+
+  .script-col1 {
+    text-align: center;
+
+    span {
+      margin: 10px auto;
+      height: 80px;
+      width: 80px;
+      border: 1px solid rgba(0,0,0,0.2);
+      border-radius: 50%;
+      display: flex;
+
+      img {
+        margin: auto;
+        width: 50px;
+      }
+    }
+  }
+
+  .script-col2 {
+    font-weight: 500;
+  }
+}

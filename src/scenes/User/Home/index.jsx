@@ -77,7 +77,7 @@ export default class UserHomeComponent extends Component {
                             </Col>
                             <Col className='user-home__col col4' span={6}>
                                 <p>Không khí <Icon type="caret-right"/></p>
-                                <b>270</b><span>AQI</span>
+                                <b>1.9</b><span>AQI</span>
                             </Col>
                         </Row>
                         <h1>Phòng</h1>

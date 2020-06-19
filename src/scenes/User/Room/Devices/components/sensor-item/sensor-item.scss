@@ -1,0 +1,63 @@
+.sensor-item {
+  text-align: center;
+  margin: 5px 0 20px;
+
+  .temperature {
+    color: red;
+  }
+
+  .humidity {
+    color: blue;
+  }
+}
+
+@mixin sensor-item--laptop-mdpi() {
+  .sensor-item {
+
+    b {
+      font-size: 16px;
+    }
+
+    .temperature {
+      font-size: 45px;
+    }
+
+    .humidity {
+      font-size: 45px;
+    }
+  }
+}
+
+@mixin sensor-item--laptop-hidpi() {
+  .sensor-item {
+
+    b {
+      font-size: 18px;
+    }
+
+    .temperature {
+      font-size: 45px;
+    }
+
+    .humidity {
+      font-size: 45px;
+    }
+  }
+}
+
+@mixin sensor-item--desktop() {
+  .sensor-item {
+
+    b {
+      font-size: 22px;
+    }
+
+    .temperature {
+      font-size: 50px;
+    }
+
+    .humidity {
+      font-size: 50px;
+    }
+  }
+}

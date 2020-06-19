@@ -37,3 +37,10 @@ export function createScript(scheduleRequest) {
         body: JSON.stringify(scheduleRequest)
     });
 }
+
+export function deleteScriptById(id) {
+    return request({
+        url: `${API_BASE_URL}/script/${id}`,
+        method: 'DELETE'
+    });
+}
