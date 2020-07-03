@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import {Button, Icon, Form, Input, DatePicker} from 'antd';
 import moment from 'moment';
 
+import './change-info.scss';
+
 const ChangeInfoComponent = ({userInfo, updateUserInfo}) => {
     const AntEditForm = Form.create()(ChangeInfoForm);
 
     return (
-        <div className="user-info__edit">
+        <div className="user-info-edit">
             <AntEditForm userInfo={userInfo} updateUserInfo={updateUserInfo}/>
         </div>
     )
@@ -39,7 +41,6 @@ class ChangeInfoForm extends Component {
                     phone: values.phone,
                     email: values.email,
                 };
-                console.log(request);
                 this.props.updateUserInfo(request);
             }
         });

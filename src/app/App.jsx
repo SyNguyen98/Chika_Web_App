@@ -93,11 +93,12 @@ import {
     USER_HOME_LINK,
     USER_INFO_LINK,
     USER_ROOM_LINK,
-    USER_SCRIPT_LINK
+    USER_SCRIPT_LINK, USER_SUPPORT_LINK
 } from "../constant/link";
 import {AlertModal} from "../components/modal";
 import {getAllSensorByUserId} from "../services/ProductService";
 import {CameraComponent} from "../scenes/User/Camera";
+import UserSupportComponent from "../scenes/User/Support";
 
 const {Content} = Layout;
 const alertAudio = new Audio("/sound/Fire-Alarm-Sound.mp3");
@@ -325,6 +326,8 @@ class App extends Component {
 
                         <Route exact path={USER_INFO_LINK}
                                render={(props) => <UserPersonalComponent currentUser={currentUser} {...props}/>}/>
+                        <Route exact path={USER_SUPPORT_LINK}
+                               render={(props) => <UserSupportComponent currentUser={currentUser} onLogout={this.onChangePasswordLogout} {...props}/>}/>
 
                     </Switch>
                 </Content>

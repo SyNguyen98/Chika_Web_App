@@ -1,13 +1,13 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Icon, Tabs, notification, Modal, Row, Col} from 'antd';
-
-import './personal-info.css';
+import {Icon, Tabs} from 'antd';
 
 import {updateUserInfo} from '../../../services/UserService';
 import {getAllNumberOfProductByUserId} from '../../../services/ProductService';
+import {ErrorNotification, SuccessNotification} from "../../../components/notification";
+import ChangeInfoComponent from './change-info';
+import UserProductModal from "./device-modal";
 
-import ChangeInfoComponent from './ChangeInfo';
-import {ADMIN_PRODUCT_IMG_URI} from "../../../constant/uri";
+import './personal-info.scss';
 
 const {TabPane} = Tabs;
 
@@ -41,13 +41,9 @@ export default class UserPersonalComponent extends Component {
                 isLoading: false
             });
             this.forceUpdate();
-            console.log(this.state.productNum);
         }).catch(error => {
             this.setState({isLoading: false});
-            notification.error({
-                message: 'Chika Smarthome',
-                description: error.message || "Tải dữ liệu thất bại!"
-            });
+            ErrorNotification(error.message || "Tải dữ liệu thất bại!")
         });
     };
 
@@ -58,10 +54,7 @@ export default class UserPersonalComponent extends Component {
                 userInfo: response,
                 isLoading: false
             });
-            notification.success({
-                message: 'Chika Smarthome',
-                description: "Thông tin đã được cập nhật."
-            });
+            SuccessNotification("Thông tin đã được cập nhật.");
             this.forceUpdate();
         }).catch(error => {
             this.setState({isLoading: false});
@@ -71,10 +64,7 @@ export default class UserPersonalComponent extends Component {
             } else if (error.message.includes('Email')) {
                 message = 'Email đã được sử dụng';
             }
-            notification.error({
-                message: 'Chika Smarthome',
-                description: message || "Đã có lỗi xảy ra. Vui lòng thử lại sau!"
-            });
+            ErrorNotification(message || "Đã có lỗi xảy ra. Vui lòng thử lại sau!")
         });
     };
 
@@ -95,13 +85,13 @@ export default class UserPersonalComponent extends Component {
             <Fragment>
                 <div className="user-info">
                     {currentUser ? (
-                        <div className="user-info__float">
-                            <div className="user-info__col1">
+                        <div className="container">
+                            <div className="info-col1">
                                 <img alt="avatar" src={currentUser.avatar}/>
                                 <h1>{currentUser.name}</h1>
                                 <p><Icon type="code"/>&ensp;{currentUser.role}</p>
                             </div>
-                            <div className="user-info__col2">
+                            <div className="info-col2">
                                 <Tabs defaultActiveKey="1" onChange={this.callback}>
                                     <TabPane tab="Hồ Sơ" key="1">
                                         <h1><Icon type="idcard"/>&emsp;Thông tin cá nhân</h1>
@@ -114,8 +104,7 @@ export default class UserPersonalComponent extends Component {
                                         <p><Icon type="contacts"/>&emsp;&emsp;Ngày gia nhập:&emsp;&emsp;
                                             <i>{currentUser.createAt}</i></p>
                                         <p>
-                                            <Icon type="appstore"/>&emsp;&emsp;Số sản
-                                            phẩm:&emsp;&emsp;&ensp;{numOfProduct}&emsp;&emsp;
+                                            <Icon type="appstore"/>&emsp;&emsp;Số sản phẩm:&emsp;&emsp;&ensp;{numOfProduct}&emsp;&emsp;
                                             <Icon type="info-circle" style={{cursor: 'pointer'}}
                                                   onClick={this.handleModal}/>
                                         </p>
@@ -126,81 +115,15 @@ export default class UserPersonalComponent extends Component {
                                     </TabPane>
                                 </Tabs>
                             </div>
-                            <div className="user-info__corner1"/>
-                            <div className="user-info__corner2"/>
+                            <div className="corner1"/>
+                            <div className="corner2"/>
                         </div>
                     ) : null}
-
-                    <ProductModal productNum={productNum}
-                                  productModalVisible={productModalVisible}
-                                  handleModal={this.handleModal}/>
                 </div>
+
+                <UserProductModal productNum={productNum} productModalVisible={productModalVisible}
+                                  handleModal={this.handleModal}/>
             </Fragment>
-        )
-    }
-}
-
-class ProductModal extends Component {
-
-    render() {
-        const {productNum, productModalVisible} = this.props;
-        const products = [];
-        if (productNum.switchWifi !== 0) {
-            products.push(
-                <Col span={6}>
-                    <img alt="cong tac wifi" src={`${ADMIN_PRODUCT_IMG_URI}switch-wifi.png`}/>
-                    <p>Số lượng: {productNum.switchWifi}</p>
-                </Col>
-            )
-        }
-        if (productNum.switchRf !== 0) {
-            products.push(
-                <Col span={6}>
-                    <img alt="cong tac rf" src={`${ADMIN_PRODUCT_IMG_URI}switch-rf.png`}/>
-                    <p>Số lượng: {productNum.switchRf}</p>
-                </Col>
-            )
-        }
-        if (productNum.moduleIr !== 0) {
-            products.push(
-                <Col span={6}>
-                    <img alt="dieu khien hong ngoai" src={`${ADMIN_PRODUCT_IMG_URI}module-ir.png`}/>
-                    <p>Số lượng: {productNum.moduleIr}</p>
-                </Col>
-            )
-        }
-        if (productNum.homeCenter !== 0) {
-            products.push(
-                <Col span={6}>
-                    <img alt="dieu khien trung tam" src={`${ADMIN_PRODUCT_IMG_URI}home-central.png`}/>
-                    <p>Số lượng: {productNum.homeCenter}</p>
-                </Col>
-            )
-        }
-        if (productNum.sensor !== 0) {
-            products.push(
-                <Col span={6}>
-                    <img alt="cam bien" src={`${ADMIN_PRODUCT_IMG_URI}sensor.png`}/>
-                    <p>Số lượng: {productNum.sensor}</p>
-                </Col>
-            )
-        }
-
-        return (
-            <Modal visible={productModalVisible} closable={false}
-                   title="Sản Phẩm Sở Hữu"
-                   centered
-                   width='40vw'
-                   onCancel={this.props.handleModal}
-                   footer={(
-                       <Button type='primary' onClick={this.props.handleModal}>
-                           Quay về
-                       </Button>
-                   )}>
-                <Row className="user-info__product-modal">
-                    {products}
-                </Row>
-            </Modal>
         )
     }
 }

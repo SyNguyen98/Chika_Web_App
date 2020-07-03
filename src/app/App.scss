@@ -1,7 +1,8 @@
 @import "../styles/config";
-@import '../scenes/User/Room/room';
-@import '../scenes/User/Room/Devices/devices';
-@import "../scenes/User/Script/scripts";
+@import "../components/header/header";
+@import "../components/sidenav/sidenav";
+@import "../scenes/Guest/style";
+@import '../scenes/User/style';
 
 /* width */
 ::-webkit-scrollbar {
@@ -25,20 +26,23 @@
     background: #00ff98; 
 }
 
-@media (min-width: $screen-laptop-mdpi) {
-    @include user-rooms--laptop-mdpi();
-    @include user-room--laptop-mdpi();
-    @include scripts--laptop-mdpi();
+@media (max-width: $screen-desktop) {
+    @include app-header--desktop();
+    @include app-side-nav--desktop();
+    @include guest--desktop();
+    @include user--desktop();
 }
 
-@media (min-width: $screen-laptop-hidpi) {
-    @include user-rooms--laptop-hidpi();
-    @include user-room--laptop-hidpi();
-    @include scripts--laptop-hidpi();
+@media (max-width: $screen-laptop-hidpi) {
+    @include app-header--laptop-hidpi();
+    @include app-side-nav--laptop-hidpi();
+    @include guest--laptop-hidpi();
+    @include user--laptop-hidpi();
 }
 
-@media (min-width: $screen-desktop) {
-    @include user-rooms--desktop();
-    @include user-room--desktop();
-    @include scripts--desktop();
+@media (max-width: $screen-laptop-mdpi) {
+    @include app-header--laptop-mdpi();
+    @include app-side-nav--laptop-mdpi();
+    @include guest--laptop-mdpi();
+    @include user--laptop-mdpi();
 }

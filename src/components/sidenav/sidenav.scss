@@ -1,0 +1,142 @@
+.app-side-nav {
+
+  .ant-drawer-header {
+    background-image: linear-gradient(#00ff98, #003eff);
+    padding: 10px 20px;
+    box-shadow: 3px 5px 7px #d1d1d1;
+  }
+
+  .header {
+    h4 {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 25px;
+      font-weight: bold;
+      line-height: normal;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 4px 6px #6e6e6e;
+    }
+
+    .content {
+      display: flex;
+
+      img {
+        margin: auto;
+        border-radius: 50%;
+        box-shadow: 3px 5px 7px #6e6e6e;
+      }
+
+      p {
+        margin: auto;
+        color: white;
+        text-shadow: 3px 5px 7px #6e6e6e;
+      }
+    }
+  }
+
+  .item {
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .2s;
+
+    p {
+      padding-left: 12px;
+      padding-top: 10px;
+      text-shadow: 5px 7px 9px #d1d1d1;
+    }
+
+    .anticon {
+      margin-top: 10px;
+    }
+  }
+
+  .item:hover {
+    transform: scale(1.1);
+  }
+
+  .bottom {
+    font-weight: 500;
+    text-align: center;
+    color: blue;
+    position: absolute;
+    bottom: 20px;
+  }
+}
+
+@mixin app-side-nav--laptop-mdpi() {
+  .app-side-nav {
+    .header {
+      .content {
+        img {
+          width: 60px;
+          height: 60px;
+        }
+
+        p {
+          padding-left: 10px;
+          font-size: 18px;
+          line-height: 25px;
+        }
+      }
+    }
+
+    .item {
+      p {
+        font-size: 16px;
+      }
+
+      .anticon {
+        font-size: 26px;
+      }
+    }
+
+    .bottom {
+      font-size: 14px;
+    }
+  }
+}
+
+@mixin app-side-nav--laptop-hidpi() {
+  @include app-side-nav--laptop-mdpi();
+}
+
+@mixin app-side-nav--desktop() {
+  .app-side-nav {
+
+    .ant-drawer-header {
+      padding-top: 20px !important;
+    }
+
+    .header {
+      .content {
+        img {
+          width: 80px;
+          height: 80px;
+        }
+
+        p {
+          padding-left: 15px;
+          font-size: 22px;
+          line-height: 30px;
+        }
+      }
+    }
+
+    .item {
+      p {
+        font-size: 22px;
+      }
+
+      .anticon {
+        font-size: 32px;
+      }
+    }
+
+    .bottom {
+      font-size: 18px;
+    }
+  }
+}

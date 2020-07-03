@@ -1,9 +1,9 @@
 import React from 'react';
 import {Drawer, Icon} from 'antd';
 
-import "./sidenav.css";
+import "./sidenav.scss";
 
-import {ADMIN_INFO_LINK, ADMIN_SETTING_LINK, USER_INFO_LINK, USER_SETTING_LINK} from "../../constant/link";
+import {ADMIN_INFO_LINK, ADMIN_SETTING_LINK, USER_INFO_LINK, USER_SUPPORT_LINK} from "../../constant/link";
 
 const SideNavComponent = ({history, currentUser, sidenavVisible, onCloseSidenav, handleLogout}) => {
 
@@ -12,11 +12,24 @@ const SideNavComponent = ({history, currentUser, sidenavVisible, onCloseSidenav,
         onCloseSidenav();
     }
 
+    const getWidth = () => {
+        if (window.innerWidth < 1300) {
+            return '250px';
+        }
+        if (window.innerWidth < 1500) {
+            return '270px';
+        }
+        if (window.innerWidth < 2000) {
+            return '330px';
+        }
+        return '400px'
+    }
+
     return (
-        <Drawer className='side-nav'
+        <Drawer className='app-side-nav'
                 title={<SideNavHeader currentUser={currentUser}/>}
                 placement='left'
-                width='23vw'
+                width={getWidth()}
                 visible={sidenavVisible}
                 closable={false}
                 onClose={onCloseSidenav}>
@@ -24,14 +37,14 @@ const SideNavComponent = ({history, currentUser, sidenavVisible, onCloseSidenav,
             {currentUser.role === 'ADMIN' ? (
                 <AdminSidenavComponent handleChangeComponent={handleChangeComponent}/>
             ) : (
-                <UserSidenavComponent currentUser={currentUser} handleChangeComponent={handleChangeComponent}/>
+                <UserSidenavComponent handleChangeComponent={handleChangeComponent}/>
             )}
 
-            <div className='side-nav__item' onClick={handleLogout}>
+            <div className='item' onClick={handleLogout}>
                 <Icon type="logout"/><p>Đăng xuất</p>
             </div>
 
-            <i className='side-nav__bottom'>Sản phẩm của Chika Smarthome<br/>Copyright © Chika</i>
+            <i className='bottom'>Sản phẩm của Chika Smarthome<br/>Copyright © Chika</i>
         </Drawer>
     )
 }
@@ -39,14 +52,11 @@ const SideNavComponent = ({history, currentUser, sidenavVisible, onCloseSidenav,
 export default SideNavComponent;
 
 const SideNavHeader = ({currentUser}) => (
-    <div className='side-nav__header'>
-        <h4>CHÀO MỪNG TRỞ LẠI!</h4>
-        <div style={{display: 'flex'}}>
+    <div className='header'>
+        {window.innerWidth < 1500 ? <h4>CHÀO MỪNG<br/>TRỞ LẠI!</h4> : <h4>CHÀO MỪNG TRỞ LẠI!</h4>}
+        <div className="content">
             <img alt='user-avatar' src={currentUser.avatar !== '' ? currentUser.avatar : '/image/avatar.png'}/>
-            <span>
-                    <p className='name'>{currentUser ? currentUser.name : null}</p>
-                    <p className='email'>{currentUser ? currentUser.email : null}</p>
-                </span>
+            <p>{currentUser ? currentUser.name : null}</p>
         </div>
     </div>
 )
@@ -54,30 +64,24 @@ const SideNavHeader = ({currentUser}) => (
 
 const AdminSidenavComponent = ({handleChangeComponent}) => (
     <nav>
-        <div className='side-nav__item' onClick={() => handleChangeComponent(ADMIN_INFO_LINK)}>
+        <div className='item' onClick={() => handleChangeComponent(ADMIN_INFO_LINK)}>
             <Icon type="idcard"/><p>Thông tin cá nhân</p>
         </div>
 
-        <div className='side-nav__item' onClick={() => handleChangeComponent(ADMIN_SETTING_LINK)}>
+        <div className='item' onClick={() => handleChangeComponent(ADMIN_SETTING_LINK)}>
             <Icon type="setting"/><p>Hỗ trợ</p>
         </div>
     </nav>
 )
 
 
-const UserSidenavComponent = ({currentUser, handleChangeComponent}) => (
+const UserSidenavComponent = ({handleChangeComponent}) => (
     <nav>
-        <div className='side-nav__item' onClick={() => handleChangeComponent(USER_INFO_LINK)}>
+        <div className='item' onClick={() => handleChangeComponent(USER_INFO_LINK)}>
             <Icon type="idcard"/><p>Quản lý tài khoản</p>
         </div>
 
-        {/*{currentUser.role === 'HOME_MASTER' ? (*/}
-        {/*    <div className='side-nav__item' onClick={() => handleChangeComponent(USER_ADD_USER_LINK)}>*/}
-        {/*        <Icon type="user-add"/><p>Thêm thành viên</p>*/}
-        {/*    </div>*/}
-        {/*) : null}*/}
-
-        <div className='side-nav__item' onClick={() => handleChangeComponent(USER_SETTING_LINK)}>
+        <div className='item' onClick={() => handleChangeComponent(USER_SUPPORT_LINK)}>
             <Icon type="setting"/><p>Hỗ trợ</p>
         </div>
     </nav>

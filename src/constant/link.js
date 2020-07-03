@@ -36,12 +36,11 @@ export const ADMIN_MODULE_IR_LINK = `${ADMIN_PRODUCT_LINK}/Dieu-khien-hong-ngoai
 export const ADMIN_HOME_CENTRAL_LINK = `${ADMIN_PRODUCT_LINK}/Bo-dieu-khien-trung-tam`;
 export const ADMIN_SENSOR_LINK = `${ADMIN_PRODUCT_LINK}/Cam-bien`;
 
-const USER_LINK = '/Nguoi_dung';
+const USER_LINK = '/Nguoi-dung';
 export const USER_HOME_LINK = `${USER_LINK}/Nha`;
 export const USER_ROOM_LINK = `${USER_LINK}/Phong`;
-export const USER_SCRIPT_LINK = `${USER_LINK}/Kich_ban`;
-export const USER_CAMERA_LINK = `${USER_LINK}/Giam_sat`;
+export const USER_SCRIPT_LINK = `${USER_LINK}/Kich-ban`;
+export const USER_CAMERA_LINK = `${USER_LINK}/Giam-sat`;
 
-export const USER_INFO_LINK = `${USER_LINK}/Thong_tin_ca_nhan`;
-export const USER_ADD_USER_LINK = `${USER_LINK}/Them_nguoi_dung`;
-export const USER_SETTING_LINK = `${USER_LINK}/Cai_dat`;
+export const USER_INFO_LINK = `${USER_LINK}/Thong-tin-ca-nhan`;
+export const USER_SUPPORT_LINK = `${USER_LINK}/Ho-tro`;

@@ -1,0 +1,62 @@
+.user-support {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(to bottom right, #432c58 70%, #00ff98 30%);
+  display: flex;
+
+  .container {
+    margin: 110px auto auto;
+    padding: 10px 30px;
+    background-color: white;
+    box-shadow: 3px 6px 9px #3b3b3b;
+
+    .change-password {
+      margin: 10px 200px;
+      text-align: center;
+    }
+
+    .feedback {
+      margin: 10px 150px;
+      text-align: center;
+
+      .ant-input {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@mixin user-support--laptop-mdpi() {
+  .user-support {
+    .container {
+      width: 1000px;
+      height: 520px;
+    }
+  }
+}
+
+@mixin user-support--laptop-hidpi() {
+  .user-support {
+    .container {
+      width: 1100px;
+      height: 520px;
+
+      .ant-tabs-bar {
+        width: 350px;
+      }
+    }
+  }
+}
+
+@mixin user-support--desktop() {
+  .user-support {
+    .container {
+      width: 1500px;
+      height: 800px;
+
+      .ant-tabs-bar {
+        width: 440px;
+      }
+    }
+  }
+}

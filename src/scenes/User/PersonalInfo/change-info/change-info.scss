@@ -1,0 +1,43 @@
+.user-info-edit {
+  margin: 1vw 5vw;
+  text-align: center;
+}
+
+@mixin user-info-edit--laptop-mdpi() {
+  .user-info-edit {
+    .ant-input-affix-wrapper {
+      font-size: 18px;
+      height: 40px;
+    }
+
+    .ant-input-affix-wrapper .ant-input:not(:last-child) , .ant-calendar-picker-input.ant-input {
+      font-size: 18px;
+    }
+  }
+}
+
+@mixin user-info-edit--laptop-hidpi() {
+  .user-info-edit {
+    .ant-input-affix-wrapper {
+      font-size: 18px;
+      height: 40px;
+    }
+
+    .ant-input-affix-wrapper .ant-input:not(:last-child) , .ant-calendar-picker-input.ant-input {
+      font-size: 18px;
+    }
+  }
+}
+
+@mixin user-info-edit--desktop() {
+  .user-info-edit {
+    .ant-input-affix-wrapper {
+      font-size: 20px;
+      height: 50px;
+    }
+
+    .ant-input-affix-wrapper .ant-input:not(:last-child) , .ant-calendar-picker-input.ant-input{
+      font-size: 20px;
+    }
+  }
+}

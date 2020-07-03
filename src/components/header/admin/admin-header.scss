@@ -1,0 +1,82 @@
+@import "src/styles/config";
+
+.admin-header {
+    display: flex;
+    color: black;
+
+    Button {
+        margin: auto;
+        background-color: rgba(0,0,0,0);
+        border: 0;
+        transition: transform .2s;
+    }
+
+    Button:hover {
+        background-color: rgba(0,0,0,0);
+        transform: scale(1.2);
+    }
+
+    img {
+        cursor: unset;
+    }
+
+    h1 {
+        margin: auto;
+        color: $chika-dark-blue;
+        font-weight: 600;
+    }
+}
+
+@mixin admin-header--laptop-mdpi() {
+    @include admin-header--laptop-hidpi();
+}
+
+@mixin admin-header--laptop-hidpi() {
+    .admin-header {
+        Button {
+            font-size: 20px;
+        }
+
+        img {
+            margin: auto 10px auto 30px;
+            height: 50px;
+        }
+
+        h1 {
+            font-size: 25px;
+        }
+
+        .nav {
+            right: 200px !important;
+
+            .item {
+                font-size: 25px;
+            }
+        }
+    }
+}
+
+@mixin admin-header--desktop() {
+    .admin-header {
+        Button {
+            font-size: 25px;
+        }
+
+        img {
+            margin: auto 10px auto 50px;
+            height: 70px;
+        }
+
+        h1 {
+            font-size: 35px;
+        }
+
+        .nav {
+            right: 300px !important;
+
+            .item {
+                font-size: 30px;
+            }
+        }
+    }
+}

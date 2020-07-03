@@ -1,0 +1,399 @@
+@import "src/styles/config";
+
+.home-page {
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1
+    }
+  }
+  @-webkit-keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes bummer {
+    100% {
+      -webkit-transform: scale(1, 1);
+    }
+  }
+  @keyframes bummer {
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+
+  .header {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/image/guest/home/smarthome-header.jpg');
+    background-size: 100% 100vh;
+    min-height: 100vh;
+    position: relative;
+
+    .content {
+      position: absolute;
+      top: 30%;
+
+      h1 {
+        color: $chika-light-green;
+        font-weight: bold;
+        text-shadow: 0 0 0 black, 2px 0 0 $chika-blue, 0 0 0 black, 0 2px 0 $chika-blue;
+        animation: fadein 3s ease-out forwards;
+        -webkit-animation: fadein 3s;
+      }
+
+      p {
+        color: white;
+        animation: fadein 3s ease-out forwards;
+        -webkit-animation: fadein 3s;
+      }
+
+      Button {
+        height: auto;
+        padding: 2px 3px 5px;
+        font-weight: 600;
+        border: 2px solid white;
+        border-radius: 30px;
+        -webkit-animation: bummer 2s;
+        animation: bummer 2s;
+        -webkit-transform: scale(0, 0);
+        transform: scale(0, 0);
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards; /* Add this so that your modal doesn't close after the animation completes */
+      }
+
+      Button:hover {
+        border-color: white;
+      }
+
+      .button-login {
+        margin-top: 5%;
+        margin-left: 5%;
+        background-color: $chika-blue;
+        color: white;
+      }
+
+      .button-login:hover {
+        background-color: #002db4;
+        color: white;
+      }
+
+      .button-product {
+        margin-left: 5%;
+        background-color: $chika-light-green;
+        color: $chika-dark-blue;
+      }
+
+      .button-product:hover {
+        background-color: #00dd85;
+        color: $chika-dark-blue;
+      }
+    }
+  }
+
+  .row {
+
+    h1 {
+      margin-top: 40px;
+      color: $chika-dark-blue;
+      font-weight: 800;
+      border-bottom: 1px solid !important;
+      border-image: linear-gradient(90deg,$chika-light-green, $chika-blue) 1;
+    }
+
+    p {
+      color: black;
+      text-align: justify;
+    }
+
+    img {
+      cursor: pointer;
+      transition: transform .4s;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .row1 {
+
+    img {
+      cursor: unset;
+    }
+    img:hover {
+      transform: none;
+    }
+
+    .col2 {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  .row2 {
+    .col1 {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .col2 {
+
+    }
+  }
+
+  .row3, .row4, .row5 img {
+    transition: transform .4s
+  }
+
+  .row3__col1, .row4__col2, .row5__col1 {
+    padding: 50px 40px !important;
+  }
+
+  .row3__col2, .row4__col1, .row5__col2 {
+    overflow: hidden;
+  }
+
+  .row3__col2:hover img, .row4__col1:hover img, .row5__col2:hover img {
+    transform: scale(1.05);
+    transform-origin: 50% 50%;
+  }
+
+  .panel {
+    position: relative;
+    margin-top: 130px;
+    overflow: hidden;
+    text-align: center;
+
+    img {
+      width: 100%;
+      cursor: pointer;
+      transition: transform .4s
+    }
+
+    h1 {
+      color: #432c58;
+      font-size: 35px;
+      font-weight: 800;
+      border-bottom: 1px solid !important;
+      border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
+    }
+
+    p {
+      color: black;
+      font-size: 18px;
+    }
+  }
+
+  .panel:hover {
+    img {
+      transform: scale(1.05);
+      transform-origin: 50% 50%;
+    }
+
+    h1 {
+      color: $chika-blue;
+    }
+  }
+
+  .security-panel {
+    .content {
+      position: absolute;
+      top: 150px;
+      right: 50px;
+    }
+  }
+
+  .light-control-panel {
+    .content {
+      position: absolute;
+      top: 150px;
+      left: 50px;
+      width: 35%;
+
+      p {
+        text-align: justify;
+      }
+    }
+  }
+
+  .reasons {
+    margin: 100px 10vw auto 10vw;
+    text-align: center;
+
+    h1 {
+      color: $chika-dark-blue;
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .col {
+      margin: 20px auto 70px auto;
+
+      img {
+        width: 5vw;
+        margin-bottom: 15px;
+      }
+
+      p {
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+@mixin home-page--laptop-mdpi() {
+  .home-page {
+    .header {
+      .content {
+        left: 150px;
+
+        h1 {
+          font-size: 50px;
+        }
+
+        p {
+          font-size: 25px;
+        }
+
+        Button {
+          font-size: 20px;
+        }
+
+        .button-login {
+          width: 160px;
+        }
+
+        .button-product {
+          width: 240px;
+        }
+      }
+    }
+
+    .row {
+      margin: 70px 80px auto !important;
+
+      h1 {
+        margin-top: 20px;
+        font-size: 35px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+
+      img {
+        width: 500px;
+      }
+
+      .row2 {
+        .col2 {
+          width: 500px;
+        }
+      }
+    }
+  }
+}
+
+@mixin home-page--laptop-hidpi() {
+  .home-page {
+    .header {
+      .content {
+        left: 150px;
+
+        h1 {
+          font-size: 55px;
+        }
+
+        p {
+          font-size: 30px;
+        }
+
+        Button {
+          font-size: 22px;
+        }
+
+        .button-login {
+          width: 170px;
+        }
+
+        .button-product {
+          width: 260px;
+        }
+      }
+    }
+
+    .row {
+      margin: 80px 120px auto !important;
+
+      h1 {
+        margin-top: 18px;
+        font-size: 37px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+
+      img {
+        width: 500px;
+      }
+    }
+  }
+}
+
+@mixin home-page--desktop() {
+  .home-page {
+    .header {
+      .content {
+        top: 35% !important;
+        left: 250px;
+
+        h1 {
+          font-size: 65px;
+        }
+
+        p {
+          font-size: 30px;
+        }
+
+        Button {
+          font-size: 22px;
+        }
+
+        .button-login {
+          width: 180px;
+        }
+
+        .button-product {
+          width: 270px;
+        }
+      }
+    }
+
+    .row {
+      margin: 100px 200px auto !important;
+
+      h1 {
+        margin-top: 18px;
+        font-size: 40px;
+      }
+
+      p {
+        font-size: 22px;
+      }
+
+      img {
+        width: 600px;
+      }
+    }
+  }
+}

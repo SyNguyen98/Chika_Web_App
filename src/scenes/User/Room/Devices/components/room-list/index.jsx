@@ -9,7 +9,7 @@ import './room-list.scss';
 
 export default class RoomListComponent extends Component {
     render() {
-        const { roomList, roomId } = this.props;
+        const { roomList, roomId, handleGoToRoomPage } = this.props;
         return (
             <Fragment>
                 {roomList.map((item, i) => {
@@ -19,7 +19,7 @@ export default class RoomListComponent extends Component {
                         return (
                             <div className='room-item' key={i}
                                  style={setHeaderBackground(ROOM_COLOR[i], `${ROOM_IMG_URI}${item.logo}.jpg`)}
-                                 onClick={() => this.handleGoToRoomPage(item.id)}>
+                                 onClick={() => handleGoToRoomPage(item.id)}>
                                 <img alt="icon" src={`${ROOM_IMG_URI}${item.logo}-icon.png`}/>
                                 <p>{item.name.toUpperCase()}</p>
                             </div>

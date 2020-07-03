@@ -1,0 +1,13 @@
+@import "./Home/home";
+
+@mixin guest--laptop-mdpi() {
+  @include home-page--laptop-mdpi();
+}
+
+@mixin guest--laptop-hidpi() {
+  @include home-page--laptop-hidpi();
+}
+
+@mixin guest--desktop() {
+  @include home-page--desktop();
+}

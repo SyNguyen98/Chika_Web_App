@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Col, Divider, Icon, Modal, Popover, Row, Switch} from 'antd';
+import {Button, Col, Divider, Icon, Modal, Popover, Row} from 'antd';
 
 import AddDeviceModal from './components/add-device';
 import SensorComponent from './components/sensor-item'
@@ -11,7 +11,7 @@ import {deleteDevice, getDevicesByRoomId} from '../../../../services/DeviceServi
 import {deleteRoom} from '../../../../services/RoomService';
 import {mqttPublish, mqttSubscribe} from "../../../../services/MqttService";
 
-import {DEVICE_IMG_URI, ROOM_IMG_URI} from "../../../../constant/uri";
+import {ROOM_IMG_URI} from "../../../../constant/uri";
 import {USER_ROOM_LINK} from "../../../../constant/link";
 import {LIST_ROOM} from "../../../../constant";
 
@@ -186,7 +186,8 @@ export default class UserRoomComponent extends Component {
             <Fragment>
                 <Row className='user-room'>
                     <Col span={7} className='list-room'>
-                        <RoomListComponent roomList={roomList} roomId={roomId}/>
+                        <RoomListComponent roomList={roomList} roomId={roomId}
+                                           handleGoToRoomPage={this.handleGoToRoomPage}/>
                     </Col>
                     <Col span={17} className='list-device'>
                         <div className='title'>

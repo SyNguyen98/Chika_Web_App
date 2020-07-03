@@ -1,3 +1,22 @@
-$screen-desktop: 1700px;
-$screen-laptop-hidpi: 1300px;
-$screen-laptop-mdpi: 1100px;
+$screen-desktop: 1920px;
+$screen-laptop-hidpi: 1440px;
+$screen-laptop-mdpi: 1280px;
+
+$chika-light-green: #00ff9b;
+$chika-blue: #003eff;
+$chika-dark-blue: #432c85;
+$chika-orange: #ff8c00;
+
+.round-button-orange {
+  color: $chika-orange;
+  border-color: $chika-orange;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.round-button-orange:hover {
+  color: white;
+  background-color: $chika-orange;
+  border-color: $chika-orange;
+}

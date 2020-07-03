@@ -1,10 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import {Col, Icon, Row} from 'antd';
 
-import './home.css';
-
 import {USER_ROOM_LINK, USER_SCRIPT_LINK} from "../../../constant/link";
 import {USER_HOME_IMG_URI} from "../../../constant/uri";
+
+import './home.scss';
 
 export default class UserHomeComponent extends Component {
     constructor(props) {
@@ -44,15 +44,15 @@ export default class UserHomeComponent extends Component {
         return (
             <Fragment>
                 <Row gutter={[16, 8]} className='user-home'>
-                    <Col span={6} className="user-home__info">
-                        <div className="user-home__info__header" style={this.setSecurityBackground()}>
+                    <Col span={6} className="info">
+                        <div className="header" style={this.setSecurityBackground()}>
                             <img alt="home-header" src={`${USER_HOME_IMG_URI}shield-icon.png`}/>
-                            <div className="user-home__info__header__content">
+                            <div className="content">
                                 <p>An ninh</p>
                                 <b>AN TOÀN</b>
                             </div>
                         </div>
-                        <div className="user-home__info__body">
+                        <div className="body">
                             <p><Icon type="home"/>&emsp;Chủ nhà</p>
                             <b>HUỲNH VĂN TUẤN</b>
                             <p><Icon type="team"/>&emsp;Số thành viên trong nhà:</p>
@@ -61,70 +61,70 @@ export default class UserHomeComponent extends Component {
                             <b>15 thiết bị</b>
                         </div>
                     </Col>
-                    <Col span={18} className='user-home__body'>
-                        <Row className='user-home__row'>
-                            <Col className='user-home__col col1' span={6}>
+                    <Col span={18} className='body'>
+                        <Row className='row'>
+                            <Col className='col col1' span={6}>
                                 <p>Điện năng <Icon type="caret-right"/></p>
                                 <b>190</b><span>kW</span>
                             </Col>
-                            <Col className='user-home__col col2' span={6}>
+                            <Col className='col col2' span={6}>
                                 <p>Nhiệt độ <Icon type="caret-right"/></p>
                                 <b>27</b><span>&#8451;</span>
                             </Col>
-                            <Col className='user-home__col col3' span={6}>
+                            <Col className='col col3' span={6}>
                                 <p>Độ ẩm <Icon type="caret-right"/></p>
                                 <b>15</b><span>&#37;</span>
                             </Col>
-                            <Col className='user-home__col col4' span={6}>
+                            <Col className='col col4' span={6}>
                                 <p>Không khí <Icon type="caret-right"/></p>
                                 <b>1.9</b><span>AQI</span>
                             </Col>
                         </Row>
                         <h1>Phòng</h1>
-                        <Row className='user-home__row'>
-                            <Col className='user-home__col room' span={6}
+                        <Row className='row'>
+                            <Col className='col room' span={6}
                                  style={this.setBackground(`${USER_HOME_IMG_URI}living-room.jpg`)}>
                                 <p>Phòng Khách <Icon type="caret-right"/></p>
                             </Col>
-                            <Col className='user-home__col room' span={6}
+                            <Col className='col room' span={6}
                                  style={this.setBackground(`${USER_HOME_IMG_URI}kitchen.jpeg`)}>
                                 <p>Phòng Bếp <Icon type="caret-right"/></p>
                             </Col>
-                            <Col className='user-home__col room' span={6}
+                            <Col className='col room' span={6}
                                  style={this.setBackground(`${USER_HOME_IMG_URI}bedroom.jpg`)}>
                                 <p>Phòng Ngủ <Icon type="caret-right"/></p>
                             </Col>
-                            <Col className='user-home__col room' span={6}
+                            <Col className='col room' span={6}
                                  style={this.setBackground(`${USER_HOME_IMG_URI}room.jpg`)}
                                  onClick={() => this.handleChangeComponent(USER_ROOM_LINK)}>
                                 <p>Xem Tất Cả <Icon type="caret-right"/></p>
                             </Col>
                         </Row>
                         <h1>Kịch bản đang hoạt động</h1>
-                        <Row className='user-home__row'>
-                            <Col className='user-home__col script' span={6}>
-                                <div className='user-home__col script__circle'>
+                        <Row className='row'>
+                            <Col className='col script' span={6}>
+                                <div className='circle'>
                                     <img alt="wake-up-icon"
                                          src={`${USER_HOME_IMG_URI}clock-icon.png`}/>
                                 </div>
                                 <p>Thức Dậy</p>
                             </Col>
-                            <Col className='user-home__col script' span={6}>
-                                <div className='user-home__col script__circle'>
+                            <Col className='col script' span={6}>
+                                <div className='circle'>
                                     <img alt="sleep-icon"
                                          src={`${USER_HOME_IMG_URI}moon-icon.png`}/>
                                 </div>
                                 <p>Đi Ngủ</p>
                             </Col>
-                            <Col className='user-home__col script' span={6}>
-                                <div className='user-home__col script__circle'>
+                            <Col className='col script' span={6}>
+                                <div className='circle'>
                                     <img alt="go-work-icon"
                                          src={`${USER_HOME_IMG_URI}working-icon.png`}/>
                                 </div>
                                 <p>Đi Làm</p>
                             </Col>
-                            <Col className='user-home__col script' span={6}>
-                                <div className='user-home__col script__circle'
+                            <Col className='col script' span={6}>
+                                <div className='circle'
                                      onClick={() => this.handleChangeComponent(USER_SCRIPT_LINK)}>
                                     <img alt="3-dot-icon"
                                          src={`${USER_HOME_IMG_URI}3-dot-icon.png`}/>

@@ -1,0 +1,29 @@
+@import "PersonalInfo/personal-info";
+@import "Support/support";
+@import "Room/room";
+@import "Room/Devices/devices";
+@import "Script/scripts";
+
+@mixin user--laptop-mdpi() {
+  @include user-info--laptop-mdpi();
+  @include user-support--laptop-mdpi();
+  @include user-rooms--laptop-mdpi();
+  @include user-room--laptop-mdpi();
+  @include scripts--laptop-mdpi();
+}
+
+@mixin user--laptop-hidpi() {
+  @include user-info--laptop-hidpi();
+  @include user-support--laptop-hidpi();
+  @include user-rooms--laptop-hidpi();
+  @include user-room--laptop-hidpi();
+  @include scripts--laptop-hidpi();
+}
+
+@mixin user--desktop() {
+  @include user-info--desktop();
+  @include user-support--desktop();
+  @include user-rooms--desktop();
+  @include user-room--desktop();
+  @include scripts--desktop();
+}
