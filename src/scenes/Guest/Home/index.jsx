@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Col, Row} from 'antd';
-
+import RoundOrangeButton from "../../../components/button";
 import {GUEST_HOME_IMG_URI} from "../../../constant/uri";
 import {
   CONDITIONER_TV_LINK,
@@ -14,7 +14,6 @@ import {
 } from "../../../constant/link";
 
 import "./home.scss"
-import RoundOrangeButton from "../../../components/button";
 
 export default class HomeComponent extends Component {
 
@@ -42,28 +41,47 @@ export default class HomeComponent extends Component {
           </div>
         </div>
 
-        <Row className="row row1">
-          <Col className="col1" span={12}>
+        <div className="_row">
+          <div className="content">
             <h1>NHÀ THÔNG MINH là gì?</h1>
-            <p>Là ngôi nhà có hệ thống đèn chiếu sáng, điều hòa, bình nóng lạnh, rèm cửa, âm thanh đa vùng... 
+            <p>Là ngôi nhà có hệ thống đèn chiếu sáng, điều hòa, bình nóng lạnh, rèm cửa, âm thanh đa vùng...
               được điều khiển, kiểm soát trên smartphone dù ở bất cứ nơi đâu và bằng chính giọng nói của gia chủ.</p>
-          </Col>
-          <Col className="col2" span={12}>
-            <img alt="smarthome" src={`${GUEST_HOME_IMG_URI}smarthome.jpg`}/>
-          </Col>
-        </Row>
+          </div>
+          <img alt="smarthome" src={`${GUEST_HOME_IMG_URI}smarthome.jpg`}/>
+        </div>
 
-        <Row className="row row2">
-          <Col className="col1" span={12}>
-            <img alt="google-assitant" src={`${GUEST_HOME_IMG_URI}google-assistant.png`}
-                  onClick={() => this.handleChangePage(GOOGLE_ASSISTANT_LINK)}/>
-          </Col>
-          <Col className="col2" span={12}>
+        <div className="_row">
+          <img alt="google-assitant" src={`${GUEST_HOME_IMG_URI}google-assistant.png`}
+               onClick={() => this.handleChangePage(GOOGLE_ASSISTANT_LINK)}/>
+          <div className="content">
             <h1>TÍCH HỢP<br/>GOOGLE ASSISTANT</h1>
             <p>Điều khiển nhà bằng giọng nói tiếng Việt. Nhà thông minh Chika được Google cấp chứng nhận “Works with the Google Assistant”.</p>
             <RoundOrangeButton onClick={() => this.handleChangePage(GOOGLE_ASSISTANT_LINK)} />
-          </Col>
-        </Row>
+          </div>
+        </div>
+
+        {/*<Row className="row row1">*/}
+        {/*  <Col className="col1" span={12}>*/}
+        {/*    <h1>NHÀ THÔNG MINH là gì?</h1>*/}
+        {/*    <p>Là ngôi nhà có hệ thống đèn chiếu sáng, điều hòa, bình nóng lạnh, rèm cửa, âm thanh đa vùng... */}
+        {/*      được điều khiển, kiểm soát trên smartphone dù ở bất cứ nơi đâu và bằng chính giọng nói của gia chủ.</p>*/}
+        {/*  </Col>*/}
+        {/*  <Col className="col2" span={12}>*/}
+        {/*    <img alt="smarthome" src={`${GUEST_HOME_IMG_URI}smarthome.jpg`}/>*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
+
+        {/*<Row className="row row2">*/}
+        {/*  <Col className="col1" span={12}>*/}
+        {/*    <img alt="google-assitant" src={`${GUEST_HOME_IMG_URI}google-assistant.png`}*/}
+        {/*          onClick={() => this.handleChangePage(GOOGLE_ASSISTANT_LINK)}/>*/}
+        {/*  </Col>*/}
+        {/*  <Col className="col2" span={12}>*/}
+        {/*    <h1>TÍCH HỢP<br/>GOOGLE ASSISTANT</h1>*/}
+        {/*    <p>Điều khiển nhà bằng giọng nói tiếng Việt. Nhà thông minh Chika được Google cấp chứng nhận “Works with the Google Assistant”.</p>*/}
+        {/*    <RoundOrangeButton onClick={() => this.handleChangePage(GOOGLE_ASSISTANT_LINK)} />*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
 
         <div className="panel security-panel" onClick={() => this.handleChangePage(SECURITY_SYSTEM_LINK)}>
           <img alt="security-panel" src={`${GUEST_HOME_IMG_URI}security.jpg`}/>

@@ -97,6 +97,33 @@
     }
   }
 
+  ._row {
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      margin-top: 40px;
+      color: $chika-dark-blue;
+      font-weight: 800;
+      border-bottom: 1px solid !important;
+      border-image: linear-gradient(90deg,$chika-light-green, $chika-blue) 1;
+    }
+
+    p {
+      color: black;
+      text-align: justify;
+    }
+
+    img {
+      cursor: pointer;
+      transition: transform .4s;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+    }
+  }
+
   .row {
 
     h1 {
@@ -178,16 +205,14 @@
     }
 
     h1 {
-      color: #432c58;
-      font-size: 35px;
+      color: $chika-dark-blue;
       font-weight: 800;
       border-bottom: 1px solid !important;
-      border-image: linear-gradient(90deg, #00ff98, #003eff) 1;
+      border-image: linear-gradient(90deg, $chika-light-green, $chika-blue) 1;
     }
 
     p {
       color: black;
-      font-size: 18px;
     }
   }
 
@@ -205,8 +230,8 @@
   .security-panel {
     .content {
       position: absolute;
-      top: 150px;
-      right: 50px;
+      top: 35%;
+      right: 4%;
     }
   }
 
@@ -218,7 +243,7 @@
       width: 35%;
 
       p {
-        text-align: justify;
+
       }
     }
   }
@@ -328,6 +353,36 @@
         .button-product {
           width: 260px;
         }
+      }
+    }
+
+    ._row {
+      margin: 50px 120px 100px;
+
+      h1 {
+        font-size: $h1-hdpi;
+      }
+
+      p {
+        font-size: $p-hdpi;
+      }
+
+      img {
+        width: 500px;
+      }
+
+      .content {
+        width: 500px;
+      }
+    }
+
+    .panel {
+      h1 {
+        font-size: $h1-hdpi;
+      }
+
+      p {
+        font-size: $p-hdpi;
       }
     }
 
