@@ -119,7 +119,6 @@ class App extends Component {
     loadCurrentUser = () => {
         getUserInfo().then(response => {
             this.setState({currentUser: response});
-            console.log(response);
             switch (response.role) {
                 case 'ADMIN':
                     this.props.history.push(ADMIN_USER_LINK);
@@ -151,7 +150,7 @@ class App extends Component {
                     }).catch(() => {
                         ErrorNotification("Đã có lỗi xảy ra")
                     });
-                    this.props.history.push(USER_ROOM_LINK);
+                    this.props.history.push(USER_HOME_LINK);
                     this.onCloseSidenav();
                     break;
                 default:
@@ -316,7 +315,7 @@ class App extends Component {
                                                                          updateAdminInfo={this.updateAdminInfo}
                                                                          onLogout={this.onChangePasswordLogout} {...props} />}/>
 
-                        <Route exact path={USER_HOME_LINK} render={(props) => <UserHomeComponent {...props}/>}/>
+                        <Route exact path={USER_HOME_LINK} render={(props) => <UserHomeComponent currentUser={currentUser} {...props}/>}/>
                         <Route exact path={USER_ROOM_LINK} render={(props) => <ListRoomComponent {...props}/>}/>
                         <Route exact path={`${USER_ROOM_LINK}/:id`}
                                render={(props) => <UserRoomComponent mqttMessage={mqttMessage}

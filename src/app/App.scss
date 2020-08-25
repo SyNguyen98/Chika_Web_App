@@ -17,16 +17,17 @@
    
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #003eff; 
+    background: $chika-blue;
     border-radius: 10px;
 }
   
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #00ff98; 
+    background: $chika-light-green;
 }
 
 @media (max-width: $screen-desktop) {
+    @include config--desktop();
     @include app-header--desktop();
     @include app-side-nav--desktop();
     @include guest--desktop();
@@ -34,6 +35,7 @@
 }
 
 @media (max-width: $screen-laptop-hidpi) {
+    @include config--laptop-hidpi();
     @include app-header--laptop-hidpi();
     @include app-side-nav--laptop-hidpi();
     @include guest--laptop-hidpi();
@@ -41,6 +43,7 @@
 }
 
 @media (max-width: $screen-laptop-mdpi) {
+    @include config--laptop-mdpi();
     @include app-header--laptop-mdpi();
     @include app-side-nav--laptop-mdpi();
     @include guest--laptop-mdpi();

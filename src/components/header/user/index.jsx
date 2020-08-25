@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Icon} from 'antd';
 
-import {USER_CAMERA_LINK, USER_HOME_LINK, USER_ROOM_LINK, USER_SCRIPT_LINK} from "../../../constant/link";
+import {USER_HOME_LINK, USER_ROOM_LINK, USER_SCRIPT_LINK} from "../../../constant/link";
 
 import "./user-header.scss";
 
@@ -21,9 +21,6 @@ const UserHeaderComponent = ({onOpenSidenav, handleChangePage}) => {
                 </a>
                 <a className="item" onClick={() => handleChangePage(USER_SCRIPT_LINK)}>
                     <img alt='script-icon' src='/image/header/script-icon.png'/>&ensp;Kịch bản
-                </a>
-                <a className="item" onClick={() => handleChangePage(USER_CAMERA_LINK)}>
-                    <img alt='camera-icon' src='/image/header/camera-icon.png'/>&ensp;Giám sát
                 </a>
             </nav>
         </div>

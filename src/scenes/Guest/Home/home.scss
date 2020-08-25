@@ -97,21 +97,25 @@
     }
   }
 
-  ._row {
+  .row {
     display: flex;
     justify-content: space-between;
 
     h1 {
-      margin-top: 40px;
+      margin-top: 15%;
       color: $chika-dark-blue;
       font-weight: 800;
       border-bottom: 1px solid !important;
-      border-image: linear-gradient(90deg,$chika-light-green, $chika-blue) 1;
+      border-image: linear-gradient(90deg, $chika-light-green, $chika-blue) 1;
     }
 
     p {
       color: black;
       text-align: justify;
+    }
+
+    Button {
+      margin-left: 30%;
     }
 
     img {
@@ -122,74 +126,6 @@
     img:hover {
       transform: scale(1.05);
     }
-  }
-
-  .row {
-
-    h1 {
-      margin-top: 40px;
-      color: $chika-dark-blue;
-      font-weight: 800;
-      border-bottom: 1px solid !important;
-      border-image: linear-gradient(90deg,$chika-light-green, $chika-blue) 1;
-    }
-
-    p {
-      color: black;
-      text-align: justify;
-    }
-
-    img {
-      cursor: pointer;
-      transition: transform .4s;
-    }
-
-    img:hover {
-      transform: scale(1.05);
-    }
-  }
-
-  .row1 {
-
-    img {
-      cursor: unset;
-    }
-    img:hover {
-      transform: none;
-    }
-
-    .col2 {
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
-
-  .row2 {
-    .col1 {
-      display: flex;
-      justify-content: flex-start;
-    }
-
-    .col2 {
-
-    }
-  }
-
-  .row3, .row4, .row5 img {
-    transition: transform .4s
-  }
-
-  .row3__col1, .row4__col2, .row5__col1 {
-    padding: 50px 40px !important;
-  }
-
-  .row3__col2, .row4__col1, .row5__col2 {
-    overflow: hidden;
-  }
-
-  .row3__col2:hover img, .row4__col1:hover img, .row5__col2:hover img {
-    transform: scale(1.05);
-    transform-origin: 50% 50%;
   }
 
   .panel {
@@ -238,23 +174,18 @@
   .light-control-panel {
     .content {
       position: absolute;
-      top: 150px;
-      left: 50px;
+      top: 30%;
+      left: 3%;
       width: 35%;
-
-      p {
-
-      }
     }
   }
 
   .reasons {
-    margin: 100px 10vw auto 10vw;
+    margin: 100px 10% auto 10%;
     text-align: center;
 
     h1 {
       color: $chika-dark-blue;
-      font-size: 30px;
       font-weight: 800;
     }
 
@@ -262,13 +193,11 @@
       margin: 20px auto 70px auto;
 
       img {
-        width: 5vw;
         margin-bottom: 15px;
       }
 
       p {
         color: black;
-        font-size: 20px;
         font-weight: bold;
       }
     }
@@ -304,24 +233,47 @@
     }
 
     .row {
-      margin: 70px 80px auto !important;
+      margin: 50px 100px 100px;
 
       h1 {
-        margin-top: 20px;
-        font-size: 35px;
+        font-size: $h1-hdpi;
       }
 
       p {
-        font-size: 18px;
+        font-size: $p-hdpi;
       }
 
       img {
-        width: 500px;
+        width: 480px;
       }
 
-      .row2 {
-        .col2 {
-          width: 500px;
+      .content {
+        width: 480px;
+      }
+    }
+
+    .panel {
+      h1 {
+        font-size: $h1-mdpi;
+      }
+
+      p {
+        font-size: $p-mdpi;
+      }
+    }
+
+    .reasons {
+      h1 {
+        font-size: $h1-mdpi;
+      }
+
+      .col {
+        img {
+          width: 60px;
+        }
+
+        p {
+          font-size: $h5-mdpi;
         }
       }
     }
@@ -356,7 +308,7 @@
       }
     }
 
-    ._row {
+    .row {
       margin: 50px 120px 100px;
 
       h1 {
@@ -386,20 +338,19 @@
       }
     }
 
-    .row {
-      margin: 80px 120px auto !important;
-
+    .reasons {
       h1 {
-        margin-top: 18px;
-        font-size: 37px;
+        font-size: $h1-hdpi;
       }
 
-      p {
-        font-size: 18px;
-      }
+      .col {
+        img {
+          width: 60px;
+        }
 
-      img {
-        width: 500px;
+        p {
+          font-size: $h5-hdpi;
+        }
       }
     }
   }
@@ -435,19 +386,48 @@
     }
 
     .row {
-      margin: 100px 200px auto !important;
+      margin: 50px 180px 100px;
 
       h1 {
-        margin-top: 18px;
-        font-size: 40px;
+        font-size: $h1-desktop;
       }
 
       p {
-        font-size: 22px;
+        font-size: $p-desktop;
       }
 
       img {
-        width: 600px;
+        width: 700px;
+      }
+
+      .content {
+        width: 700px;
+      }
+    }
+
+    .panel {
+      h1 {
+        font-size: $h1-desktop;
+      }
+
+      p {
+        font-size: $p-desktop;
+      }
+    }
+
+    .reasons {
+      h1 {
+        font-size: $h1-desktop;
+      }
+
+      .col {
+        img {
+          width: 80px;
+        }
+
+        p {
+          font-size: $h5-desktop;
+        }
       }
     }
   }

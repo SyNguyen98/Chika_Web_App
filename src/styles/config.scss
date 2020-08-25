@@ -8,14 +8,22 @@ $chika-dark-blue: #432c85;
 $chika-orange: #ff8c00;
 
 // Font-size
+$h1-mdpi: 30px;
 $h1-hdpi: 34px;
+$h1-desktop: 40px;
+
+$h5-mdpi: 20px;
+$h5-hdpi: 24px;
+$h5-desktop: 26px;
+
+$p-mdpi: 14px;
 $p-hdpi: 16px;
+$p-desktop: 20px;
 
 .round-button-orange {
   color: $chika-orange;
   border-color: $chika-orange;
   background-color: transparent;
-  font-size: 16px;
   font-weight: bold;
 }
 
@@ -23,4 +31,20 @@ $p-hdpi: 16px;
   color: white;
   background-color: $chika-orange;
   border-color: $chika-orange;
+}
+
+@mixin config--laptop-mdpi() {
+  .round-button-orange {
+    font-size: $p-mdpi !important;
+  }
+}
+@mixin config--laptop-hidpi() {
+  .round-button-orange {
+    font-size: $p-hdpi !important;
+  }
+}
+@mixin config--desktop() {
+  .round-button-orange {
+    font-size: $p-desktop !important;
+  }
 }

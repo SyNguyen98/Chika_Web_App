@@ -41,6 +41,7 @@ export default class UserHomeComponent extends Component {
     };
 
     render() {
+        const {currentUser} = this.props;
         return (
             <Fragment>
                 <Row gutter={[16, 8]} className='user-home'>
@@ -54,7 +55,7 @@ export default class UserHomeComponent extends Component {
                         </div>
                         <div className="body">
                             <p><Icon type="home"/>&emsp;Chủ nhà</p>
-                            <b>HUỲNH VĂN TUẤN</b>
+                            <b>{currentUser ? currentUser.name : ""}</b>
                             <p><Icon type="team"/>&emsp;Số thành viên trong nhà:</p>
                             <b>3 người</b>
                             <p><Icon type="appstore"/>&emsp;Số thiết bị trong nhà:</p>
