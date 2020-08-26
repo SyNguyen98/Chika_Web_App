@@ -28,7 +28,12 @@ export const REMOTE_ICON = [
     "fullscreen",
     "pause",
     "audio",
-    "sound"
+    "sound",
+    "minus-circle",
+    "plus-circle",
+    "login",
+    "logout"
+
 ]
 
 export const SCRIPT_NAME = [
