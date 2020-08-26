@@ -77,7 +77,7 @@
 
 @mixin user-rooms--laptop-mdpi() {
   .user-rooms {
-    padding: 0 40px;
+    padding: 20px 40px;
 
     .item {
       margin: 0 15px 40px 15px;
@@ -118,7 +118,7 @@
 
 @mixin user-rooms--laptop-hidpi() {
   .user-rooms {
-    padding: 0 45px;
+    padding: 20px 45px;
 
     .item {
       margin: 0 20px 40px 20px;
@@ -159,7 +159,7 @@
 
 @mixin user-rooms--desktop() {
   .user-rooms {
-    padding: 0 50px;
+    padding: 20px 50px;
 
     .item {
       margin: 0 30px 40px 30px;
